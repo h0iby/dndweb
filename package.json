@@ -1,0 +1,37 @@
+{
+  "name": "dndweb",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {},
+  "description": "template",
+  "main": "index.js",
+  "devDependencies": {
+	"browser-sync": "latest",
+    "browsersync-ssi": "latest",
+	"del": "latest",
+	"gulp": "latest",
+    "gulp-autoprefixer": "latest",
+    "gulp-debug": "latest",
+    "gulp-concat": "latest",
+    "gulp-include": "latest",
+    "gulp-install": "latest",
+    "gulp-jshint": "latest",
+    "gulp-less": "latest",
+    "gulp-load-plugins": "latest",
+    "gulp-notify": "latest",
+    "gulp-plumber": "latest",
+    "gulp-rename": "latest",
+    "gulp-replace": "latest",
+    "gulp-uglify": "latest",
+    "gulp-watch": "latest",
+	"gulp.spritesmith": "latest",
+	"vinyl-buffer": "latest",
+  	"gulp-imagemin": "latest",
+    "ssi": "latest"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

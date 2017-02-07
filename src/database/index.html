@@ -1,0 +1,42 @@
+<!--#set var="title" value="R&D" -->
+<!--#include virtual="/_htmlStart.html" -->
+	<!-- insert more head based items here if needs be!! (ex. css (or scripts)) -->
+<!--#include virtual="/_pageStart.html" -->
+	<!--#include virtual="/_header.html" -->
+
+	<div id="Main">
+		<h1>Database</h1>
+		<div class="-js-database-content"></div>
+		<div id="DnDEndpoints"></div>
+
+
+
+ <div id="profiles"></div>
+
+    <script id="profileTemplate" type="text/template">
+    	<div class="profile">
+            <div class="info">
+				<div class="alias">
+                    <%= alias %>
+                </div>
+				<div class="route">
+                    <%= route %>
+                </div>
+                <div class="guid">
+                    <%= guid %>
+                </div>
+                <div class="relation">
+                    <%= relation %>
+                </div>
+				<hr/>
+            </div>
+        </div>
+   </script>
+
+
+	</div>
+
+	<!--#include virtual="/_footer.html" -->
+<!--#include virtual="/_pageEnd.html" -->
+<!-- ------------------------------------- insert more bottom based items here if needs be!! (ex. scripts) -->
+<!--#include virtual="/_htmlEnd.html" -->

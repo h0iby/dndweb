@@ -1,7 +1,11 @@
-// include site/data.js
-// include site/slider.js
+var app = app || {};
 
-(function()
-{
-	"use strict";
-})();
+$(function(){
+	'use strict';
+
+	app.data();
+	app.slider();
+});
+
+// = include site/data.js
+// = include site/slider.js

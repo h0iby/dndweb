@@ -1,0 +1,77 @@
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+/* Fonts */
+/* Languages */
+/* Celestial Alphabet */
+/* Common Alphabet */
+/* Draconic Alphabet */
+/* Druidic Alphabet */
+/* Dwarven Alphabet */
+/* Elven Alphabet */
+/* Infernal Alphabet */
+/* Alphabets */
+@font-face {
+  font-family: 'Celestial';
+  src: url('/composition/fonts/Celestial.woff2') format('woff2'), url('/composition/fonts/Celestial.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Common';
+  src: url('/composition/fonts/Common.woff2') format('woff2'), url('/composition/fonts/Common.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Draconic';
+  src: url('/composition/fonts/Draconic.woff2') format('woff2'), url('/composition/fonts/Draconic.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Druidic';
+  src: url('/composition/fonts/Druidic.woff2') format('woff2'), url('/composition/fonts/Druidic.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Dwarven';
+  src: url('/composition/fonts/Dwarven.woff2') format('woff2'), url('/composition/fonts/Dwarven.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Elven';
+  src: url('/composition/fonts/Elven.woff2') format('woff2'), url('/composition/fonts/Elven.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Infernal';
+  src: url('/composition/fonts/Infernal.woff2') format('woff2'), url('/composition/fonts/Infernal.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+#Page {
+  background: red;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  height: 90%;
+  overflow: auto;
+}

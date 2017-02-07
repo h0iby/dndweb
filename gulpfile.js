@@ -44,12 +44,12 @@ var uglifyOptions =
 var Folders =
 {
 	root: "src",
-	target: {
+	source: {
 		styles: "src/resources/less",
 		scripts: "src/resources/scripts",
 		sprites: "src/resources/sprites",
 	},
-	source: {
+	target: {
 		styles: "src/assets/css",
 		scripts: "src/assets/scripts",
 		sprites: "src/assets/sprites",
@@ -77,10 +77,10 @@ gulp.task("build", ["styles", "scripts", "sprites"]);
 // watch task
 gulp.task("watch", function()
 {
-	gulp.watch(Folders.target.styles + "/**/*.*", ["styles"]);
-	gulp.watch(Folders.target.scripts + "/**/*.*", ["scripts"]);
-	gulp.watch(Folders.source.styles + "/*.css", browserSync.reload);
-	gulp.watch(Folders.source.scripts + "/*.js", browserSync.reload);
+	gulp.watch(Folders.source.styles + "/**/*.*", ["styles"]);
+	gulp.watch(Folders.source.scripts + "/**/*.*", ["scripts"]);
+	gulp.watch(Folders.target.styles + "/*.css", browserSync.reload);
+	gulp.watch(Folders.target.scripts + "/*.js", browserSync.reload);
 	gulp.watch(Folders.root + "/*.html", browserSync.reload);
 	gulp.watch(Folders.root + "/**/*.html", browserSync.reload);
 	gulp.watch(Folders.root + "/**/**/*.html", browserSync.reload);

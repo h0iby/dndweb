@@ -1,0 +1,66 @@
+header{
+	nav{
+		a{
+
+		}
+	}
+}
+main{
+	nav{
+		position: relative;
+		display: block;
+		padding: 10px;
+		font-size: inherit;
+
+		a{
+			position: relative;
+			display: block;
+			float: left;
+			width: 20%;
+			height: 150px;
+			background: @backgroundNavigation;
+			color: @fontColorNavigation;
+			margin: 0 5px 10px;
+			font-size: inherit;
+			text-decoration: none;
+
+			strong{
+				display: block;
+				padding: 7px 4px 4px;
+				font-weight: bold;
+				font-size: 1.5em;
+			}
+
+			em {
+				display: block;
+				padding: 0 4px 0 8px;
+				font-size: 0.9em;
+			}
+
+			span{
+				position: absolute;
+				bottom: 5px;
+				right: 4px;
+				display: block;
+				font-size: 0.8em;
+				line-height: 1.1em;
+			}
+
+			&:active, &:visited{
+				background: @backgroundNavigation;
+				color: @fontColorNavigation;
+			}
+			&:hover{
+				background: @yellow;
+				color: @black;
+			}
+		}
+	}
+}
+footer{
+	nav{
+		a{
+
+		}
+	}
+}

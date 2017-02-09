@@ -45,17 +45,19 @@ var Folders =
 {
 	root: "src",
 	source: {
-		styles: "src/resources/less",
-		scripts: "src/resources/scripts",
-		sprites: "src/resources/sprites",
+		main: "src/_resources",
+		styles: "src/_resources/less",
+		scripts: "src/_resources/scripts",
+		sprites: "src/_resources/sprites",
 	},
 	target: {
-		styles: "src/assets/css",
-		scripts: "src/assets/scripts",
-		sprites: "src/assets/sprites",
+		main: "src/_assets",
+		styles: "src/_assets/css",
+		scripts: "src/_assets/scripts",
+		sprites: "src/_assets/sprites",
 	},
 	settings: {
-		sprites: "assets/sprites"
+		sprites: "_assets/sprites"
 	}
 };
 // /////////////////////////////////////////
@@ -83,7 +85,6 @@ gulp.task("watch", function()
 	gulp.watch(Folders.target.scripts + "/*.js", browserSync.reload);
 	gulp.watch(Folders.root + "/*.html", browserSync.reload);
 	gulp.watch(Folders.root + "/**/*.html", browserSync.reload);
-	gulp.watch(Folders.root + "/**/**/*.html", browserSync.reload);
 });
 // /////////////////////////////////////////
 

@@ -45,10 +45,10 @@ var Folders =
 {
 	root: "src",
 	source: {
-		main: "src/_resources",
-		styles: "src/_resources/less",
-		scripts: "src/_resources/scripts",
-		sprites: "src/_resources/sprites",
+		main: "src/__resources",
+		styles: "src/__resources/less",
+		scripts: "src/__resources/scripts",
+		sprites: "src/__resources/sprites",
 	},
 	target: {
 		main: "src/_assets",
@@ -65,26 +65,31 @@ var Folders =
 
 
 // Default task to be run with `gulp`
-gulp.task("default", ["styles", "scripts", "browser-sync", "watch"]);
+gulp.task("default", ["styles", "scripts", "browser-sync", "watch-build", "watch-sync"]);
 // /////////////////////////////////////////
 
 
 
 // build task
-gulp.task("build", ["styles", "scripts", "sprites"]);
+gulp.task("build", ["styles", "scripts", "sprites", "watch-build"]);
 // /////////////////////////////////////////
 
 
 
-// watch task
-gulp.task("watch", function()
+// watch task - sync
+gulp.task("watch-sync", function()
 {
-	gulp.watch(Folders.source.styles + "/**/*.*", ["styles"]);
-	gulp.watch(Folders.source.scripts + "/**/*.*", ["scripts"]);
 	gulp.watch(Folders.target.styles + "/*.css", browserSync.reload);
 	gulp.watch(Folders.target.scripts + "/*.js", browserSync.reload);
 	gulp.watch(Folders.root + "/*.html", browserSync.reload);
 	gulp.watch(Folders.root + "/**/*.html", browserSync.reload);
+});
+// /////////////////////////////////////////
+// watch task - build
+gulp.task("watch-build", function()
+{
+	gulp.watch(Folders.source.styles + "/**/*.*", ["styles"]);
+	gulp.watch(Folders.source.scripts + "/**/*.*", ["scripts"]);
 });
 // /////////////////////////////////////////
 

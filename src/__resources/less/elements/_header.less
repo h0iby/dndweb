@@ -1,0 +1,137 @@
+header{
+	position: relative;
+	order: 1;
+	z-index: 3;
+	flex-shrink: 0;
+	height: 70px;
+	background: @backgroundHeader @background 50% 0 repeat-x;
+	font-size: inherit;
+	box-shadow: -5px -15px 25px 15px @shadow;
+
+	.logo{
+		position: absolute;
+		top: 10px;
+		left: 50%;
+		width: 48px;
+		height: 50px;
+		margin: 0 0 0 -24px;
+		background: url(/_assets/images/logo.png) no-repeat 50% 50%;
+		background-size: 100% 100%;
+	}
+
+	input{
+		margin: 0;
+		padding: 0;
+		border: none;
+		background: transparent;
+	}
+
+
+	div.search{
+		position: absolute;
+		display: block;
+		width: 80px;
+		z-index: 2;
+		height: 100%;
+		top: 0;
+		right: 0;
+		overflow: hidden;
+		text-indent: -9999px;
+
+		&::before{
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 38px;
+			height: 38px;
+			margin: -19px 0 0 -19px;
+			opacity: 1;
+			background: url(/_assets/images/search.png) 0 0 no-repeat;
+		}
+
+		.burger{
+			left: 28px;
+			opacity: 0;
+		}
+
+		span{
+			&:nth-child(3){
+				transform-origin: 0% 100%;
+			}
+			&:nth-child(1){
+				transform: rotate(45deg) translate(1px, 0);
+			}
+			&:nth-child(2){
+				opacity: 0;
+				transform: rotate(0deg) scale(0.2, 0.2);
+			}
+			&:nth-child(3){
+				transform: rotate(-45deg) translate(-1px, 2px);
+			}
+		}
+	}
+
+	form {
+		position: absolute;
+		top: 0;
+		z-index: 2;
+		right: 80px;
+		height: 100%;
+		-webkit-font-smoothing: antialiased;
+		transform-origin: 0% 0%;
+		transform: translate(200%, 0);
+		transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+
+		input {
+			position: relative;
+			line-height: 38px;
+			float: left;
+			display: block;
+			width: : auto;
+			top: 16px;
+			outline: none 0;
+		}
+
+		[type='search']{
+			background: @white;
+			border-radius: 5px;
+			width: 200px;
+			padding: 0 10px;
+		}
+		[type='submit']{
+			background: url(/_assets/images/search.png) 0 0 no-repeat;
+			width: 38px;
+			height: 38px;
+			text-indent: -9999px;
+			overflow: hidden;
+		}
+	}
+
+	.search[type='checkbox']{
+		position: absolute;
+		display: block;
+		width: 80px;
+		height: 100%;
+		right: 0;
+		top: 0;
+		z-index: 3;
+		opacity: 0;
+
+		&:checked{
+			& ~ .search {
+				&::before{
+					opacity: 0;
+				}
+				.burger {
+					opacity: 1;
+				}
+			}
+			& ~ form {
+				transform: scale(1.0, 1.0);
+				transform: translate(0, 0);
+				opacity: 1;
+			}
+		}
+	}
+}

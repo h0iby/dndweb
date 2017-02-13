@@ -29,13 +29,11 @@ header{
 							opacity 0.55s ease;
 
 
-				&:nth-child(3)
-				{
+				&:nth-child(3){
 					transform-origin: 0% 100%;
 				}
 			}
 		}
-
 		.burger[type='checkbox']{
 			display: block;
 			width: 120px;
@@ -79,6 +77,7 @@ header{
 		left: 0;
 		height: 100%;
 		width: 45%;
+		max-width: 400px;
 		background: @navBackgroundHeader @navBackground 0 0 repeat;
 		box-shadow: 0 0 25px 0px @shadow;
 		font-size: inherit;
@@ -92,7 +91,6 @@ header{
 			opacity: 0.4;
 			text-transform: uppercase;
 		}
-
 		#Menu{
 			position: absolute;
 			top: 70px;
@@ -169,20 +167,20 @@ header{
 
 					&::before, &::after{
 						position: absolute;
-						top: 27%;
-						left: 25%;
-						width: 50%;
-						height: 15%;
-						margin: -2px 0 0;
+						left: 50%;
+						top: 6px;
+						width: 18px;
+						height: 6px;
+						margin: 0 0 0 -9px;
 						content: "";
 						display: block;
 						background: @navAccordion0IconBackground;
 					}
 					&::before{
-						transform: rotate(45deg) translate(15%, 180%);
+						transform: rotate(45deg) translate(4px, 10px);
 					}
 					&::after{
-						transform: rotate(-45deg) translate(-15%, 180%);
+						transform: rotate(-45deg) translate(-4px, 10px);
 					}
 				}
 			}
@@ -266,7 +264,7 @@ header{
 					height: @navAccordionSubHeight;
 
 					span {
-						left: 0;
+						left: 50%;
 						top: 50%;
 						width: 24px;
 						height: 24px;
@@ -274,8 +272,17 @@ header{
 						background: @navAccordion1IconColor;
 
 						&::before, &::after{
-							top: 30%;
+							top: 2px;
+							width: 12px;
+							height: 4px;
+							margin: 0 0 0 -6px;
 							background: @navAccordion1IconBackground;
+						}
+						&::before{
+							transform: rotate(45deg) translate(4px, 8px);
+						}
+						&::after{
+							transform: rotate(-45deg) translate(-4px, 8px);
 						}
 					}
 				}

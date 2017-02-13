@@ -337,6 +337,7 @@ header nav {
   left: 0;
   height: 100%;
   width: 45%;
+  max-width: 400px;
   background: #f9f7ec url('/_assets/images/bg.jpg') 0 0 repeat;
   box-shadow: 0 0 25px 0px #000000;
   font-size: inherit;
@@ -423,20 +424,20 @@ header nav li span span {
 header nav li span span::before,
 header nav li span span::after {
   position: absolute;
-  top: 27%;
-  left: 25%;
-  width: 50%;
-  height: 15%;
-  margin: -2px 0 0;
+  left: 50%;
+  top: 6px;
+  width: 18px;
+  height: 6px;
+  margin: 0 0 0 -9px;
   content: "";
   display: block;
   background: url('/_assets/images/bg.jpg');
 }
 header nav li span span::before {
-  transform: rotate(45deg) translate(15%, 180%);
+  transform: rotate(45deg) translate(4px, 10px);
 }
 header nav li span span::after {
-  transform: rotate(-45deg) translate(-15%, 180%);
+  transform: rotate(-45deg) translate(-4px, 10px);
 }
 header nav li a {
   position: relative;
@@ -497,7 +498,7 @@ header nav li li span {
   height: 50px;
 }
 header nav li li span span {
-  left: 0;
+  left: 50%;
   top: 50%;
   width: 24px;
   height: 24px;
@@ -506,8 +507,17 @@ header nav li li span span {
 }
 header nav li li span span::before,
 header nav li li span span::after {
-  top: 30%;
+  top: 2px;
+  width: 12px;
+  height: 4px;
+  margin: 0 0 0 -6px;
   background: #9d0a0e;
+}
+header nav li li span span::before {
+  transform: rotate(45deg) translate(4px, 8px);
+}
+header nav li li span span::after {
+  transform: rotate(-45deg) translate(-4px, 8px);
 }
 header nav li li a {
   color: #ffffff;

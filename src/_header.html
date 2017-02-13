@@ -3,10 +3,10 @@
 	<div class="burger"><span></span><span></span><span></span></div>
 	<nav role="navigation">
 		<span class="label">Menu</span>
-		<ul>
+		<ul id="Menu">
 			<li style="display: none;">
 				<input type="checkbox" />
-				<span>&nbsp;</span><a href="#">Characters</a>
+				<span><span>&nbsp;</span></span><a href="#">Characters</a>
 				<hr/>
 				<ul>
 					<li>
@@ -15,7 +15,7 @@
 					</li>
 					<li>
 						<input type="checkbox" />
-						<span>&nbsp;</span><a href="#">View Characters</a>
+						<span><span>&nbsp;</span></span><a href="#">View Characters</a>
 						<hr/>
 						<ul>
 							<li class="status-ingame">
@@ -34,7 +34,7 @@
 					</li>
 					<li>
 						<input type="checkbox" />
-						<span>&nbsp;</span><a href="#">Edit Characters</a>
+						<span><span>&nbsp;</span></span><a href="#">Edit Characters</a>
 						<hr/>
 						<ul>
 							<li class="status-ingame">
@@ -55,7 +55,7 @@
 			</li>
 			<li>
 				<input type="checkbox" checked="checked" />
-				<span>&nbsp;</span><a href="#">Database</a>
+				<span><span>&nbsp;</span></span><a href="#">Database</a>
 				<hr/>
 				<ul>
 					<li>
@@ -75,7 +75,7 @@
 					</li>
 					<li>
 						<input type="checkbox" />
-						<span>&nbsp;</span><a href="#">Feats</a>
+						<span><span>&nbsp;</span></span><a href="#">Feats</a>
 						<hr/>
 						<ul>
 							<li>
@@ -94,7 +94,7 @@
 					</li>
 					<li>
 						<input type="checkbox" />
-						<span>&nbsp;</span><a href="#">Skills</a>
+						<span><span>&nbsp;</span></span><a href="#">Skills</a>
 						<hr/>
 						<ul>
 							<li>
@@ -105,7 +105,7 @@
 					</li>
 					<li>
 						<input type="checkbox" />
-						<span>&nbsp;</span><a href="#">Spells</a>
+						<span><span>&nbsp;</span></span><a href="#">Spells</a>
 						<hr/>
 						<ul>
 							<li>
@@ -148,6 +148,10 @@
 	</nav>
 	<a href="/" class="logo"></a>
 	<input class="search" type="checkbox" />
-	<div class="search"><div class="burger"><span></span><span></span><span></span></div></div>
-	<form><input type="search" /><input type="submit" /></form>
+	<div class="search"><span></span><span></span></div>
+	<form>
+		<input type="search" />
+		<input type="submit" />
+		<div class="search-icon"><span></span><span></span></div>
+	</form>
 </header>

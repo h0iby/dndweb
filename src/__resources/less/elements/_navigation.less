@@ -73,7 +73,6 @@ header{
 			}
 		}
 	}
-
 	nav{
 		position: fixed;
 		top: 0;
@@ -92,6 +91,15 @@ header{
 			margin: 0 0 0 70px;
 			opacity: 0.4;
 			text-transform: uppercase;
+		}
+
+		#Menu{
+			position: absolute;
+			top: 70px;
+			left: 0;
+			width: 100%;
+			bottom: 0px;
+			overflow: auto;
 		}
 
 		//level 1
@@ -143,28 +151,39 @@ header{
 				left: 10px;
 				top: 0;
 				width: 60px;
-				line-height: @navAccordionHeight;
+				height: @navAccordionHeight;
 				cursor: pointer;
 
-				input{
+				span {
 					position: absolute;
-					top: 0;
-				}
-
-				&::before{
-					position: absolute;
-					content: "";
 					display: block;
 					top: 50%;
 					left: 50%;
 					width: 36px;
 					height: 36px;
 					margin: -18px 0 0 -18px;
-					background: url(/_assets/images/accordion.png) 0 0 no-repeat;
-    				background-size: auto 72px;
-					background-position: 0 100%;
-					transform: rotate(180deg);
+					cursor: pointer;
+					border-radius: 50%;
+					background: @navAccordion0IconColor;
 					transition: transform 0.5s;
+
+					&::before, &::after{
+						position: absolute;
+						top: 27%;
+						left: 25%;
+						width: 50%;
+						height: 15%;
+						margin: -2px 0 0;
+						content: "";
+						display: block;
+						background: @navAccordion0IconBackground;
+					}
+					&::before{
+						transform: rotate(45deg) translate(15%, 180%);
+					}
+					&::after{
+						transform: rotate(-45deg) translate(-15%, 180%);
+					}
 				}
 			}
 
@@ -194,12 +213,9 @@ header{
 				cursor: pointer;
 
 				&:checked{
-					& ~ hr {
-						opacity: 0;
-					}
 					& ~ span {
-						&::before{
-							transform: rotate(0deg);
+						span {
+							transform: rotate(-180deg);
 						}
 					}
 					& ~ ul {
@@ -215,26 +231,8 @@ header{
 				li {
 					hr{
 						display: block;
-					}
-					&:last-child{
-						hr{
-							display: none;
-						}
-						li{
-							hr{
-								display: block;
-							}
-							&:last-child{
-								hr{
-									display: none;
-								}
-								li{
-									hr {
-										display: block;
-									}
-								}
-							}
-						}
+						top: 0;
+						margin: 0;
 					}
 				}
 			}
@@ -263,18 +261,22 @@ header{
 				}
 
 				span {
-					line-height: @navAccordionSubHeight;
 					left: 45px;
 					width: 50px;
+					height: @navAccordionSubHeight;
 
-					&::before{
+					span {
+						left: 0;
 						top: 50%;
 						width: 24px;
 						height: 24px;
 						margin: -12px 0 0 -12px;
-						background: url(/_assets/images/accordion.png) 0 0 no-repeat;
-						background-size: auto 66px;
-						background-position: 100% 100%;
+						background: @navAccordion1IconColor;
+
+						&::before, &::after{
+							top: 30%;
+							background: @navAccordion1IconBackground;
+						}
 					}
 				}
 				a {
@@ -363,8 +365,6 @@ main{
 			&:active, &:visited{
 				background: @navMainBackground;
 				color: @navMainFontColor;
-			}
-			&:hover{
 			}
 		}
 	}

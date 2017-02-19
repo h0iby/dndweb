@@ -103,7 +103,7 @@ gulp.task("styles", ["css-less", "css-print"]);
 gulp.task("css-less", function () {
     return gulp
         .src(Folders.source.styles + "/main.less")
-        .pipe(plugins.less({ compress: false }))
+        .pipe(plugins.less({ compress: true }))
         .on("error", plugins.notify.onError(function(error) {
             return error.message;
         }))
@@ -117,7 +117,7 @@ gulp.task("css-less", function () {
 gulp.task("css-print", function () {
 	return gulp
         .src(Folders.source.styles + "/print.less")
-        .pipe(plugins.less({ compress: false }))
+        .pipe(plugins.less({ compress: true }))
         .on("error", plugins.notify.onError(function (error) {
         	return error.message;
         }))
@@ -141,6 +141,7 @@ gulp.task("js", function () {
 		.src(Folders.source.scripts + "/main.js")
 		.pipe(plugins.rename({ suffix: "" }))
 		.pipe(plugins.include())
+		//.pipe(plugins.uglify())
 		.on("error", plugins.notify.onError(function (error) {
 			return error.message;
 		}))

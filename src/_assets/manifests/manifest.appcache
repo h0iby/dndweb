@@ -1,0 +1,35 @@
+CACHE MANIFEST
+# 18-02-2017 - v0.2
+
+#images
+/_assets/images/bg.jpg
+/_assets/images/logo.png
+
+#fonts
+/_assets/fonts/Celestial.woff
+/_assets/fonts/Celestial.woff2
+/_assets/fonts/Common.woff
+/_assets/fonts/Common.woff2
+/_assets/fonts/Draconic.woff
+/_assets/fonts/Draconic.woff2
+/_assets/fonts/Druidic.woff
+/_assets/fonts/Druidic.woff2
+/_assets/fonts/Dwarven.woff
+/_assets/fonts/Dwarven.woff2
+/_assets/fonts/Elven.woff
+/_assets/fonts/Elven.woff2
+/_assets/fonts/Infernal.woff
+/_assets/fonts/Infernal.woff2
+
+#css
+/_assets/css/main.css
+/_assets/css/print.css
+
+#scripts
+/_assets/scripts/main.js
+
+NETWORK:
+*
+
+FALLBACK:
+/server/ /offline.html

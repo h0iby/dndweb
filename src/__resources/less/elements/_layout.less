@@ -28,3 +28,23 @@ main {
 	font-size: inherit;
 	background: @backgroundPage @background 0 0 repeat;
 }
+
+
+#Loader{
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	display: none;
+	background: @shadow;
+	opacity: 0.5;
+	z-index: 999;
+	transition: all 0.5s;
+
+	&.loaded{
+		opacity: 0;
+		height: 0%;
+	}
+}

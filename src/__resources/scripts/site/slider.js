@@ -1,9 +1,8 @@
-var app = app || {};
-
-(function($){
+var dnd = dnd || {};
+(function(){
 	"use strict";
-
-	app.slider = function(){
-		console.log("slider");
+	dnd.vars = dnd.vars || {};
+	dnd.slider = function(){
+		//console.log("slider");
 	}
 })();

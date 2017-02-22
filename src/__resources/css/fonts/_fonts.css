@@ -1,0 +1,96 @@
+/* Alphabets */
+@font-face {
+  font-family: 'Celestial';
+  src:
+    url('/_assets/fonts/Celestial.woff2') format('woff2'),
+    url('/_assets/fonts/Celestial.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Common';
+  src:
+    url('/_assets/fonts/Common.woff2') format('woff2'),
+    url('/_assets/fonts/Common.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Draconic';
+  src:
+    url('/_assets/fonts/Draconic.woff2') format('woff2'),
+    url('/_assets/fonts/Draconic.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Druidic';
+  src:
+    url('/_assets/fonts/Druidic.woff2') format('woff2'),
+    url('/_assets/fonts/Druidic.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Dwarven';
+  src:
+    url('/_assets/fonts/Dwarven.woff2') format('woff2'),
+    url('/_assets/fonts/Dwarven.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Elven';
+  src:
+    url('/_assets/fonts/Elven.woff2') format('woff2'),
+    url('/_assets/fonts/Elven.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Infernal';
+  src:
+    url('/_assets/fonts/Infernal.woff2') format('woff2'),
+    url('/_assets/fonts/Infernal.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+/* Languages */
+:root {
+	/* Default */
+	--LanguageFontDefault: { font-family: 'Common'; font-weight: normal; font-style: normal; letter-spacing: 1.1px; }
+	/* Celestial Alphabet */
+	--LanguageFontCelestial: { font-family: 'Celestial'; font-weight: normal; font-style: normal; }
+
+	/* Common Alphabet */
+	--LanguageFontCommon: { font-family: 'Common'; font-weight: normal; font-style: normal; }
+	--LanguageFontGnoll: { font-family: 'Common'; font-weight: normal; font-style: normal; }
+	--LanguageFontHalfling: { font-family: 'Common'; font-weight: normal; font-style: normal; }
+
+	/* Draconic Alphabet */
+	--LanguageFontAuran: { font-family: 'Draconic'; font-weight: normal; font-style: normal; }
+	--LanguageFontDraconic: { font-family: 'Draconic'; font-weight: normal; font-style: normal; }
+	--LanguageFontIgnan: { font-family: 'Draconic'; font-weight: normal; font-style: normal; }
+
+	/* Druidic Alphabet */
+	--LanguageFontDruid: { font-family: 'Druidic'; font-weight: normal; font-style: normal; }
+
+	/* Dwarven Alphabet */
+	--LanguageFontDwarven: { font-family: 'Dwarven'; font-weight: normal; font-style: normal; }
+	--LanguageFontGiant: { font-family: 'Dwarven'; font-weight: normal; font-style: normal; }
+	--LanguageFontGnome: { font-family: 'Dwarven'; font-weight: normal; font-style: normal; }
+	--LanguageFontGoblin: { font-family: 'Dwarven'; font-weight: normal; font-style: normal; }
+	--LanguageFontOrc: { font-family: 'Dwarven'; font-weight: normal; font-style: normal; }
+
+	/* Elven Alphabet */
+	--LanguageFontAquan: { font-family: 'Elven'; font-weight: normal; font-style: normal; }
+	--LanguageFontElven: { font-family: 'Elven'; font-weight: normal; font-style: normal; }
+	--LanguageFontUndercommon: { font-family: 'Elven'; font-weight: normal; font-style: normal; }
+
+	/* Infernal Alphabet */
+	--LanguageFontAbyssal: { font-family: 'Infernal'; font-weight: normal; font-style: normal; }
+	--LanguageFontInfernal: { font-family: 'Infernal'; font-weight: normal; font-style: normal; }
+}

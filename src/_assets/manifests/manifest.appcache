@@ -30,6 +30,3 @@ CACHE MANIFEST
 
 NETWORK:
 *
-
-FALLBACK:
-/server/ /offline.html

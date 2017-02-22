@@ -1,24 +1,25 @@
-// Include gulp
-var gulp = require('gulp');
-
 "use strict";
 
 console.time("Require");
 
-// core modules
-var util = require("util");
-
-// custom modules
+// modules
 var gulp = require("gulp"),
 	debug = require('gulp-debug'),
 	del = require('del'),
+	postcss = require('gulp-postcss'),
+	postcssimport = require("postcss-import"),
+	postcssurl = require("postcss-url"),
+	postcsscssnext = require("postcss-cssnext"),
+	postcssbrowserreporter = require("postcss-browser-reporter"),
+	cssmqpacker = require("css-mqpacker"),
+	cssnano = require("cssnano"),
 	spritesmith = require('gulp.spritesmith'),
 	buffer = require('vinyl-buffer'),
 	imagemin = require('gulp-imagemin'),
     plugins = require("gulp-load-plugins")({ camelize: true }),
 	browserSync = require("browser-sync"),
-	reload = browserSync.reload,
-	ssi = browserSyncSSI;
+	reload = browserSync.reload;
+
 
 console.timeEnd("Require");
 
@@ -46,7 +47,7 @@ var Folders =
 	root: "src",
 	source: {
 		main: "src/__resources",
-		styles: "src/__resources/less",
+		styles: "src/__resources/css",
 		scripts: "src/__resources/scripts",
 		sprites: "src/__resources/sprites",
 	},
@@ -96,36 +97,34 @@ gulp.task("watch-build", function()
 
 
 // css
-gulp.task("styles", ["css-less", "css-print"]);
+gulp.task("styles", ["css", "css-print"]);
 // /////////////////////////////////////////
 
 // css general
-gulp.task("css-less", function () {
-    return gulp
-        .src(Folders.source.styles + "/main.less")
-        .pipe(plugins.less({ compress: true }))
-        .on("error", plugins.notify.onError(function(error) {
-            return error.message;
-        }))
-        .on("error", function(err) {
-            this.emit("end");
-        })
-        .pipe(plugins.rename({ suffix: "" }))
-        .pipe(gulp.dest(Folders.target.styles));
+gulp.task("css", function () {
+	return (
+	gulp.src(Folders.source.styles + "/main.css")
+		.pipe(postcss([
+			postcssimport(),
+			postcssurl(),
+			postcsscssnext(),
+			cssmqpacker(),
+			cssnano()
+		]))
+		.pipe(gulp.dest(Folders.target.styles))
+	)
 });
 // css print
 gulp.task("css-print", function () {
-	return gulp
-        .src(Folders.source.styles + "/print.less")
-        .pipe(plugins.less({ compress: true }))
-        .on("error", plugins.notify.onError(function (error) {
-        	return error.message;
-        }))
-        .on("error", function (err) {
-        	this.emit("end");
-        })
-        .pipe(plugins.rename({ suffix: "" }))
-        .pipe(gulp.dest(Folders.target.styles));
+	return (
+	gulp.src(Folders.source.styles + "/print.css")
+		.pipe(postcss([
+			postcssimport(),
+			postcssurl(),
+			postcsscssnext()
+		]))
+		.pipe(gulp.dest(Folders.target.styles))
+	)
 });
 // /////////////////////////////////////////
 
@@ -214,57 +213,7 @@ gulp.task("browser-sync", function()
 		},
 		server:
 		{
-			baseDir: Folders.root,
-			middleware: ssi(
-			{
-				baseDir: __dirname + "/" + Folders.root + "/",
-				ext: ".html"
-			})
+			baseDir: Folders.root
 		}
 	});
 });
-
-/*
-*	browsersync-ssi
-*
-*	Included code from github inline, because npm package was out of date.
-*	TODO: remove when npm package is updated with newest code from github.
-*/
-function browserSyncSSI(opt)
-{
-	'use strict';
-
-	var ssi = require('ssi');
-	var path = require('path');
-	var fs = require('fs');
-	var url = require('url');
-
-	var opt = opt || {};
-	var ext = opt.ext || '.shtml';
-	var baseDir = opt.baseDir || __dirname;
-	var matcher = '/**/*' + ext;
-	var version = opt.version || '';
-
-	var parser = new ssi(baseDir, baseDir, matcher);
-
-	return function(req, res, next)
-	{
-		var pathname = url.parse(req.originalUrl || req.url).pathname;
-		var filename = path.join(baseDir, pathname.substr(-1) === '/' ? pathname + 'index' + ext : pathname);
-
-		if (filename.indexOf(ext) > -1 && fs.existsSync(filename))
-		{
-			var contents = parser.parse(filename, fs.readFileSync(filename, { encoding:  'utf8' })).contents;
-
-			res.writeHead(200, { 'Content-Type': 'text/html' });
-			res.end(contents);
-		}
-		else
-		{
-			next();
-		}
-	};
-};
-
-
-

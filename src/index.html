@@ -1,29 +1,224 @@
-<!--#set var="title" value="R&D" -->
-<!--#include virtual="/_htmlStart.html" -->
-	<!-- insert more head based items here if needs be!! (ex. css (or scripts)) -->
-<!--#include virtual="/_pageStart.html" -->
-	<!--#include virtual="/_header.html" -->
+<!doctype html>
+<html lang="en" disabled-manifest="/_assets/manifests/manifest.appcache">
 
-	<main>
-		<article>
-			<nav>
-				<a href="/characters/">
-					<strong>Characters</strong>
-					<em>Create.<br/>View.<br/>Edit.</em>
-					<span></span>
-				</a>
-				<a href="/database/">
-					<strong>Database</strong>
-					<em>Feats.<br/>Spells.<br/>Classes.<br/>+ more.</em>
-					<span>D&amp;Dtools Database</span>
-				</a>
-			</nav>
-		</article>
-	</main>
+    <head>
+		<link rel="stylesheet" href="/_assets/css/main.css" />
+        <title>D&amp;D</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="apple-touch-icon" sizes="57x57" href="/_assets/favicons/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/_assets/favicons/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/_assets/favicons/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/_assets/favicons/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/_assets/favicons/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/_assets/favicons/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/_assets/favicons/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/_assets/favicons/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/_assets/favicons/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/_assets/favicons/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/_assets/favicons/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/_assets/favicons/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/_assets/favicons/favicon-16x16.png">
+		<link rel="manifest" href="/_assets/favicon/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/_assets/favicons/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+    </head>
+	<body>
+		<div id="Page">
+			<header>
+				<input class="burger" type="checkbox" />
+				<div class="burger"><span></span><span></span><span></span></div>
+				<nav role="navigation">
+					<span class="label">Menu</span>
+					<ul id="Menu">
+						<li style="display: none;">
+							<input type="checkbox" />
+							<span><span>&nbsp;</span></span><a href="#">Characters</a>
+							<hr/>
+							<ul>
+								<li>
+									<a href="/characters/">Create Character</a>
+									<hr/>
+								</li>
+								<li>
+									<input type="checkbox" />
+									<span><span>&nbsp;</span></span><a href="#">View Characters</a>
+									<hr/>
+									<ul>
+										<li class="status-ingame">
+											<a href="#">Svend Shadowface</a>
+											<hr/>
+										</li>
+										<li class="status-paused">
+											<a href="#">Melinda</a>
+											<hr/>
+										</li>
+										<li class="status-deceased">
+											<a href="#">Dipzy</a>
+											<hr/>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<input type="checkbox" />
+									<span><span>&nbsp;</span></span><a href="#">Edit Characters</a>
+									<hr/>
+									<ul>
+										<li class="status-ingame">
+											<a href="#">Svend Shadowface</a>
+											<hr/>
+										</li>
+										<li class="status-paused">
+											<a href="#">Melinda</a>
+											<hr/>
+										</li>
+										<li class="status-deceased">
+											<a href="#">Dipzy</a>
+											<hr/>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<input type="checkbox" checked />
+							<span><span>&nbsp;</span></span><a href="/database/">Database</a>
+							<hr/>
+							<ul>
+								<li>
+									<input type="checkbox" />
+									<span>&nbsp;</span><a href="#">Books</a>
+									<hr/>
+									<ul>
+										<li>
+											<a href="#">Editions</a>
+											<hr/>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="#">Classes</a>
+									<hr/>
+								</li>
+								<li>
+									<input type="checkbox" />
+									<span><span>&nbsp;</span></span><a href="#">Feats</a>
+									<hr/>
+									<ul>
+										<li>
+											<a href="#">Categories</a>
+											<hr/>
+										</li>
+										<li>
+											<a href="#">Traits</a>
+											<hr/>
+										</li>
+										<li>
+											<a href="#">Flaws</a>
+											<hr/>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<input type="checkbox" />
+									<span><span>&nbsp;</span></span><a href="#">Skills</a>
+									<hr/>
+									<ul>
+										<li>
+											<a href="#">Skill Tricks</a>
+											<hr/>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<input type="checkbox" />
+									<span><span>&nbsp;</span></span><a href="#">Spells</a>
+									<hr/>
+									<ul>
+										<li>
+											<a href="#">Descriptors</a>
+											<hr/>
+										</li>
+										<li>
+											<a href="#">Domains</a>
+											<hr/>
+										</li>
+										<li>
+											<a href="#">Spell Schools</a>
+											<hr/>
+										</li>
+										<li>
+											<a href="#">Spell Subschools</a>
+											<hr/>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="#">Languages</a>
+									<hr/>
+								</li>
+								<li>
+									<a href="#">Races</a>
+									<hr/>
+								</li>
+								<li>
+									<a href="#">Monsters</a>
+									<hr/>
+								</li>
+								<li>
+									<a href="#">Items</a>
+									<hr/>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+				<a href="/" class="logo"></a>
+				<input class="search" type="checkbox" />
+				<div class="search"><span></span><span></span></div>
+				<form>
+					<input type="search" />
+					<input type="submit" />
+					<div class="search-icon"><span></span><span></span></div>
+				</form>
+			</header>
 
-	<!--#include virtual="/_footer.html" -->
-	<script type="text/javascript">
-	</script>
-<!--#include virtual="/_pageEnd.html" -->
-<!-- ------------------------------------- insert more bottom based items here if needs be!! (ex. scripts) -->
-<!--#include virtual="/_htmlEnd.html" -->
+			<main>
+				<article>
+					<nav>
+						<a href="/characters/" style="display: none;">
+							<strong>Characters</strong>
+							<em>Create.<br/>View.<br/>Edit.</em>
+							<span></span>
+						</a>
+						<a href="/database/">
+							<strong>Database</strong>
+							<em>Feats.<br/>Spells.<br/>Classes.<br/>+ more.</em>
+							<span>D&amp;Dtools Database</span>
+						</a>
+					</nav>
+				</article>
+			</main>
+
+			<footer>
+				&nbsp;
+			</footer>
+		</div>
+		<div id="Loader">
+			<div class="spinner">
+				<div class="rect1"></div>
+				<div class="rect2"></div>
+				<div class="rect3"></div>
+				<div class="rect4"></div>
+				<div class="rect5"></div>
+			</div>
+			<p>Loading Database</p>
+		</div>
+		<script type="text/javascript">
+		</script>
+		<script src="/_assets/scripts/main.js"></script>
+	</body>
+</html>

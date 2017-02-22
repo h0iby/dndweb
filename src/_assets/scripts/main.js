@@ -10311,10 +10311,12 @@ var dnd = dnd || {};
 	dnd.initService = function(){
 		dnd.vars.serviceLoaded = false;
 		dnd.vars.serviceLoadedSpeed = "-1";
+		console.log(dnd.loadData);
 		if(dnd.loadData != undefined && dnd.loadData != ""){
 			$("#Loader").show();
 
 			if(dnd.loadData == "service"){
+				//localStorage.clear();
 				service();
 
 				var interval = setInterval(function(){

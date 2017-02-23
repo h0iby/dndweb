@@ -1,13 +1,9 @@
-// = include vendor/jquery-3.1.1.js
-// = include site/services.js
-// = include site/slider.js
+// = include /vendor/domready.js
+// = include /site/services.js
+// = include /site/slider.js
 
 var dnd = dnd || {};
-
-
-$(function(){
-	'use strict';
-
+DomReady.ready(function() {
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
 
@@ -20,7 +16,9 @@ $(function(){
 
 	dnd.initService();
 	dnd.dataLoaded = function(){
-		console.log("data loaded here");
+		console.log("after data has been loaded");
 	}
-});
 
+
+	dnd.slider();
+});

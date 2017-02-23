@@ -140,7 +140,7 @@ gulp.task("js", function () {
 		.src(Folders.source.scripts + "/main.js")
 		.pipe(plugins.rename({ suffix: "" }))
 		.pipe(plugins.include())
-		//.pipe(plugins.uglify())
+		.pipe(plugins.uglify())
 		.on("error", plugins.notify.onError(function (error) {
 			return error.message;
 		}))

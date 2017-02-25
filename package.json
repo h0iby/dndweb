@@ -28,7 +28,6 @@
 	"postcss-url": "latest",
 	"postcss-cssnext": "latest",
 	"postcss-browser-reporter": "latest",
-	"css-mqpacker": "latest",
 	"cssnano": "latest",
 	"gulp.spritesmith": "latest",
 	"vinyl-buffer": "latest",

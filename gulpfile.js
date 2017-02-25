@@ -108,7 +108,6 @@ gulp.task("css", function () {
 			postcssimport(),
 			postcssurl(),
 			postcsscssnext(),
-			cssmqpacker(),
 			cssnano()
 		]))
 		.pipe(gulp.dest(Folders.target.styles))

@@ -4,7 +4,7 @@ html, body {
 	@apply --LanguageFontDefault;
 }
 
-#Page {
+.page {
 	display: flex;
 	flex-direction: column;
 	margin: 0;
@@ -17,7 +17,7 @@ html, body {
 	overflow: hidden;
 }
 
-main {
+.main {
 	position: relative;
 	order: 2;
 	flex-grow: 1;

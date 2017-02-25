@@ -10,15 +10,23 @@
 	--grayLight: #61605c;
 	--red: #9d0a0e;
 
+
+	/* variables */
 	--pathBackground: url('/_assets/images/bg.jpg');
 	--pathLogo: url('/_assets/images/logo.png');
 
 
-	/* variables */
-	--shadow: var(--black);
+	/* breakpoints */
+	@custom-media --mobilePortrait (min-width: 30em);/* (480px) */
+	@custom-media --mobileLandscape (min-width: 37.5em);/* (600px) */
+	@custom-media --tabletPortrait (min-width: 48em);/* (768px) */
+	@custom-media --tabletLandscape (min-width: 56.25em);/* (900px) */
+	@custom-media --desktop (min-width: 68.75em);/* (1100px) */
+	@custom-media --desktopLarge (min-width: 81.25em);/* (1300px) */
 
 
 	/* layout */
+	--shadow: var(--black);
 	--background: var(--pathBackground);
 	--backgroundLogo: var(--pathLogo);
 	--backgroundSite: var(--beige);
@@ -64,4 +72,41 @@
 
 	--navMainBackground: var(--red);
 	--navMainFontColor: var(--white);
+}
+
+/* Languages */
+:root {
+	/* Default */
+	--LanguageFontDefault: { font-family: 'Common'; font-weight: normal; font-style: normal; letter-spacing: 1.1px; }
+	/* Celestial Alphabet */
+	--LanguageFontCelestial: { font-family: 'Celestial'; font-weight: normal; font-style: normal; }
+
+	/* Common Alphabet */
+	--LanguageFontCommon: { font-family: 'Common'; font-weight: normal; font-style: normal; }
+	--LanguageFontGnoll: { font-family: 'Common'; font-weight: normal; font-style: normal; }
+	--LanguageFontHalfling: { font-family: 'Common'; font-weight: normal; font-style: normal; }
+
+	/* Draconic Alphabet */
+	--LanguageFontAuran: { font-family: 'Draconic'; font-weight: normal; font-style: normal; }
+	--LanguageFontDraconic: { font-family: 'Draconic'; font-weight: normal; font-style: normal; }
+	--LanguageFontIgnan: { font-family: 'Draconic'; font-weight: normal; font-style: normal; }
+
+	/* Druidic Alphabet */
+	--LanguageFontDruid: { font-family: 'Druidic'; font-weight: normal; font-style: normal; }
+
+	/* Dwarven Alphabet */
+	--LanguageFontDwarven: { font-family: 'Dwarven'; font-weight: normal; font-style: normal; }
+	--LanguageFontGiant: { font-family: 'Dwarven'; font-weight: normal; font-style: normal; }
+	--LanguageFontGnome: { font-family: 'Dwarven'; font-weight: normal; font-style: normal; }
+	--LanguageFontGoblin: { font-family: 'Dwarven'; font-weight: normal; font-style: normal; }
+	--LanguageFontOrc: { font-family: 'Dwarven'; font-weight: normal; font-style: normal; }
+
+	/* Elven Alphabet */
+	--LanguageFontAquan: { font-family: 'Elven'; font-weight: normal; font-style: normal; }
+	--LanguageFontElven: { font-family: 'Elven'; font-weight: normal; font-style: normal; }
+	--LanguageFontUndercommon: { font-family: 'Elven'; font-weight: normal; font-style: normal; }
+
+	/* Infernal Alphabet */
+	--LanguageFontAbyssal: { font-family: 'Infernal'; font-weight: normal; font-style: normal; }
+	--LanguageFontInfernal: { font-family: 'Infernal'; font-weight: normal; font-style: normal; }
 }

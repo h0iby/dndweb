@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" dmanifest="_assets/manifests/manifest.appcache">
+<html lang="en" disabled-manifest="/_assets/manifests/manifest.appcache">
 
     <head>
 		<link rel="stylesheet" href="/_assets/css/main.css" />
@@ -27,184 +27,192 @@
 		<meta name="theme-color" content="#ffffff">
     </head>
 	<body>
-		<div id="Page">
-			<header>
-				<input class="burger" type="checkbox" />
-				<div class="burger"><span></span><span></span><span></span></div>
-				<nav role="navigation">
-					<span class="label">Menu</span>
-					<ul id="Menu">
-						<li style="display: none;">
-							<input type="checkbox" />
-							<span><span>&nbsp;</span></span><a href="#">Characters</a>
-							<hr/>
-							<ul>
-								<li>
-									<a href="/characters/">Create Character</a>
-									<hr/>
+		<div class="page">
+			<header class="header">
+				<input class="header__nav__input" type="checkbox" />
+				<div class="header__nav__icon"><span class="header__nav__icon__line header__nav__icon__line--num1"></span><span class="header__nav__icon__line header__nav__icon__line--num2"></span><span class="header__nav__icon__line header__nav__icon__line--num3"></span></div>
+				<nav class="header__nav" role="navigation">
+					<span class="header__nav__label">Menu</span>
+					<ul class="header__nav__list">
+						<li class="header__nav__list__item" style="display: none;">
+							<input class="header__nav__list__item__input" type="checkbox" />
+							<span class="header__nav__list__item__bullet"><span class="header__nav__list__item__bullet__icon">&nbsp;</span></span>
+							<a class="header__nav__list__item__link" href="#">Characters</a>
+							<hr class="header__nav__list__item__line"/>
+							<ul class="header__nav__list__item__list">
+								<li class="header__nav__list__item__list__item">
+									<a class="header__nav__list__item__list__item__link" href="/characters/">Create Character</a>
+									<hr class="header__nav__list__item__list__item__line"/>
 								</li>
-								<li>
-									<input type="checkbox" />
-									<span><span>&nbsp;</span></span><a href="#">View Characters</a>
-									<hr/>
-									<ul>
-										<li class="status-ingame">
-											<a href="#">Svend Shadowface</a>
-											<hr/>
+								<li class="header__nav__list__item__list__item">
+									<input class="header__nav__list__item__list__item__input" type="checkbox" />
+									<span class="header__nav__list__item__list__item__bullet"><span class="header__nav__list__item__list__item__bullet__icon">&nbsp;</span></span>
+									<a class="header__nav__list__item__list__item__link" href="#">View Characters</a>
+									<hr class="header__nav__list__item__list__item__line"/>
+									<ul class="header__nav__list__item__list__item__list">
+										<li class="header__nav__list__item__list__item__list__item status-ingame">
+											<a class="header__nav__list__item__list__item__list__item__link" href="#">Svend Shadowface</a>
+											<hr class="header__nav__list__item__list__item__list__item__line"/>
 										</li>
-										<li class="status-paused">
-											<a href="#">Melinda</a>
-											<hr/>
+										<li class="header__nav__list__item__list__item__list__item status-paused">
+											<a class="header__nav__list__item__list__item__list__item__link" href="#">Melinda</a>
+											<hr class="header__nav__list__item__list__item__list__item__line"/>
 										</li>
-										<li class="status-deceased">
-											<a href="#">Dipzy</a>
-											<hr/>
+										<li class="header__nav__list__item__list__item__list__item status-deceased">
+											<a class="header__nav__list__item__list__item__list__item__link" href="#">Dipzy</a>
+											<hr class="header__nav__list__item__list__item__list__item__line"/>
 										</li>
 									</ul>
 								</li>
-								<li>
-									<input type="checkbox" />
-									<span><span>&nbsp;</span></span><a href="#">Edit Characters</a>
-									<hr/>
-									<ul>
-										<li class="status-ingame">
-											<a href="#">Svend Shadowface</a>
-											<hr/>
+								<li class="header__nav__list__item__list__item">
+									<input class="header__nav__list__item__list__item__input" type="checkbox" />
+									<span class="header__nav__list__item__list__item__bullet"><span class="header__nav__list__item__list__item__bullet__icon">&nbsp;</span></span>
+									<a class="header__nav__list__item__list__item__link" href="#">Edit Characters</a>
+									<hr class="header__nav__list__item__list__item__line"/>
+									<ul class="header__nav__list__item__list__item__list">
+										<li class="header__nav__list__item__list__item__list__item status-ingame">
+											<a class="header__nav__list__item__list__item__list__item__link" href="#">Svend Shadowface</a>
+											<hr class="header__nav__list__item__list__item__list__item__line"/>
 										</li>
-										<li class="status-paused">
-											<a href="#">Melinda</a>
-											<hr/>
+										<li class="header__nav__list__item__list__item__list__item status-paused">
+											<a class="header__nav__list__item__list__item__list__item__link" href="#">Melinda</a>
+											<hr class="header__nav__list__item__list__item__list__item__line"/>
 										</li>
-										<li class="status-deceased">
-											<a href="#">Dipzy</a>
-											<hr/>
+										<li class="header__nav__list__item__list__item__list__item status-deceased">
+											<a class="header__nav__list__item__list__item__list__item__link" href="#">Dipzy</a>
+											<hr class="header__nav__list__item__list__item__list__item__line"/>
 										</li>
 									</ul>
 								</li>
 							</ul>
 						</li>
-						<li>
-							<input type="checkbox" checked />
-							<span><span>&nbsp;</span></span><a href="/database/">Database</a>
-							<hr/>
-							<ul>
-								<li>
-									<input type="checkbox" />
-									<span>&nbsp;</span><a href="#">Books</a>
-									<hr/>
-									<ul>
-										<li>
-											<a href="#">Editions</a>
-											<hr/>
+						<li class="header__nav__list__item">
+							<input class="header__nav__list__item__input" type="checkbox" checked />
+							<span class="header__nav__list__item__bullet"><span class="header__nav__list__item__bullet__icon">&nbsp;</span></span>
+							<a class="header__nav__list__item__link" href="/database/">Database</a>
+							<hr class="header__nav__list__item__line"/>
+							<ul class="header__nav__list__item__list">
+								<li class="header__nav__list__item__list__item">
+									<input class="header__nav__list__item__list__item__input" type="checkbox" />
+									<span class="header__nav__list__item__list__item__bullet"><span class="header__nav__list__item__list__item__bullet__icon">&nbsp;</span></span>
+									<a class="header__nav__list__item__list__item__link" href="#">Books</a>
+									<hr class="header__nav__list__item__list__item__line"/>
+									<ul class="header__nav__list__item__list__item__list">
+										<li class="header__nav__list__item__list__item__list__item">
+											<a class="header__nav__list__item__list__item__list__item__link" href="#">Editions</a>
+											<hr class="header__nav__list__item__list__item__list__item__line"/>
 										</li>
 									</ul>
 								</li>
-								<li>
-									<a href="#">Classes</a>
-									<hr/>
+								<li class="header__nav__list__item__list__item">
+									<a class="header__nav__list__item__list__item__link" href="#">Classes</a>
+									<hr class="header__nav__list__item__list__item__line"/>
 								</li>
-								<li>
-									<input type="checkbox" />
-									<span><span>&nbsp;</span></span><a href="#">Feats</a>
-									<hr/>
-									<ul>
-										<li>
-											<a href="#">Categories</a>
-											<hr/>
+								<li class="header__nav__list__item__list__item">
+									<input class="header__nav__list__item__list__item__input" type="checkbox" />
+									<span class="header__nav__list__item__list__item__bullet"><span class="header__nav__list__item__list__item__bullet__icon">&nbsp;</span></span>
+									<a class="header__nav__list__item__list__item__link" href="#">Feats</a>
+									<hr class="header__nav__list__item__list__item__line"/>
+									<ul class="header__nav__list__item__list__item__list">
+										<li class="header__nav__list__item__list__item__list__item">
+											<a class="header__nav__list__item__list__item__list__item__link" href="#">Categories</a>
+											<hr class="header__nav__list__item__list__item__list__item__line"/>
 										</li>
-										<li>
-											<a href="#">Traits</a>
-											<hr/>
+										<li class="header__nav__list__item__list__item__list__item">
+											<a class="header__nav__list__item__list__item__list__item__link" href="#">Traits</a>
+											<hr class="header__nav__list__item__list__item__list__item__line"/>
 										</li>
-										<li>
-											<a href="#">Flaws</a>
-											<hr/>
+										<li class="header__nav__list__item__list__item__list__item">
+											<a class="header__nav__list__item__list__item__list__item__link" href="#">Flaws</a>
+											<hr class="header__nav__list__item__list__item__list__item__line"/>
 										</li>
 									</ul>
 								</li>
-								<li>
-									<input type="checkbox" />
-									<span><span>&nbsp;</span></span><a href="#">Skills</a>
-									<hr/>
-									<ul>
-										<li>
-											<a href="#">Skill Tricks</a>
-											<hr/>
+								<li class="header__nav__list__item__list__item">
+									<input class="header__nav__list__item__list__item__input" type="checkbox" />
+									<span class="header__nav__list__item__list__item__bullet"><span class="header__nav__list__item__list__item__bullet__icon">&nbsp;</span></span>
+									<a class="header__nav__list__item__list__item__link" href="#">Skills</a>
+									<hr class="header__nav__list__item__list__item__line"/>
+									<ul class="header__nav__list__item__list__item__list">
+										<li class="header__nav__list__item__list__item__list__item">
+											<a class="header__nav__list__item__list__item__list__item__link" href="#">Skill Tricks</a>
+											<hr class="header__nav__list__item__list__item__list__item__line"/>
 										</li>
 									</ul>
 								</li>
-								<li>
-									<input type="checkbox" />
-									<span><span>&nbsp;</span></span><a href="#">Spells</a>
-									<hr/>
-									<ul>
-										<li>
-											<a href="#">Descriptors</a>
-											<hr/>
+								<li class="header__nav__list__item__list__item">
+									<input class="header__nav__list__item__list__item__input" type="checkbox" />
+									<span class="header__nav__list__item__list__item__bullet"><span class="header__nav__list__item__list__item__bullet__icon">&nbsp;</span></span>
+									<a class="header__nav__list__item__list__item__link" href="#">Spells</a>
+									<hr class="header__nav__list__item__list__item__line"/>
+									<ul class="header__nav__list__item__list__item__list">
+										<li class="header__nav__list__item__list__item__list__item">
+											<a class="header__nav__list__item__list__item__list__item__link" href="#">Descriptors</a>
+											<hr class="header__nav__list__item__list__item__list__item__line"/>
 										</li>
-										<li>
-											<a href="#">Domains</a>
-											<hr/>
+										<li class="header__nav__list__item__list__item__list__item">
+											<a class="header__nav__list__item__list__item__list__item__link" href="#">Domains</a>
+											<hr class="header__nav__list__item__list__item__list__item__line"/>
 										</li>
-										<li>
-											<a href="#">Spell Schools</a>
-											<hr/>
+										<li class="header__nav__list__item__list__item__list__item">
+											<a class="header__nav__list__item__list__item__list__item__link" href="#">Spell Schools</a>
+											<hr class="header__nav__list__item__list__item__list__item__line"/>
 										</li>
-										<li>
-											<a href="#">Spell Subschools</a>
-											<hr/>
+										<li class="header__nav__list__item__list__item__list__item">
+											<a class="header__nav__list__item__list__item__list__item__link" href="#">Spell Subschools</a>
+											<hr class="header__nav__list__item__list__item__list__item__line"/>
 										</li>
 									</ul>
 								</li>
-								<li>
-									<a href="#">Languages</a>
-									<hr/>
+								<li class="header__nav__list__item__list__item">
+									<a class="header__nav__list__item__list__item__link" href="#">Languages</a>
+									<hr class="header__nav__list__item__list__item__line"/>
 								</li>
-								<li>
-									<a href="#">Races</a>
-									<hr/>
+								<li class="header__nav__list__item__list__item">
+									<a class="header__nav__list__item__list__item__link" href="#">Races</a>
+									<hr class="header__nav__list__item__list__item__line"/>
 								</li>
-								<li>
-									<a href="#">Monsters</a>
-									<hr/>
+								<li class="header__nav__list__item__list__item">
+									<a class="header__nav__list__item__list__item__link" href="#">Monsters</a>
+									<hr class="header__nav__list__item__list__item__line"/>
 								</li>
-								<li>
-									<a href="#">Items</a>
-									<hr/>
+								<li class="header__nav__list__item__list__item">
+									<a class="header__nav__list__item__list__item__link" href="#">Items</a>
+									<hr class="header__nav__list__item__list__item__line"/>
 								</li>
 							</ul>
 						</li>
 					</ul>
 				</nav>
-				<a href="/" class="logo"></a>
-				<input class="search" type="checkbox" />
-				<div class="search"><span></span><span></span></div>
-				<form>
-					<input type="search" />
-					<input type="submit" />
-					<div class="search-icon"><span></span><span></span></div>
+				<a href="/" class="header__logo"></a>
+				<input class="header__search__input" type="checkbox" />
+				<div class="header__search__icon"><span class="header__search__icon__line header__search__icon__line--num1"></span><span class="header__search__icon__line header__search__icon__line--num2"></span></div>
+				<form class="header__search">
+					<input class="header__search__searchfield" type="search" />
+					<input class="header__search__submit" type="submit" />
+					<div class="header__search__icon header__search__icon--submit"><span class="header__search__icon__line header__search__icon__line--num1"></span><span class="header__search__icon__line header__search__icon__line--num2"></span></div>
 				</form>
 			</header>
 
-			<main>
-				<article>
-					database here!
+			<main class="main">
+				<article class="main__article">
+					Database
 				</article>
 			</main>
 
-			<footer>
+			<footer class="footer">
 				&nbsp;
 			</footer>
 		</div>
-		<div id="Loader">
-			<div class="spinner">
-				<div class="rect1"></div>
-				<div class="rect2"></div>
-				<div class="rect3"></div>
-				<div class="rect4"></div>
-				<div class="rect5"></div>
+		<div class="overlay" id="Loader">
+			<div class="overlay__spinner spinner">
+				<div class="spinner__line spinner__line--num1 rect1"></div>
+				<div class="spinner__line spinner__line--num2 rect2"></div>
+				<div class="spinner__line spinner__line--num3 rect3"></div>
+				<div class="spinner__line spinner__line--num4 rect4"></div>
+				<div class="spinner__line spinner__line--num5 rect5"></div>
 			</div>
-			<p>Loading Database</p>
+			<p class="overlay__text" >Loading Database</p>
 		</div>
 		<script type="text/javascript">
 			var dnd = dnd || {};

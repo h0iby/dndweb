@@ -4,9 +4,6 @@
 /* variables */
 @import url("variables/_variables.css");
 
-/* fonts */
-@import url("fonts/_fonts.css");
-
 /* mixins */
 @import url("mixins/_mixins.css");
 
@@ -19,6 +16,9 @@
 @import url("components/_inputs.css");
 @import url("components/_loader.css");
 @import url("components/_spinner.css");
+
+/* fonts */
+@import url("fonts/_fonts.css");
 
 /* elements */
 @import url("elements/_layout.css");

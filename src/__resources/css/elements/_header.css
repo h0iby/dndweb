@@ -1,4 +1,4 @@
-header{
+.header{
 	position: relative;
 	order: 1;
 	z-index: 3;
@@ -6,208 +6,201 @@ header{
 	height: 70px;
 	background: var(--backgroundHeader) var(--background) 50% 0 repeat-x;
 	box-shadow: -5px -15px 25px 15px var(--shadow);
+
+	&__logo{
+		position: absolute;
+		top: 10px;
+		left: 50%;
+		width: 50px;
+		height: 50px;
+		margin: 0 0 0 -25px;
+		background: var(--backgroundLogo) no-repeat 50% 50%;
+		background-size: 100% 100%;
+		text-decoration: none;
+		z-index: 1;
+
+		&::before, &::after{
+			position: absolute;
+			top: 0;
+			content: "D";
+			color: var(--logoFontColor);
+			font-size: 4rem;
+			line-height: 45px;
+			font-weight: bold;
+			padding: 5px 10px 0;
+			@apply --LanguageFont-Default;
+		}
+
+		&::before{
+			right: 100%;
+		}
+
+		&::after{
+			left: 100%;
+		}
+	}
+
+	&__search{
+		position: absolute;
+		top: 0;
+		z-index: 2;
+		right: 80px;
+		height: 100%;
+		-webkit-font-smoothing: antialiased;
+		transform-origin: 0% 0%;
+		transform: translate(0, -110%);
+		transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+
+		&__input{
+			margin: 0;
+			padding: 0;
+			border: none;
+			background: transparent;
+			position: absolute;
+			display: block;
+			width: 100px;
+			height: 100%;
+			right: 0;
+			top: 0;
+			z-index: 3;
+			opacity: 0;
+			cursor: pointer;
+
+			&:checked ~ .header__search {
+				transform: scale(1.0, 1.0);
+				transform: translate(0, 0);
+				opacity: 1;
+
+				&__icon{
+					& .header__search__icon__line{
+						width: 33px;
+						border-radius: 3px;
+
+						&--num1{
+							height: 0px;
+							transform-origin: 4px 0px;
+							border-width: 2px 0;
+							transform: rotate(-45deg) translate(-22px, 6px);
+
+						}
+
+						&--num2{
+							transform-origin: 8px -8px;
+							transform: rotate(-135deg) translate(-13px,-21px);
+						}
+					}
+				}
+			}
+		}
+
+		&__icon{
+			position: absolute;
+			display: block;
+			width: 33px;
+			z-index: 2;
+			height: 33px;
+			top: 50%;
+			right: 20px;
+			margin: -12px 0 0;
+
+			&__line{
+				position: relative;
+				display: block;
+				width: 10px;
+				height: 0px;
+				margin: 0 0 5px;
+				border-radius: 3px;
+				border: solid 4px var(--navBurgerColor);
+				z-index: 1;
+				opacity: 1;
+				transform-origin: 4px 0px;
+				transition: all 0.5s cubic-bezier(0.77,0.2,0.05,1.0), background 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.55s ease;
+
+				&--num1{
+					border-radius: 50%;
+					width: 11px;
+					height: 11px;
+					transform: rotate(45deg) translate(1px, 0);
+				}
+
+				&--num2{
+					border-width: 2px 0;
+					transform-origin: 8px -8px;
+					transform: rotate(-135deg) translate(-3px, -11px);
+				}
+			}
+
+			&--submit{
+				margin: -13px 0 0 0;
+				right: -5px;
+			}
+		}
+
+		&__searchfield, &__submit{
+			position: relative;
+			display: block;
+			top: 16px;
+			width: auto;
+			border: none 0;
+			float: left;
+			background: transparent;
+			line-height: 38px;
+			outline: none 0;
+			z-index: 3;
+		}
+
+		&__searchfield{
+			background: var(--white);
+			border-radius: 5px;
+			width: 150px;
+			padding: 0 10px;
+		}
+
+		&__submit{
+			position: relative;
+			width: 48px;
+			height: 38px;
+			text-indent: -9999px;
+			overflow: hidden;
+			cursor: pointer;
+		}
+	}
 }
 
-header .logo{
-	position: absolute;
-	top: 10px;
-	left: 50%;
-	width: 50px;
-	height: 50px;
-	margin: 0 0 0 -25px;
-	background: var(--backgroundLogo) no-repeat 50% 50%;
-	background-size: 100% 100%;
-	text-decoration: none;
+@media (--mobilePortrait) {
+	.header{
+		&__search{
+			right: 100px;
+		}
+	}
 }
 
-header .logo::before, header .logo::after{
-	position: absolute;
-	top: 0;
-	content: "D";
-	color: var(--logoFontColor);
-	font-size: 4rem;
-	line-height: 45px;
-	font-weight: bold;
-	padding: 5px 10px 0;
-	@apply --LanguageFont-Default;
+@media (--tabletLandscape) {
+	.header{
+		&__search{
+			&__searchfield{
+				width: 225px;
+			}
+		}
+	}
 }
 
-header .logo::before{
-	right: 100%;
+@media (--desktop) {
+	.header{
+		&__search{
+			&__searchfield{
+				width: 300px;
+			}
+		}
+	}
 }
 
-header .logo::after{
-	left: 100%;
-}
-
-header input{
-	margin: 0;
-	padding: 0;
-	border: none;
-	background: transparent;
-}
-
-header div.search{
-	position: absolute;
-	display: block;
-	width: 33px;
-	z-index: 2;
-	height: 33px;
-	top: 50%;
-	right: 10px;
-	margin: -13px 0 0;
-}
-
-header div.search span{
-	position: relative;
-	display: block;
-	width: 33px;
-	height: 4px;
-	margin-bottom: 5px;
-	background: var(--navBurgerColor);
-	border-radius: 3px;
-	z-index: 1;
-	opacity: 1;
-	transform-origin: 4px 0px;
-	transition: all 0.5s cubic-bezier(0.77,0.2,0.05,1.0), background 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.55s ease;
-}
-
-header div.search span:nth-child(1){
-	border-radius: 50%;
-	width: 11px;
-	height: 11px;
-	background: transparent;
-	border: solid 4px var(--navBurgerColor);
-	transform: rotate(45deg) translate(1px, 0);
-}
-
-header div.search span:nth-child(2){
-	width: 10px;
-	transform-origin: 0% 100%;
-	transform: rotate(45deg) translate(-3px, -11px);
-}
-
-header form{
-	position: absolute;
-	top: 0;
-	z-index: 2;
-	right: 80px;
-	height: 100%;
-	-webkit-font-smoothing: antialiased;
-	transform-origin: 0% 0%;
-	transform: translate(0, -110%);
-	transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-}
-
-header form input{
-	position: relative;
-	line-height: 38px;
-	float: left;
-	display: block;
-	width: auto;
-	top: 16px;
-	outline: none 0;
-}
-
-header form [type='search']{
-	background: var(--white);
-	border-radius: 5px;
-	width: 200px;
-	padding: 0 10px;
-}
-
-header form [type='submit']{
-	position: relative;
-	background: transparent;
-	width: 38px;
-	height: 38px;
-	text-indent: -9999px;
-	overflow: hidden;
-}
-
-header form .search-icon{
-	position: absolute;
-	z-index: 1;
-	width: 38px;
-	height: 38px;
-	right: 0px;
-	top: 16px;
-	opacity: 1;
-	overflow: hidden;
-}
-
-header form .search-icon span{
-	position: relative;
-	display: block;
-	width: 33px;
-	height: 4px;
-	margin-bottom: 5px;
-	background: var(--navBurgerColor);
-	border-radius: 3px;
-	z-index: 1;
-	opacity: 1;
-	transform-origin: 4px 0px;
-	transition: all 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-				background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-				opacity 0.55s ease;
-}
-
-header form .search-icon span:nth-child(1){
-	border-radius: 50%;
-	width: 11px;
-	height: 11px;
-	background: transparent;
-	border: solid 4px var(--navBurgerColor);
-	transform: rotate(45deg) translate(15px, -6px);
-}
-
-header form .search-icon span:nth-child(2){
-	width: 10px;
-	transform-origin: 0% 100%;
-	transform: rotate(45deg) translate(11px, -17px);
-}
-
-header .search[type='checkbox']{
-	position: absolute;
-	display: block;
-	width: 80px;
-	height: 100%;
-	right: 0;
-	top: 0;
-	z-index: 3;
-	opacity: 0;
-	cursor: pointer;
-}
-
-header .search[type='checkbox']:checked ~ .search span{
-	display: block;
-	width: 33px;
-	margin-bottom: 5px;
-	position: relative;
-	background: var(--navBurgerColor);
-	border-radius: 3px;
-	border-width: 0;
-	z-index: 1;
-	transform-origin: 4px 0px;
-	transition: all 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-				background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-				opacity 0.55s ease;
-}
-
-header .search[type='checkbox']:checked ~ .search span:nth-child(1){
-	transform: rotate(-45deg) translate(-22px, 6px);
-	height: 0px;
-	border-top-width: 2px;
-	border-bottom-width: 2px;
-}
-
-header .search[type='checkbox']:checked ~ .search span:nth-child(2){
-	transform: rotate(45deg) translate(-10px, 1px);
-	height: 3px;
-}
-
-header .search[type='checkbox']:checked ~ form{
-	transform: scale(1.0, 1.0);
-	transform: translate(0, 0);
-	opacity: 1;
+@media (--desktopLarge) {
+	.header{
+		&__search{
+			&__searchfield{
+				width: 400px;
+			}
+		}
+	}
 }

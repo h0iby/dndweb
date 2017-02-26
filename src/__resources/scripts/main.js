@@ -1,4 +1,5 @@
 // = include /vendor/domready.js
+// = include /vendor/template7.js
 // = include /site/services.js
 // = include /site/slider.js
 

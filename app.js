@@ -18,10 +18,10 @@ app.use(express.static("src"));
 */
 
 [
-	'feats/feats'
+	['routes', 'feats']
 ].map((controllerName) => {
-  controller = require('./routes/' + controllerName);
-  controller.setup(app, marko, fs, path, root);
+  controller = require('./routes/' + controllerName[0]);
+  controller.setup(app, marko, fs, controllerName[1], path, root);
 });
 
 /*

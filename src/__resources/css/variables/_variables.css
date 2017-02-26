@@ -17,7 +17,7 @@
 
 
 	/* breakpoints */
-	@custom-media --mobilePortrait (min-width: 30em);/* (480px) */
+	@custom-media --mobilePortrait (min-width: 25em);/* (480px) */
 	@custom-media --mobileLandscape (min-width: 37.5em);/* (600px) */
 	@custom-media --tabletPortrait (min-width: 48em);/* (768px) */
 	@custom-media --tabletLandscape (min-width: 56.25em);/* (900px) */
@@ -33,7 +33,7 @@
 	--backgroundPage: var(--beige);
 	--backgroundHeader: var(--beige);
 	--backgroundFooter: var(--grayBlack);
-	--fontSize: 15px;
+	--fontSize: 16px;
 
 
 	/* logo */
@@ -46,7 +46,7 @@
 
 
 	/* nav */
-	--navBurgerColor: var(--grayLight);
+	--navBurgerColor: var(--grayBlack);
 	--navBackground: var(--pathBackground);
 	--navBackgroundHeader: var(--beige);
 	--navFontColor: var(--grayDark);

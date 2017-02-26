@@ -28,7 +28,6 @@
 			line-height: 45px;
 			font-weight: bold;
 			padding: 5px 10px 0;
-			@apply --LanguageFont-Default;
 		}
 
 		&::before{
@@ -50,6 +49,7 @@
 		transform-origin: 0% 0%;
 		transform: translate(0, -110%);
 		transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+		display: none;
 
 		&__input{
 			margin: 0;
@@ -58,13 +58,14 @@
 			background: transparent;
 			position: absolute;
 			display: block;
-			width: 100px;
+			width: 80px;
 			height: 100%;
 			right: 0;
 			top: 0;
 			z-index: 3;
 			opacity: 0;
 			cursor: pointer;
+			display: none;
 
 			&:checked ~ .header__search {
 				transform: scale(1.0, 1.0);
@@ -73,20 +74,17 @@
 
 				&__icon{
 					& .header__search__icon__line{
-						width: 33px;
-						border-radius: 3px;
-
 						&--num1{
-							height: 0px;
-							transform-origin: 4px 0px;
-							border-width: 2px 0;
-							transform: rotate(-45deg) translate(-22px, 6px);
-
+							width: 32px;
 						}
 
 						&--num2{
-							transform-origin: 8px -8px;
-							transform: rotate(-135deg) translate(-13px,-21px);
+							border-radius: 3px;
+							width: 32px;
+							height: 0px;
+							border-width: 2px 0;
+							transform-origin: 28px 8px;
+							transform: rotate(-45deg);
 						}
 					}
 				}
@@ -95,44 +93,45 @@
 
 		&__icon{
 			position: absolute;
-			display: block;
+			display: none;
 			width: 33px;
 			z-index: 2;
 			height: 33px;
 			top: 50%;
 			right: 20px;
-			margin: -12px 0 0;
+			margin: -15px 0 0;
 
 			&__line{
-				position: relative;
 				display: block;
 				width: 10px;
 				height: 0px;
-				margin: 0 0 5px;
 				border-radius: 3px;
-				border: solid 4px var(--navBurgerColor);
 				z-index: 1;
 				opacity: 1;
-				transform-origin: 4px 0px;
+				border: solid 2px var(--navBurgerColor);
 				transition: all 0.5s cubic-bezier(0.77,0.2,0.05,1.0), background 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.55s ease;
 
 				&--num1{
-					border-radius: 50%;
-					width: 11px;
-					height: 11px;
-					transform: rotate(45deg) translate(1px, 0);
+					width: 10px;
+					height: 0px;
+					border-width: 2px 0;
+					transform-origin: 19px 9px;
+					transform: rotate(-135deg);
 				}
 
 				&--num2{
-					border-width: 2px 0;
-					transform-origin: 8px -8px;
-					transform: rotate(-135deg) translate(-3px, -11px);
+					border-radius: 50%;
+					width: 10px;
+					height: 10px;
+					border-width: 3px;
+					transform-origin: 17px 0px;
+					transform: rotate(-45deg);
 				}
 			}
 
 			&--submit{
-				margin: -13px 0 0 0;
-				right: -5px;
+				margin: -17px 0 0 0;
+				right: 8px;
 			}
 		}
 
@@ -151,9 +150,11 @@
 
 		&__searchfield{
 			background: var(--white);
-			border-radius: 5px;
+			border-radius: 7px;
 			width: 150px;
 			padding: 0 10px;
+			border: solid 1px var(--navBurgerColor);
+			color: var(--navBurgerColor);
 		}
 
 		&__submit{
@@ -170,7 +171,12 @@
 @media (--mobilePortrait) {
 	.header{
 		&__search{
-			right: 100px;
+			right: 80px;
+			display: block;
+
+			&__input, &__icon{
+				display: block;
+			}
 		}
 	}
 }

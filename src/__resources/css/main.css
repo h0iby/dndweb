@@ -1,27 +1,34 @@
 /* resets */
 @import url("resets/_resets.css");
+/**/
 
 /* variables */
 @import url("variables/_variables.css");
+/**/
 
-/* mixins */
+/* mixins *
 @import url("mixins/_mixins.css");
+/**/
 
-/* sprites */
+/* sprites *
 @import url("sprites/_sprites.css");
+/**/
 
-/* components */
+/* components *
 @import url("components/_buttons.css");
 @import url("components/_dropdowns.css");
 @import url("components/_inputs.css");
+/**/
 @import url("components/_loader.css");
 @import url("components/_spinner.css");
 
 /* fonts */
 @import url("fonts/_fonts.css");
+/**/
 
 /* elements */
 @import url("elements/_layout.css");
 @import url("elements/_header.css");
 @import url("elements/_footer.css");
 @import url("elements/_navigation.css");
+/**/

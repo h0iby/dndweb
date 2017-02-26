@@ -1,7 +1,7 @@
 html, body {
-	font-size: var(--font-size);
-	line-height: 18px;
 	@apply --LanguageFontDefault;
+	line-height: 18px;
+	font-size: var(--fontSize);
 }
 
 .page {

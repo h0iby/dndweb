@@ -32,7 +32,6 @@
 	"gulp.spritesmith": "latest",
 	"vinyl-buffer": "latest",
   	"gulp-imagemin": "latest",
-    "marko": "latest",
     "express": "^4.14.0",
     "sqlite3": "^3.1.8"
   },

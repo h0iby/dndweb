@@ -1,12 +1,6 @@
-require('marko/node-require').install();
-
 var express = require('express'),
 	app = express(),
-	path = require('path'),
-	gulp = require('gulp'),
-	root = "src",
-	fs = require('fs'),
-	marko = require('marko');
+	gulp = require('gulp');
 
 app.use(express.static("src"));
 
@@ -21,8 +15,10 @@ app.use(express.static("src"));
 	['routes', 'feats']
 ].map((controllerName) => {
   controller = require('./routes/' + controllerName[0]);
-  controller.setup(app, marko, fs, controllerName[1], path, root);
+  controller.setup(app, controllerName[1]);
 });
+
+
 
 /*
 app.get('/dot', function(req, res) {
@@ -31,12 +27,13 @@ app.get('/dot', function(req, res) {
 });
 */
 /*
-
-
 app.get('/races', function(req, res) {
 	res.sendFile(path.join(__dirname+root+'/index.html'));
 });
 */
 
+
+
+
 //gulp.start("build");
-app.listen(82);
+app.listen(80);

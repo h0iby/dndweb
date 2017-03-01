@@ -25,5 +25,12 @@ html, body {
 	overflow: auto;
 	word-break: break-all;
 	background: var(--backgroundPage) var(--background) 0 0 repeat;
+
+	&__article{
+		&__data{
+			width: 900px;
+			margin: 50px auto 0;
+		}
+	}
 }
 

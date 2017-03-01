@@ -21,6 +21,11 @@
 /**/
 @import url("components/_loader.css");
 @import url("components/_spinner.css");
+@import url("components/_filter.css");
+@import url("components/_table.css");
+@import url("components/_table-paging.css");
+@import url("components/_table-amount.css");
+
 
 /* fonts */
 @import url("fonts/_fonts.css");

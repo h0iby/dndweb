@@ -1,15 +1,9 @@
 var express = require('express'),
 	app = express(),
+	//gulpTasks = require('./gulp-tasks'),
 	gulp = require('gulp');
 
 app.use(express.static("src"));
-
-/*
-['gulp-tasks'].map((controllerName) => {
-  controller = require('./' + controllerName);
-  controller.setup(app);
-});
-*/
 
 [
 	['routes', 'feats']

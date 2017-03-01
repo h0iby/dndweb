@@ -1,0 +1,19 @@
+.filter{
+	display: table;
+	width: 100%;
+
+	&__item{
+		display: table-row;
+
+		&__text{
+			display: table-cell;
+		}
+		&__container{
+			display: table-cell;
+
+			&__input{
+
+			}
+		}
+	}
+}

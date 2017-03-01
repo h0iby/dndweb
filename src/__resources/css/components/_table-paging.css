@@ -1,0 +1,9 @@
+.table-paging{
+	display: inline-block;
+
+	&__item{
+		&--spacer{
+
+		}
+	}
+}

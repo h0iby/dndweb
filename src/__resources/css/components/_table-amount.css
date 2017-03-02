@@ -1,13 +1,16 @@
 .table-amount{
-	display: inline-block;
+	display: block;
+	margin: 15px 0 10px;
+	float: right;
+	vertical-align: top;
 
 	&__label{
 
 	}
 	&__text{
-
+		text-transform: uppercase;
 	}
 	&__select{
-
+		width: 55px;
 	}
 }

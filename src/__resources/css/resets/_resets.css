@@ -3,3 +3,34 @@ html, body, h1, h2, h3, h4, h5, h6, p, ul, li {
 	padding: 0;
 	list-style-type: none;
 }
+
+h2{
+	font-size: 3rem;
+	line-height: 3rem;
+	letter-spacing: 0.2rem;
+}
+h3{
+	font-size: 2.4rem;
+	line-height: 2.4rem;
+	letter-spacing: 0.2rem;
+}
+h4{
+	font-size: 1.9rem;
+	line-height: 1.9rem;
+	letter-spacing: 0.2rem;
+}
+h5{
+	font-size: 1.5rem;
+	line-height: 1.5rem;
+	letter-spacing: 0.2rem;
+}
+h6{
+	font-size: 1.2rem;
+	line-height: 1.2rem;
+	letter-spacing: 0.2rem;
+}
+p{
+	font-size: 1rem;
+	line-height: 1rem;
+	letter-spacing: 0.1rem;
+}

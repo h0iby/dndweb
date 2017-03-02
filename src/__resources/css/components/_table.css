@@ -1,22 +1,74 @@
 .table{
 	display: table;
 	width: 100%;
+	margin: 10px 0 0;
 
 	&__row{
 		display: table-row;
+		background: var(--tableBackgroundEven);
 
 		&__td{
 			display: table-cell;
+			padding: 8px 10px 6px;
+			display: none;
 
 			&__bold{
-
+				display: block;
+				font-weight: normal;
+				border-bottom: solid 1px var(--tableStrongBorderColor);
 			}
 			&__link{
-
+				display: block;
+				text-decoration: none;
+				color: var(--tableLinkColor);
 			}
 
 			&--header{
+				background: var(--tableHeaderBackground);
+				color: var(--tableHeaderFontColor);
 
+			}
+
+			&:first-child{
+				display: block;
+			}
+		}
+
+		&:nth-child(odd){
+			background: var(--tableBackgroundOdd);
+		}
+	}
+}
+
+@media (--tabletPortrait) {
+	.table{
+		&__row{
+			&__td{
+				&:nth-child(2){
+					display: table-cell;
+				}
+			}
+		}
+	}
+}
+
+@media (--tabletLandscape) {
+	.table{
+		&__row{
+			&__td{
+				&:last-child{
+					display: table-cell;
+				}
+			}
+		}
+	}
+}
+
+@media (--desktop) {
+	.table{
+		&__row{
+			&__td{
+				display: table-cell;
 			}
 		}
 	}

@@ -1,18 +1,71 @@
 .filter{
-	display: table;
-	width: 100%;
+	display: block;
+	overflow: hidden;
+	max-height: 0px;
+	transition: all 0.5s;
 
-	&__item{
-		display: table-row;
-
-		&__text{
-			display: table-cell;
+	&__title{
+		&::after{
+			position: relative;
+			top: -6px;
+			content: "-";
+			margin: 0 0 0 6px;
+			color: var(--filterPlusColor);
 		}
-		&__container{
-			display: table-cell;
+	}
 
-			&__input{
+	&__toggle{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 30px;
+		margin: 0;
+		padding: 0;
+		opacity: 0;
+		cursor: pointer;
 
+		&:checked ~ {
+			& .filter__title{
+				&::after{
+					content: "+";
+					top: 3px;
+				}
+			}
+
+			& .filter{
+				max-height: 150px;
+			}
+		}
+	}
+
+	&__list{
+		display: table;
+		width: 100%;
+		margin: 5px 0;
+
+		&__item{
+			display: table-row;
+			background: var(--filterBackgroundEven);
+
+			&__text, &__container{
+				padding: 8px 10px 6px;
+			}
+
+			&__text{
+				display: table-cell;
+				max-width: 200px;
+			}
+			&__container{
+				display: table-cell;
+
+				&__input{
+					width: 100%;
+				}
+			}
+
+			&:nth-child(odd){
+				background: var(--filterBackgroundOdd);
 			}
 		}
 	}

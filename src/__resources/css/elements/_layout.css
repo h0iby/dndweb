@@ -28,9 +28,21 @@ html, body {
 
 	&__article{
 		&__data{
-			width: 900px;
-			margin: 50px auto 0;
+			max-width: 1200px;
+			margin: 0 auto;
 		}
 	}
 }
 
+.section{
+	&__intro, &__header, &__main, &__footer{
+		position: relative;
+		padding: 0 5%;
+		float: left;
+		width: 90%;
+		vertical-align: top;
+	}
+	&__intro, &__header, &__main{
+		margin: 20px 0 0;
+	}
+}

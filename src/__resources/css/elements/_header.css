@@ -9,33 +9,34 @@
 
 	&__logo{
 		position: absolute;
-		top: 10px;
+		top: 5px;
 		left: 50%;
-		width: 50px;
-		height: 50px;
+		width: 65px;
+		height: 60px;
 		margin: 0 0 0 -25px;
-		background: var(--backgroundLogo) no-repeat 50% 50%;
-		background-size: 100% 100%;
 		text-decoration: none;
 		z-index: 1;
+		color: var(--logoColor);
 
 		&::before, &::after{
 			position: absolute;
 			top: 0;
 			content: "D";
-			color: var(--logoFontColor);
+			color: var(--logoTextColor);
 			font-size: 4rem;
-			line-height: 45px;
-			font-weight: bold;
-			padding: 5px 10px 0;
+			line-height: 55px;
+			font-weight: normal;
+			padding: 4px 10px 0;
+			z-index: -1;
+			transform:scale(1.6,1);
 		}
 
 		&::before{
-			right: 100%;
+			right: 68%;
 		}
 
 		&::after{
-			left: 100%;
+			left: 56%;
 		}
 	}
 
@@ -108,7 +109,7 @@
 				border-radius: 3px;
 				z-index: 1;
 				opacity: 1;
-				border: solid 2px var(--navBurgerColor);
+				border: solid 2px var(--searchFieldIcon);
 				transition: all 0.5s cubic-bezier(0.77,0.2,0.05,1.0), background 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.55s ease;
 
 				&--num1{
@@ -149,12 +150,12 @@
 		}
 
 		&__searchfield{
-			background: var(--white);
+			background: var(--searchField);
 			border-radius: 7px;
 			width: 150px;
 			padding: 0 10px;
-			border: solid 1px var(--navBurgerColor);
-			color: var(--navBurgerColor);
+			border: solid 1px var(--searchFieldBorder);
+			color: var(--searchFieldText);
 		}
 
 		&__submit{

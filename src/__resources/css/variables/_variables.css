@@ -1,14 +1,15 @@
 :root {
 	/* colors */
-	--trans: transparent;
-	--white: #ffffff;
-	--black: #000000;
+	--transparent: rgba(0,0,0,0);
+	--whiteRGB: 255,255,255;
+	--blackRGB: 0,0,0;
 
-	--beige: #f9f7ec;
-	--grayBlack: #151515;
-	--grayDark: #333333;
-	--grayLight: #61605c;
-	--red: #9d0a0e;
+	--beigeRGB: 249,247,236;
+	--grayBlackRGB: 21,21,21;
+	--grayDarkRGB: 51,51,51;
+	--grayLightRGB: 97,96,92;
+	--redDarkRGB: 157,10,14;
+	--redRGB: 255,0,0;
 
 
 	/* variables */
@@ -26,52 +27,77 @@
 
 
 	/* layout */
-	--shadow: var(--black);
+	--shadow: rgba(var(--blackRGB),1);
 	--background: var(--pathBackground);
 	--backgroundLogo: var(--pathLogo);
-	--backgroundSite: var(--beige);
-	--backgroundPage: var(--beige);
-	--backgroundHeader: var(--beige);
-	--backgroundFooter: var(--grayBlack);
+	--backgroundSite: rgba(var(--beigeRGB),1);
+	--backgroundPage: rgba(var(--beigeRGB),1);
+	--backgroundHeader: rgba(var(--beigeRGB),1);
+	--backgroundFooter: rgba(var(--grayBlackRGB),1);
 	--fontSize: 16px;
 
 
 	/* logo */
-	--logoFontColor: var(--black);
+	--logoColor: rgba(var(--redRGB),1);
+	--logoTextColor: rgba(var(--grayDarkRGB),1);
 
 
 	/* loader */
-	--loaderOverlay: var(--beige);
-	--loaderColor: var(--grayBlack);
+	--loaderOverlay: rgba(var(--beigeRGB),1);
+	--loaderColor: rgba(var(--grayBlackRGB),1);
+
+
+	/* search */
+	--searchField: rgba(var(--whiteRGB),1);
+	--searchFieldIcon: rgba(var(--grayBlackRGB),1);
+	--searchFieldBorder: rgba(var(--grayBlackRGB),1);
+	--searchFieldText: rgba(var(--grayBlackRGB),1);
 
 
 	/* nav */
-	--navBurgerColor: var(--grayBlack);
+	--navBurgerColor: rgba(var(--grayBlackRGB),1);
 	--navBackground: var(--pathBackground);
-	--navBackgroundHeader: var(--beige);
-	--navFontColor: var(--grayDark);
+	--navBackgroundHeader: rgba(var(--beigeRGB),1);
+	--navFontColor: rgba(var(--grayDarkRGB),1);
 	--navAccordionHeight: 60px;
 	--navAccordionSubHeight: 50px;
 
-	--navAccordion0FontColor: var(--grayDark);
-	--navAccordion0Background: var(--trans);
-	--navAccordion0SpacerTransparent: var(--trans);
-	--navAccordion0SpacerColor: var(--grayBlack);
-	--navAccordion0IconColor: var(--red);
+	--navAccordion0FontColor: rgba(var(--grayDarkRGB),1);
+	--navAccordion0Background: var(--transparent);
+	--navAccordion0SpacerTransparent: var(--transparent);
+	--navAccordion0SpacerColor: rgba(var(--grayBlackRGB),1);
+	--navAccordion0IconColor: rgba(var(--redDarkRGB),1);
 	--navAccordion0IconBackground: var(--pathBackground);
 
-	--navAccordion1FontColor: var(--white);
-	--navAccordion1Background: var(--red);
-	--navAccordion1SpacerTransparent: var(--trans);
-	--navAccordion1SpacerColor: var(--white);
-	--navAccordion1IconColor: var(--white);
-	--navAccordion1IconBackground: var(--red);
+	--navAccordion1FontColor: rgba(var(--whiteRGB),1);
+	--navAccordion1Background: rgba(var(--redDarkRGB),1);
+	--navAccordion1SpacerTransparent: var(--transparent);
+	--navAccordion1SpacerColor: rgba(var(--whiteRGB),1);
+	--navAccordion1IconColor: rgba(var(--whiteRGB),1);
+	--navAccordion1IconBackground: rgba(var(--redDarkRGB),1);
 
-	--navAccordion2FontColor: var(--white);
-	--navAccordion2Background: var(--grayDark);
+	--navAccordion2FontColor: rgba(var(--whiteRGB),1);
+	--navAccordion2Background: rgba(var(--grayDarkRGB),1);
 
-	--navMainBackground: var(--red);
-	--navMainFontColor: var(--white);
+	--navMainBackground: rgba(var(--redDarkRGB),1);
+	--navMainFontColor: rgba(var(--whiteRGB),1);
+
+
+	/* filter */
+	--filterBackgroundEven: rgba(var(--whiteRGB),0.3);
+	--filterBackgroundOdd: rgba(var(--grayDarkRGB),0.08);
+	--filterPlusColor: rgba(var(--redDarkRGB),1);
+
+	/* table */
+	--tableBackgroundEven: rgba(var(--whiteRGB),0.3);
+	--tableBackgroundOdd: rgba(var(--grayDarkRGB),0.08);
+	--tableHeaderBackground: rgba(var(--grayDarkRGB),1);
+	--tableHeaderFontColor: rgba(var(--whiteRGB),1);
+	--tableStrongBorderColor: rgba(var(--whiteRGB),1);
+	--tableLinkColor: rgba(var(--redDarkRGB),1);
+
+	/* paging */
+	--pagingFontColor: rgba(var(--redDarkRGB),1);
 }
 
 /* Languages */

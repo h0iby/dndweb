@@ -1,33 +1,15 @@
 var dnd = dnd || {};
-DomReady.ready(function() {
+(function() {
 	"use strict";
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
-
-	dnd.ajax = function(dataUrl, successFunction, errorFunction){
-		var request = new XMLHttpRequest();
-		request.open('GET', dataUrl, true);
-		request.onload = function() {
-			if (request.status >= 200 && request.status < 400) {
-				successFunction(request.responseText);
-			} else {
-				errorFunction();
-			}
-		};
-
-		request.onerror = function() {
-			errorFunction();
-		};
-
-		request.send();
-	}
 
 	var loadError = function(){
 		console.log("Error loading data");
 	}
 
 	var loadData = function(hasLocalStorage){
-		dnd.ajax("http://138.68.114.21/endpoints", function(endpoints){
+		dnd.ajax("//138.68.114.21/endpoints", function(endpoints){
 			dnd.service.endpoints = JSON.parse(endpoints);
 			dnd.vars.endpointAmount = 1;
 			if(hasLocalStorage){
@@ -110,8 +92,8 @@ DomReady.ready(function() {
 		}, 1);
 	}
 
-	dnd.initService = function(){
-		var loader = document.getElementById("Loader");
+	dnd.initService = function(callback){
+		var loader = dnd.selector("#Loader");
 		dnd.vars.serviceLoaded = false;
 		dnd.vars.serviceLoadedSpeed = "-1";
 		if(dnd.loadData != undefined && dnd.loadData != ""){
@@ -124,7 +106,7 @@ DomReady.ready(function() {
 					if(dnd.vars.serviceLoaded){
 						clearInterval(interval);
 						console.log("json loaded in", dnd.vars.serviceLoadedSpeed);
-						dnd.dataLoaded();
+						callback();
 						if (loader.classList){
 							loader.classList.add("loaded");
 						} else {
@@ -138,4 +120,4 @@ DomReady.ready(function() {
 		}
 
 	}
-});
+})();

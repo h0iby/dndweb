@@ -10,14 +10,18 @@ var gulp = require("gulp"),
 	postcsscssnext = require("postcss-cssnext"),
 	postcssbrowserreporter = require("postcss-browser-reporter"),
 	cssnano = require("cssnano"),
-	spritesmith = require('gulp.spritesmith'),
-	buffer = require('vinyl-buffer'),
-	imagemin = require('gulp-imagemin'),
 	plugins = require("gulp-load-plugins")({ camelize: true }),
 	browserSync = require("browser-sync"),
 	reload = browserSync.reload;
 
-
+/*
+uninstall:
+"gulp.spritesmith": "latest",
+"vinyl-buffer": "latest",
+"gulp-imagemin": "latest",
+*/
+	
+	
 console.timeEnd("Require");
 
 
@@ -44,17 +48,12 @@ var Folders =
 	source: {
 		main: "src/__resources",
 		styles: "src/__resources/css",
-		scripts: "src/__resources/scripts",
-		sprites: "src/__resources/sprites",
+		scripts: "src/__resources/scripts"
 	},
 	target: {
 		main: "src/_assets",
 		styles: "src/_assets/css",
-		scripts: "src/_assets/scripts",
-		sprites: "src/_assets/sprites",
-	},
-	settings: {
-		sprites: "_assets/sprites"
+		scripts: "src/_assets/scripts"
 	}
 };
 // /////////////////////////////////////////
@@ -68,7 +67,7 @@ gulp.task("default", ["styles", "scripts", "browser-sync", "watch-build", "watch
 
 
 // build task
-gulp.task("build", ["styles", "scripts", "sprites", "watch-build"]);
+gulp.task("build", ["styles", "scripts", "watch-build"]);
 // /////////////////////////////////////////
 
 
@@ -145,53 +144,6 @@ gulp.task("js", function () {
 		.pipe(gulp.dest(Folders.target.scripts));
 });
 // /////////////////////////////////////////
-
-
-
-// sprites
-gulp.task("sprites", ["sprite-global@1x", "sprite-global@2x"]);
-// /////////////////////////////////////////
-
-// sprites global 1x
-gulp.task("sprite-global@1x", function () {
-	// Generate our spritesheet
-	var spriteData = gulp.src(Folders.source.sprites + "/*@1x.png").pipe(spritesmith({
-		algorithm: "top-down",
-		imgName: '/' + Folders.settings.sprites + '/sprite@1x.png',
-		cssFormat: "less",
-		cssTemplate: "sprite@2.mustache",
-		cssName: '_sprites-auto.less',
-		cssVarMap: function (sprite) {
-			sprite.name = 'sprite-' + sprite.name.replace("@1x", "");
-		}
-	}));
-
-	var imgStream = spriteData.img
-		.pipe(buffer())
-		.pipe(imagemin())
-		.pipe(gulp.dest(Folders.target.sprites));
-
-	var cssStream = spriteData.css
-		.pipe(gulp.dest(Folders.source.styles + "/sprites"))
-});
-// sprites global 2x
-gulp.task("sprite-global@2x", function () {
-	// Generate our spritesheet
-	var spriteData = gulp.src(Folders.source.sprites + "/*@2x.png").pipe(spritesmith({
-		algorithm: "top-down",
-		imgName: '/' + Folders.settings.sprites + '/sprite@1x.png',
-		cssFormat: "css",
-		cssName: 'sprite@2x.css',
-	}));
-
-	var imgStream = spriteData.img
-		.pipe(buffer())
-		.pipe(imagemin())
-		.pipe(gulp.dest(Folders.target.sprites));
-});
-// /////////////////////////////////////////
-
-
 
 
 

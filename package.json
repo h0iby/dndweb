@@ -29,9 +29,6 @@
 	"postcss-cssnext": "latest",
 	"postcss-browser-reporter": "latest",
 	"cssnano": "latest",
-	"gulp.spritesmith": "latest",
-	"vinyl-buffer": "latest",
-  	"gulp-imagemin": "latest",
     "express": "^4.14.0",
     "sqlite3": "^3.1.8"
   },

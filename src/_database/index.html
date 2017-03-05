@@ -222,27 +222,43 @@
 							<div class="filter">
 								<ul class="filter__list">
 									<li class="filter__list__item">
-										<label class="filter__list__item__text" for="filter_name">
+										<label class="filter__list__item__text" for="filterName">
 											#NAME#
 										</label>
 										<label class="filter__list__item__container">
-											<input class="filter__list__item__container__input" id="filter_name" type="text" />
+											<input class="filter__list__item__container__input" id="filterName" type="text" />
 										</label>
 									</li>
 									<li class="filter__list__item">
-										<label class="filter__list__item__text" for="filter_benefit">
-											#BENEFIT#
-										</label>
-										<label class="filter__list__item__container">
-											<input class="filter__list__item__container__input" id="filter_benefit" type="text" />
-										</label>
-									</li>
-									<li class="filter__list__item">
-										<label class="filter__list__item__text" for="filter_category">
+										<label class="filter__list__item__text" for="filterCategory">
 											#CATEGORY#
 										</label>
 										<label class="filter__list__item__container">
-											<input class="filter__list__item__container__input" id="filter_category" type="text" />
+											<input class="filter__list__item__container__input" id="filterCategory" type="text" />
+										</label>
+									</li>
+									<li class="filter__list__item">
+										<label class="filter__list__item__text" for="filterBenefit">
+											#BENEFIT#
+										</label>
+										<label class="filter__list__item__container">
+											<input class="filter__list__item__container__input" id="filterBenefit" type="text" />
+										</label>
+									</li>
+									<li class="filter__list__item">
+										<label class="filter__list__item__text" for="filterPreRequisite">
+											#PREREQ#
+										</label>
+										<label class="filter__list__item__container">
+											<input class="filter__list__item__container__input" id="filterPreRequisite" type="text" />
+										</label>
+									</li>
+									<li class="filter__list__item">
+										<label class="filter__list__item__text" for="filterSpecial">
+											#SPECIAL#
+										</label>
+										<label class="filter__list__item__container">
+											<input class="filter__list__item__container__input" id="filterSpecial" type="text" />
 										</label>
 									</li>
 								</ul>
@@ -253,27 +269,27 @@
 
 							<h3>Feats</h3>
 
-							<nav class="table-paging">
-								<a class="table-paging__item" href="#">1</a>
-								<a class="table-paging__item table-paging__item--tablet" href="#">2</a>
-								<a class="table-paging__item table-paging__item--tablet" href="#">3</a>
+							<nav class="table-paging -js-paging">
+								<a data-page="1" class="table-paging__item" href="#">1</a>
+								<a data-page="2" class="table-paging__item table-paging__item--tablet" href="#">2</a>
+								<a data-page="3" class="table-paging__item table-paging__item--tablet" href="#">3</a>
 								<span class="table-paging__item table-paging__item--spacer">...</span>
-								<a class="table-paging__item table-paging__item--tablet" href="#">101</a>
-								<a class="table-paging__item" href="#">102</a>
-								<a class="table-paging__item" href="#">103</a>
-								<a class="table-paging__item" href="#">104</a>
-								<a class="table-paging__item table-paging__item--tablet" href="#">105</a>
+								<a data-page="101" class="table-paging__item table-paging__item--tablet" href="#">101</a>
+								<a data-page="102" class="table-paging__item" href="#">102</a>
+								<a data-page="103" class="table-paging__item table-paging__item--active" href="#">103</a>
+								<a data-page="104" class="table-paging__item" href="#">104</a>
+								<a data-page="105" class="table-paging__item table-paging__item--tablet" href="#">105</a>
 								<span class="table-paging__item table-paging__item--spacer">...</span>
-								<a class="table-paging__item table-paging__item--tablet" href="#">179</a>
-								<a class="table-paging__item table-paging__item--tablet" href="#">180</a>
-								<a class="table-paging__item" href="#">181</a>
+								<a data-page="179" class="table-paging__item table-paging__item--tablet" href="#">179</a>
+								<a data-page="180" class="table-paging__item table-paging__item--tablet" href="#">180</a>
+								<a data-page="181" class="table-paging__item" href="#">181</a>
 							</nav>
 							<div class="table-amount">
 								<span class="table-amount__label">
 									<span class="table-amount__text">
 										Per page:
 									</span>
-									<select class="table-amount__select">
+									<select class="table-amount__select -js-sorting-amount">
 										<option>25</option>
 										<option>50</option>
 										<option>100</option>
@@ -420,27 +436,27 @@
 						</div>
 						<div class="section__footer">
 
-							<nav class="table-paging">
-								<a class="table-paging__item" href="#">1</a>
-								<a class="table-paging__item table-paging__item--tablet" href="#">2</a>
-								<a class="table-paging__item table-paging__item--tablet" href="#">3</a>
+							<nav class="table-paging -js-paging">
+								<a data-page="1" class="table-paging__item" href="#">1</a>
+								<a data-page="2" class="table-paging__item table-paging__item--tablet" href="#">2</a>
+								<a data-page="3" class="table-paging__item table-paging__item--tablet" href="#">3</a>
 								<span class="table-paging__item table-paging__item--spacer">...</span>
-								<a class="table-paging__item table-paging__item--tablet" href="#">101</a>
-								<a class="table-paging__item" href="#">102</a>
-								<a class="table-paging__item" href="#">103</a>
-								<a class="table-paging__item" href="#">104</a>
-								<a class="table-paging__item table-paging__item--tablet" href="#">105</a>
+								<a data-page="101" class="table-paging__item table-paging__item--tablet" href="#">101</a>
+								<a data-page="102" class="table-paging__item" href="#">102</a>
+								<a data-page="103" class="table-paging__item table-paging__item--active" href="#">103</a>
+								<a data-page="104" class="table-paging__item" href="#">104</a>
+								<a data-page="105" class="table-paging__item table-paging__item--tablet" href="#">105</a>
 								<span class="table-paging__item table-paging__item--spacer">...</span>
-								<a class="table-paging__item table-paging__item--tablet" href="#">179</a>
-								<a class="table-paging__item table-paging__item--tablet" href="#">180</a>
-								<a class="table-paging__item" href="#">181</a>
+								<a data-page="179" class="table-paging__item table-paging__item--tablet" href="#">179</a>
+								<a data-page="180" class="table-paging__item table-paging__item--tablet" href="#">180</a>
+								<a data-page="181" class="table-paging__item" href="#">181</a>
 							</nav>
 							<div class="table-amount">
 								<span class="table-amount__label">
 									<span class="table-amount__text">
 										Per page:
 									</span>
-									<select class="table-amount__select">
+									<select class="table-amount__select -js-sorting-amount">
 										<option>25</option>
 										<option>50</option>
 										<option>100</option>

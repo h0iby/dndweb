@@ -1,15 +1,18 @@
 var path = require('path'),
 	paths = [],
-	XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+	XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest,
+	fs = require('fs');
 
 module.exports = {
     setup: (app, endpoint, endpoints) => {
-		var current = endpoint.path;
-		var alias = endpoint.alias;
-		var related = endpoint.related;
-		var route = "/database/" + current;
+		var current = endpoint.path,
+			alias = endpoint.alias,
+			related = endpoint.related,
+			route = "/database/" + current,
+			templateMain = path.join(__dirname+'/../src/_default/index.html'),
+			templateMenu = path.join(__dirname+'/../src/_default/menu.html'),
+			templateContent = path.join(__dirname+'/../src/_templates/' + current.replace("/", "-") + '.html');
 
-		console.log("Registering endpoint: " + route);
 
 		var serviceCallback = function(data){
 			var jsonData = JSON.parse(data);
@@ -35,12 +38,16 @@ module.exports = {
 		}
 		serviceRequest("http://localhost:81/" + current);
 
+
+		var fileMain = fs.readFileSync(templateMain).toString(),
+			fileMenu = fs.readFileSync(templateMenu).toString(),
+			fileContent = fs.readFileSync(templateContent).toString();
+
+		var html = fileMain.replace("#DBMENU#", fileMenu).replace("#MAIN#", fileContent);
+
+		//console.log("Registering endpoint: " + route);
 		app.get(route, (req, res) => {
-			res.sendFile(path.join(__dirname+'/../src/index.html'));
-        });
+			res.send(html);
+		});
     }
 }
-
-
-
-//

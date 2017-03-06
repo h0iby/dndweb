@@ -5,4 +5,4 @@
 
 - npm install -g gulp
 - npm install
-- gulp
+- gulp or npm start

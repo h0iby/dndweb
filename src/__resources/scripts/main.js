@@ -13,11 +13,11 @@ var dnd = dnd || {};
 	} else {
 		dnd.vars.localStorage = false;
 	}
-	
+
 	dnd.dataLoaded = function(){
 		console.log("after data has been loaded");
 	}
 
-	dnd.slider();
-	dnd.initService(dnd.dataLoaded);
+	//dnd.slider();
+	//dnd.initService(dnd.dataLoaded);
 })();

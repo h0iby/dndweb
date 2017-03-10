@@ -92,12 +92,15 @@ var serviceCallback = function(data){
 
 
 
+
+
 	// start gulp for assets and start server
 	//gulp.start("build");
 	app.listen(81);
 }
 
 
+// service request - with callback when done.
 var serviceRequest = function(){
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
@@ -107,4 +110,5 @@ var serviceRequest = function(){
 	xhr.send();
 }
 
+// start service request to get endpoints from webservice
 serviceRequest();

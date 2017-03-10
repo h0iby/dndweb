@@ -28,7 +28,7 @@ var serviceCallback = function(data){
 
 	//create the menu structure for database
 	jsonData.forEach(function(item, i){
-		if(item.show == '/'){
+		if(item.render && item.show == '/'){
 			var current = "";
 			if(item.children){ current = fileMenuLevel1Children; }
 			else { current = fileMenuLevel1; }

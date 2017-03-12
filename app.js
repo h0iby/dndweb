@@ -23,39 +23,54 @@ var serviceCallback = function(data){
 		templateMenuLevel1 = path.join(__dirname+''+htmlMenuPath+'/db-menu-level1.html'),
 		templateMenuLevel1Children = path.join(__dirname+''+htmlMenuPath+'/db-menu-level1-children.html'),
 		templateMenuLevel2 = path.join(__dirname+''+htmlMenuPath+'/db-menu-level2.html'),
+		templateHead = path.join(__dirname+''+htmlTemplatesPath+'/head.html'),
 		templatePage = path.join(__dirname+''+htmlTemplatesPath+'/index.html');
 
 	var fileMenu = fs.readFileSync(templateMenu).toString(),
 		fileMenuLevel1 = fs.readFileSync(templateMenuLevel1).toString(),
 		fileMenuLevel1Children = fs.readFileSync(templateMenuLevel1Children).toString(),
 		fileMenuLevel2 = fs.readFileSync(templateMenuLevel2).toString(),
+		fileHead = fs.readFileSync(templateHead).toString(),
 		filePage = fs.readFileSync(templatePage).toString();
 
-	var htmlReplacements = function(input, main, alias, path, robots){
+
+	var htmlReplacements = function(input, main, alias, path, robots, title, description, keywords, url, type){
 		var output = input;
 		if(alias == null || alias == undefined){ alias = ""; }
 		if(path == null || path == undefined){ path = ""; }
 		if(robots == null || robots == undefined){ robots = "noindex follow"; }
+		if(title == null || title == undefined){ title = "D&amp;D"; }
+		if(description == null || description == undefined){ description = "D&amp;D Database"; }
+		if(keywords == null || keywords == undefined){ keywords = "D&amp;D, DnD, dndtools, feats, spells, classes"; }
+		if(url == null || url == undefined){ url = ""; }
+		if(type == null || type == undefined){ type = ""; }
 
 		output = output.replace("#MAIN#", main);
 		output = output.replace("#MENUITEM#", alias);
 		output = output.replace("#MENUENDPOINT#", path);
-		if(robots != ""){ output = output.replace("#ROBOTS#", robots); }
+		output = output.replace("#ROBOTS#", robots);
+
+		output = output.replace("#PAGETITLE#", title);
+		output = output.replace("#METATITLE#", title);
+		output = output.replace("#OGTITLE#", title);
+		output = output.replace("#TWITTERTITLE#", title);
+		output = output.replace("#PROPTITLE#", title);
+
+		output = output.replace("#METADESCRIPTION#", description);
+		output = output.replace("#PROPDESCRIPTION#", description);
+		output = output.replace("#OGDESCRIPTION#", description);
+		output = output.replace("#TWITTERDESCRIPTION#", description);
+		output = output.replace("#TWITTERCARD#", description);
+
+		output = output.replace("#METAKEYWORDS#", keywords);
+
+		output = output.replace("#OGURL#", url);
+		output = output.replace("#CANNONICAL#", url);
+
+		output = output.replace("#OGTYPE#", type);
 
 		return output;
 	}
-
-	var replaceFunction = function(input, replaceFrom, replaceTo){
-		var output = input.replace(replaceFrom, replaceTo);
-
-		if(input.indexOf(replaceFrom) > -1){
-			replaceFunction(output, replaceFrom, replaceTo);
-		} else {
-			return output;
-		}
-	}
-
-
 
 	//create the menu structure for database
 	jsonData.forEach(function(item, i){
@@ -88,17 +103,13 @@ var serviceCallback = function(data){
 	jsonData.forEach(function(item, i){
 		if(item.render){
 			var current = html;
-			var alias = item.alias;
 			var currentPath = item.path.replace(":id", "id");
-			var templateMain = path.join(__dirname+''+htmlDatabasePath+'/endpoints/' + currentPath + ".html");
-			var fileMain = fs.readFileSync(templateMain).toString();
-			current = htmlReplacements(current, fileMain, alias, item.path, "");
 			paths.push([item, current]);
 		}
 	});
 	paths.map((controllerName) => {
 	  controller = require('./routes/database');
-	  controller.setup(app, controllerName[0], controllerName[1], controllerName[2]);
+	  controller.setup(app, controllerName[0], controllerName[1]);
 	});
 
 	// create endpoint for database
@@ -106,7 +117,38 @@ var serviceCallback = function(data){
 		var current = html;
 		var templateMain = path.join(__dirname+''+htmlDatabasePath+'/database.html');
 		var fileMain = fs.readFileSync(templateMain).toString();
-		current = htmlReplacements(current, fileMain, null, null, "index follow");
+
+		var repAlias = null,
+			repPath = null,
+			repRobots = "index follow",
+			repTitle = "D&amp;D: Database",
+			repDescription = "D&amp;D Database",
+			repKeywords = "",
+			repUrl = "",
+			repType = "";
+
+		fileMain = fileMain.replace("#HEAD#", fileHead);
+		current = htmlReplacements(current, fileMain, repAlias, repPath, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
+		res.send(current);
+	});
+
+	// create endpoint for search
+	app.get('/search', (req, res) => {
+		var current = html;
+		var templateMain = path.join(__dirname+''+htmlPagesPath+'/default.html');
+		var fileMain = fs.readFileSync(templateMain).toString();
+
+		var repAlias = null,
+			repPath = null,
+			repRobots = "noindex follow",
+			repTitle = "D&amp;D: Search",
+			repDescription = "Search for D&amp;D feats, classes, spells and more here.",
+			repKeywords = "D&amp;D, DnD, dndtools, feats, spells, classes",
+			repUrl = "/search",
+			repType = "search";
+
+		fileMain = fileMain.replace("#HEAD#", fileHead);
+		current = htmlReplacements(current, fileMain, repAlias, repPath, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
 		res.send(current);
 	});
 
@@ -115,7 +157,18 @@ var serviceCallback = function(data){
 		var current = html;
 		var templateMain = path.join(__dirname+''+htmlPagesPath+'/default.html');
 		var fileMain = fs.readFileSync(templateMain).toString();
-		current = htmlReplacements(current, fileMain, null, null, "index follow");
+
+		var repAlias = null,
+			repPath = null,
+			repRobots = "index follow",
+			repTitle = "D&amp;D",
+			repDescription = "",
+			repKeywords = "",
+			repUrl = "",
+			repType = "";
+
+		fileMain = fileMain.replace("#HEAD#", fileHead);
+		current = htmlReplacements(current, fileMain, repAlias, repPath, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
 		res.send(current);
 	});
 
@@ -135,7 +188,18 @@ var serviceCallback = function(data){
 			var current = html;
 			var templateMain = path.join(__dirname+''+htmlErrorsPath+'/'+err.status+'.html');
 			var fileMain = fs.readFileSync(templateMain).toString();
-			current = htmlReplacements(current, fileMain, null, null, null);
+
+			var repAlias = null,
+				repPath = null,
+				repRobots = "noindex follow",
+				repTitle = "D&amp;D: Page not found (Error " + err.status + ")",
+				repDescription = "Error page",
+				repKeywords = "",
+				repUrl = "",
+				repType = "error";
+
+			fileMain = fileMain.replace("#HEAD#", fileHead);
+			current = htmlReplacements(current, fileMain, repAlias, repPath, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
 			res.send(current);
 		});
 	}
@@ -145,7 +209,18 @@ var serviceCallback = function(data){
 		var current = html;
 		var templateMain = path.join(__dirname+''+htmlErrorsPath+'/'+err.status+'.html');
 		var fileMain = fs.readFileSync(templateMain).toString();
-		current = htmlReplacements(current, fileMain, null, null, null);
+
+		var repAlias = null,
+			repPath = null,
+			repRobots = "noindex follow",
+			repTitle = "D&amp;D: Page not found (Error "+ err.status +")",
+			repDescription = "",
+			repKeywords = "",
+			repUrl = "",
+			repType = "";
+
+		fileMain = fileMain.replace("#HEAD#", fileHead);
+		current = htmlReplacements(current, fileMain, repAlias, repPath, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
 		res.send(current);
 	});
 

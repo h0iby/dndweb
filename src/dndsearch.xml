@@ -1,0 +1,6 @@
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+	<ShortName>D&amp;D</ShortName>
+	<Description>D&amp;D Database - Search classes, feats, spells and more</Description>
+	<Image height="16" width="16" type="image/x-icon">/assets/favicons/favicon.ico</Image>
+	<Url type="text/html" method="get" template="/search?q={searchTerms}"/>
+</OpenSearchDescription>

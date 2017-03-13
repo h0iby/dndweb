@@ -5,18 +5,11 @@ var path = require('path'),
 
 module.exports = {
     setup: (app, item, html) => {
-		var htmlPath = "/../__resources/html";
-		var htmlTemplatesPath = htmlPath + "/templates";
-		var templateHead = path.join(__dirname+''+htmlTemplatesPath+'/head.html');
-		var fileHead = fs.readFileSync(templateHead).toString();
-
 		console.log("Registering endpoint: /database" + item.path);
 		app.get("/database" + item.path, (req, res) => {
-
+			var current = html;
 			var serviceCallback = function(response){
 				var output = JSON.parse(response);
-				var current = html.replace('#HEAD#', fileHead);
-
 				var repData = true,
 					repAlias = item.alias,
 					repPath = item.path,

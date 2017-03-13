@@ -19,7 +19,7 @@ var dnd = dnd || {};
 
 		request.send();
 	}
-	
+
 	dnd.selector = function(selector, parent){
 		selector = selector.trim();
 
@@ -38,5 +38,21 @@ var dnd = dnd || {};
 		}
 
 		return parent.querySelectorAll(selector);
+	}
+
+	dnd.appendTo = function(target, html){
+		var htmlElement = '',
+			tempContainer = document.createElement(htmlElement);
+
+		tempContainer.innerHTML = html;
+		target.appendChild(tempContainer);
+		//target.innerHTML = target.innerHTML.replace('<' + htmlElement + '>', '').replace('</' + htmlElement + '>', '');
+	}
+
+	dnd.addEventHandler = function (elem, eventType, handler) {
+		if (elem.addEventListener)
+			elem.addEventListener (eventType, handler, false);
+		else if (elem.attachEvent)
+			elem.attachEvent ('on' + eventType, handler);
 	}
 })();

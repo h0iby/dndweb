@@ -2,4 +2,155 @@
 	<div class="section__intro">
 		<h2>Feats</h2>
 	</div>
+	<div class="section__header">
+
+		<input class="filter__toggle" type="checkbox" checked>
+		<h4 class="filter__title">Filters</h4>
+		<div class="filter">
+			<ul class="filter__list">
+				<li class="filter__list__item">
+					<label class="filter__list__item__text" for="filterName">
+						#NAME#
+					</label>
+					<label class="filter__list__item__container">
+						<input class="filter__list__item__container__input" id="filterName" type="text" />
+					</label>
+				</li>
+				<li class="filter__list__item">
+					<label class="filter__list__item__text" for="filterCategory">
+						#CATEGORY#
+					</label>
+					<label class="filter__list__item__container">
+						<input class="filter__list__item__container__input" id="filterCategory" type="text" />
+					</label>
+				</li>
+				<li class="filter__list__item">
+					<label class="filter__list__item__text" for="filterBenefit">
+						#BENEFIT#
+					</label>
+					<label class="filter__list__item__container">
+						<input class="filter__list__item__container__input" id="filterBenefit" type="text" />
+					</label>
+				</li>
+				<li class="filter__list__item">
+					<label class="filter__list__item__text" for="filterPreRequisite">
+						#PREREQ#
+					</label>
+					<label class="filter__list__item__container">
+						<input class="filter__list__item__container__input" id="filterPreRequisite" type="text" />
+					</label>
+				</li>
+				<li class="filter__list__item">
+					<label class="filter__list__item__text" for="filterSpecial">
+						#SPECIAL#
+					</label>
+					<label class="filter__list__item__container">
+						<input class="filter__list__item__container__input" id="filterSpecial" type="text" />
+					</label>
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	<div class="section__main">
+
+		<h3>Feats</h3>
+
+		<!--
+		#PAGING#
+		#SORTING#
+		-->
+		<nav class="table-paging -js-paging">
+			<a data-page="1" class="table-paging__item" href="#">1</a>
+			<a data-page="2" class="table-paging__item table-paging__item--tablet" href="#">2</a>
+			<a data-page="3" class="table-paging__item table-paging__item--tablet" href="#">3</a>
+			<span class="table-paging__item table-paging__item--spacer">...</span>
+			<a data-page="101" class="table-paging__item table-paging__item--tablet" href="#">101</a>
+			<a data-page="102" class="table-paging__item" href="#">102</a>
+			<a data-page="103" class="table-paging__item table-paging__item--active" href="#">103</a>
+			<a data-page="104" class="table-paging__item" href="#">104</a>
+			<a data-page="105" class="table-paging__item table-paging__item--tablet" href="#">105</a>
+			<span class="table-paging__item table-paging__item--spacer">...</span>
+			<a data-page="179" class="table-paging__item table-paging__item--tablet" href="#">179</a>
+			<a data-page="180" class="table-paging__item table-paging__item--tablet" href="#">180</a>
+			<a data-page="181" class="table-paging__item" href="#">181</a>
+		</nav>
+		<div class="table-amount">
+			<span class="table-amount__label">
+				<span class="table-amount__text">
+					Per page:
+				</span>
+				<select class="table-amount__select -js-sorting-amount">
+					<option value="25">25</option>
+					<option value="50">50</option>
+					<option value="100">100</option>
+					<option value="500">500</option>
+					<option value="1000">1000</option>
+					<option value="100000">ALL</option>
+				</select>
+			</span>
+		</div>
+
+		<ul id="-js-template-feat" class="table">
+
+		</ul>
+
+	</div>
+	<div class="section__footer">
+
+		<!--
+		#PAGING#
+		#SORTING#
+		-->
+		<nav class="table-paging -js-paging">
+			<a data-page="1" class="table-paging__item" href="#">1</a>
+			<a data-page="2" class="table-paging__item table-paging__item--tablet" href="#">2</a>
+			<a data-page="3" class="table-paging__item table-paging__item--tablet" href="#">3</a>
+			<span class="table-paging__item table-paging__item--spacer">...</span>
+			<a data-page="101" class="table-paging__item table-paging__item--tablet" href="#">101</a>
+			<a data-page="102" class="table-paging__item" href="#">102</a>
+			<a data-page="103" class="table-paging__item table-paging__item--active" href="#">103</a>
+			<a data-page="104" class="table-paging__item" href="#">104</a>
+			<a data-page="105" class="table-paging__item table-paging__item--tablet" href="#">105</a>
+			<span class="table-paging__item table-paging__item--spacer">...</span>
+			<a data-page="179" class="table-paging__item table-paging__item--tablet" href="#">179</a>
+			<a data-page="180" class="table-paging__item table-paging__item--tablet" href="#">180</a>
+			<a data-page="181" class="table-paging__item" href="#">181</a>
+		</nav>
+		<div class="table-amount">
+			<span class="table-amount__label">
+				<span class="table-amount__text">
+					Per page:
+				</span>
+				<select class="table-amount__select -js-sorting-amount">
+					<option value="25">25</option>
+					<option value="50">50</option>
+					<option value="100">100</option>
+					<option value="500">500</option>
+					<option value="1000">1000</option>
+					<option value="100000">ALL</option>
+				</select>
+			</span>
+		</div>
+
+	</div>
+
 </section>
+
+
+
+
+<script id="template-feat--header" type="x-template">
+	<li class="table__row table__row--header">
+		<span class="table__row__td table__row__td--header"><strong class="table__row__td__bold">NAME</strong></span>
+		<span class="table__row__td table__row__td--header"><strong class="table__row__td__bold">DESCRIPTION</strong></span>
+		<span class="table__row__td table__row__td--header"><strong class="table__row__td__bold">BOOK</strong></span>
+	</li>
+</script>
+<script id="template-feat" type="x-template">
+    <li class="table__row">
+		<span class="table__row__td"><a class="table__row__td__link" href="#">#NAME#</a></span>
+		<span class="table__row__td">#DESCRIPTION#</span>
+		<span class="table__row__td"><a class="table__row__td__link" href="#">#BOOK#</a></span>
+	</li>
+</script>

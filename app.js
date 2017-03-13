@@ -34,6 +34,9 @@ var serviceCallback = function(data){
 		filePage = fs.readFileSync(templatePage).toString();
 
 
+	var templateHead = path.join(__dirname+''+htmlTemplatesPath+'/head.html');
+	var fileHead = fs.readFileSync(templateHead).toString();
+
 	var htmlReplacements = function(input, main, alias, path, data, robots, title, description, keywords, url, type){
 		var output = input;
 		if(alias == null || alias == undefined){ alias = ""; }
@@ -103,8 +106,12 @@ var serviceCallback = function(data){
 	// create endpoints for data
 	jsonData.forEach(function(item, i){
 		if(item.render){
-			var current = html;
-			var currentPath = item.path.replace(":id", "id");
+			var current = html,
+				pathMain = '' + item.path.replace(':id', 'id') + '.html',
+				templateMain = path.join(__dirname+''+htmlDatabasePath+'/endpoints' + pathMain + ''),
+				fileMain = fs.readFileSync(templateMain).toString();
+
+			current = current.replace("#HEAD#", fileHead).replace("#MAIN#", fileMain);
 			paths.push([item, current]);
 		}
 	});

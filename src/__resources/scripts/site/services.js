@@ -9,16 +9,17 @@ var dnd = dnd || {};
 	}
 
 	var loadData = function(hasLocalStorage){
-		dnd.ajax("//138.68.114.21/endpoints", function(endpoints){
+		dnd.ajax(dnd.vars.webservice + "/endpoints", function(endpoints){
 			dnd.service.endpoints = JSON.parse(endpoints);
 			dnd.vars.endpointAmount = 1;
+
 			if(hasLocalStorage){
 				localStorage.setItem("endpoints", endpoints);
 			}
 			dnd.service.endpoints.forEach(function(endpoint, id){
-				if(!endpoint.guid || endpoint.guid == null){
-					dnd.vars.endpointAmount = dnd.vars.endpointAmount + 1;
-					dnd.ajax("http://138.68.114.21/" + endpoint.path, function(data){
+				if(endpoint.path.indexOf(":id") == -1){
+					dnd.ajax(dnd.vars.webservice + endpoint.path, function(data){
+						dnd.vars.endpointAmount = dnd.vars.endpointAmount + 1;
 						dnd.service["" + endpoint.alias + ""] = data;
 						if(hasLocalStorage){
 							localStorage.setItem(endpoint.alias, JSON.stringify(data));
@@ -26,7 +27,6 @@ var dnd = dnd || {};
 					}, function(){ loadError(); }, function(){ loadError(); });
 				}
 			});
-
 		}, function(){ loadError(); }, function(){ loadError(); });
 	}
 
@@ -36,7 +36,7 @@ var dnd = dnd || {};
 		} else if (dnd.vars.localStorage){
 			dnd.vars.endpointAmount = 1;
 			JSON.parse(localStorage.getItem("endpoints")).forEach(function(endpoint, id){
-				if(!endpoint.guid || endpoint.guid == null){
+				if(endpoint.path.indexOf(":id") == -1){
 					dnd.vars.endpointAmount = dnd.vars.endpointAmount + 1;
 					var localItem = localStorage.getItem(endpoint.alias);
 					dnd.service["" + endpoint.alias + ""] = JSON.parse(localItem);
@@ -46,7 +46,7 @@ var dnd = dnd || {};
 			loadData(false);
 		}
 
-		serviceInterval();
+		//serviceInterval();
 	}
 
 	var serviceInterval = function(){
@@ -55,7 +55,10 @@ var dnd = dnd || {};
 			counter = counter + 10;
 			var intervalClear = true;
 			if (dnd.vars.localStorage){
+				console.log("endpointAmount: " + dnd.vars.endpointAmount);
+				console.log("localstorage: ", localStorage.length);
 				if(dnd.vars.endpointAmount == localStorage.length){
+					console.log("TEST");
 					clearInterval(interval);
 					dnd.vars.serviceLoaded = true;
 					if(counter < 1000){
@@ -67,7 +70,7 @@ var dnd = dnd || {};
 			} else {
 				if(dnd.service.endpoints != undefined){
 					dnd.service.endpoints.forEach(function(endpoint, id){
-						if(!endpoint.guid || endpoint.guid == null){
+						if(endpoint.path.indexOf(":id") == -1){
 							if(dnd.service["" + endpoint.alias + ""] == undefined){
 								intervalClear = false;
 							}
@@ -86,35 +89,31 @@ var dnd = dnd || {};
 					}
 				}
 			}
-
-
-
 		}, 1);
 	}
 
 	dnd.initService = function(callback){
 		var loader = dnd.selector("#Loader");
+
 		dnd.vars.serviceLoaded = false;
 		dnd.vars.serviceLoadedSpeed = "-1";
-		if(dnd.loadData != undefined && dnd.loadData != ""){
+
+		if(dnd.database){
+			localStorage.clear();
 			loader.style.display = 'block';
-
-			if(dnd.loadData == "service"){
-				service();
-
-				var interval = setInterval(function(){
-					if(dnd.vars.serviceLoaded){
-						clearInterval(interval);
-						console.log("json loaded in", dnd.vars.serviceLoadedSpeed);
-						callback();
-						if (loader.classList){
-							loader.classList.add("loaded");
-						} else {
-							loader.className += ' ' + "loaded";
-						}
+			service();
+			var interval = setInterval(function(){
+				if(dnd.vars.serviceLoaded){
+					clearInterval(interval);
+					console.log("json loaded in", dnd.vars.serviceLoadedSpeed);
+					callback();
+					if (loader.classList){
+						loader.classList.add("loaded");
+					} else {
+						loader.className += ' ' + "loaded";
 					}
-				}, 100);
-			}
+				}
+			}, 100);
 		} else {
 			loader.style.display = 'none';
 		}

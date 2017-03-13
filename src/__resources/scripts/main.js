@@ -7,6 +7,8 @@ var dnd = dnd || {};
 (function() {
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
+	dnd.vars.webservice = "http://localhost:81";
+
 
 	if (typeof(Storage) !== "undefined") {
 		dnd.vars.localStorage = true;
@@ -19,5 +21,5 @@ var dnd = dnd || {};
 	}
 
 	//dnd.slider();
-	//dnd.initService(dnd.dataLoaded);
+	dnd.initService(dnd.dataLoaded);
 })();

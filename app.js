@@ -34,7 +34,7 @@ var serviceCallback = function(data){
 		filePage = fs.readFileSync(templatePage).toString();
 
 
-	var htmlReplacements = function(input, main, alias, path, robots, title, description, keywords, url, type){
+	var htmlReplacements = function(input, main, alias, path, data, robots, title, description, keywords, url, type){
 		var output = input;
 		if(alias == null || alias == undefined){ alias = ""; }
 		if(path == null || path == undefined){ path = ""; }
@@ -46,6 +46,7 @@ var serviceCallback = function(data){
 		if(type == null || type == undefined){ type = ""; }
 
 		output = output.replace("#MAIN#", main);
+		output = output.replace("#LOADDATA#", data);
 		output = output.replace("#MENUITEM#", alias);
 		output = output.replace("#MENUENDPOINT#", path);
 		output = output.replace("#ROBOTS#", robots);
@@ -113,12 +114,14 @@ var serviceCallback = function(data){
 	});
 
 	// create endpoint for database
+	console.log("Registering endpoint: /database");
 	app.get('/database', (req, res) => {
 		var current = html;
 		var templateMain = path.join(__dirname+''+htmlDatabasePath+'/database.html');
 		var fileMain = fs.readFileSync(templateMain).toString();
 
-		var repAlias = null,
+		var repData = true,
+			repAlias = null,
 			repPath = null,
 			repRobots = "index follow",
 			repTitle = "D&amp;D: Database",
@@ -127,18 +130,20 @@ var serviceCallback = function(data){
 			repUrl = "",
 			repType = "";
 
-		fileMain = fileMain.replace("#HEAD#", fileHead);
-		current = htmlReplacements(current, fileMain, repAlias, repPath, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
+		current = current.replace("#HEAD#", fileHead);
+		current = htmlReplacements(current, fileMain, repAlias, repPath, repData, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
 		res.send(current);
 	});
 
 	// create endpoint for search
+	console.log("Registering endpoint: /search");
 	app.get('/search', (req, res) => {
 		var current = html;
 		var templateMain = path.join(__dirname+''+htmlPagesPath+'/default.html');
 		var fileMain = fs.readFileSync(templateMain).toString();
 
-		var repAlias = null,
+		var repData = true,
+			repAlias = null,
 			repPath = null,
 			repRobots = "noindex follow",
 			repTitle = "D&amp;D: Search",
@@ -147,18 +152,20 @@ var serviceCallback = function(data){
 			repUrl = "/search",
 			repType = "search";
 
-		fileMain = fileMain.replace("#HEAD#", fileHead);
-		current = htmlReplacements(current, fileMain, repAlias, repPath, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
+		current = current.replace("#HEAD#", fileHead);
+		current = htmlReplacements(current, fileMain, repAlias, repPath, repData, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
 		res.send(current);
 	});
 
 	// create endpoint for home
+	console.log("Registering endpoint: /");
 	app.get('/', (req, res) => {
 		var current = html;
 		var templateMain = path.join(__dirname+''+htmlPagesPath+'/default.html');
 		var fileMain = fs.readFileSync(templateMain).toString();
 
-		var repAlias = null,
+		var repData = false,
+			repAlias = null,
 			repPath = null,
 			repRobots = "index follow",
 			repTitle = "D&amp;D",
@@ -167,8 +174,8 @@ var serviceCallback = function(data){
 			repUrl = "",
 			repType = "";
 
-		fileMain = fileMain.replace("#HEAD#", fileHead);
-		current = htmlReplacements(current, fileMain, repAlias, repPath, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
+		current = current.replace("#HEAD#", fileHead);
+		current = htmlReplacements(current, fileMain, repAlias, repPath, repData, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
 		res.send(current);
 	});
 
@@ -189,7 +196,8 @@ var serviceCallback = function(data){
 			var templateMain = path.join(__dirname+''+htmlErrorsPath+'/'+err.status+'.html');
 			var fileMain = fs.readFileSync(templateMain).toString();
 
-			var repAlias = null,
+			var repData = false,
+				repAlias = null,
 				repPath = null,
 				repRobots = "noindex follow",
 				repTitle = "D&amp;D: Page not found (Error " + err.status + ")",
@@ -198,8 +206,8 @@ var serviceCallback = function(data){
 				repUrl = "",
 				repType = "error";
 
-			fileMain = fileMain.replace("#HEAD#", fileHead);
-			current = htmlReplacements(current, fileMain, repAlias, repPath, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
+			current = current.replace("#HEAD#", fileHead);
+			current = htmlReplacements(current, fileMain, repAlias, repPath, repData, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
 			res.send(current);
 		});
 	}
@@ -210,7 +218,8 @@ var serviceCallback = function(data){
 		var templateMain = path.join(__dirname+''+htmlErrorsPath+'/'+err.status+'.html');
 		var fileMain = fs.readFileSync(templateMain).toString();
 
-		var repAlias = null,
+		var repData = false,
+			repAlias = null,
 			repPath = null,
 			repRobots = "noindex follow",
 			repTitle = "D&amp;D: Page not found (Error "+ err.status +")",
@@ -219,8 +228,8 @@ var serviceCallback = function(data){
 			repUrl = "",
 			repType = "";
 
-		fileMain = fileMain.replace("#HEAD#", fileHead);
-		current = htmlReplacements(current, fileMain, repAlias, repPath, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
+		current = current.replace("#HEAD#", fileHead);
+		current = htmlReplacements(current, fileMain, repAlias, repPath, repData, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
 		res.send(current);
 	});
 
@@ -230,7 +239,7 @@ var serviceCallback = function(data){
 
 	// start gulp for assets and start server
 	//gulp.start("build");
-	app.listen(81);
+	app.listen(82);
 }
 
 
@@ -243,7 +252,7 @@ var serviceRequest = function(){
 	xhr.onreadystatechange = function() {
 		if (this.readyState === 4) { serviceCallback(this.responseText); }
 	};
-	xhr.open("GET", "http://localhost:80/endpoints");
+	xhr.open("GET", "http://localhost:81/endpoints");
 	xhr.send();
 }
 

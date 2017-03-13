@@ -10,13 +10,15 @@ module.exports = {
 		var templateHead = path.join(__dirname+''+htmlTemplatesPath+'/head.html');
 		var fileHead = fs.readFileSync(templateHead).toString();
 
+		console.log("Registering endpoint: /database" + item.path);
 		app.get("/database" + item.path, (req, res) => {
 
 			var serviceCallback = function(response){
 				var output = JSON.parse(response);
 				var current = html.replace('#HEAD#', fileHead);
 
-				var repAlias = item.alias,
+				var repData = true,
+					repAlias = item.alias,
 					repPath = item.path,
 					repRobots = "index follow",
 					repTitle = 'D&amp;D: ' + item.menu,
@@ -38,6 +40,7 @@ module.exports = {
 					}
 				}
 
+				current = current.replace("#LOADDATA#", repData);
 				current = current.replace("#MENUITEM#", repAlias);
 				current = current.replace("#MENUENDPOINT#", repPath);
 				current = current.replace("#ROBOTS#", repRobots);
@@ -69,7 +72,7 @@ module.exports = {
 				xhr.onreadystatechange = function(err) {
 					if (this.readyState === 4) { serviceCallback(this.responseText); }
 				};
-				xhr.open("GET", "http://localhost:80" + item.path.replace(":id", req.params.id));
+				xhr.open("GET", "http://localhost:81" + item.path.replace(":id", req.params.id));
 				xhr.send();
 			}
 			serviceRequest();

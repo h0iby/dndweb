@@ -29,8 +29,9 @@
 	"postcss-cssnext": "latest",
 	"postcss-browser-reporter": "latest",
 	"cssnano": "latest",
-    "express": "^4.14.0",
-    "sqlite3": "^3.1.8"
+    "express": "latest",
+    "sqlite3": "latest",
+  	"xmlhttprequest": "latest"
   },
   "scripts": {
 	"start": "node app.js",

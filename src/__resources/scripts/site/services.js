@@ -15,11 +15,11 @@ var dnd = dnd || {};
 			}
 
 			dnd.service.endpoints.forEach(function(endpoint, id){
-				if(endpoint.path.indexOf(":id") == -1){ total++; }
+				if(endpoint.path.indexOf(":id") == -1 && endpoint.path.indexOf(":rid") == -1 && endpoint.path.indexOf(":sid") == -1){ total++; }
 			});
 
 			dnd.service.endpoints.forEach(function(endpoint, id){
-				if(endpoint.path.indexOf(":id") == -1){
+				if(endpoint.path.indexOf(":id") == -1 && endpoint.path.indexOf(":rid") == -1 && endpoint.path.indexOf(":sid") == -1){
 					dnd.ajax(dataUrl + endpoint.path, function(data){
 						counter++;
 						dnd.service["" + endpoint.alias + ""] = JSON.parse(data);
@@ -39,7 +39,7 @@ var dnd = dnd || {};
 			var counter = 0;
 			JSON.parse(localStorage.getItem("endpoints")).forEach(function(endpoint, id){
 				counter++;
-				if(endpoint.path.indexOf(":id") == -1){
+				if(endpoint.path.indexOf(":id") == -1 && endpoint.path.indexOf(":rid") == -1 && endpoint.path.indexOf(":sid") == -1){
 					var localItem = localStorage.getItem(endpoint.alias);
 					dnd.service["" + endpoint.alias + ""] = JSON.parse(JSON.parse(localItem));
 				}

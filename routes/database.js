@@ -1,7 +1,8 @@
-var path = require('path'),
-	paths = [],
-	XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest,
-	fs = require('fs');
+var path = require('path')
+	,paths = []
+	,XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest
+	,fs = require('fs')
+	;
 
 module.exports = {
     setup: (app, item, html) => {
@@ -9,16 +10,17 @@ module.exports = {
 		app.get(item.path, (req, res) => {
 			var current = html;
 			var serviceCallback = function(response){
-				var output = JSON.parse(response);
-				var repData = true,
-					repAlias = item.alias,
-					repPath = item.path,
-					repRobots = "index follow",
-					repTitle = 'D&amp;D: ' + item.menu,
-					repDescription = 'D&amp;D ' + item.menu,
-					repKeywords = '',
-					repUrl = '',
-					repType = 'article';
+				var output = JSON.parse(response)
+					,repData = true
+					,repAlias = item.alias
+					,repPath = item.path
+					,repRobots = "index follow"
+					,repTitle = 'D&amp;D: ' + item.menu
+					,repDescription = 'D&amp;D ' + item.menu
+					,repKeywords = ''
+					,repUrl = ''
+					,repType = 'article'
+					;
 
 				if(output.length < 1){
 					repRobots = 'noindex follow';
@@ -65,7 +67,7 @@ module.exports = {
 				xhr.onreadystatechange = function(err) {
 					if (this.readyState === 4) { serviceCallback(this.responseText); }
 				};
-				xhr.open("GET", "http://dnd.exchange" + item.path.replace(":id", req.params.id));
+				xhr.open("GET", "http://dnd.exchange" + item.path.replace(":id", req.params.id).replace(":rid", req.params.rid).replace(":sid", req.params.sid));
 				xhr.send();
 			}
 			serviceRequest();

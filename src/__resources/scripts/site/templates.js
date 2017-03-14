@@ -41,6 +41,8 @@ var dnd = dnd || {};
 						html = html.replace('#NAME#', item.name);
 						html = html.replace('#DESCRIPTION#', item.description);
 						html = html.replace('#BOOK#', item.rulebook_name);
+						html = html.replace('#URLNAME#', "/rulebook/" + item.rulebook_slug + "/feat/" + item.slug);
+						html = html.replace('#URLBOOK#', "/rulebook/" + item.rulebook_slug);
 						targetContainer.insertAdjacentHTML('beforeend', html);
 						counter++;
 					}

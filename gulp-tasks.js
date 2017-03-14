@@ -1,27 +1,19 @@
 console.time("Require");
 
-// modules
-var gulp = require("gulp"),
-	debug = require('gulp-debug'),
-	del = require('del'),
-	postcss = require('gulp-postcss'),
-	postcssimport = require("postcss-import"),
-	postcssurl = require("postcss-url"),
-	postcsscssnext = require("postcss-cssnext"),
-	postcssbrowserreporter = require("postcss-browser-reporter"),
-	cssnano = require("cssnano"),
-	plugins = require("gulp-load-plugins")({ camelize: true }),
-	browserSync = require("browser-sync"),
-	reload = browserSync.reload;
+var gulp = require("gulp")
+	,debug = require('gulp-debug')
+	,del = require('del')
+	,postcss = require('gulp-postcss')
+	,postcssimport = require("postcss-import")
+	,postcssurl = require("postcss-url")
+	,postcsscssnext = require("postcss-cssnext")
+	,postcssbrowserreporter = require("postcss-browser-reporter")
+	,cssnano = require("cssnano")
+	,plugins = require("gulp-load-plugins")({ camelize: true })
+	,browserSync = require("browser-sync")
+	,reload = browserSync.reload
+	;
 
-/*
-uninstall:
-"gulp.spritesmith": "latest",
-"vinyl-buffer": "latest",
-"gulp-imagemin": "latest",
-*/
-	
-	
 console.timeEnd("Require");
 
 

@@ -1,10 +1,11 @@
-var express = require('express'),
-	app = express(),
-	path = require('path'),
-	XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest,
-	fs = require('fs'),
-	gulp = require('gulp');
-	//gulpTasks = require('./gulp-tasks'),
+var express = require('express')
+	,app = express()
+	,path = require('path')
+	,XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest
+	,fs = require('fs')
+	,gulp = require('gulp')
+	,gulpTasks = require('./gulp-tasks')
+	;
 
 
 
@@ -106,7 +107,7 @@ var serviceCallback = function(data){
 	jsonData.forEach(function(item, i){
 		if(item.render){
 			var current = html,
-				pathMain = '' + item.path.replace(':id', 'id') + '.html',
+				pathMain = '' + item.path.replace(':id', 'id').replace(':rid', 'rid').replace(':sid', 'sid') + '.html',
 				templateMain = path.join(__dirname+''+htmlPagesPath+'/endpoints' + pathMain + ''),
 				fileMain = fs.readFileSync(templateMain).toString();
 
@@ -222,8 +223,8 @@ var serviceCallback = function(data){
 
 
 	// start gulp for assets and start server
-	//gulp.start("build");
-	app.listen(82);
+	gulp.start("build");
+	app.listen(80);
 }
 
 

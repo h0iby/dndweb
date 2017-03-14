@@ -6,3 +6,4 @@
 - npm install -g gulp
 - npm install
 - npm start
+- http://localhost:82

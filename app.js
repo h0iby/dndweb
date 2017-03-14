@@ -259,7 +259,7 @@ var serviceRequest = function(){
 	xhr.onreadystatechange = function() {
 		if (this.readyState === 4) { serviceCallback(this.responseText); }
 	};
-	xhr.open("GET", "http://localhost:81/endpoints");
+	xhr.open("GET", "http://dnd.exchange/endpoints");
 	xhr.send();
 }
 

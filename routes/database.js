@@ -65,7 +65,7 @@ module.exports = {
 				xhr.onreadystatechange = function(err) {
 					if (this.readyState === 4) { serviceCallback(this.responseText); }
 				};
-				xhr.open("GET", "http://localhost:81" + item.path.replace(":id", req.params.id));
+				xhr.open("GET", "http://dnd.exchange" + item.path.replace(":id", req.params.id));
 				xhr.send();
 			}
 			serviceRequest();

@@ -16,7 +16,6 @@ var serviceCallback = function(data){
 		htmlTemplatesPath = htmlPath + "/templates",
 		htmlMenuPath = htmlPath + "/templates/menu",
 		htmlPagesPath = htmlPath + "/pages",
-		htmlDatabasePath = htmlPath + "/pages/database",
 		html = "";
 
 	var templateMenu = path.join(__dirname+''+htmlMenuPath+'/db-menu.html'),
@@ -108,7 +107,7 @@ var serviceCallback = function(data){
 		if(item.render){
 			var current = html,
 				pathMain = '' + item.path.replace(':id', 'id') + '.html',
-				templateMain = path.join(__dirname+''+htmlDatabasePath+'/endpoints' + pathMain + ''),
+				templateMain = path.join(__dirname+''+htmlPagesPath+'/endpoints' + pathMain + ''),
 				fileMain = fs.readFileSync(templateMain).toString();
 
 			current = current.replace("#HEAD#", fileHead).replace("#MAIN#", fileMain);
@@ -118,28 +117,6 @@ var serviceCallback = function(data){
 	paths.map((controllerName) => {
 	  controller = require('./routes/database');
 	  controller.setup(app, controllerName[0], controllerName[1]);
-	});
-
-	// create endpoint for database
-	console.log("Registering endpoint: /database");
-	app.get('/database', (req, res) => {
-		var current = html;
-		var templateMain = path.join(__dirname+''+htmlDatabasePath+'/database.html');
-		var fileMain = fs.readFileSync(templateMain).toString();
-
-		var repData = true,
-			repAlias = null,
-			repPath = null,
-			repRobots = "index follow",
-			repTitle = "D&amp;D: Database",
-			repDescription = "D&amp;D Database",
-			repKeywords = "",
-			repUrl = "",
-			repType = "";
-
-		current = current.replace("#HEAD#", fileHead);
-		current = htmlReplacements(current, fileMain, repAlias, repPath, repData, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
-		res.send(current);
 	});
 
 	// create endpoint for search

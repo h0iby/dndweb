@@ -9,6 +9,8 @@ var dnd = dnd || {};
 		loadTemplate("-js-template-" + dnd.menu, "template-" + dnd.menu, dnd.service[dnd.menu], false);
 	}
 
+
+
 	var clearTemplate = function(templateTarget){
 		var targetContainer = document.getElementById(templateTarget);
 
@@ -16,6 +18,8 @@ var dnd = dnd || {};
 			targetContainer.innerHTML = "";
 		}
 	}
+
+
 
 	var loadTemplate = function(templateTarget, templateName, templateData, templateClearTarget){
 		if(templateClearTarget){

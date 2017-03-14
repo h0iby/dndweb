@@ -5,8 +5,8 @@ var path = require('path'),
 
 module.exports = {
     setup: (app, item, html) => {
-		console.log("Registering endpoint: /database" + item.path);
-		app.get("/database" + item.path, (req, res) => {
+		console.log("Registering endpoint: " + item.path);
+		app.get(item.path, (req, res) => {
 			var current = html;
 			var serviceCallback = function(response){
 				var output = JSON.parse(response);

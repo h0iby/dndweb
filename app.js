@@ -224,7 +224,7 @@ var serviceCallback = function(data){
 
 	// start gulp for assets and start server
 	gulp.start("build");
-	app.listen(80);
+	app.listen(82);
 }
 
 

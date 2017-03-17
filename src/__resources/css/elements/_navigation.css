@@ -47,10 +47,8 @@
 
 						&--num2{
 							opacity: 0;
-							transform: rotate(0deg) scale(0.1, 0.1);
 							left: 50%;
 							width: 0%;
-							top: 1px;
 							position: relative;
 						}
 

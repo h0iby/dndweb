@@ -11,6 +11,10 @@
 			display: table-cell;
 			padding: 8px 10px 6px;
 			display: none;
+			vertical-align: top;
+			font-size: 1.5rem;
+			line-height: 1.6rem;
+			word-break: normal;
 
 			&__bold{
 				display: block;
@@ -32,6 +36,9 @@
 			&:first-child{
 				display: block;
 			}
+			&:nth-child(2){
+				width: auto;
+			}
 		}
 
 		&:nth-child(odd){
@@ -44,6 +51,9 @@
 	.table{
 		&__row{
 			&__td{
+				&:first-child{
+					width: 200px;
+				}
 				&:nth-child(2){
 					display: table-cell;
 				}
@@ -56,8 +66,13 @@
 	.table{
 		&__row{
 			&__td{
+				width: 200px;
+
 				&:last-child{
 					display: table-cell;
+				}
+				&:nth-child(2){
+					width: auto;
 				}
 			}
 		}

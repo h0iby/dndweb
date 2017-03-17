@@ -8,7 +8,7 @@
 		max-width: 400px;
 		background: var(--navBackgroundHeader) var(--navBackground) 0 0 repeat;
 		box-shadow: 0 0 25px 0px var(--shadow);
-		-webkit-font-smoothing: antialiased;
+		font-smoothing: antialiased;
 		transform-origin: 0% 0%;
 		transform: translate(-150%, 0);
 		transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
@@ -20,7 +20,7 @@
 			border: none;
 			background: transparent;
 			display: block;
-			width: 100px;
+			width: 70px;
 			height: 100%;
 			position: absolute;
 			top: 0px;
@@ -40,7 +40,9 @@
 						opacity: 1;
 
 						&--num1{
-							transform: rotate(45deg) translate(4px, 0);
+							animation-name: burgerMenuMoveTop;
+							animation-duration: 0.75s;
+							animation-fill-mode: forwards;
 						}
 
 						&--num2{
@@ -53,8 +55,9 @@
 						}
 
 						&--num3{
-							transform: rotate(-45deg) translate(-3px, 1px);
-							width: 34px;
+							animation-name: burgerMenuMoveBottom;
+							animation-duration: 0.75s;
+							animation-fill-mode: forwards;
 						}
 					}
 				}
@@ -64,7 +67,7 @@
 		&__icon{
 			position: absolute;
 			top: 50%;
-			left: 32px;
+			left: 26px;
 			transition: all 0.5s;
 			margin: -9px 0 0;
 			z-index: 98;
@@ -80,7 +83,26 @@
 				border-radius: 3px;
 				z-index: 1;
 				transform-origin: 4px 0px;
-				transition: all 0.5s cubic-bezier(0.77,0.2,0.05,1.0), background 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.55s ease;
+
+
+				&--num1{
+					transform: rotate(0deg) translate(0px, 0px);
+					animation-name: burgerMenuMoveTopBack;
+					animation-duration: 0.75s;
+					animation-fill-mode: forwards;
+				}
+
+				&--num2{
+					opacity: 1;
+					transition: all 0.5s cubic-bezier(0.77,0.2,0.05,1.0), background 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.55s ease;
+				}
+
+				&--num3{
+					transform: rotate(0deg) translate(0px, 0px);
+					animation-name: burgerMenuMoveBottomBack;
+					animation-duration: 0.75s;
+					animation-fill-mode: forwards;
+				}
 			}
 		}
 
@@ -88,7 +110,7 @@
 			display: block;
 			font-size: 1.8rem;
 			line-height: 64px;
-			padding: 8px 25px 0;
+			padding: 8px 25px 0 0;
 			margin: 0 0 0 70px;
 			opacity: 0.4;
 			text-transform: uppercase;
@@ -102,11 +124,12 @@
 			bottom: 0px;
 			overflow: auto;
 			display: block;
-			transition: all 0.5s;
+			transition: all 1s;
 
 			&__item{
 				position: relative;
 				line-height: var(--navAccordionHeight);
+				min-height: var(--navAccordionHeight);
 
 				&__input{
 					position: absolute;
@@ -125,7 +148,7 @@
 					&:checked ~ .header__nav__list__item{
 						&__bullet{
 							& .header__nav__list__item__bullet__icon{
-								transform: rotate(-180deg);
+								transform: rotateX(-180deg);
 							}
 						}
 						&__list{
@@ -258,7 +281,7 @@
 									}
 								}
 								&__list{
-									max-height: 1000px;
+									max-height: 500px;
 								}
 							}
 						}
@@ -529,5 +552,54 @@
 				}
 			}
 		}
+	}
+}
+
+
+
+
+@keyframes burgerMenuMoveTopBack {
+    0%   {
+		transform: rotate(45deg) translate(4px, 0);
+	}
+	50%  {
+		transform: rotate(0deg) translate(0px, 9px);
+	}
+    100% {
+		transform: rotate(0deg) translate(0px, 0px);
+	}
+}
+@keyframes burgerMenuMoveTop {
+    0%   {
+		transform: rotate(0deg) translate(0px, 0px);
+	}
+	50%  {
+		transform: rotate(0deg) translate(0px, 9px);
+	}
+    100% {
+		transform: rotate(45deg) translate(4px, 0);
+	}
+}
+
+@keyframes burgerMenuMoveBottomBack {
+    0%   {
+		transform: rotate(-45deg) translate(-3px, 1px);
+	}
+	50%  {
+		transform: rotate(0deg) translate(0px, -9px);
+	}
+    100% {
+		transform: rotate(0deg) translate(0px, 0px);
+	}
+}
+@keyframes burgerMenuMoveBottom {
+    0%   {
+		transform: rotate(0deg) translate(0px, 0px);
+	}
+	50%  {
+		transform: rotate(0deg) translate(0px, -9px);
+	}
+    100% {
+		transform: rotate(-45deg) translate(-3px, 1px);
 	}
 }

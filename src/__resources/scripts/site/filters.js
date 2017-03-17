@@ -30,7 +30,9 @@ var dnd = dnd || {};
 				var selectValue = this.options[this.selectedIndex].value;
 				dnd.filters.amount = parseInt(selectValue);
 				if(dnd.vars.localStorage){
-					localStorage.setItem("filter-amount", dnd.filters.amount);
+					if(dnd.filters.amount <= 100){
+						localStorage.setItem("filter-amount", dnd.filters.amount);
+					}
 				}
 				selectChange(selects, selectValue);
 				dnd.templates();

@@ -15,6 +15,7 @@ var dnd = dnd || {};
 	}
 
 
+
 	dnd.dataLoaded = function(){
 		dnd.filters();
 		dnd.templates();

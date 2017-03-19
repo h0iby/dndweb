@@ -3,7 +3,7 @@ var dnd = dnd || {};
 	"use strict";
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
-	var dataUrl = "http://dnd.exchange";
+	var dataUrl = "http://138.68.114.21";
 	var loadError = function(){ console.log("Error loading data"); }
 	var loadData = function(hasLocalStorage, callback){
 		dnd.ajax(dataUrl + "/endpoints", function(endpoints){
@@ -18,8 +18,10 @@ var dnd = dnd || {};
 				if(endpoint.path.indexOf(":id") == -1 && endpoint.path.indexOf(":rid") == -1 && endpoint.path.indexOf(":sid") == -1){ total++; }
 			});
 
+
 			dnd.service.endpoints.forEach(function(endpoint, id){
 				if(endpoint.path.indexOf(":id") == -1 && endpoint.path.indexOf(":rid") == -1 && endpoint.path.indexOf(":sid") == -1){
+
 					dnd.ajax(dataUrl + endpoint.path, function(data){
 						counter++;
 						dnd.service["" + endpoint.alias + ""] = JSON.parse(data);
@@ -33,9 +35,11 @@ var dnd = dnd || {};
 		}, function(){ loadError(); }, function(){ loadError(); });
 	}
 	var service = function(callback){
-		if(dnd.vars.localStorage && localStorage.length == 0){
+
+
+		if(dnd.vars.hasLocalStorage && localStorage.length == 0){
 			loadData(true, callback);
-		} else if (dnd.vars.localStorage){
+		} else if (dnd.vars.hasLocalStorage){
 			var counter = 0;
 			JSON.parse(localStorage.getItem("endpoints")).forEach(function(endpoint, id){
 				counter++;
@@ -61,6 +65,7 @@ var dnd = dnd || {};
 
 	dnd.initService = function(callback){
 		var loader = dnd.selector("#Loader");
+		//localStorage.clear();
 		if(dnd.database){
 			loader.style.display = 'block';
 			service(callback);

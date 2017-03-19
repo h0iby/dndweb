@@ -15,7 +15,7 @@ var dnd = dnd || {};
 			}
 		}
 
-		var selects = dnd.selector(".-js-sorting-amount");//document.getElementsByClassName("-js-sorting-amount");
+		var selects = dnd.selector(".-js-sorting-amount");
 		for(var i = 0; i < selects.length; i++){
 			var select = selects[i];
 			var options = select.options;

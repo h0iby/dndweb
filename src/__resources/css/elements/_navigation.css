@@ -82,7 +82,6 @@
 				z-index: 1;
 				transform-origin: 4px 0px;
 
-
 				&--num1{
 					transform: rotate(0deg) translate(0px, 0px);
 					animation-name: burgerMenuMoveTopBack;

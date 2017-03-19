@@ -3,8 +3,10 @@ var express = require('express')
 	,path = require('path')
 	,XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest
 	,fs = require('fs')
-	,gulp = require('gulp')
-	,gulpTasks = require('./gulp-tasks')
+	,http = require('http')
+	,https = require('https')
+	//,gulp = require('gulp')
+	//,gulpTasks = require('./gulp-tasks')
 	;
 
 
@@ -24,6 +26,10 @@ var serviceCallback = function(data){
 		templateMenuLevel1Children = path.join(__dirname+''+htmlMenuPath+'/db-menu-level1-children.html'),
 		templateMenuLevel2 = path.join(__dirname+''+htmlMenuPath+'/db-menu-level2.html'),
 		templateHead = path.join(__dirname+''+htmlTemplatesPath+'/head.html'),
+		templateFooter = path.join(__dirname+''+htmlTemplatesPath+'/footer.html'),
+		templateLogo = path.join(__dirname+''+htmlTemplatesPath+'/logo.html'),
+		templateSearch = path.join(__dirname+''+htmlTemplatesPath+'/search.html'),
+		templateOverlay = path.join(__dirname+''+htmlTemplatesPath+'/overlay.html'),
 		templatePage = path.join(__dirname+''+htmlTemplatesPath+'/index.html');
 
 	var fileMenu = fs.readFileSync(templateMenu).toString(),
@@ -31,11 +37,13 @@ var serviceCallback = function(data){
 		fileMenuLevel1Children = fs.readFileSync(templateMenuLevel1Children).toString(),
 		fileMenuLevel2 = fs.readFileSync(templateMenuLevel2).toString(),
 		fileHead = fs.readFileSync(templateHead).toString(),
+		fileFooter = fs.readFileSync(templateFooter).toString(),
+		fileLogo = fs.readFileSync(templateLogo).toString(),
+		fileSearch = fs.readFileSync(templateSearch).toString(),
+		fileOverlay = fs.readFileSync(templateOverlay).toString(),
 		filePage = fs.readFileSync(templatePage).toString();
 
-
-	var templateHead = path.join(__dirname+''+htmlTemplatesPath+'/head.html');
-	var fileHead = fs.readFileSync(templateHead).toString();
+	html = filePage;
 
 	var htmlReplacements = function(input, main, alias, path, data, robots, title, description, keywords, url, type){
 		var output = input;
@@ -95,7 +103,14 @@ var serviceCallback = function(data){
 		}
 	});
 	fileMenu = fileMenu.replace("#LEVEL1#", "").replace("#LEVEL2#", "");
-	html = filePage.replace("#DBMENU#", fileMenu);
+
+
+	// standard replacements
+	html = html.replace("#MENU#", fileMenu);
+	html = html.replace("#LOGO#", fileLogo);
+	html = html.replace("#SEARCH#", fileSearch);
+	html = html.replace("#FOOTER#", fileFooter);
+	html = html.replace("#OVERLAY#", fileOverlay);
 
 
 
@@ -219,12 +234,13 @@ var serviceCallback = function(data){
 	});
 
 
-
-
-
-	// start gulp for assets and start server
-	gulp.start("build");
-	app.listen(82);
+	// start gulp for assets
+	//gulp.start("build");
+	// start webserver
+	//var httpsServer = https.createServer({ key  : fs.readFileSync('key.pem'), cert : fs.readFileSync('cert.pem') }, app);
+	//httpsServer.listen(443);
+	var httpServer = http.createServer(app);
+	httpServer.listen(80);
 }
 
 

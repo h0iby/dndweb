@@ -8,13 +8,12 @@ var dnd = dnd || {};
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
 
+	dnd.vars.isLocalStorage = false;
 	if (typeof(Storage) !== "undefined") {
-		dnd.vars.localStorage = true;
+		dnd.vars.hasLocalStorage = true;
 	} else {
-		dnd.vars.localStorage = false;
+		dnd.vars.hasLocalStorage = false;
 	}
-
-
 
 	dnd.dataLoaded = function(){
 		dnd.filters();

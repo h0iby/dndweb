@@ -1,7 +1,6 @@
 var dnd = dnd || {};
 (function() {
 	"use strict";
-
 	dnd.ajax = function(dataUrl, successFunction, errorFunction){
 		var request = new XMLHttpRequest();
 		request.open('GET', dataUrl, true);
@@ -12,43 +11,32 @@ var dnd = dnd || {};
 				errorFunction();
 			}
 		};
-
 		request.onerror = function() {
 			errorFunction();
 		};
-
 		request.send();
 	}
-
 	dnd.selector = function(selector, parent){
 		selector = selector.trim();
-
 		if (!parent) {
 			parent = document;
 		}
-
 		if (selector.indexOf(' ') === -1) {
 			if (selector.lastIndexOf('.') === 0) {
 				return parent.getElementsByClassName(selector.substring(1));
 			}
-
 			if (selector.lastIndexOf('#') === 0) {
 				return parent.getElementById(selector.substring(1));
 			}
 		}
-
 		return parent.querySelectorAll(selector);
 	}
-
-	dnd.appendTo = function(target, html){
-		var htmlElement = '',
-			tempContainer = document.createElement(htmlElement);
-
-		tempContainer.innerHTML = html;
-		target.appendChild(tempContainer);
-		//target.innerHTML = target.innerHTML.replace('<' + htmlElement + '>', '').replace('</' + htmlElement + '>', '');
+	dnd.replaceAll = function(string, source, target){
+		return string.replace(new RegExp(source, 'g'), target);
 	}
-
+	dnd.appendTo = function(target, html){
+		target.insertAdjacentHTML('beforeend', html);
+	}
 	dnd.addEventHandler = function (elem, eventType, handler) {
 		if (elem.addEventListener)
 			elem.addEventListener (eventType, handler, false);

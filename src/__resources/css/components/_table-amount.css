@@ -1,20 +1,17 @@
 .table-amount{
 	display: block;
-	margin: -27px 0 10px;
+	margin: 10px 0;
 	float: right;
 	vertical-align: top;
-	font-size: 1.5rem;
-	line-height: 1.6rem;
+	font-size: 1.8rem;
+	line-height: 1.8rem;
 
-	&__label{
-	}
 	&__text{
-		text-transform: uppercase;
 		vertical-align: top;
 	}
 	&__select{
 		width: 55px;
-		height: 1.6rem;
+		height: 1.8rem;
 		vertical-align: top;
 	}
 }

@@ -10,6 +10,7 @@
 	--grayLightRGB: 97,96,92;
 	--redDarkRGB: 157,10,14;
 	--redRGB: 255,0,0;
+	--greenDarkRGB: 27, 157, 9;
 
 
 	/* variables */
@@ -36,6 +37,8 @@
 	--backgroundFooter: rgba(var(--grayBlackRGB),1);
 	--fontSize: 16px;
 
+	--checkmarkGreen: rgba(var(--greenDarkRGB),1);
+	--checkmarkRed: rgba(var(--redDarkRGB),1);
 
 	/* logo */
 	--logoColor: rgba(var(--redRGB),1);

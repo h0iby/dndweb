@@ -37,12 +37,16 @@ html, body {
 .section{
 	&__intro, &__header, &__main, &__footer{
 		position: relative;
-		padding: 0 5%;
+		padding: 0 2.5%;
 		float: left;
-		width: 90%;
+		width: 95%;
 		vertical-align: top;
 	}
 	&__intro, &__header, &__main{
 		margin: 20px 0 0;
+	}
+
+	&__header{
+		display: none;
 	}
 }

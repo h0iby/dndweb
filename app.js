@@ -164,7 +164,7 @@ var serviceCallback = function(data){
 		var templateMain = path.join(__dirname+''+htmlPagesPath+'/default.html');
 		var fileMain = fs.readFileSync(templateMain).toString();
 
-		var repData = false,
+		var repData = true,
 			repAlias = null,
 			repPath = null,
 			repRobots = "index follow",

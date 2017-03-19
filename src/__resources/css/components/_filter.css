@@ -34,38 +34,69 @@
 			}
 
 			& .filter{
-				max-height: 300px;
+				max-height: 500px;
 			}
 		}
 	}
 
+
+
 	&__list{
-		display: table;
+		display: block;
 		width: 100%;
 		margin: 5px 0;
 
 		&__item{
-			display: table-row;
+			display: flex;
 			background: var(--filterBackgroundEven);
 
 			&__text, &__container{
+				flex-direction: column;
 				padding: 8px 10px 6px;
 			}
 
 			&__text{
-				display: table-cell;
-				max-width: 200px;
+				display: block;
+				width: 40%;
+				font-size: 1.4rem;
+				line-height: 1.4rem;
+				word-break: normal;
 			}
 			&__container{
-				display: table-cell;
+				display: block;
+				width: 60%;
 
+				&__minmax{
+					width: 100%;
+				}
 				&__input{
+					width: 100%;
+				}
+				&__checkbox{
+					width: 50px;
+				}
+				&__select{
 					width: 100%;
 				}
 			}
 
 			&:nth-child(odd){
 				background: var(--filterBackgroundOdd);
+			}
+		}
+	}
+}
+
+@media (--tabletLandscape) {
+	.filter{
+		&__list{
+			&__item{
+				&__text{
+					width: 30%;
+				}
+				&__container{
+					width: 70%;
+				}
 			}
 		}
 	}

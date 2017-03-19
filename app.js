@@ -30,6 +30,7 @@ var serviceCallback = function(data){
 		templateLogo = path.join(__dirname+''+htmlTemplatesPath+'/logo.html'),
 		templateSearch = path.join(__dirname+''+htmlTemplatesPath+'/search.html'),
 		templateOverlay = path.join(__dirname+''+htmlTemplatesPath+'/overlay.html'),
+		templatePaging = path.join(__dirname+''+htmlTemplatesPath+'/paging.html'),
 		templatePage = path.join(__dirname+''+htmlTemplatesPath+'/index.html');
 
 	var fileMenu = fs.readFileSync(templateMenu).toString(),
@@ -41,6 +42,7 @@ var serviceCallback = function(data){
 		fileLogo = fs.readFileSync(templateLogo).toString(),
 		fileSearch = fs.readFileSync(templateSearch).toString(),
 		fileOverlay = fs.readFileSync(templateOverlay).toString(),
+		filePaging = fs.readFileSync(templatePaging).toString(),
 		filePage = fs.readFileSync(templatePage).toString();
 
 	html = filePage;
@@ -104,7 +106,6 @@ var serviceCallback = function(data){
 	});
 	fileMenu = fileMenu.replace("#LEVEL1#", "").replace("#LEVEL2#", "");
 
-
 	// standard replacements
 	html = html.replace("#MENU#", fileMenu);
 	html = html.replace("#LOGO#", fileLogo);
@@ -126,6 +127,7 @@ var serviceCallback = function(data){
 				templateMain = path.join(__dirname+''+htmlPagesPath+'/endpoints' + pathMain + ''),
 				fileMain = fs.readFileSync(templateMain).toString();
 
+			fileMain = fileMain.replace("#PAGING#", filePaging).replace("#PAGING#", filePaging);
 			current = current.replace("#HEAD#", fileHead).replace("#MAIN#", fileMain);
 			paths.push([item, current]);
 		}
@@ -138,9 +140,9 @@ var serviceCallback = function(data){
 	// create endpoint for search
 	console.log("Registering endpoint: /search");
 	app.get('/search', (req, res) => {
-		var current = html;
-		var templateMain = path.join(__dirname+''+htmlPagesPath+'/default.html');
-		var fileMain = fs.readFileSync(templateMain).toString();
+		var current = html,
+			templateMain = path.join(__dirname+''+htmlPagesPath+'/default.html'),
+			fileMain = fs.readFileSync(templateMain).toString();
 
 		var repData = true,
 			repAlias = null,
@@ -152,6 +154,7 @@ var serviceCallback = function(data){
 			repUrl = "/search",
 			repType = "search";
 
+		fileMain = fileMain.replace("#PAGING#", filePaging).replace("#PAGING#", filePaging);
 		current = current.replace("#HEAD#", fileHead);
 		current = htmlReplacements(current, fileMain, repAlias, repPath, repData, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
 		res.send(current);
@@ -160,9 +163,9 @@ var serviceCallback = function(data){
 	// create endpoint for home
 	console.log("Registering endpoint: /");
 	app.get('/', (req, res) => {
-		var current = html;
-		var templateMain = path.join(__dirname+''+htmlPagesPath+'/default.html');
-		var fileMain = fs.readFileSync(templateMain).toString();
+		var current = html,
+			templateMain = path.join(__dirname+''+htmlPagesPath+'/default.html'),
+			fileMain = fs.readFileSync(templateMain).toString();
 
 		var repData = true,
 			repAlias = null,
@@ -174,6 +177,7 @@ var serviceCallback = function(data){
 			repUrl = "",
 			repType = "";
 
+		fileMain = fileMain.replace("#PAGING#", filePaging).replace("#PAGING#", filePaging);
 		current = current.replace("#HEAD#", fileHead);
 		current = htmlReplacements(current, fileMain, repAlias, repPath, repData, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
 		res.send(current);
@@ -192,9 +196,9 @@ var serviceCallback = function(data){
 	if (app.get('env') === 'development') {
 		app.use(function(err, req, res, next) {
 			res.status(err.status || 500);
-			var current = html;
-			var templateMain = path.join(__dirname+''+htmlErrorsPath+'/'+err.status+'.html');
-			var fileMain = fs.readFileSync(templateMain).toString();
+			var current = html,
+				templateMain = path.join(__dirname+''+htmlErrorsPath+'/'+err.status+'.html'),
+				fileMain = fs.readFileSync(templateMain).toString();
 
 			var repData = false,
 				repAlias = null,
@@ -206,6 +210,7 @@ var serviceCallback = function(data){
 				repUrl = "",
 				repType = "error";
 
+			fileMain = fileMain.replace("#PAGING#", filePaging).replace("#PAGING#", filePaging);
 			current = current.replace("#HEAD#", fileHead);
 			current = htmlReplacements(current, fileMain, repAlias, repPath, repData, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
 			res.send(current);
@@ -214,9 +219,9 @@ var serviceCallback = function(data){
 	// error handling - production
 	app.use(function(err, req, res, next) {
 		res.status(err.status || 500);
-		var current = html;
-		var templateMain = path.join(__dirname+''+htmlErrorsPath+'/'+err.status+'.html');
-		var fileMain = fs.readFileSync(templateMain).toString();
+		var current = html,
+			templateMain = path.join(__dirname+''+htmlErrorsPath+'/'+err.status+'.html'),
+			fileMain = fs.readFileSync(templateMain).toString();
 
 		var repData = false,
 			repAlias = null,
@@ -228,6 +233,7 @@ var serviceCallback = function(data){
 			repUrl = "",
 			repType = "";
 
+		fileMain = fileMain.replace("#PAGING#", filePaging).replace("#PAGING#", filePaging);
 		current = current.replace("#HEAD#", fileHead);
 		current = htmlReplacements(current, fileMain, repAlias, repPath, repData, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
 		res.send(current);

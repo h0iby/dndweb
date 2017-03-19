@@ -3,16 +3,16 @@
 		<h2>Editions</h2>
 		<p>Browse through D&amp;D editions here.</p>
 	</div>
-	<div class="section__header">
+	<div class="section__filter">
 		<input class="filter__toggle" type="checkbox" checked>
 		<h4 class="filter__title">Filters</h4>
 		<div class="filter">
 			<ul class="filter__list">
 				<li class="filter__list__item">
 					<label class="filter__list__item__text" for="filterName">
-						#NAME#
+						Name
 					</label>
-					<label class="filter__list__item__container">
+					<label class="filter__list__item__container filter__list__item__container--textbox">
 						<input class="filter__list__item__container__input" id="filterName" type="text" />
 					</label>
 				</li>
@@ -21,21 +21,7 @@
 	</div>
 	<div class="section__main">
 		<h3>Editions<h3>
-		<div class="table-amount">
-			<span class="table-amount__label">
-				<span class="table-amount__text">
-					Per page:
-				</span>
-				<select class="table-amount__select -js-sorting-amount">
-					<option value="25">25</option>
-					<option value="50">50</option>
-					<option value="100">100</option>
-					<option value="500">500</option>
-					<option value="1000">1000</option>
-					<option value="100000">ALL</option>
-				</select>
-			</span>
-		</div>
+		#PAGING#
 		<table class="table">
 			<thead>
 				<tr class="table__row">
@@ -46,21 +32,7 @@
 		</table>
 	</div>
 	<div class="section__footer">
-		<div class="table-amount">
-			<span class="table-amount__label">
-				<span class="table-amount__text">
-					Per page:
-				</span>
-				<select class="table-amount__select -js-sorting-amount">
-					<option value="25">25</option>
-					<option value="50">50</option>
-					<option value="100">100</option>
-					<option value="500">500</option>
-					<option value="1000">1000</option>
-					<option value="100000">ALL</option>
-				</select>
-			</span>
-		</div>
+		#PAGING#
 	</div>
 </section>
 <script id="template--edition" type="x-template">

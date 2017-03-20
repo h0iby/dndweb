@@ -37,6 +37,7 @@
 	--backgroundFooter: rgba(var(--grayBlackRGB),1);
 	--fontSize: 16px;
 
+	--checkmarkTransparent: rgba(var(--greenDarkRGB),0);
 	--checkmarkGreen: rgba(var(--greenDarkRGB),1);
 	--checkmarkRed: rgba(var(--redDarkRGB),1);
 

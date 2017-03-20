@@ -73,21 +73,22 @@
 				line-height: 2.2rem;
 
 				&__input{
-					width: 96%;
-					border: solid 1px black;
-					background: white;
+					box-sizing: border-box;
+					width: 100%;
+					border: solid 1px var(--filterInputBorderColor);
+					background: var(--filterInputBackground);
 					line-height: 1.0rem;
-					padding: 8px 2% 6px;
+					padding: 8px 5px 6px;
 
 					&--min, &--max{
-						width: 42%;
-						padding: 8px 2% 6px;
+						width: 47%;
+						padding: 8px 5px 6px;
 					}
 					&--min{
-						margin: 0 8% 0 0;
+						margin: 0 6% 0 0;
 					}
 					&--max{
-						margin: 0 -6px;
+						margin: 0 0 0 -6px;
 					}
 				}
 				&__radiobutton{
@@ -114,9 +115,10 @@
 							line-height: 2.0rem;
     						text-align: center;
 							background: transparent;
-							border: solid 1px black;
+							border: solid 1px var(--filterInputBorderColor);
 							color: var(--checkmarkTransparent);
 							opacity: 0.5;
+							cursor: pointer;
 						}
 
 						&--yes{
@@ -136,7 +138,7 @@
 					&:checked{
 						& ~ .filter__list__item__container__radiobutton__style{
 							&::after{
-								background: white;
+								background: var(--filterInputBackground);
 								opacity: 1;
 							}
 						}
@@ -159,14 +161,15 @@
 						&::after{
 							content: "✗";
 							color: var(--checkmarkRed);
-							background: white;
+							background: var(--filterInputBackground);
 							font-weight: bold;
 							display: block;
 							font-size: 1.8rem;
 							padding-top: 0.2rem;
 							line-height: 2.0rem;
     						text-align: center;
-							border: solid 1px black;
+							border: solid 1px var(--filterInputBorderColor);
+							cursor: pointer;
 						}
 					}
 
@@ -182,8 +185,9 @@
 				&__select{
 					width: 100%;
 					height: 100%;
-					background: white;
-					border: solid 1px black;
+					background: var(--filterInputBackground);
+					border: solid 1px var(--filterInputBorderColor);
+					padding: 8px 0 6px;
 				}
 
 				&--radiobutton{
@@ -213,8 +217,8 @@
 
 					&__input{
 						&--min, &--max{
-							width: 45%;
-							padding: 8px 2% 6px;
+							width: 49%;
+							padding: 8px 5px 6px;
 						}
 						&--min{
 							margin: 0 2% 0 0;

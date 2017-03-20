@@ -28,6 +28,7 @@
 
 
 	/* layout */
+	--select: rgba(var(--redDarkRGB),1);
 	--shadow: rgba(var(--blackRGB),1);
 	--background: var(--pathBackground);
 	--backgroundLogo: var(--pathLogo);
@@ -91,6 +92,8 @@
 	--filterBackgroundEven: rgba(var(--whiteRGB),0.3);
 	--filterBackgroundOdd: rgba(var(--grayDarkRGB),0.08);
 	--filterPlusColor: rgba(var(--redDarkRGB),1);
+	--filterInputBorderColor: rgba(var(--grayDarkRGB),1);
+	--filterInputBackground: rgba(var(--whiteRGB),1);
 
 	/* table */
 	--tableBackgroundEven: rgba(var(--whiteRGB),0.3);

@@ -39,3 +39,8 @@ td{
 	line-height: 1.3rem;
 	letter-spacing: 0.1rem;
 }
+
+::selection{
+	background: var(--selectionBackground);
+	color: var(--selectionFontColor);
+}

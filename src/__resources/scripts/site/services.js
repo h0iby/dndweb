@@ -58,8 +58,7 @@ var dnd = dnd || {};
 
 	var serviceLoaded = function(callback){
 		var loader = dnd.selector("#Loader");
-		if (loader.classList){ loader.classList.add("loaded"); }
-		else { loader.className += ' ' + "loaded"; }
+		loader.classList.add("is-hidden");
 		callback();
 	}
 
@@ -67,7 +66,6 @@ var dnd = dnd || {};
 		var loader = dnd.selector("#Loader");
 		//localStorage.clear();
 		if(dnd.database){
-			loader.style.display = 'block';
 			service(callback);
 		} else {
 			loader.style.display = 'none';

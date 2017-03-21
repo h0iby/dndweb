@@ -8,12 +8,14 @@ var dnd = dnd || {};
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
 
-	dnd.vars.isLocalStorage = false;
 	if (typeof(Storage) !== "undefined") {
 		dnd.vars.hasLocalStorage = true;
 	} else {
 		dnd.vars.hasLocalStorage = false;
 	}
+
+	var header = dnd.selector("#Header");
+	setTimeout(function(){ header.classList.add("is-shown"); }, 1);
 
 	dnd.dataLoaded = function(){
 		dnd.filters();

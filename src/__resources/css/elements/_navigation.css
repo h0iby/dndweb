@@ -14,63 +14,18 @@
 		transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
 		z-index: 89;
 
-		&__input{
-			margin: 0;
-			padding: 0;
-			border: none;
-			background: transparent;
-			display: block;
-			width: 70px;
-			height: 100%;
-			position: absolute;
-			top: 0px;
-			left: 0px;
-			cursor: pointer;
-			opacity: 0;
-			z-index: 99;
-
-			&:checked ~ .header__nav{
-				transform: scale(1.0, 1.0);
-				opacity: 1;
-
-				&__icon{
-					transition: all 0.5s;
-
-					& .header__nav__icon__line{
-						opacity: 1;
-
-						&--num1{
-							animation-name: burgerMenuMoveTop;
-							animation-duration: 0.75s;
-							animation-fill-mode: forwards;
-						}
-
-						&--num2{
-							opacity: 0;
-							left: 50%;
-							width: 0%;
-							position: relative;
-						}
-
-						&--num3{
-							animation-name: burgerMenuMoveBottom;
-							animation-duration: 0.75s;
-							animation-fill-mode: forwards;
-						}
-					}
-				}
-			}
-		}
-
 		&__icon{
 			position: absolute;
 			top: 50%;
 			left: 26px;
-			transition: all 0.5s;
 			margin: -9px 0 0;
 			z-index: 98;
+			opacity: 0;
+			transition: all 0.5s;
+			transition-delay: 0.25s;
 
 			&__line{
+				transition: all 0.5s;
 				display: block;
 				left: 0;
 				width: 33px;
@@ -125,6 +80,8 @@
 
 			&__item{
 				position: relative;
+				transition: transform 0.25s cubic-bezier(0.77,0.2,0.05,1.0);
+				transform: translate(-100%, 0);
 				line-height: var(--navAccordionHeight);
 				min-height: var(--navAccordionHeight);
 
@@ -149,7 +106,22 @@
 							}
 						}
 						&__list{
-							max-height: 1000px;
+							max-height: 10000px;
+							&[data-children='0']{ max-height: 0px; }
+							&[data-children='1']{ max-height: 50px; }
+							&[data-children='2']{ max-height: 100px; }
+							&[data-children='3']{ max-height: 150px; }
+							&[data-children='4']{ max-height: 200px; }
+							&[data-children='5']{ max-height: 250px; }
+							&[data-children='6']{ max-height: 300px; }
+							&[data-children='7']{ max-height: 350px; }
+							&[data-children='8']{ max-height: 400px; }
+							&[data-children='9']{ max-height: 450px; }
+							&[data-children='10']{ max-height: 500px; }
+							&[data-children='11']{ max-height: 550px; }
+							&[data-children='12']{ max-height: 600px; }
+							&[data-children='13']{ max-height: 650px; }
+							&[data-children='14']{ max-height: 700px; }
 						}
 					}
 				}
@@ -446,6 +418,91 @@
 						display: none;
 					}
 				}
+			}
+		}
+
+		&__input{
+			margin: 0;
+			padding: 0;
+			border: none;
+			background: transparent;
+			width: 70px;
+			height: 100%;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			cursor: pointer;
+			opacity: 0;
+			z-index: 99;
+			display: none;
+
+			&:checked ~ .header__nav{
+				transform: scale(1.0, 1.0);
+				opacity: 1;
+
+				&__icon{
+					transition: all 0.5s;
+
+					& .header__nav__icon__line{
+						opacity: 1;
+
+						&--num1{
+							animation-name: burgerMenuMoveTop;
+							animation-duration: 0.75s;
+							animation-fill-mode: forwards;
+						}
+
+						&--num2{
+							opacity: 0;
+							left: 50%;
+							width: 0%;
+							position: relative;
+						}
+
+						&--num3{
+							animation-name: burgerMenuMoveBottom;
+							animation-duration: 0.75s;
+							animation-fill-mode: forwards;
+						}
+					}
+				}
+
+				& .header__nav__list{
+					&__item{
+						transition-delay: 0.15s;
+						transform: translate(0%, 0);
+
+						&:nth-child(1){ transition-delay: 0.15s; }
+						&:nth-child(2){ transition-delay: 0.20s; }
+						&:nth-child(3){ transition-delay: 0.25s; }
+						&:nth-child(4){ transition-delay: 0.30s; }
+						&:nth-child(5){ transition-delay: 0.35s; }
+						&:nth-child(6){ transition-delay: 0.40s; }
+						&:nth-child(7){ transition-delay: 0.45s; }
+						&:nth-child(8){ transition-delay: 0.50s; }
+						&:nth-child(9){ transition-delay: 0.55s; }
+						&:nth-child(10){ transition-delay: 0.60s; }
+						&:nth-child(11){ transition-delay: 0.65s; }
+						&:nth-child(12){ transition-delay: 0.70s; }
+						&:nth-child(13){ transition-delay: 0.75s; }
+						&:nth-child(14){ transition-delay: 0.80s; }
+						&:nth-child(15){ transition-delay: 0.85s; }
+						&:nth-child(16){ transition-delay: 0.90s; }
+						&:nth-child(17){ transition-delay: 0.95s; }
+						&:nth-child(18){ transition-delay: 1s; }
+					}
+				}
+			}
+		}
+	}
+
+	&.is-shown{
+		& .header__nav{
+			&__input{
+				display: block;
+			}
+			&__icon{
+				opacity: 1;
 			}
 		}
 	}

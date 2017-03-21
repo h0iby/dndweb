@@ -94,9 +94,9 @@ var serviceCallback = function(data){
 			if(item.show == '/'){
 				fileMenu = fileMenu.replace("#LEVEL2#", "");
 				var current = fileMenuLevel1;
-				if(item.children){ current = fileMenuLevel1Children }
+				if(item.children > 0){ current = fileMenuLevel1Children }
 				current = current.replace("#MENUNAME#", name).replace("#MENUCLASS#", alias).replace("#MENUPATH#", item.path);
-				fileMenu = fileMenu.replace("#LEVEL1#", current + " #LEVEL1#");
+				fileMenu = fileMenu.replace("#LEVEL1#", current + " #LEVEL1#").replace("#MENUCHILDREN#", item.children);
 			} else if(item.show != ''){
 				var current = fileMenuLevel2;
 				current = current.replace("#MENUNAME#", name).replace("#MENUCLASS#", alias).replace("#MENUPATH#", item.path);

@@ -28,7 +28,8 @@
 
 
 	/* layout */
-	--select: rgba(var(--redDarkRGB),1);
+	--selectionBackground: rgba(var(--redRGB),1);
+	--selectionFontColor: rgba(var(--grayBlackRGB),1);
 	--shadow: rgba(var(--blackRGB),1);
 	--background: var(--pathBackground);
 	--backgroundLogo: var(--pathLogo);

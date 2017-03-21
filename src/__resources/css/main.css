@@ -1,12 +1,12 @@
-/* resets */
-@import url("resets/_resets.css");
-/**/
-
 /* variables */
 @import url("variables/_variables.css");
 /**/
 
-/* mixins */
+/* resets */
+@import url("resets/_resets.css");
+/**/
+
+/* mixins *
 @import url("mixins/_mixins.css");
 /**/
 

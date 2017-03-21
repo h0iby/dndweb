@@ -53,7 +53,7 @@ var Folders =
 
 
 // Default task to be run with `gulp`
-gulp.task("default", ["styles", "scripts", "browser-sync", "watch-build", "watch-sync"]);
+gulp.task("default", ["styles", "scripts", "watch-build"]);
 // /////////////////////////////////////////
 
 

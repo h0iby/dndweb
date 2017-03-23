@@ -8,6 +8,7 @@
 
 	&__text{
 		vertical-align: top;
+		@apply --LanguageFontCommon;
 	}
 	&__select{
 		width: 55px;

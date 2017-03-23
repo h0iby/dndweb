@@ -1,9 +1,12 @@
 .header{
-	position: relative;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 70px;
+	width: 100%;
 	order: 1;
 	z-index: 3;
 	flex-shrink: 0;
-	height: 70px;
 	background: var(--backgroundHeader) var(--background) 50% 0 repeat-x;
 	box-shadow: -5px -15px 25px 15px var(--shadow);
 
@@ -32,6 +35,7 @@
 			padding: 4px 10px 0;
 			z-index: -1;
 			transform:scale(1.6,1);
+			@apply --LanguageFontCommon;
 		}
 
 		&::before{

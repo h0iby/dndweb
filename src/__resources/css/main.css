@@ -2,6 +2,10 @@
 @import url("variables/_variables.css");
 /**/
 
+/* fonts */
+@import url("fonts/_fonts.css");
+/**/
+
 /* resets */
 @import url("resets/_resets.css");
 /**/
@@ -24,11 +28,6 @@
 @import url("components/_filter.css");
 @import url("components/_table.css");
 @import url("components/_table-amount.css");
-
-
-/* fonts */
-@import url("fonts/_fonts.css");
-/**/
 
 /* elements */
 @import url("elements/_layout.css");

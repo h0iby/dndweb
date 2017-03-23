@@ -246,7 +246,7 @@ var serviceCallback = function(data){
 	//var httpsServer = https.createServer({ key  : fs.readFileSync('key.pem'), cert : fs.readFileSync('cert.pem') }, app);
 	//httpsServer.listen(443);
 	var httpServer = http.createServer(app);
-	httpServer.listen(80);
+	httpServer.listen(82);
 }
 
 

@@ -61,7 +61,7 @@
 /* Languages */
 :root {
 	/* Default */
-	--LanguageFontDefault: { font-family: 'Times New Roman', 'serif'; font-weight: normal; font-style: normal; }
+	--LanguageFontDefault: { font-family: 'Georgia', 'serif'; font-weight: normal; font-style: normal; }
 	/* Celestial Alphabet */
 	--LanguageFontCelestial: { font-family: 'Celestial', 'Times New Roman', 'serif'; font-weight: normal; font-style: normal; letter-spacing: 1.1px; }
 

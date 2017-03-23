@@ -24,30 +24,30 @@ h4{
 }
 h5{
 	@apply --LanguageFontCommon;
-	font-size: 1.7rem;
-	line-height: 1.7rem;
+	font-size: 1.6rem;
+	line-height: 1.6rem;
 	letter-spacing: 0.2rem;
 }
 h6{
 	@apply --LanguageFontCommon;
-	font-size: 1.5rem;
-	line-height: 1.5rem;
+	font-size: 1.3rem;
+	line-height: 1.6rem;
 	letter-spacing: 0.2rem;
 }
 
 thead td{
 	@apply --LanguageFontCommon;
-	font-size: 1.6rem;
-	line-height: 1.8rem;
+	font-size: 1.3rem;
+	line-height: 1.6rem;
 }
 
 p, a{
-	font-size: 1.4rem;
-	line-height: 1.6rem;
+	font-size: 1.1rem;
+	line-height: 1.3rem;
 }
 td{
-	font-size: 1.3rem;
-	line-height: 1.5rem;
+	font-size: 1.1rem;
+	line-height: 1.3rem;
 }
 
 ::selection{

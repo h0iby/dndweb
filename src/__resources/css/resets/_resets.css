@@ -1,34 +1,34 @@
-html, body, h1, h2, h3, h4, h5, h6, p, ul, li {
+html, body, h1, h2, h3, h4, h5, h6, p, ul, li, .h1, .h2, .h3, .h4, .h5, .h6 {
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
 }
 
-h2{
+h2, .h2{
 	@apply --LanguageFontCommon;
 	font-size: 3rem;
 	line-height: 3rem;
 	letter-spacing: 0.2rem;
 }
-h3{
+h3, .h3{
 	@apply --LanguageFontCommon;
 	font-size: 2.4rem;
 	line-height: 2.4rem;
 	letter-spacing: 0.2rem;
 }
-h4{
+h4, .h4{
 	@apply --LanguageFontCommon;
 	font-size: 1.9rem;
 	line-height: 1.9rem;
 	letter-spacing: 0.2rem;
 }
-h5{
+h5, .h5{
 	@apply --LanguageFontCommon;
 	font-size: 1.6rem;
 	line-height: 1.6rem;
 	letter-spacing: 0.2rem;
 }
-h6{
+h6, .h6{
 	@apply --LanguageFontCommon;
 	font-size: 1.3rem;
 	line-height: 1.6rem;

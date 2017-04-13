@@ -5,7 +5,7 @@ var dnd = dnd || {};
 	dnd.service = dnd.service || {};
 
 	dnd.templates = function(){
-		loadListTemplate(".-js-template--" + dnd.menu, "#template--" + dnd.menu, dnd.service[dnd.menu], true);
+		loadListTemplate(".-js-template--" + dnd.menu, "#template--" + dnd.menu, dnd.service[dnd.menu]);
 	}
 
 	var clearTemplate = function(templateTarget){
@@ -15,10 +15,8 @@ var dnd = dnd || {};
 		}
 	}
 
-	var loadListTemplate = function(templateTarget, templateName, templateData, templateClearTarget){
-		if(templateClearTarget){
-			clearTemplate(templateTarget);
-		}
+	var loadListTemplate = function(templateTarget, templateName, templateData, updateFrom){
+		clearTemplate(templateTarget);
 
 		var template = dnd.selector(templateName),
 			targetContainer = dnd.selector(templateTarget);
@@ -26,10 +24,32 @@ var dnd = dnd || {};
 		if(template != null && targetContainer.length > 0){
 			var sourceHtml = template.innerHTML,
 				currentData = templateData,
+				hash = window.location.hash.substring(1),
 				counter = 0;
 
 			if(currentData != null){
-				currentData.forEach(function(item, i){
+				var filteredJson = currentData;
+				if(hash){
+					console.log("need to figure out hash to items - maby switch and do this per item? or auto insert _slug?");
+					/*
+					var hashItems = window.location.hash.substring(1).split("&");
+
+					filteredJson = currentData.filter(function(row){
+						for(var i = 0; i < hashItems.length; i++){
+							var items = hashItems[i].split("=");
+							if(row[items[0].replace("filter", "").toLowerCase()] != undefined){
+								if(row[items[0].replace("filter", "").toLowerCase()].indexOf(items[1]) > -1){
+									return true;
+								} else {
+									return false;
+								}
+							}
+						}
+					});
+					*/
+				}
+
+				filteredJson.forEach(function(item, i){
 					if(counter < dnd.filters.amount){
 						var html = sourceHtml;
 						var isPrestige = item.prestige == 1 ? true : false;

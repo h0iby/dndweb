@@ -1,6 +1,6 @@
 // = include /site/helpers.js
-// = include /site/templates.js
 // = include /site/filters.js
+// = include /site/templates.js
 // = include /site/services.js
 
 var dnd = dnd || {};
@@ -13,9 +13,6 @@ var dnd = dnd || {};
 	} else {
 		dnd.vars.hasLocalStorage = false;
 	}
-
-	var header = dnd.selector("#Header");
-	setTimeout(function(){ header.classList.add("is-shown"); }, 1);
 
 	dnd.dataLoaded = function(){
 		dnd.filters();

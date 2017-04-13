@@ -71,7 +71,8 @@
 				float: left;
 				width: 60%;
 				line-height: 2.2rem;
-				padding: 8px 0px 6px;
+				box-sizing: border-box;
+				padding: 8px 10px 6px;
 
 				&__input{
 					box-sizing: border-box;

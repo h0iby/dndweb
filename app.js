@@ -5,8 +5,8 @@ var express = require('express')
 	,fs = require('fs')
 	,http = require('http')
 	,https = require('https')
-	//,gulp = require('gulp')
-	//,gulpTasks = require('./gulp-tasks')
+	,gulp = require('gulp')
+	,gulpTasks = require('./gulp-tasks')
 	;
 
 
@@ -241,7 +241,7 @@ var serviceCallback = function(data){
 
 
 	// start gulp for assets
-	//gulp.start("build");
+	gulp.start("build");
 	// start webserver
 	//var httpsServer = https.createServer({ key  : fs.readFileSync('key.pem'), cert : fs.readFileSync('cert.pem') }, app);
 	//httpsServer.listen(443);

@@ -1,1 +1,406 @@
-var dnd=dnd||{};!function(){"use strict";dnd.ajax=function(e,n,d){var t=new XMLHttpRequest;t.open("GET",e,!0),t.onload=function(){t.status>=200&&t.status<400?n(t.responseText):d()},t.onerror=function(){d()},t.send()},dnd.selector=function(e,n){if(e=e.trim(),n||(n=document),e.indexOf(" ")===-1){if(0===e.lastIndexOf("."))return n.getElementsByClassName(e.substring(1));if(0===e.lastIndexOf("#"))return n.getElementById(e.substring(1))}return n.querySelectorAll(e)},dnd.replaceAll=function(e,n,d){return e.replace(new RegExp(n,"g"),d)},dnd.appendTo=function(e,n){e.insertAdjacentHTML("beforeend",n)},dnd.addEventHandler=function(e,n,d){e.addEventListener?e.addEventListener(n,d,!1):e.attachEvent&&e.attachEvent("on"+n,d)}}();var dnd=dnd||{};!function(){"use strict";dnd.vars=dnd.vars||{},dnd.service=dnd.service||{},dnd.templates=function(){n(".-js-template--"+dnd.menu,"#template--"+dnd.menu,dnd.service[dnd.menu],!0)};var e=function(e){var n=dnd.selector(e);n.length>0&&(n[0].innerHTML="")},n=function(n,d,t,a){a&&e(n);var r=dnd.selector(d),o=dnd.selector(n);if(null!=r&&o.length>0){var l=r.innerHTML,i=t,s=0;null!=i&&i.forEach(function(e,n){if(s<dnd.filters.amount){var d=l,t=1==e.prestige,a=1==e.verbal_component,r=1==e.somatic_component,i=1==e.arcane_focus_component,c=1==e.divine_focus_component,f=1==e.xp_component;d=dnd.replaceAll(d,"#ID#",e.itemid),d=dnd.replaceAll(d,"#NAME#",e.name),d=dnd.replaceAll(d,"#ALIAS#",e.slug),d=dnd.replaceAll(d,"#DESCRIPTION#",e.description),d=dnd.replaceAll(d,"#PRESTIGE#",t),d=dnd.replaceAll(d,"#SPELLSCHOOL#",e.spellschool_name),d=dnd.replaceAll(d,"#COMPONENTVERBAL#",a),d=dnd.replaceAll(d,"#COMPONENTSOMATIC#",r),d=dnd.replaceAll(d,"#COMPONENTARCANE#",i),d=dnd.replaceAll(d,"#COMPONENTDIVINE#",c),d=dnd.replaceAll(d,"#COMPONENTXP#",f),d=dnd.replaceAll(d,"#BOOK#",e.rulebook_name),d=dnd.replaceAll(d,"#EDITION#",e.edition_name),d=dnd.replaceAll(d,"#EDITIONURL#","/edition/"+e.edition_id),d=dnd.replaceAll(d,"#CURRENTURL#","/"+dnd.menu+"/"+e.itemid),d=dnd.replaceAll(d,"#URL#","/rulebook/"+e.rulebook_slug),dnd.appendTo(o[0],d),s++}})}}}();var dnd=dnd||{};!function(){"use strict";dnd.vars=dnd.vars||{},dnd.service=dnd.service||{},dnd.filters=function(){if(dnd.filters.amount=25,dnd.vars.localStorage){localStorage.getItem("filter-amount");null==localStorage.getItem("filter-amount")?localStorage.setItem("filter-amount",dnd.filters.amount):dnd.filters.amount=parseInt(localStorage.getItem("filter-amount"))}for(var e=dnd.selector(".-js-sorting-amount"),n=0;n<e.length;n++){for(var d=e[n],t=d.options,a=0;a<t.length;a++){var r=t[a];r.value==dnd.filters.amount.toString()&&(d.selectedIndex=a)}d.addEventListener("change",function(){var n=this.options[this.selectedIndex].value;dnd.filters.amount=parseInt(n),dnd.vars.localStorage&&dnd.filters.amount<=100&&localStorage.setItem("filter-amount",dnd.filters.amount),o(e,n),dnd.templates()})}var o=function(e,n){for(var d=0;d<e.length;d++)for(var t=e[d],a=t.options,r=0;r<a.length;r++){var o=a[r];o.value==n.toString()&&(t.selectedIndex=r)}}}}();var dnd=dnd||{};!function(){"use strict";dnd.vars=dnd.vars||{},dnd.service=dnd.service||{};var e="http://138.68.114.21",n=function(){console.log("Error loading data")},d=function(d,t){dnd.ajax(e+"/endpoints",function(r){var o=0,l=0;dnd.service.endpoints=JSON.parse(r),d&&localStorage.setItem("endpoints",r),dnd.service.endpoints.forEach(function(e,n){e.path.indexOf(":id")==-1&&e.path.indexOf(":rid")==-1&&e.path.indexOf(":sid")==-1&&o++}),dnd.service.endpoints.forEach(function(r,i){r.path.indexOf(":id")==-1&&r.path.indexOf(":rid")==-1&&r.path.indexOf(":sid")==-1&&dnd.ajax(e+r.path,function(e){l++,dnd.service[""+r.alias]=JSON.parse(e),d&&localStorage.setItem(r.alias,JSON.stringify(e)),l==o&&a(t)},function(){n()},function(){n()})})},function(){n()},function(){n()})},t=function(e){if(dnd.vars.hasLocalStorage&&0==localStorage.length)d(!0,e);else if(dnd.vars.hasLocalStorage){var n=0;JSON.parse(localStorage.getItem("endpoints")).forEach(function(d,t){if(n++,d.path.indexOf(":id")==-1&&d.path.indexOf(":rid")==-1&&d.path.indexOf(":sid")==-1){var r=localStorage.getItem(d.alias);dnd.service[""+d.alias]=JSON.parse(JSON.parse(r))}n==JSON.parse(localStorage.getItem("endpoints")).length&&a(e)})}else d(!1,e)},a=function(e){var n=dnd.selector("#Loader");n.classList.add("is-hidden"),e()};dnd.initService=function(e){var n=dnd.selector("#Loader");dnd.database?t(e):n.style.display="none"}}();var dnd=dnd||{};!function(){dnd.vars=dnd.vars||{},dnd.service=dnd.service||{},"undefined"!=typeof Storage?dnd.vars.hasLocalStorage=!0:dnd.vars.hasLocalStorage=!1;var e=dnd.selector("#Header");setTimeout(function(){e.classList.add("is-shown")},1),dnd.dataLoaded=function(){dnd.filters(),dnd.templates()},dnd.initService(dnd.dataLoaded)}();
+var dnd = dnd || {};
+(function() {
+	"use strict";
+	dnd.ajax = function(dataUrl, successFunction, errorFunction){
+		var request = new XMLHttpRequest();
+		request.open('GET', dataUrl, true);
+		request.onload = function() {
+			if (request.status >= 200 && request.status < 400) {
+				successFunction(request.responseText);
+			} else {
+				errorFunction();
+			}
+		};
+		request.onerror = function() {
+			errorFunction();
+		};
+		request.send();
+	}
+	dnd.selector = function(selector, parent){
+		selector = selector.trim();
+		if (!parent) {
+			parent = document;
+		}
+		if (selector.indexOf(' ') === -1) {
+			if (selector.lastIndexOf('.') === 0) {
+				return parent.getElementsByClassName(selector.substring(1));
+			}
+			if (selector.lastIndexOf('#') === 0) {
+				return parent.getElementById(selector.substring(1));
+			}
+		}
+		return parent.querySelectorAll(selector);
+	}
+	dnd.replaceAll = function(string, source, target){
+		return string.replace(new RegExp(source, 'g'), target);
+	}
+	dnd.appendTo = function(target, html){
+		target.insertAdjacentHTML('beforeend', html);
+	}
+	dnd.addEventHandler = function (elem, eventType, handler) {
+		if (elem.addEventListener)
+			elem.addEventListener (eventType, handler, false);
+		else if (elem.attachEvent)
+			elem.attachEvent ('on' + eventType, handler);
+	}
+})();
+var dnd = dnd || {};
+(function() {
+	"use strict";
+	dnd.vars = dnd.vars || {};
+	dnd.service = dnd.service || {};
+
+	var setSelect = function(item, value){
+		var select = item;
+		var options = select.options;
+		for(var o = 0; o < options.length; o++) {
+			var option = options[o];
+			if(option.value == value.toString()) {
+				select.selectedIndex = o;
+			}
+		}
+	}
+	var setInputs = function(item, value){
+		var input = item;
+		input.value = value;
+	}
+
+	var setHash = function(item, value){
+		var newItemValue = value != "" ? item + "=" + value : "";
+		var hash = window.location.hash.substring(1);
+		var hashNew = "#" + hash;
+
+		if(history.pushState) {
+			if(value != ""){
+				if(hash.indexOf(item) < 0){
+					if(hashNew.length > 1){
+						hashNew += "&";
+					}
+
+					hashNew += newItemValue;
+				} else {
+					if(hash.indexOf("&") < 0){
+						hashNew = "#" + newItemValue;
+					} else {
+						var subStringTemp = hash.substring(hash.indexOf(item));
+						var subString = subStringTemp;
+						if(subStringTemp.indexOf("&") > -1){
+							subString = subStringTemp.substring(0, subStringTemp.indexOf("&"))
+						}
+
+						hashNew = hashNew.replace(subString, newItemValue);
+					}
+				}
+
+				history.pushState(null, null, hashNew);
+			} else {
+				if(hash.indexOf("&") < 0){
+					history.pushState(null, null, " ");
+				} else {
+					var subStringTemp = hash.substring(hash.indexOf(item));
+					var subString = subStringTemp;
+					if(subStringTemp.indexOf("&") > -1){
+						subString = subStringTemp.substring(0, subStringTemp.indexOf("&"))
+					}
+
+					hashNew = hashNew.replace("#" + subString + "&", "#");
+					hashNew = hashNew.replace("&" + subString, "");
+
+					history.pushState(null, null, hashNew);
+				}
+			}
+		}
+	}
+	var getHash = function(){
+		var hashItems = window.location.hash.substring(1).split("&");
+		for(var i = 0; i < hashItems.length; i++){
+			var items = hashItems[i].split("=");
+			var item = document.getElementById(items[0]);
+			if(item){
+				switch(item.tagName.toLowerCase()){
+					case "select":
+						setSelect(item, items[1]);
+						break;
+					default:
+						setInputs(item, items[1]);
+						break;
+				}
+			}
+		}
+	}
+
+
+	var populateSelect = function(elem){
+		var item = document.getElementById(elem);
+		var items = 0;
+		if(item){
+			var ident = elem.replace("filter", "").toLowerCase();
+			var json = dnd.service[ident];
+			if(json != undefined){
+				var first = document.createElement("option");
+				first.value = "";
+				first.innerHTML = "";
+				item.appendChild(first);
+
+				items = json.length;
+				for(var i = 0; i < json.length; i++){
+					var option = document.createElement("option");
+					option.value= json[i].slug;
+					option.innerHTML = json[i].name;
+					item.appendChild(option);
+				}
+			}
+
+			if(items > 0){
+				item.addEventListener('change',function(){
+					var select = this;
+					var selectValue = select.options[select.selectedIndex].value;
+					setHash(elem, selectValue);
+					dnd.templates();
+				});
+			}
+		}
+	}
+	var filterInput = function(elem){
+		var item = document.getElementById(elem);
+		if(item){
+			var timeout;
+			item.addEventListener('keyup',function(){
+				if(timeout) {
+					clearTimeout(timeout);
+					timeout = null;
+				}
+				timeout = setTimeout(function(){
+					setHash(elem, item.value);
+					dnd.templates();
+				}, 500)
+			});
+		}
+	}
+	var filterPageAmount = function(){
+		dnd.filters.amount = 25;
+		if(dnd.vars.hasLocalStorage){
+			if(localStorage.getItem("filter-amount") == null){
+				localStorage.setItem("filter-amount", dnd.filters.amount);
+			} else {
+				dnd.filters.amount = parseInt(localStorage.getItem("filter-amount"));
+			}
+		}
+
+		var selects = dnd.selector(".-js-sorting-amount");
+		for(var i = 0; i < selects.length; i++){
+			var select = selects[i];
+			var options = select.options;
+			for(var o = 0; o < options.length; o++) {
+				var option = options[o];
+				if(option.value == dnd.filters.amount.toString()) {
+					select.selectedIndex = o;
+				}
+			}
+
+			select.addEventListener('change',function(){
+				var selectValue = this.options[this.selectedIndex].value;
+				dnd.filters.amount = parseInt(selectValue);
+
+				if(dnd.vars.hasLocalStorage){
+					localStorage.setItem("filter-amount", dnd.filters.amount);
+				}
+
+				dnd.templates();
+			});
+		}
+	}
+
+	dnd.filters = function(){
+		populateSelect("filterRulebook");
+		populateSelect("filterEdition");
+		populateSelect("filterFeat-Category");
+
+		filterInput("filterSlug");
+		filterInput("filterKeywords");
+		filterInput("filterBenefit");
+
+		filterPageAmount();
+
+		getHash();
+	}
+})();
+var dnd = dnd || {};
+(function() {
+	"use strict";
+	dnd.vars = dnd.vars || {};
+	dnd.service = dnd.service || {};
+
+	dnd.templates = function(){
+		loadListTemplate(".-js-template--" + dnd.menu, "#template--" + dnd.menu, dnd.service[dnd.menu]);
+	}
+
+	var clearTemplate = function(templateTarget){
+		var target = dnd.selector(templateTarget);
+		if(target.length > 0){
+			target[0].innerHTML = "";
+		}
+	}
+
+	var loadListTemplate = function(templateTarget, templateName, templateData, updateFrom){
+		clearTemplate(templateTarget);
+
+		var template = dnd.selector(templateName),
+			targetContainer = dnd.selector(templateTarget);
+
+		if(template != null && targetContainer.length > 0){
+			var sourceHtml = template.innerHTML,
+				currentData = templateData,
+				hash = window.location.hash.substring(1),
+				counter = 0;
+
+			if(currentData != null){
+				var filteredJson = currentData;
+				if(hash){
+					console.log("need to figure out hash to items - maby switch and do this per item? or auto insert _slug?");
+					/*
+					var hashItems = window.location.hash.substring(1).split("&");
+
+					filteredJson = currentData.filter(function(row){
+						for(var i = 0; i < hashItems.length; i++){
+							var items = hashItems[i].split("=");
+							if(row[items[0].replace("filter", "").toLowerCase()] != undefined){
+								if(row[items[0].replace("filter", "").toLowerCase()].indexOf(items[1]) > -1){
+									return true;
+								} else {
+									return false;
+								}
+							}
+						}
+					});
+					*/
+				}
+
+				filteredJson.forEach(function(item, i){
+					if(counter < dnd.filters.amount){
+						var html = sourceHtml;
+						var isPrestige = item.prestige == 1 ? true : false;
+						var isComponentVerbal = item.verbal_component == 1 ? true : false;
+						var isComponentSomatic = item.somatic_component == 1 ? true : false;
+						var isComponentArcane = item.arcane_focus_component == 1 ? true : false;
+						var isComponentDivine = item.divine_focus_component == 1 ? true : false;
+						var isComponentXP = item.xp_component == 1 ? true : false;
+
+						html = dnd.replaceAll(html, '#ID#', item.itemid);
+						html = dnd.replaceAll(html, '#NAME#', item.name);
+						html = dnd.replaceAll(html, '#ALIAS#', item.slug);
+						html = dnd.replaceAll(html, '#DESCRIPTION#', item.description);
+						html = dnd.replaceAll(html, '#PRESTIGE#', isPrestige);
+						html = dnd.replaceAll(html, '#SPELLSCHOOL#', item.spellschool_name);
+						html = dnd.replaceAll(html, '#COMPONENTVERBAL#', isComponentVerbal);
+						html = dnd.replaceAll(html, '#COMPONENTSOMATIC#', isComponentSomatic);
+						html = dnd.replaceAll(html, '#COMPONENTARCANE#', isComponentArcane);
+						html = dnd.replaceAll(html, '#COMPONENTDIVINE#', isComponentDivine);
+						html = dnd.replaceAll(html, '#COMPONENTXP#', isComponentXP);
+						html = dnd.replaceAll(html, '#BOOK#', item.rulebook_name);
+						html = dnd.replaceAll(html, '#EDITION#', item.edition_name);
+
+						html = dnd.replaceAll(html, '#EDITIONURL#', '/edition/' + item.edition_id);
+						html = dnd.replaceAll(html, '#CURRENTURL#', '/' + dnd.menu + '/' + item.itemid);
+						html = dnd.replaceAll(html, '#URL#', '/rulebook/' + item.rulebook_slug);
+
+						dnd.appendTo(targetContainer[0], html);
+						counter++;
+					}
+				});
+			}
+		}
+	}
+})();
+var dnd = dnd || {};
+(function() {
+	"use strict";
+	dnd.vars = dnd.vars || {};
+	dnd.service = dnd.service || {};
+	var dataUrl = "http://138.68.114.21";
+	var loadError = function(){ console.log("Error loading data"); }
+	var loadData = function(hasLocalStorage, callback){
+		dnd.ajax(dataUrl + "/endpoints", function(endpoints){
+			var total = 0, counter = 0;
+			dnd.service.endpoints = JSON.parse(endpoints);
+
+			if(hasLocalStorage){
+				localStorage.setItem("endpoints", endpoints);
+			}
+
+			dnd.service.endpoints.forEach(function(endpoint, id){
+				if(endpoint.path.indexOf(":id") == -1 && endpoint.path.indexOf(":rid") == -1 && endpoint.path.indexOf(":sid") == -1){ total++; }
+			});
+
+
+			dnd.service.endpoints.forEach(function(endpoint, id){
+				if(endpoint.path.indexOf(":id") == -1 && endpoint.path.indexOf(":rid") == -1 && endpoint.path.indexOf(":sid") == -1){
+
+					dnd.ajax(dataUrl + endpoint.path, function(data){
+						counter++;
+						dnd.service["" + endpoint.alias + ""] = JSON.parse(data);
+						if(hasLocalStorage){
+							localStorage.setItem(endpoint.alias, JSON.stringify(data));
+						}
+						if(counter == total){ serviceLoaded(callback); }
+					}, function(){ loadError(); }, function(){ loadError(); });
+				}
+			});
+		}, function(){ loadError(); }, function(){ loadError(); });
+	}
+	var service = function(callback){
+
+
+		if(dnd.vars.hasLocalStorage && localStorage.length == 0){
+			loadData(true, callback);
+		} else if (dnd.vars.hasLocalStorage){
+			var counter = 0;
+			JSON.parse(localStorage.getItem("endpoints")).forEach(function(endpoint, id){
+				counter++;
+				if(endpoint.path.indexOf(":id") == -1 && endpoint.path.indexOf(":rid") == -1 && endpoint.path.indexOf(":sid") == -1){
+					var localItem = localStorage.getItem(endpoint.alias);
+					dnd.service["" + endpoint.alias + ""] = JSON.parse(JSON.parse(localItem));
+				}
+				if(counter == JSON.parse(localStorage.getItem("endpoints")).length){
+					serviceLoaded(callback);
+				}
+			});
+		} else {
+			loadData(false, callback);
+		}
+	}
+
+	var serviceLoaded = function(callback){
+		var loader = dnd.selector("#Loader");
+		loader.classList.add("is-hidden");
+		callback();
+	}
+
+	dnd.initService = function(callback){
+		var loader = dnd.selector("#Loader");
+		//localStorage.clear();
+		if(dnd.database){
+			service(callback);
+		} else {
+			loader.style.display = 'none';
+		}
+	}
+})();
+
+var dnd = dnd || {};
+(function() {
+	dnd.vars = dnd.vars || {};
+	dnd.service = dnd.service || {};
+
+	if (typeof(Storage) !== "undefined") {
+		dnd.vars.hasLocalStorage = true;
+	} else {
+		dnd.vars.hasLocalStorage = false;
+	}
+
+	dnd.dataLoaded = function(){
+		dnd.filters();
+		dnd.templates();
+	}
+	dnd.initService(dnd.dataLoaded);
+})();

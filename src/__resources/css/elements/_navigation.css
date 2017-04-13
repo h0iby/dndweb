@@ -32,10 +32,14 @@
 			top: 50%;
 			left: 26px;
 			margin: -9px 0 0;
-			z-index: 98;
+			z-index: 97;
 			opacity: 0;
 			transition: all 0.5s;
 			transition-delay: 0.25s;
+			animation-name: showBurger;
+			animation-duration: 0.8s;
+			animation-delay: .40s;
+			animation-fill-mode: forwards;
 
 			&__line{
 				transition: all 0.5s;
@@ -52,8 +56,8 @@
 
 				&--num1{
 					transform: rotate(0deg) translate(0px, 0px);
-					animation-name: burgerMenuMoveTopBack;
-					animation-duration: 0.75s;
+					animation-name: burgerMenuTopToVertical;
+					animation-duration: 0.8s;
 					animation-fill-mode: forwards;
 				}
 
@@ -64,8 +68,8 @@
 
 				&--num3{
 					transform: rotate(0deg) translate(0px, 0px);
-					animation-name: burgerMenuMoveBottomBack;
-					animation-duration: 0.75s;
+					animation-name: burgerMenuBottomToVertical;
+					animation-duration: 0.8s;
 					animation-fill-mode: forwards;
 				}
 			}
@@ -433,7 +437,7 @@
 		}
 
 		&__input{
-			&, &--off{
+			&--on, &--off{
 				margin: 0;
 				padding: 0;
 				border: none;
@@ -445,101 +449,93 @@
 				left: 0px;
 				cursor: pointer;
 				opacity: 0;
-				z-index: 99;
+				z-index: 98;
 				display: none;
 			}
 
-			&:checked ~ .header__nav{
-				transform: scale(1.0, 1.0);
-				opacity: 1;
-
-				&__close{
-					opacity: .5;
-					width: 100%;
-					height: 100%;
-				}
-
-				&__icon{
-					transition: all 0.5s;
-
-					& .header__nav__icon__line{
-						opacity: 1;
-
-						&--num1{
-							animation-name: burgerMenuMoveTop;
-							animation-duration: 0.75s;
-							animation-fill-mode: forwards;
-						}
-
-						&--num2{
-							opacity: 0;
-							left: 50%;
-							width: 0%;
-							position: relative;
-						}
-
-						&--num3{
-							animation-name: burgerMenuMoveBottom;
-							animation-duration: 0.75s;
-							animation-fill-mode: forwards;
-						}
-					}
-				}
-
-				& .header__nav__list{
-					&__item{
-						transition-delay: 0.15s;
-						transform: translate(0%, 0);
-
-						.header__nav__list__item__bullet{
-							transform: translate(0,0);
-						}
-
-						&:nth-child(1){ transition-delay: 0.15s; & .header__nav__list__item__bullet{ transition-delay: .55s; transform: translate(0,0); } }
-						&:nth-child(2){ transition-delay: 0.20s; & .header__nav__list__item__bullet{ transition-delay: .60s; transform: translate(0,0); } }
-						&:nth-child(3){ transition-delay: 0.25s; & .header__nav__list__item__bullet{ transition-delay: .65s; transform: translate(0,0); } }
-						&:nth-child(4){ transition-delay: 0.30s; & .header__nav__list__item__bullet{ transition-delay: .70s; transform: translate(0,0); } }
-						&:nth-child(5){ transition-delay: 0.35s; & .header__nav__list__item__bullet{ transition-delay: .75s; transform: translate(0,0); } }
-						&:nth-child(6){ transition-delay: 0.40s; & .header__nav__list__item__bullet{ transition-delay: .80s; transform: translate(0,0); } }
-						&:nth-child(7){ transition-delay: 0.45s; & .header__nav__list__item__bullet{ transition-delay: .85s; transform: translate(0,0); } }
-						&:nth-child(8){ transition-delay: 0.50s; & .header__nav__list__item__bullet{ transition-delay: .90s; transform: translate(0,0); } }
-						&:nth-child(9){ transition-delay: 0.55s; & .header__nav__list__item__bullet{ transition-delay: .95s; transform: translate(0,0); } }
-						&:nth-child(10){ transition-delay: 0.60s; & .header__nav__list__item__bullet{ transition-delay: 1.00s; transform: translate(0,0); } }
-						&:nth-child(11){ transition-delay: 0.65s; & .header__nav__list__item__bullet{ transition-delay: 1.05s; transform: translate(0,0); } }
-						&:nth-child(12){ transition-delay: 0.70s; & .header__nav__list__item__bullet{ transition-delay: 1.10s; transform: translate(0,0); } }
-						&:nth-child(13){ transition-delay: 0.75s; & .header__nav__list__item__bullet{ transition-delay: 1.15s; transform: translate(0,0); } }
-						&:nth-child(14){ transition-delay: 0.80s; & .header__nav__list__item__bullet{ transition-delay: 1.20s; transform: translate(0,0); } }
-						&:nth-child(15){ transition-delay: 0.85s; & .header__nav__list__item__bullet{ transition-delay: 1.25s; transform: translate(0,0); } }
-						&:nth-child(16){ transition-delay: 0.90s; & .header__nav__list__item__bullet{ transition-delay: 1.30s; transform: translate(0,0); } }
-						&:nth-child(17){ transition-delay: 0.95s; & .header__nav__list__item__bullet{ transition-delay: 1.35s; transform: translate(0,0); } }
-						&:nth-child(18){ transition-delay: 1s; & .header__nav__list__item__bullet{ transition-delay: 1.40s; transform: translate(0,0); } }
-
-						&__bullet{
-							opacity: 1;
-						}
-					}
-				}
-			}
-		}
-	}
-
-	&.is-shown{
-		& .header__nav{
-			&__input{
+			&--on{
 				display: block;
 
 				&:checked ~ .header__nav{
+					transform: scale(1.0, 1.0);
+					opacity: 1;
+
 					&__input{
 						display: none;
 
 						&--off{
 							display: block;
+							z-index: 99;
+						}
+					}
+
+					&__close{
+						opacity: .5;
+						width: 100%;
+						height: 100%;
+					}
+
+					&__icon{
+						transition: all 0.5s;
+
+						& .header__nav__icon__line{
+							opacity: 1;
+
+							&--num1{
+								animation-name: burgerMenuTopToRotated;
+								animation-duration: 0.8s;
+								animation-fill-mode: forwards;
+							}
+
+							&--num2{
+								opacity: 0;
+								left: 50%;
+								width: 0%;
+								position: relative;
+							}
+
+							&--num3{
+								animation-name: burgerMenuBottomToRotated;
+								animation-duration: 0.8s;
+								animation-fill-mode: forwards;
+							}
+						}
+					}
+
+					& .header__nav__list{
+						&__item{
+							transition-delay: 0.15s;
+							transform: translate(0%, 0);
+
+							.header__nav__list__item__bullet{
+								transform: translate(0,0);
+							}
+
+							&:nth-child(1){ transition-delay: 0.15s; & .header__nav__list__item__bullet{ transition-delay: .55s; transform: translate(0,0); } }
+							&:nth-child(2){ transition-delay: 0.20s; & .header__nav__list__item__bullet{ transition-delay: .60s; transform: translate(0,0); } }
+							&:nth-child(3){ transition-delay: 0.25s; & .header__nav__list__item__bullet{ transition-delay: .65s; transform: translate(0,0); } }
+							&:nth-child(4){ transition-delay: 0.30s; & .header__nav__list__item__bullet{ transition-delay: .70s; transform: translate(0,0); } }
+							&:nth-child(5){ transition-delay: 0.35s; & .header__nav__list__item__bullet{ transition-delay: .75s; transform: translate(0,0); } }
+							&:nth-child(6){ transition-delay: 0.40s; & .header__nav__list__item__bullet{ transition-delay: .80s; transform: translate(0,0); } }
+							&:nth-child(7){ transition-delay: 0.45s; & .header__nav__list__item__bullet{ transition-delay: .85s; transform: translate(0,0); } }
+							&:nth-child(8){ transition-delay: 0.50s; & .header__nav__list__item__bullet{ transition-delay: .90s; transform: translate(0,0); } }
+							&:nth-child(9){ transition-delay: 0.55s; & .header__nav__list__item__bullet{ transition-delay: .95s; transform: translate(0,0); } }
+							&:nth-child(10){ transition-delay: 0.60s; & .header__nav__list__item__bullet{ transition-delay: 1.00s; transform: translate(0,0); } }
+							&:nth-child(11){ transition-delay: 0.65s; & .header__nav__list__item__bullet{ transition-delay: 1.05s; transform: translate(0,0); } }
+							&:nth-child(12){ transition-delay: 0.70s; & .header__nav__list__item__bullet{ transition-delay: 1.10s; transform: translate(0,0); } }
+							&:nth-child(13){ transition-delay: 0.75s; & .header__nav__list__item__bullet{ transition-delay: 1.15s; transform: translate(0,0); } }
+							&:nth-child(14){ transition-delay: 0.80s; & .header__nav__list__item__bullet{ transition-delay: 1.20s; transform: translate(0,0); } }
+							&:nth-child(15){ transition-delay: 0.85s; & .header__nav__list__item__bullet{ transition-delay: 1.25s; transform: translate(0,0); } }
+							&:nth-child(16){ transition-delay: 0.90s; & .header__nav__list__item__bullet{ transition-delay: 1.30s; transform: translate(0,0); } }
+							&:nth-child(17){ transition-delay: 0.95s; & .header__nav__list__item__bullet{ transition-delay: 1.35s; transform: translate(0,0); } }
+							&:nth-child(18){ transition-delay: 1s; & .header__nav__list__item__bullet{ transition-delay: 1.40s; transform: translate(0,0); } }
+
+							&__bullet{
+								opacity: 1;
+							}
 						}
 					}
 				}
-			}
-			&__icon{
-				opacity: 1;
 			}
 		}
 	}
@@ -609,7 +605,6 @@
 		}
 	}
 }
-
 @media (--tabletPortrait) {
 	.main{
 		&__article{
@@ -621,7 +616,6 @@
 		}
 	}
 }
-
 @media (--desktop) {
 	.main{
 		&__article{
@@ -633,7 +627,6 @@
 		}
 	}
 }
-
 @media (--desktopLarge) {
 	.main{
 		&__article{
@@ -647,9 +640,12 @@
 }
 
 
+@keyframes showBurger {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
+}
 
-
-@keyframes burgerMenuMoveTopBack {
+@keyframes burgerMenuTopToVertical {
     0%   {
 		transform: rotate(45deg) translate(4px, 0);
 	}
@@ -660,7 +656,7 @@
 		transform: rotate(0deg) translate(0px, 0px);
 	}
 }
-@keyframes burgerMenuMoveTop {
+@keyframes burgerMenuTopToRotated {
     0%   {
 		transform: rotate(0deg) translate(0px, 0px);
 	}
@@ -672,7 +668,7 @@
 	}
 }
 
-@keyframes burgerMenuMoveBottomBack {
+@keyframes burgerMenuBottomToVertical {
     0%   {
 		transform: rotate(-45deg) translate(-3px, 1px);
 	}
@@ -683,7 +679,7 @@
 		transform: rotate(0deg) translate(0px, 0px);
 	}
 }
-@keyframes burgerMenuMoveBottom {
+@keyframes burgerMenuBottomToRotated {
     0%   {
 		transform: rotate(0deg) translate(0px, 0px);
 	}

@@ -4,57 +4,57 @@
 		<p>Search for your favorite D&amp;D classes here.</p>
 	</div>
 	<div class="section__filter">
-		<input class="filter__toggle" type="checkbox" checked>
-		<h4 class="filter__title">Filters</h4>
+		<input class="filter__toggle" type="checkbox" />
+		<span class="h4 filter__title">Filters</span>
 		<div class="filter">
 			<ul class="filter__list">
 				<li class="filter__list__item">
-					<label class="filter__list__item__text" for="filterName">
+					<label class="filter__list__item__text" for="filterSlug">
 						Name
 					</label>
-					<label class="filter__list__item__container filter__list__item__container--textbox">
-						<input class="filter__list__item__container__input" id="filterName" type="text" />
-					</label>
+					<span class="filter__list__item__container filter__list__item__container--textbox">
+						<input class="filter__list__item__container__input" id="filterSlug" type="text" />
+					</span>
 				</li>
 				<li class="filter__list__item">
 					<label class="filter__list__item__text" for="filterFeature">
 						##Class Feature
 					</label>
-					<label class="filter__list__item__container filter__list__item__container--textbox">
+					<span class="filter__list__item__container filter__list__item__container--textbox">
 						<input class="filter__list__item__container__input" id="filterFeature" type="text" />
-					</label>
+					</span>
 				</li>
 				<li class="filter__list__item">
 					<label class="filter__list__item__text" for="filterBaseAttackMin">
 						##Base Attack Bonus (Min/Max)
 					</label>
-					<label class="filter__list__item__container filter__list__item__container--minmax">
+					<span class="filter__list__item__container filter__list__item__container--minmax">
 						<input class="filter__list__item__container__input filter__list__item__container__input--min" id="filterBaseAttackMin" type="text" />
 						<input class="filter__list__item__container__input filter__list__item__container__input--max" id="filterBaseAttackMax" type="text" />
-					</label>
+					</span>
 				</li>
 				<li class="filter__list__item">
 					<label class="filter__list__item__text" for="filterHitpointsMin">
 						##Hitpoints (Min/Max)
 					</label>
-					<label class="filter__list__item__container filter__list__item__container--minmax">
+					<span class="filter__list__item__container filter__list__item__container--minmax">
 						<input class="filter__list__item__container__input filter__list__item__container__input--min" id="filterHitpointsMin" type="text" />
 						<input class="filter__list__item__container__input filter__list__item__container__input--max" id="filterHitpointsMax" type="text" />
-					</label>
+					</span>
 				</li>
 				<li class="filter__list__item">
 					<label class="filter__list__item__text" for="filterSkillpointsMin">
 						##Skillpoints (Min/Max)
 					</label>
-					<label class="filter__list__item__container filter__list__item__container--minmax">
+					<span class="filter__list__item__container filter__list__item__container--minmax">
 						<input class="filter__list__item__container__input filter__list__item__container__input--min" id="filterSkillpointsMin" type="text" />
 						<input class="filter__list__item__container__input filter__list__item__container__input--max" id="filterSkillpointsMax" type="text" />
-					</label>
+					</span>
 				</li>
 				<li class="filter__list__item">
-					<label class="filter__list__item__text" for="filterPrestigeClassUnset">
+					<span class="filter__list__item__text">
 						Prestige class
-					</label>
+					</span>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
 						<input class="filter__list__item__container__radiobutton" name="filterPrestigeClass" id="filterPrestigeClassUnset" type="radio" checked />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--unset"></span>
@@ -72,17 +72,17 @@
 					<label class="filter__list__item__text" for="filterRulebook">
 						Rulebook
 					</label>
-					<label class="filter__list__item__container filter__list__item__container--select">
+					<span class="filter__list__item__container filter__list__item__container--select">
 						<select id="filterRulebook" class="filter__list__item__container__select"></select>
-					</label>
+					</span>
 				</li>
 				<li class="filter__list__item">
 					<label class="filter__list__item__text" for="filterEdition">
 						##Edition
 					</label>
-					<label class="filter__list__item__container filter__list__item__container--select">
+					<span class="filter__list__item__container filter__list__item__container--select">
 						<select id="filterEdition" class="filter__list__item__container__select"></select>
-					</label>
+					</span>
 				</li>
 			</ul>
 		</div>
@@ -99,7 +99,7 @@
 					<td data-type="book" class="table__row__td table__row__td--book table__row__td--header"><strong class="table__row__td__bold">Rulebook</strong></td>
 				</tr>
 			</thead>
-			<tbody class="-js-template--class"></tbody>
+			<tbody class="-js-template -js-template--class"></tbody>
 		</table>
 	</div>
 	<div class="section__footer">

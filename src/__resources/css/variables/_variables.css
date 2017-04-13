@@ -90,6 +90,7 @@
 
 
 	/* filter */
+	--filterBackground: rgba(var(--whiteRGB),0.5);
 	--filterBackgroundEven: rgba(var(--whiteRGB),0.3);
 	--filterBackgroundOdd: rgba(var(--grayDarkRGB),0.08);
 	--filterPlusColor: rgba(var(--redDarkRGB),1);

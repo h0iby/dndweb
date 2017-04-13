@@ -43,4 +43,50 @@ var dnd = dnd || {};
 		else if (elem.attachEvent)
 			elem.attachEvent ('on' + eventType, handler);
 	}
+	dnd.setHash = function(item, value){
+		var newItemValue = value != "" ? item + "=" + value.toLowerCase() : "";
+		var hash = window.location.hash.substring(1);
+		var hashNew = "#" + hash;
+
+		if(history.pushState) {
+			if(value != ""){
+				if(hash.indexOf(item) < 0){
+					if(hashNew.length > 1){
+						hashNew += "&";
+					}
+
+					hashNew += newItemValue;
+				} else {
+					if(hash.indexOf("&") < 0){
+						hashNew = "#" + newItemValue;
+					} else {
+						var subStringTemp = hash.substring(hash.indexOf(item));
+						var subString = subStringTemp;
+						if(subStringTemp.indexOf("&") > -1){
+							subString = subStringTemp.substring(0, subStringTemp.indexOf("&"))
+						}
+
+						hashNew = hashNew.replace(subString, newItemValue);
+					}
+				}
+
+				history.pushState(null, null, hashNew);
+			} else {
+				if(hash.indexOf("&") < 0){
+					history.pushState(null, null, " ");
+				} else {
+					var subStringTemp = hash.substring(hash.indexOf(item));
+					var subString = subStringTemp;
+					if(subStringTemp.indexOf("&") > -1){
+						subString = subStringTemp.substring(0, subStringTemp.indexOf("&"))
+					}
+
+					hashNew = hashNew.replace("#" + subString + "&", "#");
+					hashNew = hashNew.replace("&" + subString, "");
+
+					history.pushState(null, null, hashNew);
+				}
+			}
+		}
+	}
 })();

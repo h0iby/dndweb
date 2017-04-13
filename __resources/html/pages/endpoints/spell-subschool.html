@@ -4,16 +4,16 @@
 		<p>Browse through D&amp;D spell subschools here.</p>
 	</div>
 	<div class="section__filter">
-		<input class="filter__toggle" type="checkbox" checked>
-		<h4 class="filter__title">Filters</h4>
+		<input class="filter__toggle" type="checkbox" />
+		<span class="h4 filter__title">Filters</span>
 		<div class="filter">
 			<ul class="filter__list">
 				<li class="filter__list__item">
-					<label class="filter__list__item__text" for="filterName">
+					<label class="filter__list__item__text" for="filterSlug">
 						Name
 					</label>
 					<label class="filter__list__item__container filter__list__item__container--textbox">
-						<input class="filter__list__item__container__input" id="filterName" type="text" />
+						<input class="filter__list__item__container__input" id="filterSlug" type="text" />
 					</label>
 				</li>
 			</ul>
@@ -28,7 +28,7 @@
 					<td data-type="name" class="table__row__td table__row__td--name table__row__td--header"><strong class="table__row__td__bold">Name</strong></td>
 				</tr>
 			</thead>
-			<tbody class="-js-template--spell-subschool"></tbody>
+			<tbody class="-js-template -js-template--spell-subschool"></tbody>
 		</table>
 	</div>
 	<div class="section__footer">

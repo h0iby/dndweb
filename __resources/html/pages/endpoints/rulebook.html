@@ -4,25 +4,25 @@
 		<p>Browse through D&amp;D rulebooks here.</p>
 	</div>
 	<div class="section__filter">
-		<input class="filter__toggle" type="checkbox" checked>
-		<h4 class="filter__title">Filters</h4>
+		<input class="filter__toggle" type="checkbox" />
+		<span class="h4 filter__title">Filters</span>
 		<div class="filter">
 			<ul class="filter__list">
 				<li class="filter__list__item">
-					<label class="filter__list__item__text" for="filterName">
+					<label class="filter__list__item__text" for="filterSlug">
 						Name
 					</label>
-					<label class="filter__list__item__container filter__list__item__container--textbox">
-						<input class="filter__list__item__container__input" id="filterName" type="text" />
-					</label>
+					<span class="filter__list__item__container filter__list__item__container--textbox">
+						<input class="filter__list__item__container__input" id="filterSlug" type="text" />
+					</span>
 				</li>
 				<li class="filter__list__item">
 					<label class="filter__list__item__text" for="filterEdition">
 						Edition
 					</label>
-					<label class="filter__list__item__container filter__list__item__container--select">
+					<span class="filter__list__item__container filter__list__item__container--select">
 						<select id="filterEdition" class="filter__list__item__container__select"></select>
-					</label>
+					</span>
 				</li>
 			</ul>
 		</div>
@@ -37,7 +37,7 @@
 					<td data-type="edition" class="table__row__td table__row__td--edition table__row__td--header"><strong class="table__row__td__bold">Edition</strong></td>
 				</tr>
 			</thead>
-			<tbody class="-js-template--rulebook"></tbody>
+			<tbody class="-js-template -js-template--rulebook"></tbody>
 		</table>
 	</div>
 	<div class="section__footer">

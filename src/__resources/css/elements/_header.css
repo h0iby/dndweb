@@ -136,13 +136,15 @@
 					transform-origin: 19px 9px;
 					transform: rotate(-135deg);
 					animation-name: searchIconLineShorten;
-					animation-duration: 0.5s;
+					animation-duration: 0.2s;
+					animation-delay: 0s;
 					animation-fill-mode: forwards;
 				}
 
 				&--num2{
 					animation-name: searchIconCircleBloat;
-					animation-duration: 0.5s;
+					animation-duration: 0.2s;
+					animation-delay: 0s;
 					animation-fill-mode: forwards;
 				}
 			}
@@ -245,13 +247,13 @@
 
 @keyframes searchIconLineShorten {
 	0%   { width: 32px; }
-	50%  { width: 16px; }
+	25%, 50%  { width: 16px; }
 	100% { width: 10px; }
 }
 @keyframes searchIconLineLengthen {
 	0%   { width: 10px; }
-	50%  { width: 16px; }
-	100% { width: 32px; }
+	15%, 30%  { width: 16px; }
+	60%, 100% { width: 32px; }
 }
 
 @keyframes searchIconCircleCollapse {
@@ -263,7 +265,7 @@
 		transform-origin: 17px 0px;
 		transform: rotate(-45deg);
 	}
-    50%, 100% {
+    45%, 100% {
 		border-radius: 3px;
 		width: 32px;
 		height: 0px;
@@ -273,7 +275,7 @@
 	}
 }
 @keyframes searchIconCircleBloat {
-    0%, 50%   {
+    0%, 40%   {
 		border-radius: 3px;
 		width: 32px;
 		height: 0px;

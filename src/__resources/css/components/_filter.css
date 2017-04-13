@@ -5,31 +5,44 @@
 	transition: all 0.5s;
 
 	&__title{
-		&::after{
-			position: relative;
-			top: -6px;
-			content: "-";
-			margin: 0 0 0 6px;
-			color: var(--filterPlusColor);
+		position: relative;
+		display: inline-block;
+		padding: 7px 35px 6px 7px;
+		background: var(--filterBackground);
+
+		&::after, &::before{
+			position: absolute;
+			content: "";
+			display: block;
+			right: 12px;
+			top: 50%;
+			margin: -1 0 0 0;
+			width: 12px;
+			border-bottom: solid 2px var(--filterPlusColor);
+		}
+		&::after {
+			transition: transform .5s;
+			transform: rotate(90deg) scale(1);
 		}
 	}
 
 	&__toggle{
 		position: absolute;
 		top: 0;
-		left: 0;
-		width: 100%;
-		height: 30px;
+		left: 20px;
+		width: 130px;
+		height: 43px;
 		margin: 0;
 		padding: 0;
 		opacity: 0;
+		z-index: 1;
 		cursor: pointer;
 
 		&:checked ~ {
 			& .filter__title{
 				&::after{
-					content: "+";
-					top: 3px;
+					transition: transform .5s;
+					transform: rotate(-180deg) scale(.5);
 				}
 			}
 
@@ -105,15 +118,15 @@
 						display: block;
 						top: 0;
 						left: 0;
-						width: 50px;
-						padding: 8px 10px 6px 0;
+						width: 100%;
+						box-sizing: border-box;
+						padding: 8px 0 6px 10px;
 
 						&::after{
 							content: "-";
 							font-weight: bold;
 							display: block;
 							font-size: 1.8rem;
-							padding-top: 0.2rem;
 							line-height: 2.0rem;
     						text-align: center;
 							background: transparent;
@@ -194,8 +207,8 @@
 
 				&--radiobutton{
 					display: inline-block;
-					width: 50px;
-					padding: 8px 10px 6px 0;
+					width: 60px;
+					padding: 8px 0 6px 10px;
 					flex-grow: 0;
 				}
 			}
@@ -219,7 +232,7 @@
 
 					&__input{
 						&--min, &--max{
-							width: 50%;
+							width: 49%;
 							padding: 8px 5px 6px;
 						}
 						&--min{

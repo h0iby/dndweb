@@ -4,102 +4,142 @@
 		<p>Search for your favorite D&amp;D spells here.</p>
 	</div>
 	<div class="section__filter">
-		<input class="filter__toggle" type="checkbox" checked>
-		<h4 class="filter__title">Filters</h4>
+		<input class="filter__toggle" type="checkbox" />
+		<span class="h4 filter__title">Filters</span>
 		<div class="filter">
 			<ul class="filter__list">
 				<li class="filter__list__item">
-					<label class="filter__list__item__text" for="filterName">
+					<label class="filter__list__item__text" for="filterSlug">
 						Name
 					</label>
-					<label class="filter__list__item__container filter__list__item__container--textbox">
-						<input class="filter__list__item__container__input" id="filterName" type="text" />
-					</label>
+					<span class="filter__list__item__container filter__list__item__container--textbox">
+						<input class="filter__list__item__container__input" id="filterSlug" type="text" />
+					</span>
 				</li>
 				<li class="filter__list__item">
-					<label class="filter__list__item__text" for="filterName">
+					<label class="filter__list__item__text" for="filterDescription">
 						##Text (description)
 					</label>
-					<label class="filter__list__item__container filter__list__item__container--textbox">
-						<input class="filter__list__item__container__input" id="filterName" type="text" />
-					</label>
+					<span class="filter__list__item__container filter__list__item__container--textbox">
+						<input class="filter__list__item__container__input" id="filterDescription" type="text" />
+					</span>
 				</li>
 				<li class="filter__list__item">
 					<label class="filter__list__item__text" for="filterSpellschool">
 						Spell School
 					</label>
-					<label class="filter__list__item__container filter__list__item__container--select">
+					<span class="filter__list__item__container filter__list__item__container--select">
 						<input class="filter__list__item__container__input" id="filterSpellschool" type="text" />
-					</label>
+					</span>
 				</li>
 				<li class="filter__list__item">
 					<label class="filter__list__item__text" for="filterSpellsubschool">
 						Spell Subschool
 					</label>
-					<label class="filter__list__item__container filter__list__item__container--select">
+					<span class="filter__list__item__container filter__list__item__container--select">
 						<input class="filter__list__item__container__input" id="filterSpellsubschool" type="text" />
+					</span>
+				</li>
+				<li class="filter__list__item">
+					<span class="filter__list__item__text">
+						##Verbal comp.
+					</span>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentVerbal" id="filterComponentVerbalUnset" type="radio" checked />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--unset"></span>
+					</label>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentVerbal" id="filterComponentVerbalYes" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--yes"></span>
+					</label>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentVerbal" id="filterComponentVerbalNo" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--no"></span>
 					</label>
 				</li>
 				<li class="filter__list__item">
-					<label class="filter__list__item__text" for="filterComponentVerbal">
-						##Verbal component
+					<span class="filter__list__item__text">
+						##Somatic comp.
+					</span>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentSomatic" id="filterComponentSomaticUnset" type="radio" checked />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--unset"></span>
 					</label>
-					<label class="filter__list__item__container filter__list__item__container--checkbox">
-						<input class="filter__list__item__container__checkbox" id="filterComponentVerbal" type="checkbox" />
-						<span class="filter__list__item__container__checkbox__style"></span>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentSomatic" id="filterComponentSomaticYes" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--yes"></span>
 					</label>
-				</li>
-				<li class="filter__list__item">
-					<label class="filter__list__item__text" for="filterComponentSomatic">
-						##Somatic component
-					</label>
-					<label class="filter__list__item__container filter__list__item__container--checkbox">
-						<input class="filter__list__item__container__checkbox" id="filterComponentSomatic" type="checkbox" />
-						<span class="filter__list__item__container__checkbox__style"></span>
-					</label>
-				</li>
-				<li class="filter__list__item">
-					<label class="filter__list__item__text" for="filterComponentArcane">
-						##Arcane focus component
-					</label>
-					<label class="filter__list__item__container filter__list__item__container--checkbox">
-						<input class="filter__list__item__container__checkbox" id="filterComponentArcane" type="checkbox" />
-						<span class="filter__list__item__container__checkbox__style"></span>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentSomatic" id="filterComponentSomaticNo" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--no"></span>
 					</label>
 				</li>
 				<li class="filter__list__item">
-					<label class="filter__list__item__text" for="filterComponentDivine">
-						##Divine component
+					<span class="filter__list__item__text">
+						##Arcane focus comp.
+					</span>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentArcane" id="filterComponentArcaneUnset" type="radio" checked />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--unset"></span>
 					</label>
-					<label class="filter__list__item__container filter__list__item__container--checkbox">
-						<input class="filter__list__item__container__checkbox" id="filterComponentDivine" type="checkbox" />
-						<span class="filter__list__item__container__checkbox__style"></span>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentArcane" id="filterComponentArcaneYes" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--yes"></span>
+					</label>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentArcane" id="filterComponentArcaneNo" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--no"></span>
 					</label>
 				</li>
 				<li class="filter__list__item">
-					<label class="filter__list__item__text" for="filterComponentXP">
-						##XP component
+					<span class="filter__list__item__text">
+						##Divine focus comp.
+					</span>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentDivine" id="filterComponentDivineUnset" type="radio" checked />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--unset"></span>
 					</label>
-					<label class="filter__list__item__container filter__list__item__container--checkbox">
-						<input class="filter__list__item__container__input" id="filterComponentXP" type="checkbox" />
-						<span class="filter__list__item__container__checkbox__style"></span>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentDivine" id="filterComponentDivineYes" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--yes"></span>
+					</label>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentDivine" id="filterComponentDivineNo" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--no"></span>
+					</label>
+				</li>
+				<li class="filter__list__item">
+					<span class="filter__list__item__text">
+						##XP comp.
+					</span>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentXP" id="filterComponentXPUnset" type="radio" checked />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--unset"></span>
+					</label>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentXP" id="filterComponentXPYes" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--yes"></span>
+					</label>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentXP" id="filterComponentXPNo" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--no"></span>
 					</label>
 				</li>
 				<li class="filter__list__item">
 					<label class="filter__list__item__text" for="filterClass">
 						##Class
 					</label>
-					<label class="filter__list__item__container filter__list__item__container--select">
+					<span class="filter__list__item__container filter__list__item__container--select">
 						<select id="filterClass" class="filter__list__item__container__select"></select>
-					</label>
+					</span>
 				</li>
 				<li class="filter__list__item">
 					<label class="filter__list__item__text" for="filterRulebook">
 						Rulebook
 					</label>
-					<label class="filter__list__item__container filter__list__item__container--select">
+					<span class="filter__list__item__container filter__list__item__container--select">
 						<select id="filterRulebook" class="filter__list__item__container__select"></select>
-					</label>
+					</span>
 				</li>
 			</ul>
 		</div>
@@ -120,7 +160,7 @@
 					<td data-type="book" class="table__row__td table__row__td--book table__row__td--header"><strong class="table__row__td__bold">Book</strong></td>
 				</tr>
 			</thead>
-			<tbody class="-js-template--spell"></tbody>
+			<tbody class="-js-template -js-template--spell"></tbody>
 		</table>
 	</div>
 	<div class="section__footer">

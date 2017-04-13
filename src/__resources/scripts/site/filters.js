@@ -20,56 +20,13 @@ var dnd = dnd || {};
 	}
 
 	var setHash = function(item, value){
-		var newItemValue = value != "" ? item + "=" + value : "";
-		var hash = window.location.hash.substring(1);
-		var hashNew = "#" + hash;
-
-		if(history.pushState) {
-			if(value != ""){
-				if(hash.indexOf(item) < 0){
-					if(hashNew.length > 1){
-						hashNew += "&";
-					}
-
-					hashNew += newItemValue;
-				} else {
-					if(hash.indexOf("&") < 0){
-						hashNew = "#" + newItemValue;
-					} else {
-						var subStringTemp = hash.substring(hash.indexOf(item));
-						var subString = subStringTemp;
-						if(subStringTemp.indexOf("&") > -1){
-							subString = subStringTemp.substring(0, subStringTemp.indexOf("&"))
-						}
-
-						hashNew = hashNew.replace(subString, newItemValue);
-					}
-				}
-
-				history.pushState(null, null, hashNew);
-			} else {
-				if(hash.indexOf("&") < 0){
-					history.pushState(null, null, " ");
-				} else {
-					var subStringTemp = hash.substring(hash.indexOf(item));
-					var subString = subStringTemp;
-					if(subStringTemp.indexOf("&") > -1){
-						subString = subStringTemp.substring(0, subStringTemp.indexOf("&"))
-					}
-
-					hashNew = hashNew.replace("#" + subString + "&", "#");
-					hashNew = hashNew.replace("&" + subString, "");
-
-					history.pushState(null, null, hashNew);
-				}
-			}
-		}
+		dnd.setHash(item, value);
 	}
 	var getHash = function(){
 		var hashItems = window.location.hash.substring(1).split("&");
 		for(var i = 0; i < hashItems.length; i++){
 			var items = hashItems[i].split("=");
-			var item = document.getElementById(items[0]);
+			var item = document.getElementById("filter" + items[0]);
 			if(item){
 				switch(item.tagName.toLowerCase()){
 					case "select":
@@ -85,10 +42,10 @@ var dnd = dnd || {};
 
 
 	var populateSelect = function(elem){
-		var item = document.getElementById(elem);
+		var item = document.getElementById("filter" + elem);
 		var items = 0;
 		if(item){
-			var ident = elem.replace("filter", "").toLowerCase();
+			var ident = elem.toLowerCase();
 			var json = dnd.service[ident];
 			if(json != undefined){
 				var first = document.createElement("option");
@@ -116,7 +73,7 @@ var dnd = dnd || {};
 		}
 	}
 	var filterInput = function(elem){
-		var item = document.getElementById(elem);
+		var item = document.getElementById("filter" + elem);
 		if(item){
 			var timeout;
 			item.addEventListener('keyup',function(){
@@ -166,13 +123,13 @@ var dnd = dnd || {};
 	}
 
 	dnd.filters = function(){
-		populateSelect("filterRulebook");
-		populateSelect("filterEdition");
-		populateSelect("filterFeat-Category");
+		populateSelect("Rulebook");
+		populateSelect("Edition");
+		populateSelect("Feat-Category");
 
-		filterInput("filterSlug");
-		filterInput("filterKeywords");
-		filterInput("filterBenefit");
+		filterInput("Slug");
+		filterInput("Keywords");
+		filterInput("Benefit");
 
 		filterPageAmount();
 

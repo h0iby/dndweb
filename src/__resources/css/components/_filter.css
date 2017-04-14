@@ -203,6 +203,7 @@
 					background: var(--filterInputBackground);
 					border: solid 1px var(--filterInputBorderColor);
 					padding: 8px 0 6px;
+                    appearance: none;
 				}
 
 				&--radiobutton{

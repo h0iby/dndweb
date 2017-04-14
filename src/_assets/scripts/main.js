@@ -93,6 +93,28 @@ var dnd = dnd || {};
 var dnd = dnd || {};
 (function() {
 	"use strict";
+
+    dnd.navigation = function(){
+        var scrollPos = 0;
+        var timeout;
+        var header = document.getElementById("Header");
+        var headerHeight = header.offsetHeight + 5;
+        
+        window.onscroll = function() {
+            if(window.pageYOffset < scrollPos){
+                header.classList.remove("is-hidden");
+            } else {
+                header.classList.add("is-hidden");
+            }
+            
+            scrollPos = window.pageYOffset;
+        };
+    }
+    
+})();
+var dnd = dnd || {};
+(function() {
+	"use strict";
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
 
@@ -233,10 +255,9 @@ var dnd = dnd || {};
 	"use strict";
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
-
-	dnd.templates = function(){
-		loadListTemplate(".-js-template--" + dnd.menu, "#template--" + dnd.menu, dnd.service[dnd.menu]);
-	}
+    var dataUrl = "http://138.68.114.21";
+	var loadError = function(){ console.log("Error loading data"); }
+	
 
 	var filterData = function(json){
 		var hashItems = window.location.hash.substring(1).split("&");
@@ -341,6 +362,7 @@ var dnd = dnd || {};
 			target[0].innerHTML = "";
 		}
 	}
+    
 	var loadListTemplate = function(templateTarget, templateName, templateData){
 		clearTemplate(templateTarget);
 
@@ -363,6 +385,43 @@ var dnd = dnd || {};
 				replaceData(templateTarget, sourceHtml, filteredJson);
 			}
 		}
+	}
+    var loadPageTemplate = function(templateTarget, templateName, templateData){
+        clearTemplate(templateTarget);
+        
+        console.log("templateTarget", templateTarget);
+        console.log("templateName", templateName);
+        console.log("templateData", templateData);
+    }
+    
+    var loadTemplates = function(data){
+        if(dnd.pagetype == "list"){
+            loadListTemplate(".-js-template--" + dnd.menu, "#template--" + dnd.menu, data);
+        } else {
+            loadPageTemplate(".-js-template--" + dnd.menu, "#template--" + dnd.menu, data);
+        }
+    }
+    
+    dnd.templates = function(){
+        var data = dnd.service[dnd.menu];
+        console.log(data);
+        if(data == undefined && dnd.vars.hasLocalStorage){
+            if(localStorage.getItem(dnd.menu) != null){
+                dnd.service[dnd.menu] = JSON.parse(JSON.parse(localStorage.getItem(dnd.menu)));
+                data = dnd.service[dnd.menu];
+            }
+        }
+
+        if(data == undefined){
+            dnd.ajax(dataUrl + dnd.endpoint, function(data){
+                dnd.service[dnd.menu] = JSON.parse(data);
+                if(dnd.vars.hasLocalStorage){
+                    localStorage.setItem(dnd.menu, JSON.stringify(data));
+                }
+            }, function(){ loadError(); }, function(){ loadError(); });
+        } else {
+            loadTemplates(data);
+        }
 	}
 })();
 var dnd = dnd || {};
@@ -451,6 +510,7 @@ var dnd = dnd || {};
 		dnd.vars.hasLocalStorage = false;
 	}
 
+    dnd.navigation();
 	dnd.dataLoaded = function(){
 		dnd.filters();
 		dnd.templates();

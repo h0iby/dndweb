@@ -9,6 +9,11 @@
 	flex-shrink: 0;
 	background: var(--backgroundHeader) var(--background) 50% 0 repeat-x;
 	box-shadow: -5px -15px 25px 15px var(--shadow);
+    transition: all 0.5s;
+    
+    &.is-hidden{
+        top: -75px;
+    }
 
 	&__logo{
 		position: absolute;

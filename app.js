@@ -123,7 +123,7 @@ var serviceCallback = function(data){
 	jsonData.forEach(function(item, i){
 		if(item.render){
 			var current = html,
-				pathMain = '' + item.path.replace(':id', 'id').replace(':rid', 'rid').replace(':sid', 'sid') + '.html',
+				pathMain = '' + item.path.replace(':rid', 'rid').replace(':sid', 'sid') + '.html',
 				templateMain = path.join(__dirname+''+htmlPagesPath+'/endpoints' + pathMain + ''),
 				fileMain = fs.readFileSync(templateMain).toString();
 
@@ -259,7 +259,7 @@ var serviceRequest = function(){
 	xhr.onreadystatechange = function() {
 		if (this.readyState === 4) { serviceCallback(this.responseText); }
 	};
-	xhr.open("GET", "http://dnd.exchange/endpoints");
+	xhr.open("GET", "http://138.68.114.21/endpoints");
 	xhr.send();
 }
 

@@ -1,4 +1,5 @@
 // = include /site/helpers.js
+// = include /site/navigation.js
 // = include /site/filters.js
 // = include /site/templates.js
 // = include /site/services.js
@@ -14,6 +15,7 @@ var dnd = dnd || {};
 		dnd.vars.hasLocalStorage = false;
 	}
 
+    dnd.navigation();
 	dnd.dataLoaded = function(){
 		dnd.filters();
 		dnd.templates();

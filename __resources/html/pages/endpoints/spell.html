@@ -6,7 +6,7 @@
 	<div class="section__filter">
 		<input class="filter__toggle" type="checkbox" />
 		<span class="h4 filter__title">Filters</span>
-		<div class="filter">
+		<div class="filter" data-filters="10">
 			<ul class="filter__list">
 				<li class="filter__list__item">
 					<label class="filter__list__item__text" for="filterSlug">
@@ -14,14 +14,6 @@
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--textbox">
 						<input class="filter__list__item__container__input" id="filterSlug" type="text" />
-					</span>
-				</li>
-				<li class="filter__list__item">
-					<label class="filter__list__item__text" for="filterDescription">
-						##Text (description)
-					</label>
-					<span class="filter__list__item__container filter__list__item__container--textbox">
-						<input class="filter__list__item__container__input" id="filterDescription" type="text" />
 					</span>
 				</li>
 				<li class="filter__list__item">
@@ -160,7 +152,7 @@
 					<td data-type="book" class="table__row__td table__row__td--book table__row__td--header"><strong class="table__row__td__bold">Book</strong></td>
 				</tr>
 			</thead>
-			<tbody class="-js-template -js-template--spell"></tbody>
+			<tbody class="-js-template -js-template--spell -js-list" data-endpoint="#DATAENDPOINT#"></tbody>
 		</table>
 	</div>
 	<div class="section__footer">

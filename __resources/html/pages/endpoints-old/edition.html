@@ -1,0 +1,46 @@
+<section class="main__article__section section">
+	<div class="section__intro">
+		<h2>Editions</h2>
+		<p>Browse through D&amp;D editions here.</p>
+	</div>
+	<div class="section__filter">
+		<input class="filter__toggle" type="checkbox" />
+		<span class="h4 filter__title">Filters</span>
+		<div class="filter">
+			<ul class="filter__list">
+				<li class="filter__list__item">
+					<label class="filter__list__item__text" for="filterSlug">
+						Name
+					</label>
+					<span class="filter__list__item__container filter__list__item__container--textbox">
+						<input class="filter__list__item__container__input" id="filterSlug" type="text" />
+					</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="section__main">
+		<h3>Editions</h3>
+		#PAGING#
+		<table class="table">
+			<thead>
+				<tr class="table__row">
+					<td data-type="name" class="table__row__td table__row__td--name table__row__td--header"><strong class="table__row__td__bold">Name</strong></td>
+				</tr>
+			</thead>
+			<tbody class="-js-template -js-template--edition"></tbody>
+		</table>
+	</div>
+	<div class="section__footer">
+		#PAGING#
+	</div>
+</section>
+<script id="template--edition" type="x-template">
+    <tr data-type="#ALIAS#" data-id="#ID#" class="table__row">
+		<td data-type="name" class="table__row__td table__row__td--name"><a class="table__row__td__link" href="#CURRENTURL#">#NAME#</a></td>
+	</tr>
+</script>
+<script type="text/javascript">
+	var dnd = dnd || {};
+	dnd.pagetype = "list";
+</script>

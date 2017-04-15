@@ -38,6 +38,7 @@ module.exports = {
 				current = current.replace("#LOADDATA#", repData);
 				current = current.replace("#MENUITEM#", repAlias);
 				current = current.replace("#MENUENDPOINT#", repPath);
+				current = current.replace("#DATAENDPOINT#", repPath);
 				current = current.replace("#ROBOTS#", repRobots);
 
 				current = current.replace("#PAGETITLE#", repTitle);
@@ -63,11 +64,12 @@ module.exports = {
 			}
 
 			var serviceRequest = function(){
+                console.log("http://localhost");
 				var xhr = new XMLHttpRequest();
 				xhr.onreadystatechange = function(err) {
 					if (this.readyState === 4) { serviceCallback(this.responseText); }
 				};
-				xhr.open("GET", "http://dnd.exchange" + item.path.replace(":id", req.params.id).replace(":rid", req.params.rid).replace(":sid", req.params.sid));
+				xhr.open("GET", "http://localhost" + item.path.replace(":id", req.params.id).replace(":rid", req.params.rid).replace(":sid", req.params.sid));
 				xhr.send();
 			}
 			serviceRequest();

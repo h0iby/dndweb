@@ -1,0 +1,95 @@
+<section class="main__article__section section">
+	<div class="section__intro">
+		<h2>Skills</h2>
+		<p>Browse through D&amp;D skills here.</p>
+	</div>
+	<div class="section__filter">
+		<input class="filter__toggle" type="checkbox" />
+		<span class="h4 filter__title">Filters</span>
+		<div class="filter">
+			<ul class="filter__list">
+				<li class="filter__list__item">
+					<label class="filter__list__item__text" for="filterSlug">
+						Name
+					</label>
+					<span class="filter__list__item__container filter__list__item__container--textbox">
+						<input class="filter__list__item__container__input" id="filterSlug" type="text" />
+					</span>
+				</li>
+				<li class="filter__list__item">
+					<label class="filter__list__item__text" for="filterAbility">
+						Ability
+					</label>
+					<span class="filter__list__item__container filter__list__item__container--select">
+						<select id="filterAbility" class="filter__list__item__container__select"></select>
+					</span>
+				</li>
+				<li class="filter__list__item">
+					<span class="filter__list__item__text">
+						Trained
+					</span>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterTrained" id="filterTrainedUnset" type="radio" checked />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--unset"></span>
+					</label>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterTrained" id="filterTrainedYes" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--yes"></span>
+					</label>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterTrained" id="filterTrainedNo" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--no"></span>
+					</label>
+				</li>
+				<li class="filter__list__item">
+					<span class="filter__list__item__text">
+						AC Penalty
+					</span>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterAcPenalty" id="filterAcPenaltyUnset" type="radio" checked />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--unset"></span>
+					</label>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterAcPenalty" id="filterAcPenaltyYes" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--yes"></span>
+					</label>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterAcPenalty" id="filterAcPenaltyNo" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--no"></span>
+					</label>
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	<div class="section__main">
+		<h3>Skills</h3>
+		#PAGING#
+		<table class="table">
+			<thead>
+				<tr class="table__row">
+					<td data-type="name" class="table__row__td table__row__td--name table__row__td--header"><strong class="table__row__td__bold">Name</strong></td>
+					<td data-type="ability" class="table__row__td table__row__td--header"><strong class="table__row__td__bold" title="Ability">Ability</strong></td>
+					<td data-type="trained" class="table__row__td table__row__td--trained table__row__td--header"><strong class="table__row__td__bold" title="Trained only">Trained only</strong></td>
+					<td data-type="trained" class="table__row__td table__row__td--trained table__row__td--header"><strong class="table__row__td__bold" title="Trained only">Amor check penalty</strong></td>
+				</tr>
+			</thead>
+			<tbody class="-js-template -js-template--skill"></tbody>
+		</table>
+	</div>
+	<div class="section__footer">
+		#PAGING#
+	</div>
+</section>
+<script id="template--skill" type="x-template">
+    <tr data-type="#ALIAS#" data-id="#ID#" class="table__row">
+		<td data-type="name" class="table__row__td table__row__td--name"><a class="table__row__td__link" href="#CURRENTURL#">#NAME#</a></td>
+		<td data-type="ability" class="table__row__td table__row__td--name">#ABILITY#</td>
+		<td data-type="trained" class="table__row__td table__row__td--trained table__row__td--#TRAINED#"></td>
+		<td data-type="penalty" class="table__row__td table__row__td--penalty table__row__td--#PENALTY#"></td>
+	</tr>
+</script>
+<script type="text/javascript">
+	var dnd = dnd || {};
+	dnd.pagetype = "list";
+</script>

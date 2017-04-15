@@ -3,10 +3,9 @@ var dnd = dnd || {};
 	"use strict";
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
-    var dataUrl = "http://138.68.114.21";
-	var loadError = function(){ console.log("Error loading data"); }
-	
-
+    var dataUrl = "http://localhost";
+    console.log(dataUrl);
+    
 	var filterData = function(json){
 		var hashItems = window.location.hash.substring(1).split("&");
 		var filteredJson = json;
@@ -66,11 +65,11 @@ var dnd = dnd || {};
 		return filteredJson;
 	}
 
-	var replaceData = function(templateTarget, sourceHtml, filteredJson){
+	var replaceListData = function(item, sourceHtml, json){
 		var counter = 0,
-			targetContainer = dnd.selector(templateTarget);
+            targetHtml = "";
 
-		filteredJson.forEach(function(item, i){
+		json.forEach(function(item, i){
 			if(counter < dnd.filters.amount){
 				var html = sourceHtml;
 				var isPrestige = item.prestige == 1 ? true : false;
@@ -94,81 +93,100 @@ var dnd = dnd || {};
 				html = dnd.replaceAll(html, '#BOOK#', item.rulebook_name);
 				html = dnd.replaceAll(html, '#EDITION#', item.edition_name);
 
-				html = dnd.replaceAll(html, '#EDITIONURL#', '/edition/' + item.edition_id);
-				html = dnd.replaceAll(html, '#CURRENTURL#', '/' + dnd.menu + '/' + item.itemid);
+				html = dnd.replaceAll(html, '#EDITIONURL#', '/edition/' + item.edition_slug);
+				html = dnd.replaceAll(html, '#CURRENTURL#', '/' + dnd.menu + '/' + item.slug);
 				html = dnd.replaceAll(html, '#URL#', '/rulebook/' + item.rulebook_slug);
 
-				dnd.appendTo(targetContainer[0], html);
+				targetHtml += html;
 				counter++;
 			}
 		});
-	}
-
-	var clearTemplate = function(templateTarget){
-		var target = dnd.selector(templateTarget);
-		if(target.length > 0){
-			target[0].innerHTML = "";
-		}
-	}
-    
-	var loadListTemplate = function(templateTarget, templateName, templateData){
-		clearTemplate(templateTarget);
-
-		var template = dnd.selector(templateName),
-			targetContainer = dnd.selector(templateTarget);
-
-		if(template != null && targetContainer.length > 0){
-			var sourceHtml = template.innerHTML,
-				hash = window.location.hash.substring(1);
-
-			if(templateData != null){
-				var filteredJson = templateData;
-
-				if(hash){
-					var hashItems = window.location.hash.substring(1).split("&");
-
-					filteredJson = filterData(templateData);
-				}
-
-				replaceData(templateTarget, sourceHtml, filteredJson);
-			}
-		}
-	}
-    var loadPageTemplate = function(templateTarget, templateName, templateData){
-        clearTemplate(templateTarget);
         
-        console.log("templateTarget", templateTarget);
-        console.log("templateName", templateName);
-        console.log("templateData", templateData);
+        item.innerHTML = targetHtml;
+	}
+    var replacePageData = function(item, sourceHtml, json){
+		var counter = 0,
+            targetHtml = "";
+
+        console.log(json);
+        
+		json.forEach(function(item, i){
+			if(counter < dnd.filters.amount){
+				var html = sourceHtml;
+                
+				var isPrestige = item.prestige == 1 ? true : false;
+				var isComponentVerbal = item.verbal_component == 1 ? true : false;
+				var isComponentSomatic = item.somatic_component == 1 ? true : false;
+				var isComponentArcane = item.arcane_focus_component == 1 ? true : false;
+				var isComponentDivine = item.divine_focus_component == 1 ? true : false;
+				var isComponentXP = item.xp_component == 1 ? true : false;
+                
+				html = dnd.replaceAll(html, '#NAME#', item.name);
+				html = dnd.replaceAll(html, '#ALIAS#', item.slug);
+				html = dnd.replaceAll(html, '#DESCRIPTION#', item.description);
+				html = dnd.replaceAll(html, '#PRESTIGE#', isPrestige);
+				html = dnd.replaceAll(html, '#SPELLSCHOOL#', item.spellschool_name);
+				html = dnd.replaceAll(html, '#COMPONENTVERBAL#', isComponentVerbal);
+				html = dnd.replaceAll(html, '#COMPONENTSOMATIC#', isComponentSomatic);
+				html = dnd.replaceAll(html, '#COMPONENTARCANE#', isComponentArcane);
+				html = dnd.replaceAll(html, '#COMPONENTDIVINE#', isComponentDivine);
+				html = dnd.replaceAll(html, '#COMPONENTXP#', isComponentXP);
+				html = dnd.replaceAll(html, '#BOOK#', item.rulebook_name);
+				html = dnd.replaceAll(html, '#EDITION#', item.edition_name);
+
+				targetHtml += html;
+				counter++;
+			}
+		});
+        
+        item.innerHTML = targetHtml;
+	}
+
+	var clearTemplate = function(item){
+        item.innerHTML = "";
+	}
+	var loadListTemplate = function(item, template, data){
+        var sourceHtml = template.innerHTML,
+            hash = window.location.hash.substring(1),
+            filteredJson = data;
+
+        if(hash){
+            filteredJson = filterData(filteredJson);
+        }
+
+        replaceListData(item, sourceHtml, filteredJson);
+	}
+    var loadPageTemplate = function(item, template, data){
+        var sourceHtml = template.innerHTML,
+            filteredJson = data;
+        
+        replacePageData(item, sourceHtml, filteredJson);
     }
     
-    var loadTemplates = function(data){
+    
+    dnd.templateData = function(item, template, type, data){
+        clearTemplate(item);
         if(dnd.pagetype == "list"){
-            loadListTemplate(".-js-template--" + dnd.menu, "#template--" + dnd.menu, data);
+            loadListTemplate(item, template, data);
         } else {
-            loadPageTemplate(".-js-template--" + dnd.menu, "#template--" + dnd.menu, data);
+            loadPageTemplate(item, template, data);
         }
     }
-    
     dnd.templates = function(){
-        var data = dnd.service[dnd.menu];
-        console.log(data);
-        if(data == undefined && dnd.vars.hasLocalStorage){
-            if(localStorage.getItem(dnd.menu) != null){
-                dnd.service[dnd.menu] = JSON.parse(JSON.parse(localStorage.getItem(dnd.menu)));
-                data = dnd.service[dnd.menu];
+        var templateBaseClass = "-js-template";
+        var items = document.getElementsByClassName(templateBaseClass);
+        
+        for(var i = 0; i < items.length; i++){
+            var item = items[i];
+            if(item.classList[1] && item.classList[2]){
+                var template = document.getElementById(item.classList[1].replace("-js-","")),
+                    endpoint = item.getAttribute("data-endpoint"),
+                    type = item.classList[2].replace("-js-", "");
+
+                if(template && endpoint){
+                    dnd.data(endpoint, dnd.templateData, item, template, type);
+                }
             }
         }
-
-        if(data == undefined){
-            dnd.ajax(dataUrl + dnd.endpoint, function(data){
-                dnd.service[dnd.menu] = JSON.parse(data);
-                if(dnd.vars.hasLocalStorage){
-                    localStorage.setItem(dnd.menu, JSON.stringify(data));
-                }
-            }, function(){ loadError(); }, function(){ loadError(); });
-        } else {
-            loadTemplates(data);
-        }
-	}
+    }
 })();

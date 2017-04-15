@@ -1,0 +1,185 @@
+<section class="main__article__section section">
+	<div class="section__intro">
+		<h2>Spells</h2>
+		<p>Search for your favorite D&amp;D spells here.</p>
+	</div>
+	<div class="section__filter">
+		<input class="filter__toggle" type="checkbox" />
+		<span class="h4 filter__title">Filters</span>
+		<div class="filter">
+			<ul class="filter__list">
+				<li class="filter__list__item">
+					<label class="filter__list__item__text" for="filterSlug">
+						Name
+					</label>
+					<span class="filter__list__item__container filter__list__item__container--textbox">
+						<input class="filter__list__item__container__input" id="filterSlug" type="text" />
+					</span>
+				</li>
+				<li class="filter__list__item">
+					<label class="filter__list__item__text" for="filterDescription">
+						##Text (description)
+					</label>
+					<span class="filter__list__item__container filter__list__item__container--textbox">
+						<input class="filter__list__item__container__input" id="filterDescription" type="text" />
+					</span>
+				</li>
+				<li class="filter__list__item">
+					<label class="filter__list__item__text" for="filterSpellschool">
+						Spell School
+					</label>
+					<span class="filter__list__item__container filter__list__item__container--select">
+						<input class="filter__list__item__container__input" id="filterSpellschool" type="text" />
+					</span>
+				</li>
+				<li class="filter__list__item">
+					<label class="filter__list__item__text" for="filterSpellsubschool">
+						Spell Subschool
+					</label>
+					<span class="filter__list__item__container filter__list__item__container--select">
+						<input class="filter__list__item__container__input" id="filterSpellsubschool" type="text" />
+					</span>
+				</li>
+				<li class="filter__list__item">
+					<span class="filter__list__item__text">
+						##Verbal comp.
+					</span>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentVerbal" id="filterComponentVerbalUnset" type="radio" checked />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--unset"></span>
+					</label>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentVerbal" id="filterComponentVerbalYes" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--yes"></span>
+					</label>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentVerbal" id="filterComponentVerbalNo" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--no"></span>
+					</label>
+				</li>
+				<li class="filter__list__item">
+					<span class="filter__list__item__text">
+						##Somatic comp.
+					</span>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentSomatic" id="filterComponentSomaticUnset" type="radio" checked />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--unset"></span>
+					</label>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentSomatic" id="filterComponentSomaticYes" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--yes"></span>
+					</label>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentSomatic" id="filterComponentSomaticNo" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--no"></span>
+					</label>
+				</li>
+				<li class="filter__list__item">
+					<span class="filter__list__item__text">
+						##Arcane focus comp.
+					</span>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentArcane" id="filterComponentArcaneUnset" type="radio" checked />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--unset"></span>
+					</label>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentArcane" id="filterComponentArcaneYes" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--yes"></span>
+					</label>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentArcane" id="filterComponentArcaneNo" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--no"></span>
+					</label>
+				</li>
+				<li class="filter__list__item">
+					<span class="filter__list__item__text">
+						##Divine focus comp.
+					</span>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentDivine" id="filterComponentDivineUnset" type="radio" checked />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--unset"></span>
+					</label>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentDivine" id="filterComponentDivineYes" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--yes"></span>
+					</label>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentDivine" id="filterComponentDivineNo" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--no"></span>
+					</label>
+				</li>
+				<li class="filter__list__item">
+					<span class="filter__list__item__text">
+						##XP comp.
+					</span>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentXP" id="filterComponentXPUnset" type="radio" checked />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--unset"></span>
+					</label>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentXP" id="filterComponentXPYes" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--yes"></span>
+					</label>
+					<label class="filter__list__item__container filter__list__item__container--radiobutton">
+						<input class="filter__list__item__container__radiobutton" name="filterComponentXP" id="filterComponentXPNo" type="radio" />
+						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--no"></span>
+					</label>
+				</li>
+				<li class="filter__list__item">
+					<label class="filter__list__item__text" for="filterClass">
+						##Class
+					</label>
+					<span class="filter__list__item__container filter__list__item__container--select">
+						<select id="filterClass" class="filter__list__item__container__select"></select>
+					</span>
+				</li>
+				<li class="filter__list__item">
+					<label class="filter__list__item__text" for="filterRulebook">
+						Rulebook
+					</label>
+					<span class="filter__list__item__container filter__list__item__container--select">
+						<select id="filterRulebook" class="filter__list__item__container__select"></select>
+					</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="section__main">
+		<h3>Spells</h3>
+		#PAGING#
+		<table class="table">
+			<thead>
+				<tr class="table__row">
+					<td data-type="name" class="table__row__td table__row__td--name table__row__td--header"><strong class="table__row__td__bold">Name</strong></td>
+					<td data-type="spellschool" class="table__row__td table__row__td--spellschool table__row__td--header"><strong class="table__row__td__bold">Spellschool</strong></td>
+					<td data-type="component" class="table__row__td table__row__td--component table__row__td--header"><strong class="table__row__td__bold" title="Verbal">Verbal</strong></td>
+					<td data-type="component" class="table__row__td table__row__td--component table__row__td--header"><strong class="table__row__td__bold" title="Somatic">Somatic</strong></td>
+					<td data-type="component" class="table__row__td table__row__td--component table__row__td--header"><strong class="table__row__td__bold" title="Arcane">Arcane</strong></td>
+					<td data-type="component" class="table__row__td table__row__td--component table__row__td--header"><strong class="table__row__td__bold" title="Divine">Divine</strong></td>
+					<td data-type="component" class="table__row__td table__row__td--component table__row__td--header"><strong class="table__row__td__bold" title="XP Component">XP</strong></td>
+					<td data-type="book" class="table__row__td table__row__td--book table__row__td--header"><strong class="table__row__td__bold">Book</strong></td>
+				</tr>
+			</thead>
+			<tbody class="-js-template -js-template--spell"></tbody>
+		</table>
+	</div>
+	<div class="section__footer">
+		#PAGING#
+	</div>
+</section>
+<script id="template--spell" type="x-template">
+    <tr data-type="#ALIAS#" data-id="#ID#" class="table__row">
+		<td data-type="name" class="table__row__td table__row__td--name"><a class="table__row__td__link" href="#URL#/spell/#ALIAS#">#NAME#</a></td>
+		<td data-type="spellschool" class="table__row__td table__row__td--spellschool">#SPELLSCHOOL#</td>
+		<td data-type="component" class="table__row__td table__row__td--component table__row__td--#COMPONENTVERBAL#"></td>
+		<td data-type="component" class="table__row__td table__row__td--component table__row__td--#COMPONENTSOMATIC#"></td>
+		<td data-type="component" class="table__row__td table__row__td--component table__row__td--#COMPONENTARCANE#"></td>
+		<td data-type="component" class="table__row__td table__row__td--component table__row__td--#COMPONENTDIVINE#"></td>
+		<td data-type="component" class="table__row__td table__row__td--component table__row__td--#COMPONENTXP#"></td>
+		<td data-type="book" class="table__row__td table__row__td--book"><a class="table__row__td__link" href="#URL#">#BOOK#</a></td>
+	</tr>
+</script>
+<script type="text/javascript">
+	var dnd = dnd || {};
+	dnd.pagetype = "list";
+</script>

@@ -1,24 +1,21 @@
 // = include /site/helpers.js
-// = include /site/navigation.js
 // = include /site/filters.js
-// = include /site/templates.js
 // = include /site/services.js
+// = include /site/navigation.js
+// = include /site/templates.js
 
 var dnd = dnd || {};
 (function() {
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
+    
+    dnd.vars.localstorage = false;
+    dnd.vars.indexeddb = false;
 
-	if (typeof(Storage) !== "undefined") {
-		dnd.vars.hasLocalStorage = true;
-	} else {
-		dnd.vars.hasLocalStorage = false;
-	}
+	if (typeof(Storage) !== "undefined") { dnd.vars.localstorage = true; }
+    if (window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB) { dnd.vars.indexeddb = true; }
 
     dnd.navigation();
-	dnd.dataLoaded = function(){
-		dnd.filters();
-		dnd.templates();
-	}
-	dnd.initService(dnd.dataLoaded);
+    dnd.filters();
+    dnd.templates();
 })();

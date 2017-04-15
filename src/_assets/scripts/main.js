@@ -93,28 +93,6 @@ var dnd = dnd || {};
 var dnd = dnd || {};
 (function() {
 	"use strict";
-
-    dnd.navigation = function(){
-        var scrollPos = 0;
-        var timeout;
-        var header = document.getElementById("Header");
-        var headerHeight = header.offsetHeight + 5;
-        
-        window.onscroll = function() {
-            if(window.pageYOffset < scrollPos){
-                header.classList.remove("is-hidden");
-            } else {
-                header.classList.add("is-hidden");
-            }
-            
-            scrollPos = window.pageYOffset;
-        };
-    }
-    
-})();
-var dnd = dnd || {};
-(function() {
-	"use strict";
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
 
@@ -204,7 +182,7 @@ var dnd = dnd || {};
 	}
 	var filterPageAmount = function(){
 		dnd.filters.amount = 25;
-		if(dnd.vars.hasLocalStorage){
+		if(dnd.vars.localstorage){
 			if(localStorage.getItem("filter-amount") == null){
 				localStorage.setItem("filter-amount", dnd.filters.amount);
 			} else {
@@ -227,7 +205,7 @@ var dnd = dnd || {};
 				var selectValue = this.options[this.selectedIndex].value;
 				dnd.filters.amount = parseInt(selectValue);
 
-				if(dnd.vars.hasLocalStorage){
+				if(dnd.vars.localstorage){
 					localStorage.setItem("filter-amount", dnd.filters.amount);
 				}
 
@@ -255,10 +233,123 @@ var dnd = dnd || {};
 	"use strict";
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
-    var dataUrl = "http://138.68.114.21";
+	var dataUrl = "http://localhost";
+    console.log(dataUrl);
 	var loadError = function(){ console.log("Error loading data"); }
+    
+    
+    /*
+	var loadData = function(hasLocalStorage, callback){
+		dnd.ajax(dataUrl + "/endpoints", function(endpoints){
+			var total = 0, counter = 0;
+			dnd.service.endpoints = JSON.parse(endpoints);
+
+			if(hasLocalStorage){
+				localStorage.setItem("endpoints", endpoints);
+			}
+
+			dnd.service.endpoints.forEach(function(endpoint, id){
+				if(endpoint.path.indexOf(":rid") == -1 && endpoint.path.indexOf(":sid") == -1){ total++; }
+			});
+
+
+			dnd.service.endpoints.forEach(function(endpoint, id){
+				if(endpoint.path.indexOf(":rid") == -1 && endpoint.path.indexOf(":sid") == -1){
+
+					dnd.ajax(dataUrl + endpoint.path, function(data){
+						counter++;
+						dnd.service["" + endpoint.alias + ""] = JSON.parse(data);
+						if(hasLocalStorage){
+							localStorage.setItem(endpoint.alias, JSON.stringify(data));
+						}
+						if(counter == total){ serviceLoaded(callback); }
+					}, function(){ loadError(); }, function(){ loadError(); });
+				}
+			});
+		}, function(){ loadError(); }, function(){ loadError(); });
+	}
+	var service = function(callback){
+
+
+		if(dnd.vars.hasLocalStorage && localStorage.length == 0){
+			loadData(true, callback);
+		} else if (dnd.vars.hasLocalStorage){
+			var counter = 0;
+			JSON.parse(localStorage.getItem("endpoints")).forEach(function(endpoint, id){
+				counter++;
+				if(endpoint.path.indexOf(":rid") == -1 && endpoint.path.indexOf(":sid") == -1){
+					var localItem = localStorage.getItem(endpoint.alias);
+					dnd.service["" + endpoint.alias + ""] = JSON.parse(JSON.parse(localItem));
+				}
+				if(counter == JSON.parse(localStorage.getItem("endpoints")).length){
+					serviceLoaded(callback);
+				}
+			});
+		} else {
+			loadData(false, callback);
+		}
+	}
+
 	
 
+	dnd.initService = function(callback){
+		var loader = dnd.selector("#Loader");
+		//localStorage.clear();
+		if(dnd.database){
+			service(callback);
+		} else {
+			loader.style.display = 'none';
+		}
+	}
+    */
+
+    dnd.data = function(endpoint, callback, item, template, type){
+        //do IndexedDB (localstorage is too small)
+        
+        dnd.ajax(dataUrl + endpoint, function(data){
+            var json = JSON.parse(data);
+            
+            var loader = dnd.selector("#Loader");
+            loader.style.display = 'none';
+            loader.classList.add("is-hidden");
+            
+            if(json != null){
+                callback(item, template, type, json);
+            }
+            
+        }, function(){ loadError(); }, function(){ loadError(); });
+	}
+})();
+var dnd = dnd || {};
+(function() {
+	"use strict";
+
+    dnd.navigation = function(){
+        var scrollPos = 0;
+        var timeout;
+        var header = document.getElementById("Header");
+        var headerHeight = header.offsetHeight + 5;
+        
+        window.onscroll = function() {
+            if(window.pageYOffset < scrollPos){
+                header.classList.remove("is-hidden");
+            } else {
+                header.classList.add("is-hidden");
+            }
+            
+            scrollPos = window.pageYOffset;
+        };
+    }
+    
+})();
+var dnd = dnd || {};
+(function() {
+	"use strict";
+	dnd.vars = dnd.vars || {};
+	dnd.service = dnd.service || {};
+    var dataUrl = "http://localhost";
+    console.log(dataUrl);
+    
 	var filterData = function(json){
 		var hashItems = window.location.hash.substring(1).split("&");
 		var filteredJson = json;
@@ -318,11 +409,11 @@ var dnd = dnd || {};
 		return filteredJson;
 	}
 
-	var replaceData = function(templateTarget, sourceHtml, filteredJson){
+	var replaceListData = function(item, sourceHtml, json){
 		var counter = 0,
-			targetContainer = dnd.selector(templateTarget);
+            targetHtml = "";
 
-		filteredJson.forEach(function(item, i){
+		json.forEach(function(item, i){
 			if(counter < dnd.filters.amount){
 				var html = sourceHtml;
 				var isPrestige = item.prestige == 1 ? true : false;
@@ -346,174 +437,116 @@ var dnd = dnd || {};
 				html = dnd.replaceAll(html, '#BOOK#', item.rulebook_name);
 				html = dnd.replaceAll(html, '#EDITION#', item.edition_name);
 
-				html = dnd.replaceAll(html, '#EDITIONURL#', '/edition/' + item.edition_id);
-				html = dnd.replaceAll(html, '#CURRENTURL#', '/' + dnd.menu + '/' + item.itemid);
+				html = dnd.replaceAll(html, '#EDITIONURL#', '/edition/' + item.edition_slug);
+				html = dnd.replaceAll(html, '#CURRENTURL#', '/' + dnd.menu + '/' + item.slug);
 				html = dnd.replaceAll(html, '#URL#', '/rulebook/' + item.rulebook_slug);
 
-				dnd.appendTo(targetContainer[0], html);
+				targetHtml += html;
 				counter++;
 			}
 		});
-	}
-
-	var clearTemplate = function(templateTarget){
-		var target = dnd.selector(templateTarget);
-		if(target.length > 0){
-			target[0].innerHTML = "";
-		}
-	}
-    
-	var loadListTemplate = function(templateTarget, templateName, templateData){
-		clearTemplate(templateTarget);
-
-		var template = dnd.selector(templateName),
-			targetContainer = dnd.selector(templateTarget);
-
-		if(template != null && targetContainer.length > 0){
-			var sourceHtml = template.innerHTML,
-				hash = window.location.hash.substring(1);
-
-			if(templateData != null){
-				var filteredJson = templateData;
-
-				if(hash){
-					var hashItems = window.location.hash.substring(1).split("&");
-
-					filteredJson = filterData(templateData);
-				}
-
-				replaceData(templateTarget, sourceHtml, filteredJson);
-			}
-		}
-	}
-    var loadPageTemplate = function(templateTarget, templateName, templateData){
-        clearTemplate(templateTarget);
         
-        console.log("templateTarget", templateTarget);
-        console.log("templateName", templateName);
-        console.log("templateData", templateData);
+        item.innerHTML = targetHtml;
+	}
+    var replacePageData = function(item, sourceHtml, json){
+		var counter = 0,
+            targetHtml = "";
+
+        console.log(json);
+        
+		json.forEach(function(item, i){
+			if(counter < dnd.filters.amount){
+				var html = sourceHtml;
+                
+				var isPrestige = item.prestige == 1 ? true : false;
+				var isComponentVerbal = item.verbal_component == 1 ? true : false;
+				var isComponentSomatic = item.somatic_component == 1 ? true : false;
+				var isComponentArcane = item.arcane_focus_component == 1 ? true : false;
+				var isComponentDivine = item.divine_focus_component == 1 ? true : false;
+				var isComponentXP = item.xp_component == 1 ? true : false;
+                
+				html = dnd.replaceAll(html, '#NAME#', item.name);
+				html = dnd.replaceAll(html, '#ALIAS#', item.slug);
+				html = dnd.replaceAll(html, '#DESCRIPTION#', item.description);
+				html = dnd.replaceAll(html, '#PRESTIGE#', isPrestige);
+				html = dnd.replaceAll(html, '#SPELLSCHOOL#', item.spellschool_name);
+				html = dnd.replaceAll(html, '#COMPONENTVERBAL#', isComponentVerbal);
+				html = dnd.replaceAll(html, '#COMPONENTSOMATIC#', isComponentSomatic);
+				html = dnd.replaceAll(html, '#COMPONENTARCANE#', isComponentArcane);
+				html = dnd.replaceAll(html, '#COMPONENTDIVINE#', isComponentDivine);
+				html = dnd.replaceAll(html, '#COMPONENTXP#', isComponentXP);
+				html = dnd.replaceAll(html, '#BOOK#', item.rulebook_name);
+				html = dnd.replaceAll(html, '#EDITION#', item.edition_name);
+
+				targetHtml += html;
+				counter++;
+			}
+		});
+        
+        item.innerHTML = targetHtml;
+	}
+
+	var clearTemplate = function(item){
+        item.innerHTML = "";
+	}
+	var loadListTemplate = function(item, template, data){
+        var sourceHtml = template.innerHTML,
+            hash = window.location.hash.substring(1),
+            filteredJson = data;
+
+        if(hash){
+            filteredJson = filterData(filteredJson);
+        }
+
+        replaceListData(item, sourceHtml, filteredJson);
+	}
+    var loadPageTemplate = function(item, template, data){
+        var sourceHtml = template.innerHTML,
+            filteredJson = data;
+        
+        replacePageData(item, sourceHtml, filteredJson);
     }
     
-    var loadTemplates = function(data){
+    
+    dnd.templateData = function(item, template, type, data){
+        clearTemplate(item);
         if(dnd.pagetype == "list"){
-            loadListTemplate(".-js-template--" + dnd.menu, "#template--" + dnd.menu, data);
+            loadListTemplate(item, template, data);
         } else {
-            loadPageTemplate(".-js-template--" + dnd.menu, "#template--" + dnd.menu, data);
+            loadPageTemplate(item, template, data);
         }
     }
-    
     dnd.templates = function(){
-        var data = dnd.service[dnd.menu];
-        console.log(data);
-        if(data == undefined && dnd.vars.hasLocalStorage){
-            if(localStorage.getItem(dnd.menu) != null){
-                dnd.service[dnd.menu] = JSON.parse(JSON.parse(localStorage.getItem(dnd.menu)));
-                data = dnd.service[dnd.menu];
+        var templateBaseClass = "-js-template";
+        var items = document.getElementsByClassName(templateBaseClass);
+        
+        for(var i = 0; i < items.length; i++){
+            var item = items[i];
+            if(item.classList[1] && item.classList[2]){
+                var template = document.getElementById(item.classList[1].replace("-js-","")),
+                    endpoint = item.getAttribute("data-endpoint"),
+                    type = item.classList[2].replace("-js-", "");
+
+                if(template && endpoint){
+                    dnd.data(endpoint, dnd.templateData, item, template, type);
+                }
             }
         }
-
-        if(data == undefined){
-            dnd.ajax(dataUrl + dnd.endpoint, function(data){
-                dnd.service[dnd.menu] = JSON.parse(data);
-                if(dnd.vars.hasLocalStorage){
-                    localStorage.setItem(dnd.menu, JSON.stringify(data));
-                }
-            }, function(){ loadError(); }, function(){ loadError(); });
-        } else {
-            loadTemplates(data);
-        }
-	}
-})();
-var dnd = dnd || {};
-(function() {
-	"use strict";
-	dnd.vars = dnd.vars || {};
-	dnd.service = dnd.service || {};
-	var dataUrl = "http://138.68.114.21";
-	var loadError = function(){ console.log("Error loading data"); }
-	var loadData = function(hasLocalStorage, callback){
-		dnd.ajax(dataUrl + "/endpoints", function(endpoints){
-			var total = 0, counter = 0;
-			dnd.service.endpoints = JSON.parse(endpoints);
-
-			if(hasLocalStorage){
-				localStorage.setItem("endpoints", endpoints);
-			}
-
-			dnd.service.endpoints.forEach(function(endpoint, id){
-				if(endpoint.path.indexOf(":id") == -1 && endpoint.path.indexOf(":rid") == -1 && endpoint.path.indexOf(":sid") == -1){ total++; }
-			});
-
-
-			dnd.service.endpoints.forEach(function(endpoint, id){
-				if(endpoint.path.indexOf(":id") == -1 && endpoint.path.indexOf(":rid") == -1 && endpoint.path.indexOf(":sid") == -1){
-
-					dnd.ajax(dataUrl + endpoint.path, function(data){
-						counter++;
-						dnd.service["" + endpoint.alias + ""] = JSON.parse(data);
-						if(hasLocalStorage){
-							localStorage.setItem(endpoint.alias, JSON.stringify(data));
-						}
-						if(counter == total){ serviceLoaded(callback); }
-					}, function(){ loadError(); }, function(){ loadError(); });
-				}
-			});
-		}, function(){ loadError(); }, function(){ loadError(); });
-	}
-	var service = function(callback){
-
-
-		if(dnd.vars.hasLocalStorage && localStorage.length == 0){
-			loadData(true, callback);
-		} else if (dnd.vars.hasLocalStorage){
-			var counter = 0;
-			JSON.parse(localStorage.getItem("endpoints")).forEach(function(endpoint, id){
-				counter++;
-				if(endpoint.path.indexOf(":id") == -1 && endpoint.path.indexOf(":rid") == -1 && endpoint.path.indexOf(":sid") == -1){
-					var localItem = localStorage.getItem(endpoint.alias);
-					dnd.service["" + endpoint.alias + ""] = JSON.parse(JSON.parse(localItem));
-				}
-				if(counter == JSON.parse(localStorage.getItem("endpoints")).length){
-					serviceLoaded(callback);
-				}
-			});
-		} else {
-			loadData(false, callback);
-		}
-	}
-
-	var serviceLoaded = function(callback){
-		var loader = dnd.selector("#Loader");
-		loader.classList.add("is-hidden");
-		callback();
-	}
-
-	dnd.initService = function(callback){
-		var loader = dnd.selector("#Loader");
-		//localStorage.clear();
-		if(dnd.database){
-			service(callback);
-		} else {
-			loader.style.display = 'none';
-		}
-	}
+    }
 })();
 
 var dnd = dnd || {};
 (function() {
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
+    
+    dnd.vars.localstorage = false;
+    dnd.vars.indexeddb = false;
 
-	if (typeof(Storage) !== "undefined") {
-		dnd.vars.hasLocalStorage = true;
-	} else {
-		dnd.vars.hasLocalStorage = false;
-	}
+	if (typeof(Storage) !== "undefined") { dnd.vars.localstorage = true; }
+    if (window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB) { dnd.vars.indexeddb = true; }
 
     dnd.navigation();
-	dnd.dataLoaded = function(){
-		dnd.filters();
-		dnd.templates();
-	}
-	dnd.initService(dnd.dataLoaded);
+    dnd.filters();
+    dnd.templates();
 })();

@@ -90,6 +90,7 @@
 
 
 	/* filter */
+    --filterLineHeight: 51px;
 	--filterBackground: rgba(var(--whiteRGB),0.5);
 	--filterBackgroundEven: rgba(var(--whiteRGB),0.3);
 	--filterBackgroundOdd: rgba(var(--grayDarkRGB),0.08);

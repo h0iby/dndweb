@@ -32,6 +32,8 @@
 		animation-duration: 0.25s;
 		animation-delay: .10s;
 		animation-fill-mode: forwards;
+        
+        & .stroke1 { animation: animateLogo .9s 2; }
 
 		&::before, &::after{
 			position: absolute;
@@ -245,10 +247,15 @@
 	0%   { opacity: 0; }
 	100% { opacity: 1; }
 }
+@keyframes animateLogo {
+  0% { fill: url(#Gradient); clip-path: inset(0 100% 100% 0); }
+  100% { fill: url(#Gradient); clip-path: inset(0 0 0 0); }
+}
 @keyframes showSearch {
 	0%   { opacity: 0; }
 	100% { opacity: 1; }
 }
+
 
 @keyframes searchIconLineShorten {
 	0%   { width: 32px; }

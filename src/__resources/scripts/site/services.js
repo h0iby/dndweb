@@ -3,8 +3,12 @@ var dnd = dnd || {};
 	"use strict";
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
-	var dataUrl = "http://138.68.114.21";
+	var dataUrl = "http://localhost";
+    console.log(dataUrl);
 	var loadError = function(){ console.log("Error loading data"); }
+    
+    
+    /*
 	var loadData = function(hasLocalStorage, callback){
 		dnd.ajax(dataUrl + "/endpoints", function(endpoints){
 			var total = 0, counter = 0;
@@ -15,12 +19,12 @@ var dnd = dnd || {};
 			}
 
 			dnd.service.endpoints.forEach(function(endpoint, id){
-				if(endpoint.path.indexOf(":id") == -1 && endpoint.path.indexOf(":rid") == -1 && endpoint.path.indexOf(":sid") == -1){ total++; }
+				if(endpoint.path.indexOf(":rid") == -1 && endpoint.path.indexOf(":sid") == -1){ total++; }
 			});
 
 
 			dnd.service.endpoints.forEach(function(endpoint, id){
-				if(endpoint.path.indexOf(":id") == -1 && endpoint.path.indexOf(":rid") == -1 && endpoint.path.indexOf(":sid") == -1){
+				if(endpoint.path.indexOf(":rid") == -1 && endpoint.path.indexOf(":sid") == -1){
 
 					dnd.ajax(dataUrl + endpoint.path, function(data){
 						counter++;
@@ -43,7 +47,7 @@ var dnd = dnd || {};
 			var counter = 0;
 			JSON.parse(localStorage.getItem("endpoints")).forEach(function(endpoint, id){
 				counter++;
-				if(endpoint.path.indexOf(":id") == -1 && endpoint.path.indexOf(":rid") == -1 && endpoint.path.indexOf(":sid") == -1){
+				if(endpoint.path.indexOf(":rid") == -1 && endpoint.path.indexOf(":sid") == -1){
 					var localItem = localStorage.getItem(endpoint.alias);
 					dnd.service["" + endpoint.alias + ""] = JSON.parse(JSON.parse(localItem));
 				}
@@ -56,11 +60,7 @@ var dnd = dnd || {};
 		}
 	}
 
-	var serviceLoaded = function(callback){
-		var loader = dnd.selector("#Loader");
-		loader.classList.add("is-hidden");
-		callback();
-	}
+	
 
 	dnd.initService = function(callback){
 		var loader = dnd.selector("#Loader");
@@ -70,5 +70,23 @@ var dnd = dnd || {};
 		} else {
 			loader.style.display = 'none';
 		}
+	}
+    */
+
+    dnd.data = function(endpoint, callback, item, template, type){
+        //do IndexedDB (localstorage is too small)
+        
+        dnd.ajax(dataUrl + endpoint, function(data){
+            var json = JSON.parse(data);
+            
+            var loader = dnd.selector("#Loader");
+            loader.style.display = 'none';
+            loader.classList.add("is-hidden");
+            
+            if(json != null){
+                callback(item, template, type, json);
+            }
+            
+        }, function(){ loadError(); }, function(){ loadError(); });
 	}
 })();

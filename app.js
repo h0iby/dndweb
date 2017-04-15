@@ -255,11 +255,12 @@ var serviceCallback = function(data){
 
 // service request - with callback when done.
 var serviceRequest = function(){
+    console.log("http://localhost/endpoints");
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 		if (this.readyState === 4) { serviceCallback(this.responseText); }
 	};
-	xhr.open("GET", "http://138.68.114.21/endpoints");
+	xhr.open("GET", "http://localhost/endpoints");
 	xhr.send();
 }
 

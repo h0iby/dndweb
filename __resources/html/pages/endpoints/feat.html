@@ -6,7 +6,7 @@
 	<div class="section__filter">
 		<input class="filter__toggle" type="checkbox" />
 		<span class="h4 filter__title">Filters</span>
-		<div class="filter">
+		<div class="filter" data-filters="5">
 			<ul class="filter__list">
 				<li class="filter__list__item">
 					<label class="filter__list__item__text" for="filterSlug">
@@ -17,27 +17,11 @@
 					</span>
 				</li>
 				<li class="filter__list__item">
-					<label class="filter__list__item__text" for="filterFeatCategory">
-						##Feat Category
-					</label>
-					<span class="filter__list__item__container filter__list__item__container--select">
-						<select id="filterFeat-Category" class="filter__list__item__container__select"></select>
-					</span>
-				</li>
-				<li class="filter__list__item">
 					<label class="filter__list__item__text" for="filterKeywords">
 						##Keywords (benefit, special, description)
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--textbox">
 						<input class="filter__list__item__container__input" id="filterKeywords" type="text" />
-					</span>
-				</li>
-				<li class="filter__list__item">
-					<label class="filter__list__item__text" for="filterBenefit">
-						##Prerequisites
-					</label>
-					<span class="filter__list__item__container filter__list__item__container--textbox">
-						<input class="filter__list__item__container__input" id="filterBenefit" type="text" />
 					</span>
 				</li>
 				<li class="filter__list__item">
@@ -71,7 +55,7 @@
 					<td data-type="book" class="table__row__td table__row__td--book table__row__td--header"><strong class="table__row__td__bold">Rulebook</strong></td>
 				</tr>
 			</thead>
-			<tbody class="-js-template -js-template--feat"></tbody>
+			<tbody class="-js-template -js-template--feat -js-list" data-endpoint="#DATAENDPOINT#"></tbody>
 		</table>
 	</div>
 	<div class="section__footer">
@@ -84,8 +68,4 @@
 		<td data-type="desription" class="table__row__td table__row__td--description">#DESCRIPTION#</td>
 		<td data-type="book" class="table__row__td table__row__td--book"><a class="table__row__td__link" href="#URL#">#BOOK#</a></td>
 	</tr>
-</script>
-<script type="text/javascript">
-	var dnd = dnd || {};
-	dnd.pagetype = "list";
 </script>

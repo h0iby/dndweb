@@ -90,7 +90,7 @@ var dnd = dnd || {};
 	}
 	var filterPageAmount = function(){
 		dnd.filters.amount = 25;
-		if(dnd.vars.hasLocalStorage){
+		if(dnd.vars.localstorage){
 			if(localStorage.getItem("filter-amount") == null){
 				localStorage.setItem("filter-amount", dnd.filters.amount);
 			} else {
@@ -113,7 +113,7 @@ var dnd = dnd || {};
 				var selectValue = this.options[this.selectedIndex].value;
 				dnd.filters.amount = parseInt(selectValue);
 
-				if(dnd.vars.hasLocalStorage){
+				if(dnd.vars.localstorage){
 					localStorage.setItem("filter-amount", dnd.filters.amount);
 				}
 

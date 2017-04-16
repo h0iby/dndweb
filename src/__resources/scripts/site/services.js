@@ -72,21 +72,36 @@ var dnd = dnd || {};
 		}
 	}
     */
+    var loadData = function(callback){
+        callback;
+    }
+    
+    var saveData = function(json, callback){
+        dnd.service[dnd.menu] = json;
+        callback;
+    }
+    
 
     dnd.data = function(endpoint, callback, item, template, type){
+        var dataLoad = false;
         //do IndexedDB (localstorage is too small)
         
-        dnd.ajax(dataUrl + endpoint, function(data){
-            var json = JSON.parse(data);
-            
-            var loader = dnd.selector("#Loader");
-            loader.style.display = 'none';
-            loader.classList.add("is-hidden");
-            
-            if(json != null){
-                callback(item, template, type, json);
-            }
-            
-        }, function(){ loadError(); }, function(){ loadError(); });
+        if(!dataLoad){
+            dnd.ajax(dataUrl + endpoint, function(data){
+                var json = JSON.parse(data);
+
+                var loader = dnd.selector("#Loader");
+                loader.style.display = 'none';
+                loader.classList.add("is-hidden");
+
+                if(json != null){
+                    saveData(json, callback(item, template, type, json));
+                }
+
+            }, function(){ loadError(); }, function(){ loadError(); });
+        } else {
+            var json = dnd.service[dnd.menu];
+            loadData(callback(item, template, type, json));
+        }
 	}
 })();

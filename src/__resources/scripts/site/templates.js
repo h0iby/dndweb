@@ -65,7 +65,7 @@ var dnd = dnd || {};
 		return filteredJson;
 	}
 
-	var replaceListData = function(item, sourceHtml, json){
+	var replaceData = function(item, sourceHtml, json){
 		var counter = 0,
             targetHtml = "";
 
@@ -104,43 +104,6 @@ var dnd = dnd || {};
         
         item.innerHTML = targetHtml;
 	}
-    var replacePageData = function(item, sourceHtml, json){
-		var counter = 0,
-            targetHtml = "";
-
-        console.log(json);
-        
-		json.forEach(function(item, i){
-			if(counter < dnd.filters.amount){
-				var html = sourceHtml;
-                
-				var isPrestige = item.prestige == 1 ? true : false;
-				var isComponentVerbal = item.verbal_component == 1 ? true : false;
-				var isComponentSomatic = item.somatic_component == 1 ? true : false;
-				var isComponentArcane = item.arcane_focus_component == 1 ? true : false;
-				var isComponentDivine = item.divine_focus_component == 1 ? true : false;
-				var isComponentXP = item.xp_component == 1 ? true : false;
-                
-				html = dnd.replaceAll(html, '#NAME#', item.name);
-				html = dnd.replaceAll(html, '#ALIAS#', item.slug);
-				html = dnd.replaceAll(html, '#DESCRIPTION#', item.description);
-				html = dnd.replaceAll(html, '#PRESTIGE#', isPrestige);
-				html = dnd.replaceAll(html, '#SPELLSCHOOL#', item.spellschool_name);
-				html = dnd.replaceAll(html, '#COMPONENTVERBAL#', isComponentVerbal);
-				html = dnd.replaceAll(html, '#COMPONENTSOMATIC#', isComponentSomatic);
-				html = dnd.replaceAll(html, '#COMPONENTARCANE#', isComponentArcane);
-				html = dnd.replaceAll(html, '#COMPONENTDIVINE#', isComponentDivine);
-				html = dnd.replaceAll(html, '#COMPONENTXP#', isComponentXP);
-				html = dnd.replaceAll(html, '#BOOK#', item.rulebook_name);
-				html = dnd.replaceAll(html, '#EDITION#', item.edition_name);
-
-				targetHtml += html;
-				counter++;
-			}
-		});
-        
-        item.innerHTML = targetHtml;
-	}
 
 	var clearTemplate = function(item){
         item.innerHTML = "";
@@ -154,19 +117,19 @@ var dnd = dnd || {};
             filteredJson = filterData(filteredJson);
         }
 
-        replaceListData(item, sourceHtml, filteredJson);
+        replaceData(item, sourceHtml, filteredJson);
 	}
     var loadPageTemplate = function(item, template, data){
         var sourceHtml = template.innerHTML,
             filteredJson = data;
         
-        replacePageData(item, sourceHtml, filteredJson);
+        replaceData(item, sourceHtml, filteredJson);
     }
     
     
     dnd.templateData = function(item, template, type, data){
         clearTemplate(item);
-        if(dnd.pagetype == "list"){
+        if(type == "list"){
             loadListTemplate(item, template, data);
         } else {
             loadPageTemplate(item, template, data);

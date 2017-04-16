@@ -9,6 +9,14 @@ module.exports = {
 		console.log("Registering endpoint: " + item.path);
 		app.get(item.path, (req, res) => {
 			var current = html;
+            
+            var replaceFunction = function(replaceFrom, replaceTo){
+                if(current.indexOf(replaceFrom) > -1){
+                    current = current.replace(replaceFrom, replaceTo);
+                    replaceFunction(replaceFrom, replaceTo);
+                }
+            }
+            
 			var serviceCallback = function(response){
 				var output = JSON.parse(response)
 					,repData = true
@@ -35,30 +43,30 @@ module.exports = {
 					}
 				}
 
-				current = current.replace("#LOADDATA#", repData);
-				current = current.replace("#MENUITEM#", repAlias);
-				current = current.replace("#MENUENDPOINT#", repPath);
-				current = current.replace("#DATAENDPOINT#", repPath);
-				current = current.replace("#ROBOTS#", repRobots);
-
-				current = current.replace("#PAGETITLE#", repTitle);
-				current = current.replace("#METATITLE#", repTitle);
-				current = current.replace("#OGTITLE#", repTitle);
-				current = current.replace("#TWITTERTITLE#", repTitle);
-				current = current.replace("#PROPTITLE#", repTitle);
-
-				current = current.replace("#METADESCRIPTION#", repDescription);
-				current = current.replace("#PROPDESCRIPTION#", repDescription);
-				current = current.replace("#OGDESCRIPTION#", repDescription);
-				current = current.replace("#TWITTERDESCRIPTION#", repDescription);
-				current = current.replace("#TWITTERCARD#", repDescription);
-
-				current = current.replace("#METAKEYWORDS#", repKeywords);
-
-				current = current.replace("#OGURL#", repUrl);
-				current = current.replace("#CANNONICAL#", repUrl);
-
-				current = current.replace("#OGTYPE#", repType);
+                replaceFunction("#LOADDATA#", repData);
+                replaceFunction("#MENUITEM#", repAlias);
+                replaceFunction("#MENUENDPOINT#", repPath);
+                replaceFunction("#DATAENDPOINT#", repPath);
+                replaceFunction("#ROBOTS#", repRobots);
+                
+                replaceFunction("#PAGETITLE#", repTitle);
+                replaceFunction("#METATITLE#", repTitle);
+                replaceFunction("#OGTITLE#", repTitle);
+                replaceFunction("#TWITTERTITLE#", repTitle);
+                replaceFunction("#PROPTITLE#", repTitle);
+                
+                replaceFunction("#METADESCRIPTION#", repDescription);
+                replaceFunction("#PROPDESCRIPTION#", repDescription);
+                replaceFunction("#OGDESCRIPTION#", repDescription);
+                replaceFunction("#TWITTERDESCRIPTION#", repDescription);
+                replaceFunction("#TWITTERCARD#", repDescription);
+                
+                replaceFunction("#METAKEYWORDS#", repKeywords);
+                
+                replaceFunction("#OGURL#", repKeywords);
+                replaceFunction("#CANNONICAL#", repKeywords);
+                
+                replaceFunction("#OGTYPE#", repType);
 
 				res.send(current);
 			}

@@ -1,27 +1,24 @@
 <section class="main__article__section section">
-	<div class="section__intro">
-		<h2>#NAME# </h2>
-        <p>(<a href="#BOOKURL#">#BOOKNAME#</a> )</p>
-        <p>[ #FEATCATEGORIES# ]</p>
-        <p>#DESCRIPTION#</p>
-	</div>
+	<div class="-js-template -js-template--feat -js-page section__intro" data-endpoint="#DATAENDPOINT#"></div>
 	<div class="section__main">
 		<h3>Prerequisites for #NAME#:</h3>
-        <div class="-js-template -js-template--feat -js-page" data-endpoint="#DATAENDPOINT#">#PREREQUISITES#</div>
-        
+        <div class="js-template js-template--feat js-page" data-endpoint="#DATAENDPOINT#">#PREREQUISITES#</div>
+
         <h3>#NAME# is required for:</h3>
-        <div class="-js-template -js-template--feat -js-page" data-endpoint="#DATAENDPOINT#">#REQUIRED#</div>
-        
+        <div class="js-template js-template--feat js-page" data-endpoint="#DATAENDPOINT#">#REQUIRED#</div>
+
         <h3>#NAME# benefit:</h3>
-        <div class="-js-template -js-template--feat -js-page" data-endpoint="#DATAENDPOINT#">#BENEFITS#</div>
-        
+        <div class="js-template js-template--feat js-page" data-endpoint="#DATAENDPOINT#">#BENEFITS#</div>
+
         <h3>Without #NAME#:</h3>
-        <div class="-js-template -js-template--feat -js-page" data-endpoint="#DATAENDPOINT#">#NORMAL#</div>
+        <div class="js-template js-template--feat js-page" data-endpoint="#DATAENDPOINT#">#NORMAL#</div>
 	</div>
 </section>
+
+
 <script id="template--feat" type="x-template">
-</script>
-<script id="template--feat-required" type="x-template">
-</script>
-<script id="template--feat-prerequisites" type="x-template">
+	<h2>#NAME# </h2>
+	<p>(<a href="#BOOKURL#">#BOOKNAME#</a> )</p>
+	<p>[ #FEATCATEGORIES# ]</p>
+	<p>#DESCRIPTION#</p>
 </script>

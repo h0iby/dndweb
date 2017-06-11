@@ -5,7 +5,7 @@ var dnd = dnd || {};
 	dnd.service = dnd.service || {};
     var dataUrl = "http://localhost";
     console.log(dataUrl);
-    
+
 	var filterData = function(json){
 		var hashItems = window.location.hash.substring(1).split("&");
 		var filteredJson = json;
@@ -101,7 +101,7 @@ var dnd = dnd || {};
 				counter++;
 			}
 		});
-        
+
         item.innerHTML = targetHtml;
 	}
 
@@ -122,12 +122,14 @@ var dnd = dnd || {};
     var loadPageTemplate = function(item, template, data){
         var sourceHtml = template.innerHTML,
             filteredJson = data;
-        
+
         replaceData(item, sourceHtml, filteredJson);
     }
-    
-    
+
+
     dnd.templateData = function(item, template, type, data){
+		console.log(item, template);
+		console.log(type, data);
         clearTemplate(item);
         if(type == "list"){
             loadListTemplate(item, template, data);
@@ -138,7 +140,6 @@ var dnd = dnd || {};
     dnd.templates = function(){
         var templateBaseClass = "-js-template";
         var items = document.getElementsByClassName(templateBaseClass);
-        
         for(var i = 0; i < items.length; i++){
             var item = items[i];
             if(item.classList[1] && item.classList[2]){
@@ -146,6 +147,8 @@ var dnd = dnd || {};
                     endpoint = item.getAttribute("data-endpoint"),
                     type = item.classList[2].replace("-js-", "");
 
+					console.log(item.classList[1], item.getAttribute("data-endpoint"));
+					console.log(template, endpoint);
                 if(template && endpoint){
                     dnd.data(endpoint, dnd.templateData, item, template, type);
                 }

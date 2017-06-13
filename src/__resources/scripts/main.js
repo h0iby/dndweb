@@ -13,10 +13,19 @@ var dnd = dnd || {};
     dnd.vars.localstorage = false;
     dnd.vars.indexeddb = false;
 
+	window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+
+	//prefixes of window.IDB objects
+	window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
+	window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
+
+
 	if (typeof(Storage) !== "undefined") { dnd.vars.localstorage = true; }
-    if (window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB) { dnd.vars.indexeddb = true; }
+    if (window.indexedDB) { dnd.vars.indexeddb = true; }
+
 
     dnd.navigation();
-    dnd.filters();
+    //dnd.filters();
+	dnd.data();
     dnd.templates();
 })();

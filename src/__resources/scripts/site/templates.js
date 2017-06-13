@@ -3,8 +3,9 @@ var dnd = dnd || {};
 	"use strict";
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
-    var dataUrl = "http://";
 
+	//var dataUrl = "http://";
+	/*
 	var filterData = function(json){
 		var hashItems = window.location.hash.substring(1).split("&");
 		var filteredJson = json;
@@ -167,4 +168,13 @@ var dnd = dnd || {};
 			}
 		}
     }
+	*/
+
+	dnd.templates = function(){
+        var templateBaseClass = "-js-template";
+        var items = document.getElementsByClassName(templateBaseClass);
+
+		if(items.length > 0){
+		}
+	}
 })();

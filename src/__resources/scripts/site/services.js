@@ -3,9 +3,9 @@ var dnd = dnd || {};
 	"use strict";
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
+	var db;
 	var dataUrl = "http://";
 	var loadError = function(){ console.log("Error loading data"); }
-
 
     /*
 	var loadData = function(hasLocalStorage, callback){
@@ -71,6 +71,8 @@ var dnd = dnd || {};
 		}
 	}
     */
+	/*
+
     var loadData = function(callback){
         callback;
     }
@@ -109,6 +111,99 @@ var dnd = dnd || {};
 			} else {
 				var json = dnd.service[dnd.menu];
 				loadData(callback(item, template, type, json));
+			}
+		}
+	}
+
+	*/
+
+
+	dnd.dataadd = function(){
+		console.log(db);
+		var request = db.transaction(["dndData"], "readwrite")
+                .objectStore("dndData")
+                .add({ id: "00-03", name: "Kenny", age: 19, email: "kenny@planet.org" });
+
+        request.onsuccess = function(event) {
+                alert("Kenny has been added to your database.");
+        };
+
+        request.onerror = function(event) {
+                alert("Unable to add data\r\nKenny is aready exist in your database! ");
+        }
+
+	}
+
+	dnd.dataread = function() {
+		console.log(db);
+        var transaction = db.transaction(["dndData"]);
+        var objectStore = transaction.objectStore("dndData");
+        var request = objectStore.get("00-03");
+        request.onerror = function(event) {
+          alert("Unable to retrieve daa from database!");
+        };
+        request.onsuccess = function(event) {
+          // Do something with the request.result!
+          if(request.result) {
+                alert("Name: " + request.result.name + ", Age: " + request.result.age + ", Email: " + request.result.email);
+          } else {
+                alert("Kenny couldn't be found in your database!");
+          }
+        };
+	}
+
+	dnd.datareadall = function(){
+		var objectStore = db.transaction("dndData").objectStore("dndData");
+
+        objectStore.openCursor().onsuccess = function(event) {
+          var cursor = event.target.result;
+          if (cursor) {
+                alert("Name for id " + cursor.key + " is " + cursor.value.name + ", Age: " + cursor.value.age + ", Email: " + cursor.value.email);
+                cursor.continue();
+          }
+          else {
+                alert("No more entries!");
+          }
+        };
+
+	}
+
+
+	dnd.data = function(){
+		var loader = dnd.selector("#Loader");
+		dataUrl += dnd.path;
+
+		if(dnd.endpoint == "" || dnd.menu == ""){
+			loader.style.display = 'none';
+			loader.classList.add("is-hidden");
+		} else {
+			if(dnd.vars.indexeddb){
+				console.log("test");
+
+				const dndData = [
+				  { id: "00-01", name: "Bill", age: 35, email: "bill@company.com" },
+				  { id: "00-02", name: "Donna", age: 32, email: "donna@home.org" }
+				];
+
+				var request = window.indexedDB.open("dndDB", 1);
+
+				request.onerror = function(event) { loadError(); };
+
+				request.onsuccess = function(event) {
+				  db = request.result;
+					console.log(db);
+				};
+
+
+
+				request.onupgradeneeded = function(event) {
+					var db = event.target.result;
+					var objectStore = db.createObjectStore("dndData", {keyPath: "id"});
+					for (var i in dndData) { objectStore.add(dndData[i]); }
+				}
+
+
+			} else {
 			}
 		}
 	}

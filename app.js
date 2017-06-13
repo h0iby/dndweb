@@ -1,4 +1,5 @@
 var express = require('express')
+	,serverPath = "http://localhost:81"
 	,app = express()
 	,path = require('path')
 	,XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest
@@ -255,12 +256,12 @@ var serviceCallback = function(data){
 
 // service request - with callback when done.
 var serviceRequest = function(){
-    console.log("http://localhost/endpoints");
+    console.log(serverPath + "/endpoints");
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 		if (this.readyState === 4) { serviceCallback(this.responseText); }
 	};
-	xhr.open("GET", "http://localhost/endpoints");
+	xhr.open("GET", serverPath + "/endpoints");
 	xhr.send();
 }
 

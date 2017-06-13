@@ -233,11 +233,10 @@ var dnd = dnd || {};
 	"use strict";
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
-	var dataUrl = "http://localhost";
-    console.log(dataUrl);
+	var dataUrl = "http://";
 	var loadError = function(){ console.log("Error loading data"); }
-    
-    
+
+
     /*
 	var loadData = function(hasLocalStorage, callback){
 		dnd.ajax(dataUrl + "/endpoints", function(endpoints){
@@ -290,7 +289,7 @@ var dnd = dnd || {};
 		}
 	}
 
-	
+
 
 	dnd.initService = function(callback){
 		var loader = dnd.selector("#Loader");
@@ -305,34 +304,43 @@ var dnd = dnd || {};
     var loadData = function(callback){
         callback;
     }
-    
+
     var saveData = function(json, callback){
         dnd.service[dnd.menu] = json;
         callback;
     }
-    
+
 
     dnd.data = function(endpoint, callback, item, template, type){
-        var dataLoad = false;
-        //do IndexedDB (localstorage is too small)
-        
-        if(!dataLoad){
-            dnd.ajax(dataUrl + endpoint, function(data){
-                var json = JSON.parse(data);
+		var loader = dnd.selector("#Loader");
+		dataUrl += dnd.path;
+		console.log("TEST");
+		if(dnd.endpoint == "" || dnd.menu == ""){
+			loader.style.display = 'none';
+			loader.classList.add("is-hidden");
+		} else {
+			var dataLoad = false;
+			//do IndexedDB (localstorage is too small)
 
-                var loader = dnd.selector("#Loader");
-                loader.style.display = 'none';
-                loader.classList.add("is-hidden");
+			if(!dataLoad){
+				console.log(dataUrl);
+				dnd.ajax(dataUrl + endpoint, function(data){
+					var json = JSON.parse(data);
 
-                if(json != null){
-                    saveData(json, callback(item, template, type, json));
-                }
+					var loader = dnd.selector("#Loader");
+					loader.style.display = 'none';
+					loader.classList.add("is-hidden");
 
-            }, function(){ loadError(); }, function(){ loadError(); });
-        } else {
-            var json = dnd.service[dnd.menu];
-            loadData(callback(item, template, type, json));
-        }
+					if(json != null){
+						saveData(json, callback(item, template, type, json));
+					}
+
+				}, function(){ loadError(); }, function(){ loadError(); });
+			} else {
+				var json = dnd.service[dnd.menu];
+				loadData(callback(item, template, type, json));
+			}
+		}
 	}
 })();
 var dnd = dnd || {};
@@ -362,8 +370,7 @@ var dnd = dnd || {};
 	"use strict";
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
-    var dataUrl = "http://localhost";
-    console.log(dataUrl);
+    var dataUrl = "http://";
 
 	var filterData = function(json){
 		var hashItems = window.location.hash.substring(1).split("&");
@@ -496,23 +503,36 @@ var dnd = dnd || {};
             loadPageTemplate(item, template, data);
         }
     }
-    dnd.templates = function(){
+
+	dnd.templates = function(){
+		dataUrl += dnd.path;
+		var loader = dnd.selector("#Loader");
         var templateBaseClass = "-js-template";
         var items = document.getElementsByClassName(templateBaseClass);
-        for(var i = 0; i < items.length; i++){
-            var item = items[i];
-            if(item.classList[1] && item.classList[2]){
-                var template = document.getElementById(item.classList[1].replace("-js-","")),
-                    endpoint = item.getAttribute("data-endpoint"),
-                    type = item.classList[2].replace("-js-", "");
 
-					console.log(item.classList[1], item.getAttribute("data-endpoint"));
-					console.log(template, endpoint);
-                if(template && endpoint){
-                    dnd.data(endpoint, dnd.templateData, item, template, type);
-                }
-            }
-        }
+		if(items.length < 1){
+			loader.style.display = 'none';
+			loader.classList.add("is-hidden");
+		} else {
+			for(var i = 0; i < items.length; i++){
+				var item = items[i];
+				if(item.classList[1] && item.classList[2]){
+					var template = document.getElementById(item.classList[1].replace("-js-","")),
+						endpoint = item.getAttribute("data-endpoint"),
+						type = item.classList[2].replace("-js-", "");
+
+					if(template && endpoint){
+						dnd.data(endpoint, dnd.templateData, item, template, type);
+					} else {
+						loader.style.display = 'none';
+						loader.classList.add("is-hidden");
+					}
+				} else {
+					loader.style.display = 'none';
+					loader.classList.add("is-hidden");
+				}
+			}
+		}
     }
 })();
 
@@ -520,7 +540,8 @@ var dnd = dnd || {};
 (function() {
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
-    
+	dnd.path = "localhost:81";
+
     dnd.vars.localstorage = false;
     dnd.vars.indexeddb = false;
 

@@ -8,7 +8,8 @@ var dnd = dnd || {};
 (function() {
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
-    
+	dnd.path = "localhost:81";
+
     dnd.vars.localstorage = false;
     dnd.vars.indexeddb = false;
 

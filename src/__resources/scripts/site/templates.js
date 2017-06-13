@@ -3,8 +3,7 @@ var dnd = dnd || {};
 	"use strict";
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
-    var dataUrl = "http://localhost";
-    console.log(dataUrl);
+    var dataUrl = "http://";
 
 	var filterData = function(json){
 		var hashItems = window.location.hash.substring(1).split("&");
@@ -137,22 +136,35 @@ var dnd = dnd || {};
             loadPageTemplate(item, template, data);
         }
     }
-    dnd.templates = function(){
+
+	dnd.templates = function(){
+		dataUrl += dnd.path;
+		var loader = dnd.selector("#Loader");
         var templateBaseClass = "-js-template";
         var items = document.getElementsByClassName(templateBaseClass);
-        for(var i = 0; i < items.length; i++){
-            var item = items[i];
-            if(item.classList[1] && item.classList[2]){
-                var template = document.getElementById(item.classList[1].replace("-js-","")),
-                    endpoint = item.getAttribute("data-endpoint"),
-                    type = item.classList[2].replace("-js-", "");
 
-					console.log(item.classList[1], item.getAttribute("data-endpoint"));
-					console.log(template, endpoint);
-                if(template && endpoint){
-                    dnd.data(endpoint, dnd.templateData, item, template, type);
-                }
-            }
-        }
+		if(items.length < 1){
+			loader.style.display = 'none';
+			loader.classList.add("is-hidden");
+		} else {
+			for(var i = 0; i < items.length; i++){
+				var item = items[i];
+				if(item.classList[1] && item.classList[2]){
+					var template = document.getElementById(item.classList[1].replace("-js-","")),
+						endpoint = item.getAttribute("data-endpoint"),
+						type = item.classList[2].replace("-js-", "");
+
+					if(template && endpoint){
+						dnd.data(endpoint, dnd.templateData, item, template, type);
+					} else {
+						loader.style.display = 'none';
+						loader.classList.add("is-hidden");
+					}
+				} else {
+					loader.style.display = 'none';
+					loader.classList.add("is-hidden");
+				}
+			}
+		}
     }
 })();

@@ -430,6 +430,14 @@
 								}
 							}
 						}
+
+						&:first-child{
+							& .header__nav__list__item__list__item{
+								&__line{
+									display: none;
+								}
+							}
+						}
 					}
 				}
 
@@ -547,7 +555,7 @@
 			}
 		}
 	}
-    
+
     &.is-hidden{
         & .header__nav{
             &__input--on:checked{

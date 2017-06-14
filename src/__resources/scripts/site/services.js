@@ -5,7 +5,7 @@ var dnd = dnd || {};
 	dnd.service = dnd.service || {};
 	var db;
 	var dataUrl = "http://";
-	var loadError = function(){ console.log("Error loading data"); }
+	var loadError = function(text){ var output = text == null ? "Error loading data" : text; console.log("Data Error", output); }
 
     /*
 	var loadData = function(hasLocalStorage, callback){
@@ -118,54 +118,77 @@ var dnd = dnd || {};
 	*/
 
 
-	dnd.dataadd = function(){
-		console.log(db);
-		var request = db.transaction(["dndData"], "readwrite")
-                .objectStore("dndData")
-                .add({ id: "00-03", name: "Kenny", age: 19, email: "kenny@planet.org" });
-
-        request.onsuccess = function(event) {
-                alert("Kenny has been added to your database.");
-        };
-
-        request.onerror = function(event) {
-                alert("Unable to add data\r\nKenny is aready exist in your database! ");
-        }
-
+	var indexedDbAdd = function(item){
+		var request = db.transaction(["dndData"], "readwrite").objectStore("dndData").add({ id: "00-03", name: "Kenny", age: 19, email: "kenny@planet.org" });
+		request.onsuccess = function(event) {
+			console.log("added");
+		};
+		request.onerror = function(event) { loadError("IndexedDb Add"); };
 	}
 
-	dnd.dataread = function() {
-		console.log(db);
-        var transaction = db.transaction(["dndData"]);
-        var objectStore = transaction.objectStore("dndData");
-        var request = objectStore.get("00-03");
-        request.onerror = function(event) {
-          alert("Unable to retrieve daa from database!");
-        };
-        request.onsuccess = function(event) {
-          // Do something with the request.result!
-          if(request.result) {
-                alert("Name: " + request.result.name + ", Age: " + request.result.age + ", Email: " + request.result.email);
-          } else {
-                alert("Kenny couldn't be found in your database!");
-          }
-        };
+	var indexedDbReadSingle = function(itemId) {
+		var item = [];
+		var transaction = db.transaction(["dndData"]);
+		var objectStore = transaction.objectStore("dndData");
+		var request = objectStore.get(itemId);
+		request.onerror = function(event) { loadError("IndexedDb Read Single"); };
+		request.onsuccess = function(event) {
+			if(request.result) {
+				console.log("result", request.result);
+			}
+
+
+		};
 	}
 
-	dnd.datareadall = function(){
-		var objectStore = db.transaction("dndData").objectStore("dndData");
+	var indexedDbReadAll = function(dbTable){
+		var objectStore = db.transaction(dbTable).objectStore(dbTable);
 
-        objectStore.openCursor().onsuccess = function(event) {
-          var cursor = event.target.result;
-          if (cursor) {
-                alert("Name for id " + cursor.key + " is " + cursor.value.name + ", Age: " + cursor.value.age + ", Email: " + cursor.value.email);
-                cursor.continue();
-          }
-          else {
-                alert("No more entries!");
-          }
-        };
+		objectStore.openCursor().onerror = function(){ loadError("IndexedDb Read All"); }
 
+		objectStore.openCursor().onsuccess = function(event) {
+			var cursor = event.target.result;
+			if (cursor) {
+				console.log(cursor.key);
+				cursor.continue();
+			} else {}
+
+		};
+			console.log("done");
+	}
+
+
+	var indexedDb = function(dbTable, dbMode, dbInput){
+		var request = window.indexedDB.open("dndDB", 1);
+		request.onerror = function(event) { loadError(); };
+		request.onsuccess = function(event) {
+			db = request.result;
+
+			/*
+			var tableIsAvailable = false;
+			for(var i = 0; i < db.objectStoreNames.length; i++){
+				if(dbTable == db.objectStoreNames[i]){
+					tableIsAvailable = true;
+
+				}
+			}
+
+			if(!tableIsAvailable){
+				const dndData = [];
+				var objectStore = db.createObjectStore(dbTable, {keyPath: "id"});
+				for (var i in dndData) { objectStore.add(dndData[i]); }
+			}
+*/
+			//indexedDbAdd(dbTable, dbInput);
+			//indexedDbReadAll(dbTable);
+			//indexedDbReadSingle(dbTable, "00-03");
+		};
+		request.onupgradeneeded = function(event) {
+			const dndData = [];
+			var db = event.target.result;
+			var objectStore = db.createObjectStore(dbTable, {keyPath: "id"});
+			for (var i in dndData) { objectStore.add(dndData[i]); }
+		}
 	}
 
 
@@ -178,29 +201,8 @@ var dnd = dnd || {};
 			loader.classList.add("is-hidden");
 		} else {
 			if(dnd.vars.indexeddb){
-				console.log("test");
+				indexedDb(dnd.type);
 
-				const dndData = [
-				  { id: "00-01", name: "Bill", age: 35, email: "bill@company.com" },
-				  { id: "00-02", name: "Donna", age: 32, email: "donna@home.org" }
-				];
-
-				var request = window.indexedDB.open("dndDB", 1);
-
-				request.onerror = function(event) { loadError(); };
-
-				request.onsuccess = function(event) {
-				  db = request.result;
-					console.log(db);
-				};
-
-
-
-				request.onupgradeneeded = function(event) {
-					var db = event.target.result;
-					var objectStore = db.createObjectStore("dndData", {keyPath: "id"});
-					for (var i in dndData) { objectStore.add(dndData[i]); }
-				}
 
 
 			} else {

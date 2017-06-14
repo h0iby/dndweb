@@ -22,6 +22,7 @@ module.exports = {
 				var output = JSON.parse(response)
 					,repData = true
 					,repAlias = item.alias.replace("-rid", "--" + req.params.rid).replace("-sid", "--" + req.params.sid)
+					,repMenu = item.alias
 					,repPath = item.path.replace(":rid", req.params.rid).replace(":sid", req.params.sid)
 					,repRobots = "index follow"
 					,repTitle = 'D&amp;D: ' + item.menu
@@ -46,6 +47,7 @@ module.exports = {
 
                 replaceFunction("#LOADDATA#", repData);
                 replaceFunction("#MENUITEM#", repAlias);
+				replaceFunction("#MENUTYPE#", repMenu);
                 replaceFunction("#MENUENDPOINT#", repPath);
                 replaceFunction("#DATAENDPOINT#", repPath);
                 replaceFunction("#ROBOTS#", repRobots);

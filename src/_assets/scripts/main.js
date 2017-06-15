@@ -422,6 +422,22 @@ var dnd = dnd || {};
 	}
 
 
+
+
+	var indexedDbInit = function(){
+		var request = window.indexedDB.open("dndDB", 1);
+		request.onerror = function(event) { loadError(); };
+		request.onsuccess = function(event) {
+			db = request.result;
+		}
+		request.onupgradeneeded = function(event) {
+			var db = event.target.result;
+			var objectStore = db.createObjectStore("dndData", {keyPath: "id"});
+		}
+	}
+
+
+
 	dnd.data = function(){
 		var loader = dnd.selector("#Loader");
 		dataUrl += dnd.path;
@@ -431,7 +447,8 @@ var dnd = dnd || {};
 			loader.classList.add("is-hidden");
 		} else {
 			if(dnd.vars.indexeddb){
-				indexedDb(dnd.type);
+				indexedDbInit();
+				//indexedDb(dnd.type);
 
 
 

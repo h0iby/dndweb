@@ -388,6 +388,8 @@ var dnd = dnd || {};
 	}
 
 
+
+
 	var indexedDb = function(dbTable, dbMode, dbInput){
 		var request = window.indexedDB.open("dndDB", 1);
 		request.onerror = function(event) { loadError(); };
@@ -424,17 +426,79 @@ var dnd = dnd || {};
 
 
 
-	var indexedDbInit = function(){
+
+
+
+
+
+	var idbItem = function(idbObj){
+		console.log("TEST", idbObj);
+		console.log(idbObj, db.objectStoreNames);
+	}
+
+
+
+
+
+
+	var idbCheck = function(idbObj){
+		console.log(idbObj, db.objectStoreNames);
+		var exists = false;
+		for(var i = 0; i < db.objectStoreNames.length; i++){
+			if(db.objectStoreNames[i] == idbObj){
+				exists = true;
+			}
+		}
+
+		//console.log(db.oldVersion);
+
+		if(exists){
+			console.log("exists objs");
+			idbItem(idbObj);
+		} else {
+			console.log("create new objs");
+			console.log(db);
+
+			//db.transaction(["dndData"], "readwrite").objectStore(idbObj);//.createObjectStore(idbObj, {keyPath: "id"});
+			//var objectStore = db.createObjectStore(idbObj, {keyPath: "id"});
+			//db.createObjectStore(idbObj, {keyPath: "id"});
+
+			/*
+			var request = indexedDB.open("dndDB");
+			request.onerror = function(event) {
+
+			};
+			request.onsuccess = function(event) {
+				var db = event.target.result;
+				var objectStore = db.createObjectStore(idbObj, {keyPath: "id"});
+			};
+			*/
+
+			idbItem(idbObj);
+		}
+	}
+
+
+
+
+
+
+	var idbInit = function(idbObj){
 		var request = window.indexedDB.open("dndDB", 1);
 		request.onerror = function(event) { loadError(); };
 		request.onsuccess = function(event) {
 			db = request.result;
+			idbCheck(idbObj)
 		}
 		request.onupgradeneeded = function(event) {
 			var db = event.target.result;
 			var objectStore = db.createObjectStore("dndData", {keyPath: "id"});
 		}
 	}
+
+
+
+
 
 
 
@@ -447,11 +511,7 @@ var dnd = dnd || {};
 			loader.classList.add("is-hidden");
 		} else {
 			if(dnd.vars.indexeddb){
-				indexedDbInit();
-				//indexedDb(dnd.type);
-
-
-
+				idbInit(dnd.type);
 			} else {
 			}
 		}
@@ -669,9 +729,8 @@ var dnd = dnd || {};
     dnd.vars.localstorage = false;
     dnd.vars.indexeddb = false;
 
-	window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 
-	//prefixes of window.IDB objects
+	window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 	window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
 	window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
 

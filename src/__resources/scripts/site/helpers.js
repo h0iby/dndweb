@@ -1,16 +1,27 @@
 var dnd = dnd || {};
 (function() {
 	"use strict";
-	dnd.ajax = function(dataUrl, successFunction, errorFunction){
+	dnd.ajax = function(mode, url, successFunction, errorFunction){
 		var request = new XMLHttpRequest();
-		request.open('GET', dataUrl, true);
+		request.open('GET', url);
 		request.onload = function() {
-			if (request.status >= 200 && request.status < 400) {
-				successFunction(request.responseText);
-			} else {
-				errorFunction();
+			if(!mode){
+				if (request.status >= 200 && request.status < 400) {
+					successFunction(request.responseText);
+				} else {
+					errorFunction();
+				}
 			}
 		};
+		request.onloadend = function(){
+			if(mode){
+				if (request.status >= 200 && request.status < 400) {
+					successFunction(request.responseText);
+				} else {
+					errorFunction();
+				}
+			}
+		}
 		request.onerror = function() {
 			errorFunction();
 		};

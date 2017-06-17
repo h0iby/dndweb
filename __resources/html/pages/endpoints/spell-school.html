@@ -28,19 +28,15 @@
 					<td data-type="name" class="table__row__td table__row__td--name table__row__td--header"><strong class="table__row__td__bold">Name</strong></td>
 				</tr>
 			</thead>
-			<tbody class="-js-template -js-template--spell-school -js-list" data-endpoint="#DATAENDPOINT#"></tbody>
+			<tbody class="-js-template -js-template--#MENUTYPE#" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#"></tbody>
 		</table>
 	</div>
 	<div class="section__footer">
 		#PAGING#
 	</div>
 </section>
-<script id="template--spell-school" type="x-template">
+<script id="template--#MENUTYPE#" type="x-template">
     <tr data-type="#ALIAS#" data-id="#ID#" class="table__row">
 		<td data-type="name" class="table__row__td table__row__td--name"><a class="table__row__td__link" href="#CURRENTURL#">#NAME#</a></td>
 	</tr>
-</script>
-<script type="text/javascript">
-	var dnd = dnd || {};
-	dnd.pagetype = "list";
 </script>

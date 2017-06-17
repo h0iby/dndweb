@@ -40,13 +40,16 @@ var dnd = dnd || {};
 		}
 	}
 
-
 	var populateSelect = function(elem){
-		var item = document.getElementById("filter" + elem);
-		var items = 0;
+		var item = document.getElementById("filter" + elem),
+			items = 0;
+
 		if(item){
-			var ident = elem.toLowerCase();
-			var json = dnd.service[ident];
+			var ident = elem.toLowerCase(),
+				json = dnd.service[ident];
+
+
+
 			if(json != undefined){
 				var first = document.createElement("option");
 				first.value = "";
@@ -60,6 +63,11 @@ var dnd = dnd || {};
 					option.innerHTML = json[i].name;
 					item.appendChild(option);
 				}
+			} else {
+				item.setAttribute("data-type", ident)
+				item.setAttribute("data-item", ident)
+				item.setAttribute("data-endpoint", "/" + ident)
+				dnd.data(item, dnd.filters);
 			}
 
 			if(items > 0){
@@ -123,6 +131,9 @@ var dnd = dnd || {};
 	}
 
 	dnd.filters = function(){
+		filterPageAmount();
+
+		/*
 		populateSelect("Rulebook");
 		populateSelect("Edition");
 		populateSelect("Feat-Category");
@@ -131,8 +142,129 @@ var dnd = dnd || {};
 		filterInput("Keywords");
 		filterInput("Benefit");
 
-		filterPageAmount();
 
 		getHash();
+		*/
+
 	}
+	dnd.filter = function(data){
+		var output = data,
+			hashItems = window.location.hash.substring(1).split("&");
+
+		/*
+		for(var i = 0; i < hashItems.length; i++){
+			var items = hashItems[i].split("=");
+			var item = items[0].toLowerCase();
+			var value = items[1]
+			var isDefault = false;
+
+			output = data.filter(function(row){
+				var selectors = [];
+				var isInRow = true;
+
+				if(item && row[item]){
+					selectors.push(row[item].toLowerCase());
+					isDefault = true;
+				}
+
+				if(!isDefault){
+					switch(item){
+						case "keywords":
+							selectors.push(row["name"].toLowerCase());
+							selectors.push(row["description"]);
+							break;
+						case "rulebook":
+						//case "edition":
+							selectors.push(row[item + "_slug"].toLowerCase());
+							break;
+						case "prerequisites":
+							//selectors.push(row[item + "_slug"].toLowerCase());
+							break;
+						default:
+							//selectors.push(row["name"].toLowerCase());
+							break;
+					}
+				}
+
+				var temp = null;
+				for(var s = 0; s < selectors.length; s++){
+					if(selectors[s].indexOf(value) > -1){
+						temp = true;
+					}
+				}
+				if(temp == null){
+					isInRow = false;
+				}
+
+				if(isInRow){
+					return true;
+				} else {
+					return false;
+				}
+			});
+		}
+		*/
+		return output;
+	}
+
+	/*
+	var filterData = function(json){
+		var hashItems = window.location.hash.substring(1).split("&");
+		var filteredJson = json;
+
+		for(var i = 0; i < hashItems.length; i++){
+			var items = hashItems[i].split("=");
+			var item = items[0].toLowerCase();
+			var value = items[1]
+			var isDefault = false;
+
+			filteredJson = json.filter(function(row){
+				var selectors = [];
+				var isInRow = true;
+
+				if(item && row[item]){
+					selectors.push(row[item].toLowerCase());
+					isDefault = true;
+				}
+
+				if(!isDefault){
+					switch(item){
+						case "keywords":
+							selectors.push(row["name"].toLowerCase());
+							selectors.push(row["description"]);
+							break;
+						case "rulebook":
+						//case "edition":
+							selectors.push(row[item + "_slug"].toLowerCase());
+							break;
+						case "prerequisites":
+							//selectors.push(row[item + "_slug"].toLowerCase());
+							break;
+						default:
+							//selectors.push(row["name"].toLowerCase());
+							break;
+					}
+				}
+
+				var temp = null;
+				for(var s = 0; s < selectors.length; s++){
+					if(selectors[s].indexOf(value) > -1){
+						temp = true;
+					}
+				}
+				if(temp == null){
+					isInRow = false;
+				}
+
+				if(isInRow){
+					return true;
+				} else {
+					return false;
+				}
+			});
+		}
+
+		return filteredJson;
+	}
+	*/
 })();

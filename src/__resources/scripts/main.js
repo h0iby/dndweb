@@ -1,8 +1,8 @@
 // = include /site/helpers.js
-// = include /site/filters.js
-// = include /site/services.js
 // = include /site/navigation.js
 // = include /site/templates.js
+// = include /site/data.js
+// = include /site/filters.js
 
 var dnd = dnd || {};
 (function() {
@@ -24,7 +24,5 @@ var dnd = dnd || {};
 
 
     dnd.navigation();
-    //dnd.filters();
-	dnd.data();
-    dnd.templates();
+	dnd.templates();
 })();

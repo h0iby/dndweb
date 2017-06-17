@@ -1,24 +1,24 @@
 <section class="main__article__section section">
-	<div class="-js-template -js-template--feat section__intro" data-endpoint="#DATAENDPOINT#"></div>
+	<div class="-js-template -js-template--#MENUTYPE# section__intro" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#"></div>
 
 
 	<div class="section__main">
 		<h3>Prerequisites for #NAME#:</h3>
-        <div class="js-template js-template--feat js-page" data-endpoint="#DATAENDPOINT#">#PREREQUISITES#</div>
+        <div class="js-template js-template--#MENUTYPE#-prerequisites js-page" data-type="#MENUTYPE#-prerequisites" data-item="#MENUITEM#-prerequisites" data-endpoint="#DATAENDPOINT#/prerequisites">#PREREQUISITES#</div>
 
         <h3>#NAME# is required for:</h3>
-        <div class="js-template js-template--feat js-page" data-endpoint="#DATAENDPOINT#">#REQUIRED#</div>
+        <div class="js-template js-template--#MENUTYPE#-requirements js-page" data-type="#MENUTYPE#-requirements" data-item="#MENUITEM#-requirements" data-endpoint="#DATAENDPOINT#/requirements">#REQUIRED#</div>
 
         <h3>#NAME# benefit:</h3>
-        <div class="js-template js-template--feat js-page" data-endpoint="#DATAENDPOINT#">#BENEFITS#</div>
+        <div class="js-template js-template--#MENUTYPE#-benefits js-page" data-type="#MENUTYPE#-benefits" data-item="#MENUITEM#-benefits" data-endpoint="#DATAENDPOINT#/benefits">#BENEFITS#</div>
 
         <h3>Without #NAME#:</h3>
-        <div class="js-template js-template--feat js-page" data-endpoint="#DATAENDPOINT#">#NORMAL#</div>
+        <div class="js-template js-template--#MENUTYPE#-normal js-page" data-type="#MENUTYPE#-normal" data-item="#MENUITEM#-normal" data-endpoint="#DATAENDPOINT#/normal">#NORMAL#</div>
 	</div>
 </section>
 
 
-<script id="template--feat" type="x-template">
+<script id="template--#MENUTYPE#" type="x-template">
 	<h2>#NAME# </h2>
 	<p>(<a href="#BOOKURL#">#BOOKNAME#</a> )</p>
 	<p>[ #FEATCATEGORIES# ]</p>

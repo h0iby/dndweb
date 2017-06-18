@@ -89,7 +89,6 @@ var dnd = dnd || {};
 						history.pushState(null, null, " ");
 					}
 				} else {
-					console.log('test 2');
 					var subStringTemp = hash.substring(hash.indexOf(item));
 					var subString = subStringTemp;
 					if(subStringTemp.indexOf("&") > -1){

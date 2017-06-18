@@ -105,23 +105,39 @@ var dnd = dnd || {};
 (function() {
 	"use strict";
 
-    dnd.navigation = function(){
-        var scrollPos = 0;
+	var filters = function(){
+		var hash = window.location.hash.substring(1);
+
+		if(hash != "" && hash != null){
+			var filterToggle = document.getElementsByClassName("filter__toggle");
+			if(filterToggle){
+				filterToggle[0].checked = true;
+			}
+		}
+	}
+	var topNav = function(){
+		var scrollPos = 0;
         var timeout;
         var header = document.getElementById("Header");
         var headerHeight = header.offsetHeight + 5;
-        
+
         window.onscroll = function() {
             if(window.pageYOffset < scrollPos){
                 header.classList.remove("is-hidden");
             } else {
                 header.classList.add("is-hidden");
             }
-            
+
             scrollPos = window.pageYOffset;
         };
+	}
+
+
+    dnd.navigation = function(){
+		topNav();
+		filters();
     }
-    
+
 })();
 var dnd = dnd || {};
 (function() {
@@ -189,13 +205,23 @@ var dnd = dnd || {};
 			templateLoad(item, data, template);
 		}
 	}
-	dnd.templates = function(){
-		var templateBaseClass = "-js-template",
+	dnd.templates = function(item){
+		dnd.filters();
+		var items = [],
+			templateBaseClass = "-js-template";
+		if(item != null){
+			templateBaseClass += "--" + item.getAttribute("data-item")
 			items = document.getElementsByClassName(templateBaseClass);
-
+		} else {
+			items = document.getElementsByClassName(templateBaseClass);
+		}
 		if(items.length > 0){
 			for(var i = 0; i < items.length; i++){
-				dnd.data(items[i], dnd.template);
+				if(item != null){
+					dnd.template(items[i], dnd.service[item.getAttribute("data-type")]);
+				} else {
+					dnd.data(items[i], dnd.template);
+				}
 			}
 		} else {
 			templateLoader(false);
@@ -204,12 +230,9 @@ var dnd = dnd || {};
 	dnd.template = function(item, output){
 		var data = output,
 			hash = window.location.hash.substring(1);
-
-		dnd.filters();
 		if(hash != "" && hash != null){
 			data = dnd.filter(data);
 		}
-
 		templateInit(item, data);
 		templateLoader(false);
 	}
@@ -241,7 +264,9 @@ var dnd = dnd || {};
 	}
 	var dataToDnd = function(item, obj, callback){
 		dnd.service["" + obj.id + ""] = obj.data;
-		callback(item, obj.data);
+		if(callback != null){
+			callback(item, obj.data);
+		}
 	}
 	var idbDataAdd = function(item, callback){
 		dnd.ajax(true, url + "" + item.getAttribute("data-endpoint"), function(data){
@@ -314,11 +339,13 @@ var dnd = dnd || {};
 
 	var setSelect = function(item, value){
 		var select = item;
-		var options = select.options;
-		for(var o = 0; o < options.length; o++) {
-			var option = options[o];
-			if(option.value == value.toString()) {
-				select.selectedIndex = o;
+		if(select){
+			var options = select.options;
+			for(var o = 0; o < options.length; o++) {
+				var option = options[o];
+				if(option.value == value.toString()) {
+					select.selectedIndex = o;
+				}
 			}
 		}
 	}
@@ -330,11 +357,11 @@ var dnd = dnd || {};
 	var setHash = function(item, value){
 		dnd.setHash(item, value);
 	}
-	var getHash = function(){
+	var getHash = function(type){
 		var hashItems = window.location.hash.substring(1).split("&");
 		for(var i = 0; i < hashItems.length; i++){
 			var items = hashItems[i].split("=");
-			var item = document.getElementById("filter" + items[0]);
+			var item = document.getElementById(items[0]);
 			if(item){
 				switch(item.tagName.toLowerCase()){
 					case "select":
@@ -348,60 +375,72 @@ var dnd = dnd || {};
 		}
 	}
 
-	var populateSelect = function(elem){
-		var item = document.getElementById("filter" + elem),
-			items = 0;
+	var selectItem = function(item){
+		var json = dnd.service[item.getAttribute("data-type")],
+			obj = item.getAttribute("id"),
+			first = document.createElement("option"),
+			items = json.length;
 
-		if(item){
-			var ident = elem.toLowerCase(),
-				json = dnd.service[ident];
-
-
-
-			if(json != undefined){
-				var first = document.createElement("option");
-				first.value = "";
-				first.innerHTML = "";
-				item.appendChild(first);
-
-				items = json.length;
+		if(!item.hasAttribute("data-loaded")){
+			first.value = "";
+			first.innerHTML = "";
+			item.appendChild(first);
+		}
+		if(items > 0){
+			if(!item.hasAttribute("data-loaded")){
+				item.setAttribute("data-loaded", "true");
 				for(var i = 0; i < json.length; i++){
 					var option = document.createElement("option");
 					option.value= json[i].slug;
 					option.innerHTML = json[i].name;
 					item.appendChild(option);
 				}
-			} else {
-				item.setAttribute("data-type", ident)
-				item.setAttribute("data-item", ident)
-				item.setAttribute("data-endpoint", "/" + ident)
-				dnd.data(item, dnd.filters);
-			}
-
-			if(items > 0){
 				item.addEventListener('change',function(){
 					var select = this;
 					var selectValue = select.options[select.selectedIndex].value;
-					setHash(elem, selectValue);
-					dnd.templates();
+					setHash(obj, selectValue);
+					dnd.templates(document.getElementsByClassName("-js-template--" + item.getAttribute("data-target"))[0]);
 				});
+			}
+			getHash();
+		}
+	}
+	var selectData = function(item, obj){
+		var ident = obj.toLowerCase();
+		item.setAttribute("data-type", ident);
+		item.setAttribute("data-item", ident);
+		item.setAttribute("data-endpoint", "/" + ident);
+		dnd.data(item, selectItem);
+	}
+	var selectInit = function(obj){
+		var item = document.getElementById("filter" + obj);
+		if(item){
+			var ident = obj.toLowerCase(),
+				json = dnd.service[ident];
+			if(json == null){
+				selectData(item, obj);
+			} else {
+				selectItem(item);
 			}
 		}
 	}
-	var filterInput = function(elem){
-		var item = document.getElementById("filter" + elem);
+
+	var filterInput = function(obj){
+		var item = document.getElementById("filter" + obj);
 		if(item){
 			var timeout;
-			item.addEventListener('keyup',function(){
+			item.addEventListener('change',function(){
 				if(timeout) {
 					clearTimeout(timeout);
 					timeout = null;
 				}
 				timeout = setTimeout(function(){
-					setHash(elem, item.value);
-					dnd.templates();
+					setHash(obj, item.value);
+					dnd.templates(document.getElementsByClassName("-js-template--" + item.getAttribute("data-target"))[0]);
 				}, 500)
 			});
+
+			getHash();
 		}
 	}
 	var filterPageAmount = function(){
@@ -441,30 +480,23 @@ var dnd = dnd || {};
 	dnd.filters = function(){
 		filterPageAmount();
 
-		/*
-		populateSelect("Rulebook");
-		populateSelect("Edition");
-		populateSelect("Feat-Category");
+		selectInit("Rulebook");
+		selectInit("Edition");
+		selectInit("Feat-Category");
 
 		filterInput("Slug");
 		filterInput("Keywords");
 		filterInput("Benefit");
-
-
-		getHash();
-		*/
-
 	}
 	dnd.filter = function(data){
 		var output = data,
 			hashItems = window.location.hash.substring(1).split("&");
 
-		/*
 		for(var i = 0; i < hashItems.length; i++){
-			var items = hashItems[i].split("=");
-			var item = items[0].toLowerCase();
-			var value = items[1]
-			var isDefault = false;
+			var items = hashItems[i].split("="),
+				item = items[0].toLowerCase().substr(6,(items[0].length-6)),
+				value = items[1],
+				isDefault = false;
 
 			output = data.filter(function(row){
 				var selectors = [];
@@ -474,7 +506,6 @@ var dnd = dnd || {};
 					selectors.push(row[item].toLowerCase());
 					isDefault = true;
 				}
-
 				if(!isDefault){
 					switch(item){
 						case "keywords":
@@ -493,88 +524,27 @@ var dnd = dnd || {};
 							break;
 					}
 				}
-
 				var temp = null;
 				for(var s = 0; s < selectors.length; s++){
 					if(selectors[s].indexOf(value) > -1){
+
 						temp = true;
 					}
 				}
 				if(temp == null){
 					isInRow = false;
 				}
-
 				if(isInRow){
 					return true;
 				} else {
 					return false;
 				}
+
 			});
 		}
-		*/
+
 		return output;
 	}
-
-	/*
-	var filterData = function(json){
-		var hashItems = window.location.hash.substring(1).split("&");
-		var filteredJson = json;
-
-		for(var i = 0; i < hashItems.length; i++){
-			var items = hashItems[i].split("=");
-			var item = items[0].toLowerCase();
-			var value = items[1]
-			var isDefault = false;
-
-			filteredJson = json.filter(function(row){
-				var selectors = [];
-				var isInRow = true;
-
-				if(item && row[item]){
-					selectors.push(row[item].toLowerCase());
-					isDefault = true;
-				}
-
-				if(!isDefault){
-					switch(item){
-						case "keywords":
-							selectors.push(row["name"].toLowerCase());
-							selectors.push(row["description"]);
-							break;
-						case "rulebook":
-						//case "edition":
-							selectors.push(row[item + "_slug"].toLowerCase());
-							break;
-						case "prerequisites":
-							//selectors.push(row[item + "_slug"].toLowerCase());
-							break;
-						default:
-							//selectors.push(row["name"].toLowerCase());
-							break;
-					}
-				}
-
-				var temp = null;
-				for(var s = 0; s < selectors.length; s++){
-					if(selectors[s].indexOf(value) > -1){
-						temp = true;
-					}
-				}
-				if(temp == null){
-					isInRow = false;
-				}
-
-				if(isInRow){
-					return true;
-				} else {
-					return false;
-				}
-			});
-		}
-
-		return filteredJson;
-	}
-	*/
 })();
 
 var dnd = dnd || {};

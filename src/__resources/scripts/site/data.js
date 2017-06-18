@@ -25,7 +25,9 @@ var dnd = dnd || {};
 	}
 	var dataToDnd = function(item, obj, callback){
 		dnd.service["" + obj.id + ""] = obj.data;
-		callback(item, obj.data);
+		if(callback != null){
+			callback(item, obj.data);
+		}
 	}
 	var idbDataAdd = function(item, callback){
 		dnd.ajax(true, url + "" + item.getAttribute("data-endpoint"), function(data){

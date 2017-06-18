@@ -64,13 +64,23 @@ var dnd = dnd || {};
 			templateLoad(item, data, template);
 		}
 	}
-	dnd.templates = function(){
-		var templateBaseClass = "-js-template",
+	dnd.templates = function(item){
+		dnd.filters();
+		var items = [],
+			templateBaseClass = "-js-template";
+		if(item != null){
+			templateBaseClass += "--" + item.getAttribute("data-item")
 			items = document.getElementsByClassName(templateBaseClass);
-
+		} else {
+			items = document.getElementsByClassName(templateBaseClass);
+		}
 		if(items.length > 0){
 			for(var i = 0; i < items.length; i++){
-				dnd.data(items[i], dnd.template);
+				if(item != null){
+					dnd.template(items[i], dnd.service[item.getAttribute("data-type")]);
+				} else {
+					dnd.data(items[i], dnd.template);
+				}
 			}
 		} else {
 			templateLoader(false);
@@ -79,12 +89,9 @@ var dnd = dnd || {};
 	dnd.template = function(item, output){
 		var data = output,
 			hash = window.location.hash.substring(1);
-
-		dnd.filters();
 		if(hash != "" && hash != null){
 			data = dnd.filter(data);
 		}
-
 		templateInit(item, data);
 		templateLoader(false);
 	}

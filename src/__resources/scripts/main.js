@@ -9,6 +9,7 @@ var dnd = dnd || {};
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
 	dnd.path = "localhost:81";
+	dnd.path = "2.108.133.82:81";
 
     dnd.vars.localstorage = false;
     dnd.vars.indexeddb = false;

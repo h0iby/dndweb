@@ -82,10 +82,14 @@ var dnd = dnd || {};
 				}
 
 				history.pushState(null, null, hashNew);
-			} else {
+			}
+			else {
 				if(hash.indexOf("&") < 0){
-					history.pushState(null, null, " ");
+					if(hash.indexOf(item) > -1){
+						history.pushState(null, null, " ");
+					}
 				} else {
+					console.log('test 2');
 					var subStringTemp = hash.substring(hash.indexOf(item));
 					var subString = subStringTemp;
 					if(subStringTemp.indexOf("&") > -1){
@@ -104,7 +108,6 @@ var dnd = dnd || {};
 var dnd = dnd || {};
 (function() {
 	"use strict";
-
 	var filters = function(){
 		var hash = window.location.hash.substring(1);
 
@@ -131,13 +134,10 @@ var dnd = dnd || {};
             scrollPos = window.pageYOffset;
         };
 	}
-
-
     dnd.navigation = function(){
 		topNav();
 		filters();
     }
-
 })();
 var dnd = dnd || {};
 (function() {
@@ -160,11 +160,13 @@ var dnd = dnd || {};
 	var templateLoad = function(item, data, template){
 		var templateHtml = template.innerHTML,
 			counter = 0,
-            itemHtml = "";
+            itemHtml = "",
+			count = dnd.filters.amount != null ? dnd.filters.amount : 25;
 
 		templateClear(item);
 		data.forEach(function(obj, i){
-			if(counter < dnd.filters.amount){
+
+			if(counter < count){
 				var html = templateHtml;
 
 				var isPrestige = obj.prestige == 1 ? true : false;
@@ -201,12 +203,13 @@ var dnd = dnd || {};
 	}
 	var templateInit = function(item, data){
 		var template = document.getElementById(item.classList[1].replace("-js-",""));
+		templateLoader(false);
 		if(item && data && template){
 			templateLoad(item, data, template);
+			dnd.filters();
 		}
 	}
 	dnd.templates = function(item){
-		dnd.filters();
 		var items = [],
 			templateBaseClass = "-js-template";
 		if(item != null){
@@ -234,7 +237,6 @@ var dnd = dnd || {};
 			data = dnd.filter(data);
 		}
 		templateInit(item, data);
-		templateLoader(false);
 	}
 })();
 var dnd = dnd || {};
@@ -336,7 +338,6 @@ var dnd = dnd || {};
 	"use strict";
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
-
 	var setSelect = function(item, value){
 		var select = item;
 		if(select){
@@ -353,7 +354,6 @@ var dnd = dnd || {};
 		var input = item;
 		input.value = value;
 	}
-
 	var setHash = function(item, value){
 		dnd.setHash(item, value);
 	}
@@ -374,7 +374,6 @@ var dnd = dnd || {};
 			}
 		}
 	}
-
 	var selectItem = function(item){
 		var json = dnd.service[item.getAttribute("data-type")],
 			obj = item.getAttribute("id"),
@@ -406,11 +405,18 @@ var dnd = dnd || {};
 		}
 	}
 	var selectData = function(item, obj){
-		var ident = obj.toLowerCase();
+		var filters = dnd.selector(".section__filter")[0],
+			ident = obj.toLowerCase();
+
 		item.setAttribute("data-type", ident);
 		item.setAttribute("data-item", ident);
 		item.setAttribute("data-endpoint", "/" + ident);
-		dnd.data(item, selectItem);
+
+		if(!filters.hasAttribute("data-loaded")){
+			dnd.data(item, selectItem);
+		} else {
+			selectItem(item);
+		}
 	}
 	var selectInit = function(obj){
 		var item = document.getElementById("filter" + obj);
@@ -424,22 +430,23 @@ var dnd = dnd || {};
 			}
 		}
 	}
-
 	var filterInput = function(obj){
 		var item = document.getElementById("filter" + obj);
 		if(item){
 			var timeout;
-			item.addEventListener('change',function(){
-				if(timeout) {
-					clearTimeout(timeout);
-					timeout = null;
-				}
-				timeout = setTimeout(function(){
-					setHash(obj, item.value);
-					dnd.templates(document.getElementsByClassName("-js-template--" + item.getAttribute("data-target"))[0]);
-				}, 500)
-			});
-
+			if(!item.hasAttribute("data-loaded")){
+				item.setAttribute("data-loaded", "true");
+				item.addEventListener('keyup',function(){
+					if(timeout) {
+						clearTimeout(timeout);
+						timeout = null;
+					}
+					timeout = setTimeout(function(){
+						setHash("filter" + obj, item.value);
+						dnd.templates(document.getElementsByClassName("-js-template--" + item.getAttribute("data-target"))[0]);
+					}, 500)
+				});
+			}
 			getHash();
 		}
 	}
@@ -476,73 +483,52 @@ var dnd = dnd || {};
 			});
 		}
 	}
-
 	dnd.filters = function(){
 		filterPageAmount();
+		setTimeout(function(){
+			selectInit("Rulebook");
+			selectInit("Edition");
+			selectInit("Feat-Category");
 
-		selectInit("Rulebook");
-		selectInit("Edition");
-		selectInit("Feat-Category");
-
-		filterInput("Slug");
-		filterInput("Keywords");
-		filterInput("Benefit");
+			filterInput("Slug");
+			filterInput("Keywords");
+			filterInput("Benefit");
+		},1)
 	}
 	dnd.filter = function(data){
 		var output = data,
 			hashItems = window.location.hash.substring(1).split("&");
-
-		for(var i = 0; i < hashItems.length; i++){
-			var items = hashItems[i].split("="),
-				item = items[0].toLowerCase().substr(6,(items[0].length-6)),
-				value = items[1],
-				isDefault = false;
-
+		if(hashItems.length > 0) {
 			output = data.filter(function(row){
-				var selectors = [];
-				var isInRow = true;
-
-				if(item && row[item]){
-					selectors.push(row[item].toLowerCase());
-					isDefault = true;
-				}
-				if(!isDefault){
-					switch(item){
-						case "keywords":
-							selectors.push(row["name"].toLowerCase());
-							selectors.push(row["description"]);
-							break;
-						case "rulebook":
-						//case "edition":
-							selectors.push(row[item + "_slug"].toLowerCase());
-							break;
-						case "prerequisites":
-							//selectors.push(row[item + "_slug"].toLowerCase());
-							break;
-						default:
-							//selectors.push(row["name"].toLowerCase());
-							break;
+				var selectors = true;
+				for(var i = 0; i < hashItems.length; i++){
+					var items = hashItems[i].split("="),
+						key = items[0].toLowerCase().substr(6,(items[0].length-6)),
+						value = items[1];
+					if(row[key] != null){
+						if(row[key].indexOf(value) == -1){
+							selectors = false;
+						}
+					} else if(row[key + "_slug"] != null) {
+						if(row[key + "_slug"].indexOf(value) == -1){
+							selectors = false;
+						}
+					} else {
+						switch(key){
+							case "keywords":
+								//console.log("keywords")
+								break;
+							case "prerequisites":
+								//console.log("prerequisites")
+								break;
+							default:
+								break;
+						}
 					}
 				}
-				var temp = null;
-				for(var s = 0; s < selectors.length; s++){
-					if(selectors[s].indexOf(value) > -1){
-
-						temp = true;
-					}
-				}
-				if(temp == null){
-					isInRow = false;
-				}
-				if(isInRow){
-					return true;
-				} else {
-					return false;
-				}
-
+				if(selectors){ return true; } else { return false; }
 			});
 		}
-
 		return output;
 	}
 })();
@@ -552,6 +538,7 @@ var dnd = dnd || {};
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
 	dnd.path = "localhost:81";
+	dnd.path = "2.108.133.82:81";
 
     dnd.vars.localstorage = false;
     dnd.vars.indexeddb = false;

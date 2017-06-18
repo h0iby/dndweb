@@ -82,10 +82,14 @@ var dnd = dnd || {};
 				}
 
 				history.pushState(null, null, hashNew);
-			} else {
+			}
+			else {
 				if(hash.indexOf("&") < 0){
-					history.pushState(null, null, " ");
+					if(hash.indexOf(item) > -1){
+						history.pushState(null, null, " ");
+					}
 				} else {
+					console.log('test 2');
 					var subStringTemp = hash.substring(hash.indexOf(item));
 					var subString = subStringTemp;
 					if(subStringTemp.indexOf("&") > -1){

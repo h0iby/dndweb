@@ -1,7 +1,6 @@
 var dnd = dnd || {};
 (function() {
 	"use strict";
-
 	var filters = function(){
 		var hash = window.location.hash.substring(1);
 
@@ -28,11 +27,8 @@ var dnd = dnd || {};
             scrollPos = window.pageYOffset;
         };
 	}
-
-
     dnd.navigation = function(){
 		topNav();
 		filters();
     }
-
 })();

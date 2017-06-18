@@ -19,11 +19,13 @@ var dnd = dnd || {};
 	var templateLoad = function(item, data, template){
 		var templateHtml = template.innerHTML,
 			counter = 0,
-            itemHtml = "";
+            itemHtml = "",
+			count = dnd.filters.amount != null ? dnd.filters.amount : 25;
 
 		templateClear(item);
 		data.forEach(function(obj, i){
-			if(counter < dnd.filters.amount){
+
+			if(counter < count){
 				var html = templateHtml;
 
 				var isPrestige = obj.prestige == 1 ? true : false;
@@ -60,12 +62,13 @@ var dnd = dnd || {};
 	}
 	var templateInit = function(item, data){
 		var template = document.getElementById(item.classList[1].replace("-js-",""));
+		templateLoader(false);
 		if(item && data && template){
 			templateLoad(item, data, template);
+			dnd.filters();
 		}
 	}
 	dnd.templates = function(item){
-		dnd.filters();
 		var items = [],
 			templateBaseClass = "-js-template";
 		if(item != null){
@@ -93,6 +96,5 @@ var dnd = dnd || {};
 			data = dnd.filter(data);
 		}
 		templateInit(item, data);
-		templateLoader(false);
 	}
 })();

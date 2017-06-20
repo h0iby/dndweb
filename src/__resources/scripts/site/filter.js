@@ -11,14 +11,15 @@ var dnd = dnd || {};
 				var selectors = true;
 				for(var i = 0; i < hashItems.length; i++){
 					var items = hashItems[i].split("="),
-						key = items[0].toLowerCase().substr(6,(items[0].length-6)),
+						key = items[0].toLowerCase(),//.substr(6,(items[0].length-6)),
 						value = items[1];
+
 					if(row[key] != null){
-						if(row[key].indexOf(value) == -1){
+						if(row[key].toString().indexOf(value) == -1){
 							selectors = false;
 						}
 					} else if(row[key + "_slug"] != null) {
-						if(row[key + "_slug"].indexOf(value) == -1){
+						if(row[key + "_slug"].toString().indexOf(value) == -1){
 							selectors = false;
 						}
 					} else {

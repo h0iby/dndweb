@@ -13,7 +13,7 @@
 						Name
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--textbox">
-						<input class="filter__list__item__container__input" id="filterSlug" type="text" />
+						<input class="filter__list__item__container__input" id="filterSlug" type="text" data-select="slug" data-target="#MENUTYPE#" />
 					</span>
 				</li>
 				<li class="filter__list__item">
@@ -21,7 +21,7 @@
 						##Class Feature
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--textbox">
-						<input class="filter__list__item__container__input" id="filterFeature" type="text" />
+						<input class="filter__list__item__container__input" id="filterFeature" type="text" data-select="" data-target="#MENUTYPE#" />
 					</span>
 				</li>
 				<li class="filter__list__item">
@@ -29,8 +29,8 @@
 						##Base Attack Bonus (Min/Max)
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--minmax">
-						<input class="filter__list__item__container__input filter__list__item__container__input--min" id="filterBaseAttackMin" type="text" />
-						<input class="filter__list__item__container__input filter__list__item__container__input--max" id="filterBaseAttackMax" type="text" />
+						<input class="filter__list__item__container__input filter__list__item__container__input--min" id="filterBaseAttackMin" type="text" data-select="" data-target="#MENUTYPE#" />
+						<input class="filter__list__item__container__input filter__list__item__container__input--max" id="filterBaseAttackMax" type="text" data-select="" data-target="#MENUTYPE#" />
 					</span>
 				</li>
 				<li class="filter__list__item">
@@ -38,8 +38,8 @@
 						##Hitpoints (Min/Max)
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--minmax">
-						<input class="filter__list__item__container__input filter__list__item__container__input--min" id="filterHitpointsMin" type="text" />
-						<input class="filter__list__item__container__input filter__list__item__container__input--max" id="filterHitpointsMax" type="text" />
+						<input class="filter__list__item__container__input filter__list__item__container__input--min" id="filterHitpointsMin" type="text" data-select="" data-target="#MENUTYPE#" />
+						<input class="filter__list__item__container__input filter__list__item__container__input--max" id="filterHitpointsMax" type="text" data-select="" data-target="#MENUTYPE#" />
 					</span>
 				</li>
 				<li class="filter__list__item">
@@ -47,8 +47,8 @@
 						##Skillpoints (Min/Max)
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--minmax">
-						<input class="filter__list__item__container__input filter__list__item__container__input--min" id="filterSkillpointsMin" type="text" />
-						<input class="filter__list__item__container__input filter__list__item__container__input--max" id="filterSkillpointsMax" type="text" />
+						<input class="filter__list__item__container__input filter__list__item__container__input--min" id="filterSkillpointsMin" type="text" data-select="" data-target="#MENUTYPE#" />
+						<input class="filter__list__item__container__input filter__list__item__container__input--max" id="filterSkillpointsMax" type="text" data-select="" data-target="#MENUTYPE#" />
 					</span>
 				</li>
 				<li class="filter__list__item">
@@ -56,15 +56,15 @@
 						Prestige class
 					</span>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterPrestigeClass" id="filterPrestigeClassUnset" type="radio" checked />
+						<input class="filter__list__item__container__radiobutton" name="filterPrestigeClass" id="filterPrestigeClassUnset" type="radio" checked data-select="prestige" data-target="#MENUTYPE#" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--unset"></span>
 					</label>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterPrestigeClass" id="filterPrestigeClassYes" type="radio" />
+						<input class="filter__list__item__container__radiobutton" name="filterPrestigeClass" id="filterPrestigeClassYes" type="radio" data-select="prestige" data-radio="1" data-target="#MENUTYPE#" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--yes"></span>
 					</label>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterPrestigeClass" id="filterPrestigeClassNo" type="radio" />
+						<input class="filter__list__item__container__radiobutton" name="filterPrestigeClass" id="filterPrestigeClassNo" type="radio" data-select="prestige" data-radio="0" data-target="#MENUTYPE#" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--no"></span>
 					</label>
 				</li>
@@ -73,7 +73,7 @@
 						Rulebook
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--select">
-						<select id="filterRulebook" class="filter__list__item__container__select"></select>
+						<select id="filterRulebook" class="filter__list__item__container__select" data-select="rulebook" data-target="#MENUTYPE#"></select>
 					</span>
 				</li>
 				<li class="filter__list__item">
@@ -81,7 +81,7 @@
 						##Edition
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--select">
-						<select id="filterEdition" class="filter__list__item__container__select"></select>
+						<select id="filterEdition" class="filter__list__item__container__select" data-select="edition" data-target="#MENUTYPE#"></select>
 					</span>
 				</li>
 			</ul>

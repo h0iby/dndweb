@@ -13,7 +13,7 @@
 						Name
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--textbox">
-						<input class="filter__list__item__container__input" id="filterSlug" type="text" />
+						<input class="filter__list__item__container__input" id="filterSlug" type="text" data-target="#MENUTYPE#" />
 					</span>
 				</li>
 				<li class="filter__list__item">
@@ -21,7 +21,7 @@
 						Spell School
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--select">
-						<input class="filter__list__item__container__input" id="filterSpellschool" type="text" />
+						<select id="filterSpellSchool" class="filter__list__item__container__select" data-target="#MENUTYPE#"></select>
 					</span>
 				</li>
 				<li class="filter__list__item">
@@ -29,7 +29,7 @@
 						Spell Subschool
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--select">
-						<input class="filter__list__item__container__input" id="filterSpellsubschool" type="text" />
+						<select id="filterSpellSubschool" class="filter__list__item__container__select" data-target="#MENUTYPE#"></select>
 					</span>
 				</li>
 				<li class="filter__list__item">
@@ -37,15 +37,15 @@
 						##Verbal comp.
 					</span>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterComponentVerbal" id="filterComponentVerbalUnset" type="radio" checked />
+						<input class="filter__list__item__container__radiobutton" name="filterComponentVerbal" id="filterComponentVerbalUnset" type="radio" checked data-target="#MENUTYPE#" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--unset"></span>
 					</label>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterComponentVerbal" id="filterComponentVerbalYes" type="radio" />
+						<input class="filter__list__item__container__radiobutton" name="filterComponentVerbal" id="filterComponentVerbalYes" type="radio" data-target="#MENUTYPE#" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--yes"></span>
 					</label>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterComponentVerbal" id="filterComponentVerbalNo" type="radio" />
+						<input class="filter__list__item__container__radiobutton" name="filterComponentVerbal" id="filterComponentVerbalNo" type="radio" data-target="#MENUTYPE#" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--no"></span>
 					</label>
 				</li>
@@ -54,15 +54,15 @@
 						##Somatic comp.
 					</span>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterComponentSomatic" id="filterComponentSomaticUnset" type="radio" checked />
+						<input class="filter__list__item__container__radiobutton" name="filterComponentSomatic" id="filterComponentSomaticUnset" type="radio" checked data-target="#MENUTYPE#" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--unset"></span>
 					</label>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterComponentSomatic" id="filterComponentSomaticYes" type="radio" />
+						<input class="filter__list__item__container__radiobutton" name="filterComponentSomatic" id="filterComponentSomaticYes" type="radio" data-target="#MENUTYPE#" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--yes"></span>
 					</label>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterComponentSomatic" id="filterComponentSomaticNo" type="radio" />
+						<input class="filter__list__item__container__radiobutton" name="filterComponentSomatic" id="filterComponentSomaticNo" type="radio" data-target="#MENUTYPE#" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--no"></span>
 					</label>
 				</li>
@@ -71,15 +71,15 @@
 						##Arcane focus comp.
 					</span>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterComponentArcane" id="filterComponentArcaneUnset" type="radio" checked />
+						<input class="filter__list__item__container__radiobutton" name="filterComponentArcane" id="filterComponentArcaneUnset" type="radio" checked data-target="#MENUTYPE#" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--unset"></span>
 					</label>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterComponentArcane" id="filterComponentArcaneYes" type="radio" />
+						<input class="filter__list__item__container__radiobutton" name="filterComponentArcane" id="filterComponentArcaneYes" type="radio" data-target="#MENUTYPE#" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--yes"></span>
 					</label>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterComponentArcane" id="filterComponentArcaneNo" type="radio" />
+						<input class="filter__list__item__container__radiobutton" name="filterComponentArcane" id="filterComponentArcaneNo" type="radio" data-target="#MENUTYPE#" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--no"></span>
 					</label>
 				</li>
@@ -88,15 +88,15 @@
 						##Divine focus comp.
 					</span>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterComponentDivine" id="filterComponentDivineUnset" type="radio" checked />
+						<input class="filter__list__item__container__radiobutton" name="filterComponentDivine" id="filterComponentDivineUnset" type="radio" checked data-target="#MENUTYPE#" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--unset"></span>
 					</label>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterComponentDivine" id="filterComponentDivineYes" type="radio" />
+						<input class="filter__list__item__container__radiobutton" name="filterComponentDivine" id="filterComponentDivineYes" type="radio" data-target="#MENUTYPE#" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--yes"></span>
 					</label>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterComponentDivine" id="filterComponentDivineNo" type="radio" />
+						<input class="filter__list__item__container__radiobutton" name="filterComponentDivine" id="filterComponentDivineNo" type="radio" data-target="#MENUTYPE#" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--no"></span>
 					</label>
 				</li>
@@ -105,15 +105,15 @@
 						##XP comp.
 					</span>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterComponentXP" id="filterComponentXPUnset" type="radio" checked />
+						<input class="filter__list__item__container__radiobutton" name="filterComponentXP" id="filterComponentXPUnset" type="radio" checked data-target="#MENUTYPE#" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--unset"></span>
 					</label>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterComponentXP" id="filterComponentXPYes" type="radio" />
+						<input class="filter__list__item__container__radiobutton" name="filterComponentXP" id="filterComponentXPYes" type="radio" data-target="#MENUTYPE#" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--yes"></span>
 					</label>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterComponentXP" id="filterComponentXPNo" type="radio" />
+						<input class="filter__list__item__container__radiobutton" name="filterComponentXP" id="filterComponentXPNo" type="radio" data-target="#MENUTYPE#" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--no"></span>
 					</label>
 				</li>
@@ -122,7 +122,7 @@
 						##Class
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--select">
-						<select id="filterClass" class="filter__list__item__container__select"></select>
+						<select id="filterClass" class="filter__list__item__container__select" data-target="#MENUTYPE#"></select>
 					</span>
 				</li>
 				<li class="filter__list__item">
@@ -130,7 +130,7 @@
 						Rulebook
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--select">
-						<select id="filterRulebook" class="filter__list__item__container__select"></select>
+						<select id="filterRulebook" class="filter__list__item__container__select" data-target="#MENUTYPE#"></select>
 					</span>
 				</li>
 			</ul>

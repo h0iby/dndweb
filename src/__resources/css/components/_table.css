@@ -9,9 +9,8 @@
 
 		&__td{
 			display: table-cell;
-			padding: 8px 10px 6px;
-			display: none;
 			vertical-align: top;
+			padding: 2px 0;
 			word-break: normal;
 			width: auto;
 
@@ -23,6 +22,7 @@
 
 			&__link{
 				display: block;
+				padding: 8px 10px 6px;
 				text-decoration: none;
 				color: var(--tableLinkColor);
 			}
@@ -37,6 +37,7 @@
 				text-overflow: ellipsis;
 				white-space: nowrap;
 				overflow: hidden;
+				padding: 8px 10px 6px;
 
 			}
 

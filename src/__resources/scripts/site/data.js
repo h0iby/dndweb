@@ -3,10 +3,10 @@ var dnd = dnd || {};
 	"use strict";
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
-	var idb;
-	var idbName = "dndDB";
-	var http = "http://";
-	var url = "";
+	var idb,
+		idbName = "dndDB",
+		http = "http://",
+		url = "";
 	var loadError = function(text){ var output = text == null ? "Error loading data" : text; console.log("Data Error", output); }
 	var cookieGet = function(){
 		var cookie = null;

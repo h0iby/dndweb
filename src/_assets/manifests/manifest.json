@@ -1,5 +1,7 @@
 {
-    "name": "DnD",
+    "short_name": "DnD DB!",
+    "name": "DnD Data",
+    "description": "D&D Data, and where to find them.",
     "icons": [
         {
             "src": "/_assets/favicons/android-chrome-192x192.png",
@@ -12,6 +14,11 @@
             "type": "image/png"
         }
     ],
+    "start_url": "/",
+    "dir": "ltr",
+    "lang": "en-US",
+    "display": "standalone",
+    "orientation": "any",
     "theme_color": "#ffffff",
     "background_color": "#ffffff"
 }

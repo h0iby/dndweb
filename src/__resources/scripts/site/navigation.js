@@ -27,6 +27,15 @@ var dnd = dnd || {};
             scrollPos = window.pageYOffset;
         };
 	}
+
+	dnd.loader = function(mode){
+		var loader = dnd.selector("#Loader");
+		if(mode){
+			loader.classList.remove("is-hidden");
+		} else {
+			loader.classList.add("is-hidden");
+		}
+	}
     dnd.navigation = function(){
 		topNav();
 		filters();

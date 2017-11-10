@@ -2,7 +2,6 @@ var dnd = dnd || {};
 (function() {
 	"use strict";
 	dnd.vars = dnd.vars || {};
-	dnd.service = dnd.service || {};
 	dnd.filter = function(data){
 		var output = data,
 			hashItems = window.location.hash.substring(1).split("&");

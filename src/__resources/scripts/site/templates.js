@@ -3,16 +3,6 @@ var dnd = dnd || {};
 	"use strict";
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
-	var templateLoader = function(mode){
-		var loader = dnd.selector("#Loader");
-		if(mode){
-			loader.style.display = 'block';
-			loader.classList.remove("is-hidden");
-		} else {
-			loader.style.display = 'none';
-			loader.classList.add("is-hidden");
-		}
-	}
 	var templateClear = function(item){
 		item.innerHTML = "";
 	}
@@ -62,31 +52,9 @@ var dnd = dnd || {};
 	}
 	var templateInit = function(item, data){
 		var template = document.getElementById(item.classList[1].replace("-js-",""));
-		templateLoader(false);
 		if(item && data && template){
 			templateLoad(item, data, template);
 			dnd.filters();
-		}
-	}
-	dnd.templates = function(item){
-		var items = [],
-			templateBaseClass = "-js-template";
-		if(item != null){
-			templateBaseClass += "--" + item.getAttribute("data-item")
-			items = document.getElementsByClassName(templateBaseClass);
-		} else {
-			items = document.getElementsByClassName(templateBaseClass);
-		}
-		if(items.length > 0){
-			for(var i = 0; i < items.length; i++){
-				if(item != null){
-					dnd.template(items[i], dnd.service[item.getAttribute("data-type")]);
-				} else {
-					dnd.data(items[i], dnd.template);
-				}
-			}
-		} else {
-			templateLoader(false);
 		}
 	}
 	dnd.template = function(item, output){
@@ -96,5 +64,25 @@ var dnd = dnd || {};
 			data = dnd.filter(data);
 		}
 		templateInit(item, data);
+		dnd.loader(false);
+	}
+	dnd.templates = function(item){
+		var items = [],
+			templateBaseClass = "-js-template";
+
+		if(item != null){
+			templateBaseClass += "--" + item;
+		}
+
+		items = document.getElementsByClassName(templateBaseClass);
+
+		if(items.length > 0){
+			dnd.loader(true);
+			for(var i = 0; i < items.length; i++){
+				dnd.data(dnd.template, items[i]);
+			}
+		} else {
+			dnd.loader(false);
+		}
 	}
 })();

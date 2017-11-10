@@ -2,93 +2,102 @@ var dnd = dnd || {};
 (function() {
 	"use strict";
 	dnd.vars = dnd.vars || {};
-	dnd.service = dnd.service || {};
 	var idb,
 		idbName = "dndDB",
 		http = "http://",
 		url = "";
 	var loadError = function(text){ var output = text == null ? "Error loading data" : text; console.log("Data Error", output); }
-	var cookieGet = function(){
-		var cookie = null;
-
-		if(document.cookie != "" && document.cookie != null){
-			cookie = document.cookie;
-		}
-
-		return cookie;
-	}
-	var cookieSet = function(){
-		var d = new Date();
-		d.setTime(d.getTime() + (365*24*60*60*1000));
-		var expires = "expires="+ d.toUTCString();
-		document.cookie = "dndDB=true;" + expires + ";path=/";
-	}
-	var dataToDnd = function(item, obj, callback){
-		dnd.service["" + obj.id + ""] = obj.data;
-		if(callback != null){
-			callback(item, obj.data);
-		}
-	}
-	var idbDataAdd = function(item, callback){
-		dnd.ajax(true, url + "" + item.getAttribute("data-endpoint"), function(data){
-			var json = JSON.parse(data);
-			idb.transaction([item.getAttribute("data-type")], "readwrite").objectStore(item.getAttribute("data-type")).add({ id: item.getAttribute("data-item"), data: json });
-			idbDataCheck(item, callback);
-		}, function(){ loadError(); }, function(){ loadError(); });
-	}
-	var idbDataCheck = function(item, callback){
+	var idbCheck = function(callback, item){
 		var idbTansaction = idb.transaction([item.getAttribute("data-type")], "readwrite");
 		var idbObjStore = idbTansaction.objectStore(item.getAttribute("data-type"));
 		var idbObjStoreReq = idbObjStore.get(item.getAttribute("data-item"));
-		idbObjStoreReq.onsuccess = function(event) {
-			var obj = idbObjStoreReq.result;
-			if(obj == null){
-				idbDataAdd(item, callback);
-			} else {
-				dataToDnd(item, obj, callback);
+		if(item.classList.toString().indexOf("rid") > -1 || item.classList.toString().indexOf("sid") > -1){
+			console.log("THIS IS ERROR");
+			callback(item, [{}]);
+		} else {
+			idbObjStoreReq.onsuccess = function(event) {
+				var obj = idbObjStoreReq.result;
+				if(obj == null){
+					dnd.ajax(true, url + "" + item.getAttribute("data-endpoint"), function(data){
+						var json = JSON.parse(data);
+						idb.transaction([item.getAttribute("data-type")], "readwrite").objectStore(item.getAttribute("data-type")).add({ id: item.getAttribute("data-type"), data: json });
+						idbCheck(callback, item);
+					}, function(){ loadError(); }, function(){ loadError(); });
+				} else {
+					callback(item, obj.data);
+				}
 			}
 		}
 	}
-	var idbStart = function(item, data, callback){
+	var idbData = function(callback, items){
+		console.log(items);
+		var count = 0;
+		var counter = 0;
+		items.filter(function(i) {
+			if(i.show != ""){
+				count++;
+			}
+		});
+		items.forEach(function(item, i){
+			if(item.show != ""){
+				dnd.ajax(true, url + "" + item.path, function(data){
+					counter++;
+					var json = JSON.parse(data);
+					idb.transaction([item.alias], "readwrite").objectStore(item.alias).add({ id: item.alias, data: json });
+					if(counter == count){
+						localStorage.setItem('idbSet', true);
+						callback();
+					}
+				}, function(){ loadError(); }, function(){ loadError(); });
+			}
+		});
+	}
+	var idbStart = function(callback, json){
 		var request = window.indexedDB.open(idbName, 1);
 		request.onerror = function(event) { loadError("idbStart Error"); };
 		request.onsuccess = function(event) {
 			idb = request.result;
-			idbDataCheck(item, callback);
+			if(localStorage.getItem('idbSet') == null){
+				idbData(callback, json);
+			} else {
+				callback();
+			}
 		}
 		request.onupgradeneeded = function(event) {
 			idb = event.target.result;
-			data.forEach(function(obj, i){
-				var objectStore = idb.createObjectStore(obj.alias, {keyPath: "id"});//
-			});
+			if(localStorage.getItem('idbSet') == null){
+				json.forEach(function(obj, i){
+					var objectStore = idb.createObjectStore(obj.alias, {keyPath: "id"});
+				});
+			}
 		}
 	}
-	var idbInit = function(item, callback){
-		if(cookieGet() == null){
-			cookieSet();
-			dnd.ajax(true, url + "/endpoints", function(data){
-				var json = JSON.parse(data);
-				idbStart(item, json, callback);
-			}, function(){ loadError(); }, function(){ loadError(); });
-		} else {
-			idbStart(item, null, callback);
-		}
-	}
-	var apiInit = function(item, callback){
-		var obj = [{ id: 0, data: {} }];
-		dnd.ajax(true, url + "" + item.getAttribute("data-endpoint"), function(data){
+	var idbInit = function(callback){
+		dnd.ajax(true, url + "/endpoints", function(data){
 			var json = JSON.parse(data);
-			obj.id = item.getAttribute("data-type");
-			obj.data = json;
-			dataToDnd(item, obj, callback);
+			idbStart(callback, json);
 		}, function(){ loadError(); }, function(){ loadError(); });
 	}
-	dnd.data = function(item, callback){
-		url = http + dnd.path;
-		if(dnd.vars.indexeddb){
-			idbInit(item, callback);
+	var stdInit = function(callback, template){
+		if(dnd.vars.modern){
+			idbCheck(callback, template);
 		} else {
-			apiInit(item, callback);
+			dnd.ajax(true, url + "" + template.getAttribute("data-endpoint"), function(data){
+				var json = JSON.parse(data);
+				callback(template, json)
+			}, function(){ loadError(); }, function(){ loadError(); });
+		}
+	}
+	dnd.data = function(callback, template){
+		url = http + dnd.path;
+		if(template != null){
+			stdInit(callback, template);
+		} else {
+			if(dnd.vars.modern){
+				idbInit(callback);
+			} else{
+				callback();
+			}
 		}
 	}
 })();

@@ -12,7 +12,7 @@
 
 	&.is-hidden{
 		animation-name: loaderdelay;
-		animation-duration: 1s;
+		animation-duration: .55s;
 		height: 0%;
 		opacity: 0;
 	}

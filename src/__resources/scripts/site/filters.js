@@ -2,7 +2,6 @@ var dnd = dnd || {};
 (function() {
 	"use strict";
 	dnd.vars = dnd.vars || {};
-	dnd.service = dnd.service || {};
 	var setSelect = function(item, value){
 		var select = item;
 		if(select){
@@ -85,12 +84,12 @@ var dnd = dnd || {};
 	}
 	var selectData = function(item, obj){
 		var ident = obj.toLowerCase();
-
 		item.setAttribute("data-type", ident);
 		item.setAttribute("data-item", ident);
 		item.setAttribute("data-endpoint", "/" + ident);
 
-		dnd.data(item, selectItem);
+		//dnd.data(item, selectItem);
+		console.log("NEED TO DO THIS");
 	}
 	var selectInit = function(item){
 		var obj = item.getAttribute("data-select");

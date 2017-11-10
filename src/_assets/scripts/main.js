@@ -133,6 +133,15 @@ var dnd = dnd || {};
             scrollPos = window.pageYOffset;
         };
 	}
+
+	dnd.loader = function(mode){
+		var loader = dnd.selector("#Loader");
+		if(mode){
+			loader.classList.remove("is-hidden");
+		} else {
+			loader.classList.add("is-hidden");
+		}
+	}
     dnd.navigation = function(){
 		topNav();
 		filters();
@@ -142,7 +151,197 @@ var dnd = dnd || {};
 (function() {
 	"use strict";
 	dnd.vars = dnd.vars || {};
+	var idb,
+		idbName = "dndDB",
+		http = "http://",
+		url = "";
+	var loadError = function(text){ var output = text == null ? "Error loading data" : text; console.log("Data Error", output); }
+	var idbCheck = function(callback, item){
+		var idbTansaction = idb.transaction([item.getAttribute("data-type")], "readwrite");
+		var idbObjStore = idbTansaction.objectStore(item.getAttribute("data-type"));
+		var idbObjStoreReq = idbObjStore.get(item.getAttribute("data-item"));
+		if(item.classList.toString().indexOf("rid") > -1 || item.classList.toString().indexOf("sid") > -1){
+			console.log("THIS IS ERROR");
+			callback(item, [{}]);
+		} else {
+			idbObjStoreReq.onsuccess = function(event) {
+				var obj = idbObjStoreReq.result;
+				if(obj == null){
+					dnd.ajax(true, url + "" + item.getAttribute("data-endpoint"), function(data){
+						var json = JSON.parse(data);
+						idb.transaction([item.getAttribute("data-type")], "readwrite").objectStore(item.getAttribute("data-type")).add({ id: item.getAttribute("data-type"), data: json });
+						idbCheck(callback, item);
+					}, function(){ loadError(); }, function(){ loadError(); });
+				} else {
+					callback(item, obj.data);
+				}
+			}
+		}
+	}
+	var idbData = function(callback, items){
+		console.log(items);
+		var count = 0;
+		var counter = 0;
+		items.filter(function(i) {
+			if(i.show != ""){
+				count++;
+			}
+		});
+		items.forEach(function(item, i){
+			if(item.show != ""){
+				dnd.ajax(true, url + "" + item.path, function(data){
+					counter++;
+					var json = JSON.parse(data);
+					idb.transaction([item.alias], "readwrite").objectStore(item.alias).add({ id: item.alias, data: json });
+					if(counter == count){
+						localStorage.setItem('idbSet', true);
+						callback();
+					}
+				}, function(){ loadError(); }, function(){ loadError(); });
+			}
+		});
+	}
+	var idbStart = function(callback, json){
+		var request = window.indexedDB.open(idbName, 1);
+		request.onerror = function(event) { loadError("idbStart Error"); };
+		request.onsuccess = function(event) {
+			idb = request.result;
+			if(localStorage.getItem('idbSet') == null){
+				idbData(callback, json);
+			} else {
+				callback();
+			}
+		}
+		request.onupgradeneeded = function(event) {
+			idb = event.target.result;
+			if(localStorage.getItem('idbSet') == null){
+				json.forEach(function(obj, i){
+					var objectStore = idb.createObjectStore(obj.alias, {keyPath: "id"});
+				});
+			}
+		}
+	}
+	var idbInit = function(callback){
+		dnd.ajax(true, url + "/endpoints", function(data){
+			var json = JSON.parse(data);
+			idbStart(callback, json);
+		}, function(){ loadError(); }, function(){ loadError(); });
+	}
+	var stdInit = function(callback, template){
+		if(dnd.vars.modern){
+			idbCheck(callback, template);
+		} else {
+			dnd.ajax(true, url + "" + template.getAttribute("data-endpoint"), function(data){
+				var json = JSON.parse(data);
+				callback(template, json)
+			}, function(){ loadError(); }, function(){ loadError(); });
+		}
+	}
+	dnd.data = function(callback, template){
+		url = http + dnd.path;
+		if(template != null){
+			stdInit(callback, template);
+		} else {
+			if(dnd.vars.modern){
+				idbInit(callback);
+			} else{
+				callback();
+			}
+		}
+	}
+})();
+var dnd = dnd || {};
+(function() {
+	"use strict";
+	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
+	var templateClear = function(item){
+		item.innerHTML = "";
+	}
+	var templateLoad = function(item, data, template){
+		var templateHtml = template.innerHTML,
+			counter = 0,
+            itemHtml = "",
+			count = dnd.filters.amount != null ? dnd.filters.amount : 25;
+
+		templateClear(item);
+		data.forEach(function(obj, i){
+
+			if(counter < count){
+				var html = templateHtml;
+
+				var isPrestige = obj.prestige == 1 ? true : false;
+				var isComponentVerbal = obj.verbal_component == 1 ? true : false;
+				var isComponentSomatic = obj.somatic_component == 1 ? true : false;
+				var isComponentArcane = obj.arcane_focus_component == 1 ? true : false;
+				var isComponentDivine = obj.divine_focus_component == 1 ? true : false;
+				var isComponentXP = obj.xp_component == 1 ? true : false;
+
+				html = dnd.replaceAll(html, '#ID#', obj.itemid);
+				html = dnd.replaceAll(html, '#NAME#', obj.name);
+				html = dnd.replaceAll(html, '#ALIAS#', obj.slug);
+				html = dnd.replaceAll(html, '#DESCRIPTION#', obj.description);
+				html = dnd.replaceAll(html, '#PRESTIGE#', isPrestige);
+				html = dnd.replaceAll(html, '#SPELLSCHOOL#', obj.spellschool_name);
+				html = dnd.replaceAll(html, '#COMPONENTVERBAL#', isComponentVerbal);
+				html = dnd.replaceAll(html, '#COMPONENTSOMATIC#', isComponentSomatic);
+				html = dnd.replaceAll(html, '#COMPONENTARCANE#', isComponentArcane);
+				html = dnd.replaceAll(html, '#COMPONENTDIVINE#', isComponentDivine);
+				html = dnd.replaceAll(html, '#COMPONENTXP#', isComponentXP);
+				html = dnd.replaceAll(html, '#BOOK#', obj.rulebook_name);
+				html = dnd.replaceAll(html, '#EDITION#', obj.edition_name);
+
+				html = dnd.replaceAll(html, '#EDITIONURL#', '/edition/' + obj.edition_slug);
+				html = dnd.replaceAll(html, '#CURRENTURL#', '/' + item.getAttribute("data-item") + '/' + obj.slug);
+				html = dnd.replaceAll(html, '#URL#', '/rulebook/' + obj.rulebook_slug);
+				html = dnd.replaceAll(html, '#BOOKURL#', '/rulebook/' + obj.rulebook_slug);
+
+				itemHtml += html;
+				counter++;
+			}
+		});
+		item.innerHTML = itemHtml;
+	}
+	var templateInit = function(item, data){
+		var template = document.getElementById(item.classList[1].replace("-js-",""));
+		if(item && data && template){
+			templateLoad(item, data, template);
+			dnd.filters();
+		}
+	}
+	dnd.template = function(item, output){
+		var data = output,
+			hash = window.location.hash.substring(1);
+		if(hash != "" && hash != null){
+			data = dnd.filter(data);
+		}
+		templateInit(item, data);
+		dnd.loader(false);
+	}
+	dnd.templates = function(item){
+		var items = [],
+			templateBaseClass = "-js-template";
+
+		if(item != null){
+			templateBaseClass += "--" + item;
+		}
+
+		items = document.getElementsByClassName(templateBaseClass);
+
+		if(items.length > 0){
+			dnd.loader(true);
+			for(var i = 0; i < items.length; i++){
+				dnd.data(dnd.template, items[i]);
+			}
+		} else {
+			dnd.loader(false);
+		}
+	}
+})();
+var dnd = dnd || {};
+(function() {
+	"use strict";
+	dnd.vars = dnd.vars || {};
 	var setSelect = function(item, value){
 		var select = item;
 		if(select){
@@ -225,12 +424,12 @@ var dnd = dnd || {};
 	}
 	var selectData = function(item, obj){
 		var ident = obj.toLowerCase();
-
 		item.setAttribute("data-type", ident);
 		item.setAttribute("data-item", ident);
 		item.setAttribute("data-endpoint", "/" + ident);
 
-		dnd.data(item, selectItem);
+		//dnd.data(item, selectItem);
+		console.log("NEED TO DO THIS");
 	}
 	var selectInit = function(item){
 		var obj = item.getAttribute("data-select");
@@ -353,7 +552,6 @@ var dnd = dnd || {};
 (function() {
 	"use strict";
 	dnd.vars = dnd.vars || {};
-	dnd.service = dnd.service || {};
 	dnd.filter = function(data){
 		var output = data,
 			hashItems = window.location.hash.substring(1).split("&");
@@ -392,213 +590,25 @@ var dnd = dnd || {};
 		return output;
 	}
 })();
-var dnd = dnd || {};
-(function() {
-	"use strict";
-	dnd.vars = dnd.vars || {};
-	dnd.service = dnd.service || {};
-	var idb,
-		idbName = "dndDB",
-		http = "http://",
-		url = "";
-	var loadError = function(text){ var output = text == null ? "Error loading data" : text; console.log("Data Error", output); }
-	var cookieGet = function(){
-		var cookie = null;
-
-		if(document.cookie != "" && document.cookie != null){
-			cookie = document.cookie;
-		}
-
-		return cookie;
-	}
-	var cookieSet = function(){
-		var d = new Date();
-		d.setTime(d.getTime() + (365*24*60*60*1000));
-		var expires = "expires="+ d.toUTCString();
-		document.cookie = "dndDB=true;" + expires + ";path=/";
-	}
-	var dataToDnd = function(item, obj, callback){
-		dnd.service["" + obj.id + ""] = obj.data;
-		if(callback != null){
-			callback(item, obj.data);
-		}
-	}
-	var idbDataAdd = function(item, callback){
-		dnd.ajax(true, url + "" + item.getAttribute("data-endpoint"), function(data){
-			var json = JSON.parse(data);
-			idb.transaction([item.getAttribute("data-type")], "readwrite").objectStore(item.getAttribute("data-type")).add({ id: item.getAttribute("data-item"), data: json });
-			idbDataCheck(item, callback);
-		}, function(){ loadError(); }, function(){ loadError(); });
-	}
-	var idbDataCheck = function(item, callback){
-		var idbTansaction = idb.transaction([item.getAttribute("data-type")], "readwrite");
-		var idbObjStore = idbTansaction.objectStore(item.getAttribute("data-type"));
-		var idbObjStoreReq = idbObjStore.get(item.getAttribute("data-item"));
-		idbObjStoreReq.onsuccess = function(event) {
-			var obj = idbObjStoreReq.result;
-			if(obj == null){
-				idbDataAdd(item, callback);
-			} else {
-				dataToDnd(item, obj, callback);
-			}
-		}
-	}
-	var idbStart = function(item, data, callback){
-		var request = window.indexedDB.open(idbName, 1);
-		request.onerror = function(event) { loadError("idbStart Error"); };
-		request.onsuccess = function(event) {
-			idb = request.result;
-			idbDataCheck(item, callback);
-		}
-		request.onupgradeneeded = function(event) {
-			idb = event.target.result;
-			data.forEach(function(obj, i){
-				var objectStore = idb.createObjectStore(obj.alias, {keyPath: "id"});//
-			});
-		}
-	}
-	var idbInit = function(item, callback){
-		if(cookieGet() == null){
-			cookieSet();
-			dnd.ajax(true, url + "/endpoints", function(data){
-				var json = JSON.parse(data);
-				idbStart(item, json, callback);
-			}, function(){ loadError(); }, function(){ loadError(); });
-		} else {
-			idbStart(item, null, callback);
-		}
-	}
-	var apiInit = function(item, callback){
-		var obj = [{ id: 0, data: {} }];
-		dnd.ajax(true, url + "" + item.getAttribute("data-endpoint"), function(data){
-			var json = JSON.parse(data);
-			obj.id = item.getAttribute("data-type");
-			obj.data = json;
-			dataToDnd(item, obj, callback);
-		}, function(){ loadError(); }, function(){ loadError(); });
-	}
-	dnd.data = function(item, callback){
-		url = http + dnd.path;
-		if(dnd.vars.indexeddb){
-			idbInit(item, callback);
-		} else {
-			apiInit(item, callback);
-		}
-	}
-})();
-var dnd = dnd || {};
-(function() {
-	"use strict";
-	dnd.vars = dnd.vars || {};
-	dnd.service = dnd.service || {};
-	var templateLoader = function(mode){
-		var loader = dnd.selector("#Loader");
-		if(mode){
-			loader.style.display = 'block';
-			loader.classList.remove("is-hidden");
-		} else {
-			loader.style.display = 'none';
-			loader.classList.add("is-hidden");
-		}
-	}
-	var templateClear = function(item){
-		item.innerHTML = "";
-	}
-	var templateLoad = function(item, data, template){
-		var templateHtml = template.innerHTML,
-			counter = 0,
-            itemHtml = "",
-			count = dnd.filters.amount != null ? dnd.filters.amount : 25;
-
-		templateClear(item);
-		data.forEach(function(obj, i){
-
-			if(counter < count){
-				var html = templateHtml;
-
-				var isPrestige = obj.prestige == 1 ? true : false;
-				var isComponentVerbal = obj.verbal_component == 1 ? true : false;
-				var isComponentSomatic = obj.somatic_component == 1 ? true : false;
-				var isComponentArcane = obj.arcane_focus_component == 1 ? true : false;
-				var isComponentDivine = obj.divine_focus_component == 1 ? true : false;
-				var isComponentXP = obj.xp_component == 1 ? true : false;
-
-				html = dnd.replaceAll(html, '#ID#', obj.itemid);
-				html = dnd.replaceAll(html, '#NAME#', obj.name);
-				html = dnd.replaceAll(html, '#ALIAS#', obj.slug);
-				html = dnd.replaceAll(html, '#DESCRIPTION#', obj.description);
-				html = dnd.replaceAll(html, '#PRESTIGE#', isPrestige);
-				html = dnd.replaceAll(html, '#SPELLSCHOOL#', obj.spellschool_name);
-				html = dnd.replaceAll(html, '#COMPONENTVERBAL#', isComponentVerbal);
-				html = dnd.replaceAll(html, '#COMPONENTSOMATIC#', isComponentSomatic);
-				html = dnd.replaceAll(html, '#COMPONENTARCANE#', isComponentArcane);
-				html = dnd.replaceAll(html, '#COMPONENTDIVINE#', isComponentDivine);
-				html = dnd.replaceAll(html, '#COMPONENTXP#', isComponentXP);
-				html = dnd.replaceAll(html, '#BOOK#', obj.rulebook_name);
-				html = dnd.replaceAll(html, '#EDITION#', obj.edition_name);
-
-				html = dnd.replaceAll(html, '#EDITIONURL#', '/edition/' + obj.edition_slug);
-				html = dnd.replaceAll(html, '#CURRENTURL#', '/' + item.getAttribute("data-item") + '/' + obj.slug);
-				html = dnd.replaceAll(html, '#URL#', '/rulebook/' + obj.rulebook_slug);
-				html = dnd.replaceAll(html, '#BOOKURL#', '/rulebook/' + obj.rulebook_slug);
-
-				itemHtml += html;
-				counter++;
-			}
-		});
-		item.innerHTML = itemHtml;
-	}
-	var templateInit = function(item, data){
-		var template = document.getElementById(item.classList[1].replace("-js-",""));
-		templateLoader(false);
-		if(item && data && template){
-			templateLoad(item, data, template);
-			dnd.filters();
-		}
-	}
-	dnd.templates = function(item){
-		var items = [],
-			templateBaseClass = "-js-template";
-		if(item != null){
-			templateBaseClass += "--" + item.getAttribute("data-item")
-			items = document.getElementsByClassName(templateBaseClass);
-		} else {
-			items = document.getElementsByClassName(templateBaseClass);
-		}
-		if(items.length > 0){
-			for(var i = 0; i < items.length; i++){
-				if(item != null){
-					dnd.template(items[i], dnd.service[item.getAttribute("data-type")]);
-				} else {
-					dnd.data(items[i], dnd.template);
-				}
-			}
-		} else {
-			templateLoader(false);
-		}
-	}
-	dnd.template = function(item, output){
-		var data = output,
-			hash = window.location.hash.substring(1);
-		if(hash != "" && hash != null){
-			data = dnd.filter(data);
-		}
-		templateInit(item, data);
-	}
-})();
 
 var dnd = dnd || {};
 (function() {
 	dnd.vars = dnd.vars || {};
-	dnd.service = dnd.service || {};
 	dnd.path = "localhost:81";
     dnd.vars.localstorage = false;
     dnd.vars.indexeddb = false;
+	dnd.vars.modern = false;
 	window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 	window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
 	window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
 	if (typeof(Storage) !== "undefined") { dnd.vars.localstorage = true; }
     if (window.indexedDB) { dnd.vars.indexeddb = true; }
+	if(dnd.vars.indexeddb && dnd.vars.localstorage){ dnd.vars.modern = true; }
+
+	var dataIsLoaded = function(){
+		dnd.loader(false);
+		dnd.templates(null);
+	}
     dnd.navigation();
-	dnd.templates();
+	dnd.data(dataIsLoaded, null);
 })();

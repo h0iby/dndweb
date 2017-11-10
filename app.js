@@ -138,6 +138,29 @@ var serviceCallback = function(data){
 	  controller.setup(app, controllerName[0], controllerName[1]);
 	});
 
+	// create endpoint for character
+	console.log("Registering endpoint: /character");
+	app.get('/character', (req, res) => {
+		var current = html,
+			templateMain = path.join(__dirname+''+htmlPagesPath+'/character.html'),
+			fileMain = fs.readFileSync(templateMain).toString();
+
+		var repData = true,
+			repAlias = null,
+			repPath = null,
+			repRobots = "noindex follow",
+			repTitle = "D&amp;D: Search",
+			repDescription = "Search for D&amp;D feats, classes, spells and more here.",
+			repKeywords = "D&amp;D, DnD, dndtools, feats, spells, classes",
+			repUrl = "/search",
+			repType = "search";
+
+		fileMain = fileMain.replace("#PAGING#", filePaging).replace("#PAGING#", filePaging);
+		current = current.replace("#HEAD#", fileHead);
+		current = htmlReplacements(current, fileMain, repAlias, repPath, repData, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
+		res.send(current);
+	});
+
 	// create endpoint for search
 	console.log("Registering endpoint: /search");
 	app.get('/search', (req, res) => {

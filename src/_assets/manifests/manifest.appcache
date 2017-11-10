@@ -1,5 +1,9 @@
 CACHE MANIFEST
-# 18-02-2017 - v0.3
+# 10-11-2017 - v0.5
+
+#manifests
+/_assets/manifests/browserconfig.xml
+/_assets/manifests/manifest.json
 
 #images
 /_assets/images/bg.png
@@ -26,6 +30,30 @@ CACHE MANIFEST
 
 #scripts
 /_assets/scripts/main.js
+
+#icons
+/_assets/favicons/android-chrome-192x192.png
+/_assets/favicons/android-chrome-512x512.png
+/_assets/favicons/apple-touch-icon.png
+/_assets/favicons/apple-touch-icon-60x60.png
+/_assets/favicons/apple-touch-icon-60x60-precomposed.png
+/_assets/favicons/apple-touch-icon-76x76.png
+/_assets/favicons/apple-touch-icon-76x76-precomposed.png
+/_assets/favicons/apple-touch-icon-120x120.png
+/_assets/favicons/apple-touch-icon-120x120-precomposed.png
+/_assets/favicons/apple-touch-icon-152x152.png
+/_assets/favicons/apple-touch-icon-152x152-precomposed.png
+/_assets/favicons/apple-touch-icon-180x180.png
+/_assets/favicons/apple-touch-icon-180x180-precomposed.png
+/_assets/favicons/apple-touch-icon-precomposed.png
+/_assets/favicons/favicon.ico
+/_assets/favicons/favicon-16x16.png
+/_assets/favicons/favicon-32x32.png
+/_assets/favicons/mstile-70x70.png
+/_assets/favicons/mstile-150x150.png
+/_assets/favicons/mstile-310x150.png
+/_assets/favicons/mstile-310x310.png
+/_assets/favicons/safari-pinned-tab.svg
 
 NETWORK:
 *

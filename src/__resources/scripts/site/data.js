@@ -73,10 +73,17 @@ var dnd = dnd || {};
 		}
 	}
 	var idbInit = function(callback){
-		dnd.ajax(true, url + "/endpoints", function(data){
-			var json = JSON.parse(data);
+		if(localStorage.getItem('idbData') == null){
+			dnd.ajax(true, url + "/endpoints", function(data){
+				localStorage.setItem('idbData', data)
+				var json = JSON.parse(data);
+				idbStart(callback, json);
+			}, function(){ loadError(); }, function(){ loadError(); });
+		} else {
+			var json = JSON.parse(localStorage.getItem('idbData'));
 			idbStart(callback, json);
-		}, function(){ loadError(); }, function(){ loadError(); });
+		}
+
 	}
 	var stdInit = function(callback, template){
 		if(dnd.vars.modern){

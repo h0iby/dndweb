@@ -21,6 +21,12 @@ var dnd = dnd || {};
 	var dataIsLoaded = function(){
 		dnd.loader(false);
 		dnd.templates(null);
+
+		var dataSlow = document.querySelectorAll('[data-slow]');
+		for(var i = 0; i < dataSlow.length; i++){
+			var item = dataSlow[i];
+			item.setAttribute("style", "background-image: url('" + item.getAttribute("data-slow") + "');");
+		}
 	}
     dnd.navigation();
 	dnd.data(dataIsLoaded, null);

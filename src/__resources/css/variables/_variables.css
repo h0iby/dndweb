@@ -14,7 +14,6 @@
 
 
 	/* variables */
-	--pathBackground: url('/_assets/images/bg.png');
 	--pathLogo: url('/_assets/images/logo.png');
 
 
@@ -31,7 +30,6 @@
 	--selectionBackground: rgba(var(--redRGB),1);
 	--selectionFontColor: rgba(var(--grayBlackRGB),1);
 	--shadow: rgba(var(--blackRGB),1);
-	--background: var(--pathBackground);
 	--backgroundLogo: var(--pathLogo);
 	--backgroundSite: rgba(var(--beigeRGB),1);
 	--backgroundPage: rgba(var(--beigeRGB),1);
@@ -66,7 +64,6 @@
 	/* nav */
 	--navCloseBackground: rgba(var(--blackRGB),1);
 	--navBurgerColor: rgba(var(--grayBlackRGB),1);
-	--navBackground: var(--pathBackground);
 	--navBackgroundHeader: rgba(var(--beigeRGB),1);
 	--navFontColor: rgba(var(--grayDarkRGB),1);
 	--navAccordionHeight: 60px;

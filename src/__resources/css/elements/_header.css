@@ -7,7 +7,7 @@
 	order: 1;
 	z-index: 3;
 	flex-shrink: 0;
-	background: var(--backgroundHeader) var(--background) 50% 0 repeat-x;
+	background: var(--backgroundHeader) 50% 0 repeat-x;
 	box-shadow: -5px -15px 25px 15px var(--shadow);
     transition: transform 0.35s;
 
@@ -72,13 +72,13 @@
 		font-smoothing: antialiased;
 		transform-origin: 0% 0%;
 		transform: translate(110%, 0);
-		background: var(--backgroundHeader) var(--background) 50% 0 repeat-x;
+		background: var(--backgroundHeader) 50% 0 repeat-x;
 		box-shadow: 0px 2px 8px 0px var(--shadow);
 		margin: 1px 0 0;
 		opacity: 0;
 		padding: 0 0 0 20px;
 		display: block;
-		transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+		transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
 
 		&__input{
 			margin: 0;
@@ -215,7 +215,7 @@
 	.header{
 		&__search{
 			box-shadow: none;
-			background: transparent;
+			background: transparent !important;
 			top: 0;
 			right: 80px;
 			padding: 0;

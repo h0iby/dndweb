@@ -3,7 +3,7 @@ html, body {
 	font-size: var(--fontSize);
 	color: var(--fontColor);
 	height: 100%;
-	background: var(--backgroundPage) var(--background) 0 0 repeat;
+	background: var(--backgroundPage) 0 0 repeat;
 }
 
 .page {

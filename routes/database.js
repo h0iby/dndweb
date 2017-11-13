@@ -47,10 +47,12 @@ module.exports = {
 
                 replaceFunction("#LOADDATA#", repData);
                 replaceFunction("#MENUITEM#", repAlias);
-				replaceFunction("#MENUTYPE#", repMenu);
                 replaceFunction("#MENUENDPOINT#", repPath);
                 replaceFunction("#DATAENDPOINT#", repPath);
-                replaceFunction("#ROBOTS#", repRobots);
+
+				replaceFunction("#ROBOTS#", repRobots);
+
+				replaceFunction("#MENUTYPE#", repMenu);
 
                 replaceFunction("#PAGETITLE#", repTitle);
                 replaceFunction("#METATITLE#", repTitle);

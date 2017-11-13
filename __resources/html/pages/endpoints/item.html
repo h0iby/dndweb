@@ -1,4 +1,5 @@
 <section class="main__article__section section">
+	<div class="-js-template -js-template--#MENUTYPE#-breadcrumb" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#" data-output="1"></div>
 	<div class="section__intro">
 		<h2>Items</h2>
 		<p>Browse through D&amp;D items here.</p>
@@ -13,7 +14,7 @@
 						Name
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--textbox">
-						<input class="filter__list__item__container__input" id="filterSlug" type="text" data-target="#MENUTYPE#" />
+						<input class="filter__list__item__container__input" id="filterSlug" type="text" data-select="slug" data-target="#MENUTYPE#" />
 					</span>
 				</li>
 				<li class="filter__list__item">
@@ -21,8 +22,8 @@
 						##GP Cost (Min/Max)
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--minmax">
-						<input class="filter__list__item__container__input filter__list__item__container__input--min" id="filterCostMin" type="text" data-target="#MENUTYPE#" />
-						<input class="filter__list__item__container__input filter__list__item__container__input--max" id="filterCostMax" type="text" data-target="#MENUTYPE#" />
+						<input class="filter__list__item__container__input filter__list__item__container__input--min" id="filterCostMin" type="text" data-select="" data-target="#MENUTYPE#" />
+						<input class="filter__list__item__container__input filter__list__item__container__input--max" id="filterCostMax" type="text" data-select="" data-target="#MENUTYPE#" />
 					</span>
 				</li>
 				<li class="filter__list__item">
@@ -30,7 +31,7 @@
 						Rulebook
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--select">
-						<select id="filterRulebook" class="filter__list__item__container__select" data-target="#MENUTYPE#"></select>
+						<select id="filterRulebook" class="filter__list__item__container__select" data-select="rulebook" data-target="#MENUTYPE#"></select>
 					</span>
 				</li>
 			</ul>
@@ -54,8 +55,24 @@
 	</div>
 </section>
 <script id="template--#MENUTYPE#" type="x-template">
-    <tr data-type="#ALIAS#" data-id="#ID#" class="table__row">
-		<td data-type="name" class="table__row__td table__row__td--name"><a class="table__row__td__link" href="#URL#/item/#ALIAS#">#NAME#</a></td>
-		<td data-type="book" class="table__row__td table__row__td--book"><a class="table__row__td__link" href="#URL#">#BOOK#</a></td>
+    <tr data-type="¤ALIAS¤" data-id="¤ID¤" class="table__row">
+		<td data-type="name" class="table__row__td table__row__td--name"><a class="table__row__td__link" href="¤BOOKURL¤/item/¤ALIAS¤">¤NAME¤</a></td>
+		<td data-type="book" class="table__row__td table__row__td--book"><a class="table__row__td__link" href="¤BOOKURL¤">¤BOOK¤</a></td>
 	</tr>
+</script>
+<script id="template--#MENUTYPE#-breadcrumb" type="x-template">
+	<ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li class="breadcrumb__listitem" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a class="breadcrumb__listitem__item" itemprop="item" href="/">
+				<span class="breadcrumb__listitem__item__link" itemprop="name">Home</span>
+			</a>
+			<meta property="position" content="1">
+		</li>
+		<li class="breadcrumb__listitem" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<span class="breadcrumb__listitem__item" itemprop="item">
+				<span class="breadcrumb__listitem__item__text" itemprop="name">Items</span>
+			</span>
+			<meta property="position" content="2">
+		</li>
+	</ol>
 </script>

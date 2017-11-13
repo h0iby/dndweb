@@ -1,26 +1,98 @@
 <section class="main__article__section section">
-	<div class="-js-template -js-template--#MENUTYPE# section__intro" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#"></div>
+	<div class="-js-template -js-template--#MENUTYPE#-breadcrumb" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#" data-output="1"></div>
+	<div class="-js-template -js-template--#MENUTYPE#" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#"></div>
+	<div class="section__main">
+		<h4>Category:</h4>
+		<div class="-js-template -js-template--#MENUTYPE#-categories" data-type="#MENUTYPE#-categories" data-item="#MENUITEM#-categories" data-endpoint="#DATAENDPOINT#/categories"></div>
+		<h4>Prerequisites:</h4>
+		<div>
+			<span class="-js-template -js-template--#MENUTYPE#-prerequisite-feats" data-type="#MENUTYPE#-prerequisite-feats" data-item="#MENUITEM#-prerequisite-feats" data-endpoint="#DATAENDPOINT#/prerequisite/feats"></span>
+			<span class="-js-template -js-template--#MENUTYPE#-prerequisite-skills" data-type="#MENUTYPE#-prerequisite-skills" data-item="#MENUITEM#-prerequisite-skills" data-endpoint="#DATAENDPOINT#/prerequisite/skills"></span>
+			<span class="-js-template -js-template--#MENUTYPE#-prerequisite-specials" data-type="#MENUTYPE#-prerequisite-specials" data-item="#MENUITEM#-prerequisite-specials" data-endpoint="#DATAENDPOINT#/prerequisite/specials"></span>
+		</div>
+		<h4>Dependency:</h4>
+		<div class="-js-template -js-template--#MENUTYPE#-dependency-feats" data-type="#MENUTYPE#-dependency-feats" data-item="#MENUITEM#-dependency-feats" data-endpoint="#DATAENDPOINT#/dependency/feats"></div>
+	</div>
+	<div class="-js-template -js-template--#MENUTYPE#-info" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#"></div>
 
 
 	<div class="section__main">
+		<!--
 		<h3>Prerequisites for #NAME#:</h3>
         <div class="js-template js-template--#MENUTYPE#-prerequisites js-page" data-type="#MENUTYPE#-prerequisites" data-item="#MENUITEM#-prerequisites" data-endpoint="#DATAENDPOINT#/prerequisites">#PREREQUISITES#</div>
 
         <h3>#NAME# is required for:</h3>
         <div class="js-template js-template--#MENUTYPE#-requirements js-page" data-type="#MENUTYPE#-requirements" data-item="#MENUITEM#-requirements" data-endpoint="#DATAENDPOINT#/requirements">#REQUIRED#</div>
-
-        <h3>#NAME# benefit:</h3>
-        <div class="js-template js-template--#MENUTYPE#-benefits js-page" data-type="#MENUTYPE#-benefits" data-item="#MENUITEM#-benefits" data-endpoint="#DATAENDPOINT#/benefits">#BENEFITS#</div>
-
-        <h3>Without #NAME#:</h3>
-        <div class="js-template js-template--#MENUTYPE#-normal js-page" data-type="#MENUTYPE#-normal" data-item="#MENUITEM#-normal" data-endpoint="#DATAENDPOINT#/normal">#NORMAL#</div>
+		-->
 	</div>
 </section>
 
 
 <script id="template--#MENUTYPE#" type="x-template">
-	<h2>#NAME# </h2>
-	<p>(<a href="#BOOKURL#">#BOOKNAME#</a> )</p>
-	<p>[ #FEATCATEGORIES# ]</p>
-	<p>#DESCRIPTION#</p>
+	<div class="section__intro">
+		<h2>¤NAME¤</h2>
+		<a class="section__intro__book section__intro__url" href="¤BOOKURL¤">¤BOOK¤¤BOOKPAGE¤</a>
+		<p>¤DESCRIPTION¤<p>
+	</div>
+</script>
+
+<script id="template--#MENUTYPE#-categories" type="x-template">
+	<span>[<a href="/feat#feat-category=¤ALIAS¤&filter=no">¤NAME¤</a>]</span>
+</script>
+
+<script id="template--#MENUTYPE#-dependency-feats" type="x-template">
+	<span>[<a href="¤BOOKURL¤/feat/¤ALIAS¤">¤NAME¤ (¤BOOK¤)</a>]</span>
+</script>
+<script id="template--#MENUTYPE#-prerequisite-feats" type="x-template">
+	<span>[<a href="¤BOOKURL¤/feat/¤ALIAS¤">¤NAME¤ (¤BOOK¤)</a>]</span>
+</script>
+<script id="template--#MENUTYPE#-prerequisite-skills" type="x-template">
+	<span>[<a href="/skill/¤ALIAS¤">¤NAME¤</a>]</span>
+</script>
+<script id="template--#MENUTYPE#-prerequisite-specials" type="x-template">
+	<span>[<span>¤NAME¤</span>]</span>
+</script>
+
+
+<script id="template--#MENUTYPE#-info" type="x-template">
+	<div class="section__main">
+		<h3>Benefits</h3>
+		<p>¤BENEFIT¤</p>
+		¤SPECIAL¤
+		¤NORMAL¤
+	</div>
+</script>
+<script id="template--#MENUTYPE#-breadcrumb" type="x-template">
+	<ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li class="breadcrumb__listitem" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a class="breadcrumb__listitem__item" itemprop="item" href="/">
+				<span class="breadcrumb__listitem__item__link" itemprop="name">Home</span>
+			</a>
+			<meta property="position" content="1">
+		</li>
+		<li class="breadcrumb__listitem" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a class="breadcrumb__listitem__item" itemprop="item" href="/rulebook">
+				<span class="breadcrumb__listitem__item__link" itemprop="name">Rulebooks</span>
+			</a>
+			<meta property="position" content="2">
+		</li>
+		<li class="breadcrumb__listitem" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a class="breadcrumb__listitem__item" itemprop="item" href="/rulebook/¤BOOKALIAS¤">
+				<span class="breadcrumb__listitem__item__link" itemprop="name">¤BOOK¤</span>
+			</a>
+			<meta property="position" content="3">
+		</li>
+		<li class="breadcrumb__listitem" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a class="breadcrumb__listitem__item" itemprop="item" href="/feat#rulebook=¤BOOKALIAS¤">
+				<span class="breadcrumb__listitem__item__link" itemprop="name">Feats</span>
+			</a>
+			<meta property="position" content="4">
+		</li>
+		<li class="breadcrumb__listitem" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<span class="breadcrumb__listitem__item" itemprop="item">
+				<span class="breadcrumb__listitem__item__text" itemprop="name">¤NAME¤</span>
+			</span>
+			<meta property="position" content="5">
+		</li>
+	</ol>
 </script>

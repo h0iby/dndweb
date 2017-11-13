@@ -2,6 +2,7 @@ var dnd = dnd || {};
 (function() {
 	"use strict";
 	dnd.vars = dnd.vars || {};
+	var timeoutTimer = 1000;
 	var setSelect = function(item, value){
 		var select = item;
 		if(select){
@@ -35,7 +36,7 @@ var dnd = dnd || {};
 					if(item){
 						switch(item.tagName.toLowerCase()){
 							case "select":
-								setSelect(item, dnd.replaceAll(hashes[1], "-", " "));
+								setSelect(item, hashes[1]);//dnd.replaceAll(, "-", " ")
 								break;
 							default:
 								if(item.hasAttribute("data-radio")){
@@ -53,8 +54,8 @@ var dnd = dnd || {};
 			}
 		}
 	}
-	var selectItem = function(item){
-		var json = dnd.service[item.getAttribute("data-type")],
+	var selectData = function(item, output){
+		var json = output,
 			obj = item.getAttribute("data-select"),
 			first = document.createElement("option"),
 			items = json.length;
@@ -73,36 +74,25 @@ var dnd = dnd || {};
 					option.innerHTML = json[i].name;
 					item.appendChild(option);
 				}
+				console.log(obj);
 				item.addEventListener('change',function(){
 					var select = this;
 					var selectValue = select.options[select.selectedIndex].value;
 					setHash(obj, selectValue);
-					dnd.templates(document.getElementsByClassName("-js-template--" + item.getAttribute("data-target"))[0]);
+					dnd.templates(item.getAttribute("data-target"));
 				});
 			}
 		}
+		if(window.location.hash){
+			getHash();
+		}
 	}
-	var selectData = function(item, obj){
-		var ident = obj.toLowerCase();
+	var selectInit = function(item){
+		var ident = item.getAttribute("data-select");
 		item.setAttribute("data-type", ident);
 		item.setAttribute("data-item", ident);
 		item.setAttribute("data-endpoint", "/" + ident);
-
-		//dnd.data(item, selectItem);
-		console.log("NEED TO DO THIS");
-	}
-	var selectInit = function(item){
-		var obj = item.getAttribute("data-select");
-		if(item && obj){
-			var ident = obj.toLowerCase(),
-				json = dnd.service[ident];
-
-			if(json == null){
-				selectData(item, obj);
-			} else {
-				selectItem(item);
-			}
-		}
+		dnd.data(selectData, item);
 	}
 	var filterInput = function(item){
 		var obj = item.getAttribute("data-select");
@@ -117,10 +107,13 @@ var dnd = dnd || {};
 					}
 					timeout = setTimeout(function(){
 						setHash(obj, item.value);
-						dnd.templates(document.getElementsByClassName("-js-template--" + item.getAttribute("data-target"))[0]);
-					}, 750)
+						dnd.templates(item.getAttribute("data-target"));
+					}, timeoutTimer)
 				});
 			}
+		}
+		if(window.location.hash){
+			getHash();
 		}
 	}
 	var filterRadiobutton = function(item){
@@ -135,24 +128,23 @@ var dnd = dnd || {};
 						timeout = null;
 					}
 					timeout = setTimeout(function(){
-						var value = "";
-						if(item.hasAttribute("data-radio")){
-							value = item.getAttribute("data-radio");
-						}
-						setHash(obj, value);
-						dnd.templates(document.getElementsByClassName("-js-template--" + item.getAttribute("data-target"))[0]);
-					}, 1)
+						setHash(obj, item.getAttribute("data-radio"));
+						dnd.templates(item.getAttribute("data-target"));
+					}, 50)
 				});
 			}
+		}
+		if(window.location.hash){
+			getHash();
 		}
 	}
 	var filterPageAmount = function(){
 		dnd.filters.amount = 25;
-		if(dnd.vars.localstorage){
-			if(localStorage.getItem("filter-amount") == null){
-				localStorage.setItem("filter-amount", dnd.filters.amount);
+		if(dnd.vars.modern){
+			if(localStorage.getItem("filterAmount") == null){
+				localStorage.setItem("filterAmount", dnd.filters.amount);
 			} else {
-				dnd.filters.amount = parseInt(localStorage.getItem("filter-amount"));
+				dnd.filters.amount = parseInt(localStorage.getItem("filterAmount"));
 			}
 		}
 
@@ -172,7 +164,7 @@ var dnd = dnd || {};
 				dnd.filters.amount = parseInt(selectValue);
 
 				if(dnd.vars.localstorage){
-					localStorage.setItem("filter-amount", dnd.filters.amount);
+					localStorage.setItem("filterAmount", dnd.filters.amount);
 				}
 
 				dnd.templates();
@@ -203,8 +195,6 @@ var dnd = dnd || {};
 					filterRadiobutton(item);
 				}
 			}
-
-			getHash();
 		},1)
 	}
 })();

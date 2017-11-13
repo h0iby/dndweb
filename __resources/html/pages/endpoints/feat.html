@@ -1,4 +1,5 @@
 <section class="main__article__section section">
+	<div class="-js-template -js-template--#MENUTYPE#-breadcrumb" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#" data-output="1"></div>
 	<div class="section__intro">
 		<h2>Feats</h2>
 		<p>Search for your favorite D&amp;D feats here.</p>
@@ -6,7 +7,7 @@
 	<div class="section__filter">
 		<input class="filter__toggle" type="checkbox" />
 		<span class="h4 filter__title">Filters</span>
-		<div class="filter" data-filters="5">
+		<div class="filter" data-filters="4">
 			<ul class="filter__list">
 				<li class="filter__list__item">
 					<label class="filter__list__item__text" for="filterSlug">
@@ -18,20 +19,22 @@
 				</li>
 				<li class="filter__list__item">
 					<label class="filter__list__item__text" for="filterKeywords">
-						##Keywords (benefit, special, description)
+						Keywords
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--textbox">
-						<input class="filter__list__item__container__input" id="filterKeywords" type="text" data-select="" data-target="#MENUTYPE#" />
+						<input class="filter__list__item__container__input" id="filterKeywords" type="text" data-select="keywords" data-target="#MENUTYPE#" />
 					</span>
 				</li>
+				<!--
 				<li class="filter__list__item">
 					<label class="filter__list__item__text" for="filterFeatCategory">
-						Feat Category
+						###Category
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--select">
 						<select id="filterFeatCategory" class="filter__list__item__container__select" data-select="feat-category" data-target="#MENUTYPE#"></select>
 					</span>
 				</li>
+				-->
 				<li class="filter__list__item">
 					<label class="filter__list__item__text" for="filterRulebook">
 						Rulebook
@@ -42,7 +45,7 @@
 				</li>
 				<li class="filter__list__item">
 					<label class="filter__list__item__text" for="filterEdition">
-						##Edition
+						Edition
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--select">
 						<select id="filterEdition" class="filter__list__item__container__select" data-select="edition" data-target="#MENUTYPE#"></select>
@@ -52,7 +55,7 @@
 		</div>
 	</div>
 	<div class="section__main">
-		<h3>Feats</h3>
+		<h3 class="table__headline">Feats</h3>
 		#PAGING#
 		<table class="table">
 			<thead>
@@ -70,9 +73,25 @@
 	</div>
 </section>
 <script id="template--#MENUTYPE#" type="x-template">
-    <tr data-type="#ALIAS#" data-id="#ID#" class="table__row">
-		<td data-type="name" class="table__row__td table__row__td--name"><a class="table__row__td__link" href="#URL#/feat/#ALIAS#">#NAME#</a></td>
-		<td data-type="desription" class="table__row__td table__row__td--description">#DESCRIPTION#</td>
-		<td data-type="book" class="table__row__td table__row__td--book"><a class="table__row__td__link" href="#URL#">#BOOK#</a></td>
+    <tr data-type="¤ALIAS¤" data-id="¤ID¤" class="table__row">
+		<td data-type="name" class="table__row__td table__row__td--name"><a class="table__row__td__link" href="¤BOOKURL¤/feat/¤ALIAS¤">¤NAME¤</a></td>
+		<td data-type="desription" class="table__row__td table__row__td--description"><span class="table__row__td__text">¤DESCRIPTION¤</span></td>
+		<td data-type="book" class="table__row__td table__row__td--book"><a class="table__row__td__link" href="¤BOOKURL¤">¤BOOK¤</a></td>
 	</tr>
+</script>
+<script id="template--#MENUTYPE#-breadcrumb" type="x-template">
+	<ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li class="breadcrumb__listitem" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a class="breadcrumb__listitem__item" itemprop="item" href="/">
+				<span class="breadcrumb__listitem__item__link" itemprop="name">Home</span>
+			</a>
+			<meta property="position" content="1">
+		</li>
+		<li class="breadcrumb__listitem" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<span class="breadcrumb__listitem__item" itemprop="item">
+				<span class="breadcrumb__listitem__item__text" itemprop="name">Feats</span>
+			</span>
+			<meta property="position" content="2">
+		</li>
+	</ol>
 </script>

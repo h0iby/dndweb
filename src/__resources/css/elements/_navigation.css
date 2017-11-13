@@ -11,7 +11,7 @@
 		font-smoothing: antialiased;
 		transform-origin: 0% 0%;
 		transform: translate(-150%, 0);
-		transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+		transition: transform 0.35s cubic-bezier(0.77,0.2,0.05,1.0);
 		z-index: 89;
 		@apply --LanguageFontCommon;
 
@@ -19,16 +19,14 @@
 			position: fixed;
 			top: 0;
 			right: 0;
-			width: 0%;
-			height: 0%;
+			width: 100%;
+			height: 100%;
 			z-index: 5;
-			opacity: 0;
-			background: black;
-			transition: all 0.75s cubic-bezier(0.77,0.2,0.05,1.0);
-            animation: hideClose;
-            animation-fill-mode: forwards;
-            animation-iteration-count: 1;
-            animation-duration: .5s;
+			opacity: .65;
+			background: var(--navCloseBackground);
+			transition: transform 0.35s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.35s cubic-bezier(0.77,0.2,0.05,1.0);
+			transform: translate(-100%,0%);
+			animation: hideClose 0.35s cubic-bezier(0.77,0.2,0.05,1.0) forwards;
 		}
 
 		&__icon{
@@ -38,16 +36,16 @@
 			margin: -9px 0 0;
 			z-index: 97;
 			opacity: 0;
-			transition: all 0.5s;
-			transition-delay: 0.25s;
+			transition: transform 0.35s;
+			transition-delay: 0.35s;
 			animation-name: showBurger;
-			animation-duration: 0.8s;
+			animation-duration: 0.35s;
 			animation-delay: .40s;
 			animation-fill-mode: forwards;
             transform: translate(0, 0px);
 
 			&__line{
-				transition: all 0.5s;
+				transition: transform 0.5s;
 				display: block;
 				left: 0;
 				width: 33px;
@@ -62,19 +60,19 @@
 				&--num1{
 					transform: rotate(0deg) translate(0px, 0px);
 					animation-name: burgerMenuTopToVertical;
-					animation-duration: 0.8s;
+					animation-duration: 0.35s;
 					animation-fill-mode: forwards;
 				}
 
 				&--num2{
 					opacity: 1;
-					transition: all 0.5s cubic-bezier(0.77,0.2,0.05,1.0), background 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.55s ease;
+					transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0), background 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.55s ease;
 				}
 
 				&--num3{
 					transform: rotate(0deg) translate(0px, 0px);
 					animation-name: burgerMenuBottomToVertical;
-					animation-duration: 0.8s;
+					animation-duration: 0.35s;
 					animation-fill-mode: forwards;
 				}
 			}
@@ -98,11 +96,11 @@
 			bottom: 0px;
 			overflow: auto;
 			display: block;
-			transition: all 1s;
+			transition: transform 0.35s;
 
 			&__item{
 				position: relative;
-				transition: transform 0.25s cubic-bezier(0.77,0.2,0.05,1.0);
+				transition: transform 0.35s cubic-bezier(0.77,0.2,0.05,1.0);
 				transform: translate(-100%, 0);
 				line-height: var(--navAccordionHeight);
 				min-height: var(--navAccordionHeight);
@@ -159,7 +157,7 @@
 					height: var(--navAccordionHeight);
 					cursor: pointer;
 					opacity: 0;
-					transition: all 0.5s;
+					transition: transform 0.35s, opacity 0.35s;
 					transform: translate(-20px,0);
 
 					&__icon{
@@ -185,7 +183,7 @@
 							text-align: center;
 							vertical-align: middle;
 							color: white;
-							transition: transform 0.5s;
+							transition: transform 0.35s;
 						}
 					}
 				}
@@ -214,7 +212,7 @@
 					opacity: 1;
 					background: transparent;
 					border: none;
-					transition: all 0.5s;
+					transition: transform 0.35s;
 
 					&::before, &::after{
 						content: "";
@@ -239,7 +237,7 @@
 
 				&__list{
 					display: block;
-					transition: all 0.5s;
+					transition: transform 0.35s, max-height 0.35s;
 					margin: 0;
 					overflow: hidden;
 					max-height: 0px;
@@ -295,7 +293,7 @@
 								background: var(--navAccordion1IconColor);
 								cursor: pointer;
 								border-radius: 50%;
-								transition: transform 0.5s;
+								transition: transform 0.35s;
 
 								&::before, &::after{
 									content: "⥂";
@@ -343,7 +341,7 @@
 							opacity: 1;
 							background: transparent;
 							border: none;
-							transition: all 0.5s;
+							transition: transform 0.35s;
 
 							&::before, &::after{
 								content: "";
@@ -368,7 +366,7 @@
 
 						&__list{
 							display: block;
-							transition: all 0.5s;
+							transition: transform 0.35s;
 							margin: 0;
 							overflow: hidden;
 							max-height: 0px;
@@ -406,7 +404,7 @@
 									opacity: 1;
 									background: transparent;
 									border: none;
-									transition: all 0.5s;
+									transition: transform 0.35s;
 
 									&::before, &::after{
 										content: "";
@@ -464,7 +462,7 @@
 				opacity: 0;
 				z-index: 98;
 				display: none;
-                transition: all 0.5s;
+                transition: transform 0.35s;
                 transform: translate(0, 0px);
 			}
 
@@ -485,21 +483,18 @@
 					}
 
 					&__close{
-						animation: showClose;
-                        animation-fill-mode: forwards;
-                        animation-iteration-count: 1;
-                        animation-duration: .5s;
+						animation: showClose 0.35s cubic-bezier(0.77,0.2,0.05,1.0) forwards;
 					}
 
 					&__icon{
-						transition: all 0.5s;
+						transition: transform 0.5s;
 
 						& .header__nav__icon__line{
 							opacity: 1;
 
 							&--num1{
 								animation-name: burgerMenuTopToRotated;
-								animation-duration: 0.8s;
+								animation-duration: 0.35s;
 								animation-fill-mode: forwards;
 							}
 
@@ -512,7 +507,7 @@
 
 							&--num3{
 								animation-name: burgerMenuBottomToRotated;
-								animation-duration: 0.8s;
+								animation-duration: 0.35s;
 								animation-fill-mode: forwards;
 							}
 						}
@@ -567,7 +562,6 @@
     }
 }
 
-/* main */
 .main{
 	&__article{
 		&__nav{
@@ -666,14 +660,14 @@
 }
 
 @keyframes showClose{
-    0%   { opacity: 0; width: 0%; height: 0; }
-    10%  { opacity: 0; width: 100%; height: 100%; }
-    100% { opacity: .65; width: 100%; height: 100%; }
+    0%   { opacity: 0; transform: translate(100%,0%); }
+    10%  { opacity: 0; transform: translate(100%,0%); }
+    100% { opacity: .65; transform: translate(0%,0%); }
 }
 @keyframes hideClose{
-    0% { opacity: .65; width: 100%; height: 100%; }
-    90%  { opacity: 0; width: 100%; height: 100%; }
-    100%   { opacity: 0; width: 0%; height: 0; }
+    0% { opacity: .65; transform: translate(0%,0%); }
+    90%  { opacity: 0; transform: translate(0%,0%); }
+    100%   { opacity: 0; transform: translate(100%,0%); }
 }
 
 @keyframes showBurger {

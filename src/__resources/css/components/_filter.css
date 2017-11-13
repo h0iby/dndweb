@@ -2,7 +2,7 @@
 	display: block;
 	overflow: hidden;
 	max-height: 0px;
-	transition: all 0.5s;
+	transition: transform 0.35s, max-height 0.35s;
 
 	&__title{
 		position: relative;
@@ -21,58 +21,10 @@
 			border-bottom: solid 2px var(--filterPlusColor);
 		}
 		&::after {
-			transition: transform .5s;
+			transition: transform .35s;
 			transform: rotate(90deg) scale(1);
 		}
 	}
-
-	&__toggle{
-		position: absolute;
-		top: 0;
-		left: 20px;
-		width: 130px;
-		height: 43px;
-		margin: 0;
-		padding: 0;
-		opacity: 0;
-		z-index: 1;
-		cursor: pointer;
-
-		&:checked ~ {
-			& .filter__title{
-				&::after{
-					transition: transform .5s;
-					transform: rotate(-180deg) scale(.5);
-				}
-			}
-
-			& .filter{
-				max-height: 1000px;
-                
-                &[data-filters="1"]{ max-height: var(--filterLineHeight); }
-                &[data-filters="2"]{ max-height: calc(var(--filterLineHeight) * 2); }
-                &[data-filters="3"]{ max-height: calc(var(--filterLineHeight) * 3); }
-                &[data-filters="4"]{ max-height: calc(var(--filterLineHeight) * 4); }
-                &[data-filters="5"]{ max-height: calc(var(--filterLineHeight) * 5); }
-                &[data-filters="6"]{ max-height: calc(var(--filterLineHeight) * 6); }
-                &[data-filters="7"]{ max-height: calc(var(--filterLineHeight) * 7); }
-                &[data-filters="8"]{ max-height: calc(var(--filterLineHeight) * 8); }
-                &[data-filters="9"]{ max-height: calc(var(--filterLineHeight) * 9); }
-                &[data-filters="10"]{ max-height: calc(var(--filterLineHeight) * 10); }
-                &[data-filters="11"]{ max-height: calc(var(--filterLineHeight) * 11); }
-                &[data-filters="12"]{ max-height: calc(var(--filterLineHeight) * 12); }
-                &[data-filters="13"]{ max-height: calc(var(--filterLineHeight) * 13); }
-                &[data-filters="14"]{ max-height: calc(var(--filterLineHeight) * 14); }
-                &[data-filters="15"]{ max-height: calc(var(--filterLineHeight) * 15); }
-                &[data-filters="16"]{ max-height: calc(var(--filterLineHeight) * 16); }
-                &[data-filters="17"]{ max-height: calc(var(--filterLineHeight) * 17); }
-                &[data-filters="18"]{ max-height: calc(var(--filterLineHeight) * 18); }
-                &[data-filters="19"]{ max-height: calc(var(--filterLineHeight) * 19); }
-			}
-		}
-	}
-
-
 
 	&__list{
 		display: block;
@@ -225,14 +177,14 @@
 					height: 100%;
 					background: var(--filterInputBackground);
 					border: solid 1px var(--filterInputBorderColor);
-					padding: 8px 0 6px;
+					padding: 8px 10px 6px;
                     appearance: none;
 				}
 
 				&--radiobutton{
 					display: inline-block;
 					width: 60px;
-					padding: 8px 0 6px 10px;
+					padding: 8px 10px 6px;
 					flex-grow: 0;
 				}
 			}
@@ -242,6 +194,54 @@
 			}
 		}
 	}
+
+	&__toggle{
+		position: absolute;
+		top: 0;
+		left: 20px;
+		width: 130px;
+		height: 43px;
+		margin: 0;
+		padding: 0;
+		opacity: 0;
+		z-index: 1;
+		cursor: pointer;
+
+		&:checked ~ {
+			& .filter__title{
+				&::after{
+					transition: transform .5s;
+					transform: rotate(-180deg) scale(.5);
+				}
+			}
+
+			& .filter{
+				max-height: 1000px;
+                &[data-filters="1"]{ max-height: var(--filterLineHeight); }
+                &[data-filters="2"]{ max-height: calc(var(--filterLineHeight) * 2); }
+                &[data-filters="3"]{ max-height: calc(var(--filterLineHeight) * 3); }
+                &[data-filters="4"]{ max-height: calc(var(--filterLineHeight) * 4); }
+                &[data-filters="5"]{ max-height: calc(var(--filterLineHeight) * 5); }
+                &[data-filters="6"]{ max-height: calc(var(--filterLineHeight) * 6); }
+                &[data-filters="7"]{ max-height: calc(var(--filterLineHeight) * 7); }
+                &[data-filters="8"]{ max-height: calc(var(--filterLineHeight) * 8); }
+                &[data-filters="9"]{ max-height: calc(var(--filterLineHeight) * 9); }
+                &[data-filters="10"]{ max-height: calc(var(--filterLineHeight) * 10); }
+                &[data-filters="11"]{ max-height: calc(var(--filterLineHeight) * 11); }
+                &[data-filters="12"]{ max-height: calc(var(--filterLineHeight) * 12); }
+                &[data-filters="13"]{ max-height: calc(var(--filterLineHeight) * 13); }
+                &[data-filters="14"]{ max-height: calc(var(--filterLineHeight) * 14); }
+                &[data-filters="15"]{ max-height: calc(var(--filterLineHeight) * 15); }
+                &[data-filters="16"]{ max-height: calc(var(--filterLineHeight) * 16); }
+                &[data-filters="17"]{ max-height: calc(var(--filterLineHeight) * 17); }
+                &[data-filters="18"]{ max-height: calc(var(--filterLineHeight) * 18); }
+                &[data-filters="19"]{ max-height: calc(var(--filterLineHeight) * 19); }
+			}
+		}
+	}
+
+
+
 }
 
 @media (--tabletLandscape) {

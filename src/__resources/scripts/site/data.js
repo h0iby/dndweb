@@ -2,37 +2,27 @@ var dnd = dnd || {};
 (function() {
 	"use strict";
 	dnd.vars = dnd.vars || {};
-	var idb,
-		idbName = "dndDB",
-		http = "http://",
-		url = "";
+	var idb, idbName = "dndDB", http = "http://", url = "";
 	var loadError = function(text){ var output = text == null ? "Error loading data" : text; console.log("Data Error", output); }
 	var idbCheck = function(callback, item){
 		var idbTansaction = idb.transaction([item.getAttribute("data-type")], "readwrite");
 		var idbObjStore = idbTansaction.objectStore(item.getAttribute("data-type"));
 		var idbObjStoreReq = idbObjStore.get(item.getAttribute("data-item"));
-		if(item.classList.toString().indexOf("rid") > -1 || item.classList.toString().indexOf("sid") > -1){
-			console.log("THIS IS ERROR");
-			callback(item, [{}]);
-		} else {
-			idbObjStoreReq.onsuccess = function(event) {
-				var obj = idbObjStoreReq.result;
-				if(obj == null){
-					dnd.ajax(true, url + "" + item.getAttribute("data-endpoint"), function(data){
-						var json = JSON.parse(data);
-						idb.transaction([item.getAttribute("data-type")], "readwrite").objectStore(item.getAttribute("data-type")).add({ id: item.getAttribute("data-type"), data: json });
-						idbCheck(callback, item);
-					}, function(){ loadError(); }, function(){ loadError(); });
-				} else {
-					callback(item, obj.data);
-				}
+		idbObjStoreReq.onsuccess = function(event) {
+			var obj = idbObjStoreReq.result;
+			if(obj == null){
+				dnd.ajax(true, url + "" + item.getAttribute("data-endpoint"), function(data){
+					var json = JSON.parse(data);
+					idb.transaction([item.getAttribute("data-type")], "readwrite").objectStore(item.getAttribute("data-type")).add({ id: item.getAttribute("data-item"), data: json });
+					idbCheck(callback, item);
+				}, function(){ loadError(); }, function(){ loadError(); });
+			} else {
+				callback(item, obj.data);
 			}
 		}
 	}
 	var idbData = function(callback, items){
-		console.log(items);
-		var count = 0;
-		var counter = 0;
+		var count = 0, counter = 0;
 		items.filter(function(i) {
 			if(i.show != ""){
 				count++;
@@ -83,7 +73,6 @@ var dnd = dnd || {};
 			var json = JSON.parse(localStorage.getItem('idbData'));
 			idbStart(callback, json);
 		}
-
 	}
 	var stdInit = function(callback, template){
 		if(dnd.vars.modern){

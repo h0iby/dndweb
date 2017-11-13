@@ -3,11 +3,23 @@ var dnd = dnd || {};
 	"use strict";
 	var filters = function(){
 		var hash = window.location.hash.substring(1);
+		var filterToggle = document.getElementsByClassName("filter__toggle");
 
-		if(hash != "" && hash != null){
-			var filterToggle = document.getElementsByClassName("filter__toggle");
-			if(filterToggle){
-				filterToggle[0].checked = true;
+		if(filterToggle){
+			for(var i = 0; i < filterToggle.length; i++){
+				if(dnd.vars.modern){
+					filterToggle[i].addEventListener('change',function(){
+						localStorage.setItem('filterIsShown', this.checked.toString());
+					});
+				}
+
+				if((hash != "" && hash != null) || (localStorage.getItem('filterIsShown') == "true")){
+					if((hash.indexOf("filter=no") > -1)){
+						filterToggle[i].checked = false;
+					} else{
+						filterToggle[i].checked = true;
+					}
+				}
 			}
 		}
 	}
@@ -21,13 +33,13 @@ var dnd = dnd || {};
             if(window.pageYOffset < scrollPos){
                 header.classList.remove("is-hidden");
             } else {
-                header.classList.add("is-hidden");
+				if(!document.getElementById("navigationOn").checked){
+                	header.classList.add("is-hidden");
+				}
             }
-
             scrollPos = window.pageYOffset;
         };
 	}
-
 	dnd.loader = function(mode){
 		var loader = dnd.selector("#Loader");
 		if(mode){

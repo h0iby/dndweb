@@ -37,7 +37,10 @@
 	--backgroundPage: rgba(var(--beigeRGB),1);
 	--backgroundHeader: rgba(var(--beigeRGB),1);
 	--backgroundFooter: rgba(var(--grayBlackRGB),1);
+
 	--fontSize: 16px;
+	--fontColor: rgba(var(--grayBlackRGB),1);
+	--fontColorLink: rgba(var(--redDarkRGB),1);
 
 	--checkmarkTransparent: rgba(var(--greenDarkRGB),0);
 	--checkmarkGreen: rgba(var(--greenDarkRGB),1);
@@ -61,6 +64,7 @@
 
 
 	/* nav */
+	--navCloseBackground: rgba(var(--blackRGB),1);
 	--navBurgerColor: rgba(var(--grayBlackRGB),1);
 	--navBackground: var(--pathBackground);
 	--navBackgroundHeader: rgba(var(--beigeRGB),1);
@@ -108,4 +112,9 @@
 
 	/* paging */
 	--pagingFontColor: rgba(var(--redDarkRGB),1);
+
+
+	/* breadcrumb */
+	--breadcrumbFontColor: rgba(var(--grayBlackRGB),1);
+	--breadcrumbFontLinkColor: rgba(var(--redDarkRGB),1);
 }

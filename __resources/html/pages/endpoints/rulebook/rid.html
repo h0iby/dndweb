@@ -1,5 +1,43 @@
 <section class="main__article__section section">
-	<div class="section__intro">
-		<h2>Rulebook</h2>
-	</div>
+	<div class="-js-template -js-template--#MENUTYPE#-breadcrumb" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#" data-output="1"></div>
+	<div class="-js-template -js-template--#MENUTYPE#" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#"></div>
 </section>
+
+
+<script id="template--#MENUTYPE#" type="x-template">
+	<div class="section__intro">
+		<h2>¤NAME¤</h2>
+	</div>
+	<div class="section__main">
+		<ul class="list">
+			<li class="list__item"><a class="list__item__link" href="/feat/#rulebook=¤ALIAS¤&filter=no">Feats</a></li>
+			<li class="list__item"><a class="list__item__link" href="/class/#rulebook=¤ALIAS¤&filter=no">Classes</a></li>
+			<li class="list__item"><a class="list__item__link" href="/spell/#rulebook=¤ALIAS¤&filter=no">Spells</a></li>
+			<li class="list__item"><a class="list__item__link" href="/item/#rulebook=¤ALIAS¤&filter=no">Items</a></li>
+			<li class="list__item"><a class="list__item__link" href="/race/#rulebook=¤ALIAS¤&filter=no">Races</a></li>
+			<li class="list__item"><a class="list__item__link" href="/monster/#rulebook=¤ALIAS¤&filter=no">Monsters</a></li>
+		</table>
+	</div>
+</script>
+<script id="template--#MENUTYPE#-breadcrumb" type="x-template">
+	<ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li class="breadcrumb__listitem" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a class="breadcrumb__listitem__item" itemprop="item" href="/">
+				<span class="breadcrumb__listitem__item__link" itemprop="name">Home</span>
+			</a>
+			<meta property="position" content="1">
+		</li>
+		<li class="breadcrumb__listitem" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a class="breadcrumb__listitem__item" itemprop="item" href="/rulebook">
+				<span class="breadcrumb__listitem__item__link" itemprop="name">Rulebooks</span>
+			</a>
+			<meta property="position" content="2">
+		</li>
+		<li class="breadcrumb__listitem" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<span class="breadcrumb__listitem__item" itemprop="item">
+				<span class="breadcrumb__listitem__item__text" itemprop="name">¤NAME¤</span>
+			</span>
+			<meta property="position" content="3">
+		</li>
+	</ol>
+</script>

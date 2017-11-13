@@ -9,10 +9,10 @@
 	flex-shrink: 0;
 	background: var(--backgroundHeader) var(--background) 50% 0 repeat-x;
 	box-shadow: -5px -15px 25px 15px var(--shadow);
-    transition: all 0.5s;
-    
+    transition: transform 0.35s;
+
     &.is-hidden{
-        top: -75px;
+		transform: translate(0, -75px);
     }
 
 	&__logo{
@@ -26,14 +26,14 @@
 		z-index: 1;
 		color: var(--logoColor);
 		opacity: 0;
-		transition: all 0.5s;
+		transition: transform 0.5s;
 		transition-delay: 0.1s;
 		animation-name: showSearch;
 		animation-duration: 0.25s;
 		animation-delay: .10s;
 		animation-fill-mode: forwards;
-        
-        & .stroke1 { animation: animateLogo .9s 2; }
+
+        & .stroke1 { animation: animateLogo .7s 1; }
 
 		&::before, &::after{
 			position: absolute;
@@ -54,6 +54,13 @@
 		&::after{
 			left: 56%;
 		}
+
+		&:hover{
+			& .stroke1 {
+				fill: url(#Gradient);
+				clip-path: inset(0 0 0 0);
+			}
+		}
 	}
 
 	&__search{
@@ -71,7 +78,7 @@
 		opacity: 0;
 		padding: 0 0 0 20px;
 		display: block;
-		transition: all 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+		transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
 
 		&__input{
 			margin: 0;
@@ -120,7 +127,7 @@
 			right: 20px;
 			margin: -15px 0 0;
 			opacity: 0;
-			transition: all 0.5s;
+			transition: transform 0.5s;
 			transition-delay: 0.25s;
 			animation-name: showSearch;
 			animation-duration: 0.25s;
@@ -135,7 +142,7 @@
 				z-index: 1;
 				opacity: 1;
 				border: solid 2px var(--searchFieldIcon);
-				transition: all 0.5s cubic-bezier(0.77,0.2,0.05,1.0), background 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.55s ease;
+				transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0), background 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.55s ease;
 
 				&--num1{
 					height: 0px;
@@ -204,7 +211,6 @@
 		}
 	}
 }
-
 @media (--tabletLandscape) {
 	.header{
 		&__search{
@@ -221,7 +227,6 @@
 		}
 	}
 }
-
 @media (--desktop) {
 	.header{
 		&__search{
@@ -231,7 +236,6 @@
 		}
 	}
 }
-
 @media (--desktopLarge) {
 	.header{
 		&__search{

@@ -18,7 +18,6 @@ var dnd = dnd || {};
 	if (typeof(Storage) !== "undefined") { dnd.vars.localstorage = true; }
     if (window.indexedDB) { dnd.vars.indexeddb = true; }
 	if(dnd.vars.indexeddb && dnd.vars.localstorage){ dnd.vars.modern = true; }
-
 	var dataIsLoaded = function(){
 		dnd.loader(false);
 		dnd.templates(null);

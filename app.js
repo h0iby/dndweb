@@ -123,6 +123,7 @@ var serviceCallback = function(data){
 	// create endpoints for data
 	jsonData.forEach(function(item, i){
 		if(item.render){
+			console.log("item", item);
 			var current = html,
 				pathMain = '' + item.path.replace(':rid', 'rid').replace(':sid', 'sid') + '.html',
 				templateMain = path.join(__dirname+''+htmlPagesPath+'/endpoints' + pathMain + ''),

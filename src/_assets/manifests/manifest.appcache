@@ -9,10 +9,10 @@ CACHE MANIFEST
 /_assets/images/bg.png
 
 #fonts
-/_assets/fonts/Celestial.woff
-/_assets/fonts/Celestial.woff2
 /_assets/fonts/Common.woff
 /_assets/fonts/Common.woff2
+/_assets/fonts/Celestial.woff
+/_assets/fonts/Celestial.woff2
 /_assets/fonts/Draconic.woff
 /_assets/fonts/Draconic.woff2
 /_assets/fonts/Druidic.woff

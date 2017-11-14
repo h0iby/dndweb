@@ -442,7 +442,6 @@ var dnd = dnd || {};
 					option.innerHTML = json[i].name;
 					item.appendChild(option);
 				}
-				console.log(obj);
 				item.addEventListener('change',function(){
 					var select = this;
 					var selectValue = select.options[select.selectedIndex].value;

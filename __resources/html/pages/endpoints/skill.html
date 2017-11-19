@@ -22,7 +22,7 @@
 						Ability
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--select">
-						<select id="filterAbility" class="filter__list__item__container__select" data-filter="" data-target="#MENUTYPE#">
+						<select id="filterAbility" class="filter__list__item__container__select" data-manual="ability" data-target="#MENUTYPE#">
 							<option></option>
 							<option value="str">Strength</option>
 							<option value="dex">Dexterity</option>
@@ -38,15 +38,15 @@
 						Trained
 					</span>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterTrained" id="filterTrainedUnset" type="radio" checked data-target="#MENUTYPE#" />
+						<input class="filter__list__item__container__radiobutton" name="filterTrained" id="filterTrainedUnset" type="radio" checked data-target="#MENUTYPE#" data-select="trained_only" data-radio="" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--unset"></span>
 					</label>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterTrained" id="filterTrainedYes" type="radio" data-target="#MENUTYPE#" />
+						<input class="filter__list__item__container__radiobutton" name="filterTrained" id="filterTrainedYes" type="radio" data-target="#MENUTYPE#" data-select="trained_only" data-radio="1" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--yes"></span>
 					</label>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterTrained" id="filterTrainedNo" type="radio" data-target="#MENUTYPE#" />
+						<input class="filter__list__item__container__radiobutton" name="filterTrained" id="filterTrainedNo" type="radio" data-target="#MENUTYPE#" data-select="trained_only" data-radio="0" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--no"></span>
 					</label>
 				</li>
@@ -55,15 +55,15 @@
 						AC Penalty
 					</span>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterAcPenalty" id="filterAcPenaltyUnset" type="radio" checked data-target="#MENUTYPE#" />
+						<input class="filter__list__item__container__radiobutton" name="filterAcPenalty" id="filterAcPenaltyUnset" type="radio" checked data-target="#MENUTYPE#" data-select="armor_check_penalty" data-radio="" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--unset"></span>
 					</label>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterAcPenalty" id="filterAcPenaltyYes" type="radio" data-target="#MENUTYPE#" />
+						<input class="filter__list__item__container__radiobutton" name="filterAcPenalty" id="filterAcPenaltyYes" type="radio" data-target="#MENUTYPE#" data-select="armor_check_penalty" data-radio="1" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--yes"></span>
 					</label>
 					<label class="filter__list__item__container filter__list__item__container--radiobutton">
-						<input class="filter__list__item__container__radiobutton" name="filterAcPenalty" id="filterAcPenaltyNo" type="radio" data-target="#MENUTYPE#" />
+						<input class="filter__list__item__container__radiobutton" name="filterAcPenalty" id="filterAcPenaltyNo" type="radio" data-target="#MENUTYPE#" data-select="armor_check_penalty" data-radio="0" />
 						<span class="filter__list__item__container__radiobutton__style filter__list__item__container__radiobutton__style--no"></span>
 					</label>
 				</li>
@@ -71,7 +71,7 @@
 		</div>
 	</div>
 	<div class="section__main">
-		<h3>Skills</h3>
+		<h3 class="table__headline">Skills</h3>
 		#PAGING#
 		<table class="table">
 			<thead>
@@ -82,11 +82,9 @@
 					<td data-type="trained" class="table__row__td table__row__td--trained table__row__td--header"><strong class="table__row__td__bold" title="Trained only">Amor check penalty</strong></td>
 				</tr>
 			</thead>
-			<tbody class="-js-template -js-template--#MENUTYPE#" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#"></tbody>
+			<tbody class="-js-template -js-template--#MENUTYPE#" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#" data-reset="true"></tbody>
 		</table>
-	</div>
-	<div class="section__footer">
-		#PAGING#
+		#PAGER#
 	</div>
 </section>
 <script id="template--#MENUTYPE#" type="x-template">

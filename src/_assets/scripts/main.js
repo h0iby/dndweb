@@ -267,7 +267,9 @@ var dnd = dnd || {};
 		item.innerHTML = "";
 	}
 	var templateLoad = function(item, data, template){
-		templateClear(item);
+		if(item.getAttribute("data-reset") == "true"){
+			templateClear(item);
+		}
 		var templateHtml = template.innerHTML,
 			counter = 0,
             itemHtml = "",
@@ -302,6 +304,7 @@ var dnd = dnd || {};
 				html = dnd.replaceAll(html, '¤COMPONENTARCANE¤', isComponentArcane);
 				html = dnd.replaceAll(html, '¤COMPONENTDIVINE¤', isComponentDivine);
 				html = dnd.replaceAll(html, '¤COMPONENTXP¤', isComponentXP);
+				html = dnd.replaceAll(html, '¤MINRANKS¤', obj.min_rank);
 				html = dnd.replaceAll(html, '¤TRAINED¤', isTrainedOnly);
 				html = dnd.replaceAll(html, '¤PENALTY¤', hasCheckPenalty);
 				html = dnd.replaceAll(html, '¤CURRENTURL¤', '/' + item.getAttribute("data-item") + '/' + obj.slug);
@@ -398,7 +401,7 @@ var dnd = dnd || {};
 			var hashItems = window.location.hash.substring(1).split("&");
 			for(var i = 0; i < hashItems.length; i++){
 				var hashes = hashItems[i].split("=");
-				var items = document.querySelectorAll("[data-select='"+ hashes[0] +"']");
+				var items = document.querySelectorAll("[data-select='"+ hashes[0] +"'], [data-manual='"+ hashes[0] +"']");
 				for(var o = 0; o < items.length; o++){
 					var item = items[o];
 					if(item){
@@ -421,6 +424,17 @@ var dnd = dnd || {};
 				}
 			}
 		}
+	}
+
+	var selectManual = function(item){
+		var obj = item.getAttribute("data-manual");
+
+		item.addEventListener('change',function(){
+			var select = this;
+			var selectValue = select.options[select.selectedIndex].value;
+			setHash(obj, selectValue);
+			dnd.templates(item.getAttribute("data-target"));
+		});
 	}
 	var selectData = function(item, output){
 		var json = output,
@@ -450,16 +464,20 @@ var dnd = dnd || {};
 				});
 			}
 		}
+	}
+	var selectInit = function(item, mode){
+		if(mode){
+			var ident = item.getAttribute("data-select");
+			item.setAttribute("data-type", ident);
+			item.setAttribute("data-item", ident);
+			item.setAttribute("data-endpoint", "/" + ident);
+			dnd.data(selectData, item);
+		} else {
+			selectManual(item);
+		}
 		if(window.location.hash){
 			getHash();
 		}
-	}
-	var selectInit = function(item){
-		var ident = item.getAttribute("data-select");
-		item.setAttribute("data-type", ident);
-		item.setAttribute("data-item", ident);
-		item.setAttribute("data-endpoint", "/" + ident);
-		dnd.data(selectData, item);
 	}
 	var filterInput = function(item){
 		var obj = item.getAttribute("data-select");
@@ -545,7 +563,9 @@ var dnd = dnd || {};
 			for(var i = 0; i < selectors.length; i++){
 				var item = selectors[i];
 				if(item.hasAttribute("data-select") && item.getAttribute("data-select") != ""){
-					selectInit(item);
+					selectInit(item, true);
+				} else if(item.hasAttribute("data-manual") && item.getAttribute("data-manual") != ""){
+					selectInit(item, false);
 				}
 			}
 			selectors = dnd.selector(".filter__list__item__container__input");
@@ -581,15 +601,46 @@ var dnd = dnd || {};
 						value = items[1];
 
 					if(row[key] != null){
-						if(row[key].toString().indexOf(value) == -1){
+						if(row[key].toString().toLowerCase().indexOf(value) == -1){
 							selectors = false;
 						}
 					} else if(row[key + "_slug"] != null) {
 						if(row[key + "_slug"].toString().indexOf(value) == -1){
 							selectors = false;
 						}
+					} else if(key.indexOf("__min") > -1) {
+						var keyCurrent = key.replace("__min","");
+						if(row[keyCurrent] == null || isNaN(Number(value))){
+							selectors = false;
+						} else{
+							if(isNaN(row[keyCurrent])){
+								selectors = false;
+							} else if(row[keyCurrent] == 0){
+								selectors = false;
+							} else if(row[keyCurrent] < Number(value)){
+								selectors = false;
+							}
+						}
+					} else if(key.indexOf("__max") > -1) {
+						var keyCurrent = key.replace("__max","");
+						if(row[keyCurrent] == null || isNaN(Number(value))){
+							selectors = false;
+						} else{
+							if(isNaN(row[keyCurrent])){
+								selectors = false;
+							} else if(row[keyCurrent] == 0){
+								selectors = false;
+							} else if(row[keyCurrent] > Number(value)){
+								selectors = false;
+							}
+						}
 					} else {
 						switch(key){
+							case "ability":
+								if(row["base_skill"].toLowerCase().indexOf(value) == -1){
+									selectors = false;
+								}
+								break;
 							case "spell-school":
 								if(row["spellschool_slug"] != null){
 									if(row["spellschool_slug"].toString().indexOf(value) == -1){
@@ -639,7 +690,13 @@ var dnd = dnd || {};
 								}
 								break;
 							case "keywords":
-								if((row["slug"].toString().indexOf(value) == -1) && (row["description"].toString().indexOf(value) == -1) && (row["benefit"].toString().indexOf(value) == -1) && (row["rulebook_slug"].toString().indexOf(value) == -1)){
+								if((row["slug"].toString().indexOf(value) == -1) && (row["description"].toString().indexOf(value) == -1) && (row["benefit"].toString().indexOf(value) == -1)){
+									selectors = false;
+								}
+								break;
+							case "features":
+								console.log("features");
+								if((row["slug"].toString().indexOf(value) == -1) && (row["advancement"].toString().indexOf(value) == -1) && (row["class_features"].toString().indexOf(value) == -1)){
 									selectors = false;
 								}
 								break;
@@ -648,7 +705,8 @@ var dnd = dnd || {};
 						}
 					}
 				}
-				if(selectors){ return true; } else { return false; }
+				//if(selectors){ console.log(key, row); }
+				return selectors;
 			});
 		}
 		return output;

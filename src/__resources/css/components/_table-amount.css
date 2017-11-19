@@ -1,6 +1,7 @@
 .table-amount{
 	display: block;
-	margin: 10px 0;
+	position: relative;
+	top: 20px;
 	float: right;
 	vertical-align: top;
 	font-size: 1.8rem;

@@ -181,6 +181,19 @@
                     appearance: none;
 				}
 
+				&--minmax{
+					&::before{
+						content: "";
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						display: block;
+						width: 6px;
+						height: 2px;
+						margin: -1px 0 0 -4px;
+						background: var(--filterPlusColor);
+					}
+				}
 				&--radiobutton{
 					display: inline-block;
 					width: 60px;

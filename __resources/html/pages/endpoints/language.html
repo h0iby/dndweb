@@ -21,7 +21,7 @@
 		</div>
 	</div>
 	<div class="section__main">
-		<h3>Languages</h3>
+		<h3 class="table__headline">Languages</h3>
 		#PAGING#
 		<table class="table">
 			<thead>
@@ -29,11 +29,9 @@
 					<td data-type="name" class="table__row__td table__row__td--name table__row__td--header"><strong class="table__row__td__bold">Name</strong></td>
 				</tr>
 			</thead>
-			<tbody class="-js-template -js-template--#MENUTYPE#" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#"></tbody>
+			<tbody class="-js-template -js-template--#MENUTYPE#" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#" data-reset="true"></tbody>
 		</table>
-	</div>
-	<div class="section__footer">
-		#PAGING#
+		#PAGER#
 	</div>
 </section>
 <script id="template--#MENUTYPE#" type="x-template">

@@ -1,0 +1,26 @@
+.list-content{
+	&__item{
+		&__link{
+			display: inline-block;
+			color: #9d0a0e;
+			padding: 8px 10px 6px 5px;
+			text-decoration: none;
+
+			&::before{
+				content: "→";
+				position: relative;
+				display: inline-block;
+				top: -1px;
+				padding: 0 15px 0 0;
+				transition: transform 0.35s;
+				transform: translate(0px,0px);
+			}
+
+			&:hover{
+				&::before{
+					transform: translate(7px,0px);
+				}
+			}
+		}
+	}
+}

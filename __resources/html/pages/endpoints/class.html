@@ -19,37 +19,28 @@
 				</li>
 				<li class="filter__list__item">
 					<label class="filter__list__item__text" for="filterFeature">
-						##Class Feature
+						Class Feature
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--textbox">
-						<input class="filter__list__item__container__input" id="filterFeature" type="text" data-select="" data-target="#MENUTYPE#" />
-					</span>
-				</li>
-				<li class="filter__list__item">
-					<label class="filter__list__item__text" for="filterBaseAttackMin">
-						##Base Attack Bonus (Min/Max)
-					</label>
-					<span class="filter__list__item__container filter__list__item__container--minmax">
-						<input class="filter__list__item__container__input filter__list__item__container__input--min" id="filterBaseAttackMin" type="text" data-select="" data-target="#MENUTYPE#" />
-						<input class="filter__list__item__container__input filter__list__item__container__input--max" id="filterBaseAttackMax" type="text" data-select="" data-target="#MENUTYPE#" />
+						<input class="filter__list__item__container__input" id="filterFeature" type="text" data-select="features" data-target="#MENUTYPE#" />
 					</span>
 				</li>
 				<li class="filter__list__item">
 					<label class="filter__list__item__text" for="filterHitpointsMin">
-						##Hitpoints (Min/Max)
+						Hitpoints
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--minmax">
-						<input class="filter__list__item__container__input filter__list__item__container__input--min" id="filterHitpointsMin" type="text" data-select="" data-target="#MENUTYPE#" />
-						<input class="filter__list__item__container__input filter__list__item__container__input--max" id="filterHitpointsMax" type="text" data-select="" data-target="#MENUTYPE#" />
+						<input class="filter__list__item__container__input filter__list__item__container__input--min" id="filterHitpointsMin" type="text" data-select="hit_die__min" data-target="#MENUTYPE#" />
+						<input class="filter__list__item__container__input filter__list__item__container__input--max" id="filterHitpointsMax" type="text" data-select="hit_die__max" data-target="#MENUTYPE#" />
 					</span>
 				</li>
 				<li class="filter__list__item">
 					<label class="filter__list__item__text" for="filterSkillpointsMin">
-						##Skillpoints (Min/Max)
+						Skillpoints
 					</label>
 					<span class="filter__list__item__container filter__list__item__container--minmax">
-						<input class="filter__list__item__container__input filter__list__item__container__input--min" id="filterSkillpointsMin" type="text" data-select="" data-target="#MENUTYPE#" />
-						<input class="filter__list__item__container__input filter__list__item__container__input--max" id="filterSkillpointsMax" type="text" data-select="" data-target="#MENUTYPE#" />
+						<input class="filter__list__item__container__input filter__list__item__container__input--min" id="filterSkillpointsMin" type="text" data-select="skill_points__min" data-target="#MENUTYPE#" />
+						<input class="filter__list__item__container__input filter__list__item__container__input--max" id="filterSkillpointsMax" type="text" data-select="skill_points__max" data-target="#MENUTYPE#" />
 					</span>
 				</li>
 				<li class="filter__list__item">
@@ -90,7 +81,7 @@
 
 	</div>
 	<div class="section__main">
-		<h3>Classes</h3>
+		<h3 class="table__headline">Classes</h3>
 		#PAGING#
 		<table class="table">
 			<thead>
@@ -100,11 +91,9 @@
 					<td data-type="book" class="table__row__td table__row__td--book table__row__td--header"><strong class="table__row__td__bold">Rulebook</strong></td>
 				</tr>
 			</thead>
-			<tbody class="-js-template -js-template--#MENUTYPE#" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#"></tbody>
+			<tbody class="-js-template -js-template--#MENUTYPE#" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#" data-reset="true"></tbody>
 		</table>
-	</div>
-	<div class="section__footer">
-		#PAGING#
+		#PAGER#
 	</div>
 </section>
 <script id="template--#MENUTYPE#" type="x-template">

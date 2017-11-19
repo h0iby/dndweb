@@ -32,6 +32,7 @@ var serviceCallback = function(data){
 		templateSearch = path.join(__dirname+''+htmlTemplatesPath+'/search.html'),
 		templateOverlay = path.join(__dirname+''+htmlTemplatesPath+'/overlay.html'),
 		templatePaging = path.join(__dirname+''+htmlTemplatesPath+'/paging.html'),
+		templatePager = path.join(__dirname+''+htmlTemplatesPath+'/pager.html'),
 		templatePage = path.join(__dirname+''+htmlTemplatesPath+'/index.html');
 
 	var fileMenu = fs.readFileSync(templateMenu).toString(),
@@ -44,6 +45,7 @@ var serviceCallback = function(data){
 		fileSearch = fs.readFileSync(templateSearch).toString(),
 		fileOverlay = fs.readFileSync(templateOverlay).toString(),
 		filePaging = fs.readFileSync(templatePaging).toString(),
+		filePager = fs.readFileSync(templatePager).toString(),
 		filePage = fs.readFileSync(templatePage).toString();
 
 	html = filePage;
@@ -130,6 +132,7 @@ var serviceCallback = function(data){
 				fileMain = fs.readFileSync(templateMain).toString();
 
 			fileMain = fileMain.replace("#PAGING#", filePaging).replace("#PAGING#", filePaging);
+			fileMain = fileMain.replace("#PAGER#", filePager).replace("#PAGER#", filePager);
 			current = current.replace("#HEAD#", fileHead).replace("#MAIN#", fileMain);
 			paths.push([item, current]);
 		}
@@ -157,6 +160,7 @@ var serviceCallback = function(data){
 			repType = "search";
 
 		fileMain = fileMain.replace("#PAGING#", filePaging).replace("#PAGING#", filePaging);
+		fileMain = fileMain.replace("#PAGER#", filePager).replace("#PAGER#", filePager);
 		current = current.replace("#HEAD#", fileHead);
 		current = htmlReplacements(current, fileMain, repAlias, repPath, repData, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
 		res.send(current);
@@ -180,6 +184,7 @@ var serviceCallback = function(data){
 			repType = "search";
 
 		fileMain = fileMain.replace("#PAGING#", filePaging).replace("#PAGING#", filePaging);
+		fileMain = fileMain.replace("#PAGER#", filePager).replace("#PAGER#", filePager);
 		current = current.replace("#HEAD#", fileHead);
 		current = htmlReplacements(current, fileMain, repAlias, repPath, repData, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
 		res.send(current);
@@ -203,6 +208,7 @@ var serviceCallback = function(data){
 			repType = "";
 
 		fileMain = fileMain.replace("#PAGING#", filePaging).replace("#PAGING#", filePaging);
+		fileMain = fileMain.replace("#PAGER#", filePager).replace("#PAGER#", filePager);
 		current = current.replace("#HEAD#", fileHead);
 		current = htmlReplacements(current, fileMain, repAlias, repPath, repData, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
 		res.send(current);
@@ -236,6 +242,7 @@ var serviceCallback = function(data){
 				repType = "error";
 
 			fileMain = fileMain.replace("#PAGING#", filePaging).replace("#PAGING#", filePaging);
+			fileMain = fileMain.replace("#PAGER#", filePager).replace("#PAGER#", filePager);
 			current = current.replace("#HEAD#", fileHead);
 			current = htmlReplacements(current, fileMain, repAlias, repPath, repData, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
 			res.send(current);
@@ -259,6 +266,7 @@ var serviceCallback = function(data){
 			repType = "";
 
 		fileMain = fileMain.replace("#PAGING#", filePaging).replace("#PAGING#", filePaging);
+		fileMain = fileMain.replace("#PAGER#", filePager).replace("#PAGER#", filePager);
 		current = current.replace("#HEAD#", fileHead);
 		current = htmlReplacements(current, fileMain, repAlias, repPath, repData, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
 		res.send(current);

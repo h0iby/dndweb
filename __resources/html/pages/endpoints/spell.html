@@ -33,6 +33,26 @@
 						<select id="filterSpellSubschool" class="filter__list__item__container__select" data-select="spell-subschool" data-target="#MENUTYPE#"></select>
 					</span>
 				</li>
+				<!--
+				<li class="filter__list__item">
+					<label class="filter__list__item__text" for="filterClass">
+						##Spell Descriptor
+					</label>
+					<span class="filter__list__item__container filter__list__item__container--select">
+						<select id="filterClass" class="filter__list__item__container__select" data-select="class" data-target="#MENUTYPE#"></select>
+					</span>
+				</li>
+				-->
+				<!--
+				<li class="filter__list__item">
+					<label class="filter__list__item__text" for="filterClass">
+						##Spell Domains
+					</label>
+					<span class="filter__list__item__container filter__list__item__container--select">
+						<select id="filterClass" class="filter__list__item__container__select" data-select="class" data-target="#MENUTYPE#"></select>
+					</span>
+				</li>
+				-->
 				<li class="filter__list__item">
 					<span class="filter__list__item__text">
 						Verbal
@@ -165,7 +185,7 @@
 		</div>
 	</div>
 	<div class="section__main">
-		<h3>Spells</h3>
+		<h3 class="table__headline">Spells</h3>
 		#PAGING#
 		<table class="table">
 			<thead>
@@ -182,9 +202,7 @@
 			</thead>
 			<tbody class="-js-template -js-template--#MENUTYPE#" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#"></tbody>
 		</table>
-	</div>
-	<div class="section__footer">
-		#PAGING#
+		#PAGER#
 	</div>
 </section>
 <script id="template--#MENUTYPE#" type="x-template">

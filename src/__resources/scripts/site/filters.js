@@ -30,7 +30,7 @@ var dnd = dnd || {};
 			var hashItems = window.location.hash.substring(1).split("&");
 			for(var i = 0; i < hashItems.length; i++){
 				var hashes = hashItems[i].split("=");
-				var items = document.querySelectorAll("[data-select='"+ hashes[0] +"']");
+				var items = document.querySelectorAll("[data-select='"+ hashes[0] +"'], [data-manual='"+ hashes[0] +"']");
 				for(var o = 0; o < items.length; o++){
 					var item = items[o];
 					if(item){
@@ -53,6 +53,17 @@ var dnd = dnd || {};
 				}
 			}
 		}
+	}
+
+	var selectManual = function(item){
+		var obj = item.getAttribute("data-manual");
+
+		item.addEventListener('change',function(){
+			var select = this;
+			var selectValue = select.options[select.selectedIndex].value;
+			setHash(obj, selectValue);
+			dnd.templates(item.getAttribute("data-target"));
+		});
 	}
 	var selectData = function(item, output){
 		var json = output,
@@ -82,16 +93,20 @@ var dnd = dnd || {};
 				});
 			}
 		}
+	}
+	var selectInit = function(item, mode){
+		if(mode){
+			var ident = item.getAttribute("data-select");
+			item.setAttribute("data-type", ident);
+			item.setAttribute("data-item", ident);
+			item.setAttribute("data-endpoint", "/" + ident);
+			dnd.data(selectData, item);
+		} else {
+			selectManual(item);
+		}
 		if(window.location.hash){
 			getHash();
 		}
-	}
-	var selectInit = function(item){
-		var ident = item.getAttribute("data-select");
-		item.setAttribute("data-type", ident);
-		item.setAttribute("data-item", ident);
-		item.setAttribute("data-endpoint", "/" + ident);
-		dnd.data(selectData, item);
 	}
 	var filterInput = function(item){
 		var obj = item.getAttribute("data-select");
@@ -177,7 +192,9 @@ var dnd = dnd || {};
 			for(var i = 0; i < selectors.length; i++){
 				var item = selectors[i];
 				if(item.hasAttribute("data-select") && item.getAttribute("data-select") != ""){
-					selectInit(item);
+					selectInit(item, true);
+				} else if(item.hasAttribute("data-manual") && item.getAttribute("data-manual") != ""){
+					selectInit(item, false);
 				}
 			}
 			selectors = dnd.selector(".filter__list__item__container__input");

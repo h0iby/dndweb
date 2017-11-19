@@ -7,7 +7,9 @@ var dnd = dnd || {};
 		item.innerHTML = "";
 	}
 	var templateLoad = function(item, data, template){
-		templateClear(item);
+		if(item.getAttribute("data-reset") == "true"){
+			templateClear(item);
+		}
 		var templateHtml = template.innerHTML,
 			counter = 0,
             itemHtml = "",
@@ -42,6 +44,7 @@ var dnd = dnd || {};
 				html = dnd.replaceAll(html, '¤COMPONENTARCANE¤', isComponentArcane);
 				html = dnd.replaceAll(html, '¤COMPONENTDIVINE¤', isComponentDivine);
 				html = dnd.replaceAll(html, '¤COMPONENTXP¤', isComponentXP);
+				html = dnd.replaceAll(html, '¤MINRANKS¤', obj.min_rank);
 				html = dnd.replaceAll(html, '¤TRAINED¤', isTrainedOnly);
 				html = dnd.replaceAll(html, '¤PENALTY¤', hasCheckPenalty);
 				html = dnd.replaceAll(html, '¤CURRENTURL¤', '/' + item.getAttribute("data-item") + '/' + obj.slug);

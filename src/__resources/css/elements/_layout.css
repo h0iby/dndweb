@@ -1,8 +1,10 @@
 html, body {
+	display: flex;
 	@apply --LanguageFontDefault;
 	font-size: var(--fontSize);
 	color: var(--fontColor);
-	height: 100%;
+	min-height: 100%;
+	width: 100%;
 	background: var(--backgroundPage) 0 0 repeat;
 }
 
@@ -89,7 +91,18 @@ html, body {
 	&__intro{
 		margin: 15px 0 0;
 	}
+	&__main{
+		& p{
+			margin: 30px 0 0;
+		}
+		& table{
+			width: 100%;
 
+			& th, & td {
+				text-align: left;
+			}
+		}
+	}
 	&__breadcrumb, &__filter, &__header, &__main{
 		margin: 35px 0 0;
 	}

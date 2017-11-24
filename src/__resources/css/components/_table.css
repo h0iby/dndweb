@@ -91,8 +91,102 @@
 	}
 }
 
+.table-advancement{
+	display: block;
+	width: 100%;
+	margin: 10px 0 0;
+
+	&__headline{
+		display: inline-block;
+	}
+
+	&__row{
+		display: grid;
+		grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
+		background: var(--tableBackgroundEven);
+
+		&__td{
+			display: block;
+			vertical-align: top;
+			padding: 2px 0;
+			word-break: normal;
+			width: auto;
+
+			&__bold{
+				display: block;
+				font-weight: normal;
+				border-bottom: solid 1px var(--tableStrongBorderColor);
+			}
+
+			&__text{
+				display: block;
+				padding: 8px 10px 6px;
+				text-decoration: none;
+			}
+
+			&__link{
+				display: block;
+				padding: 8px 10px 6px;
+				text-decoration: none;
+				color: var(--tableLinkColor);
+			}
+
+			&--center{
+				text-align: center;
+			}
+
+			&--header{
+				background: var(--tableHeaderBackground);
+				color: var(--tableHeaderFontColor);
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
+				padding: 8px 10px 6px;
+
+			}
+
+			&--component, &--prestige{
+				width: 50px;
+				text-align: center;
+			}
+
+			&--true, &--false{
+				text-align: center;
+				vertical-align: middle;
+
+				&:after{
+					content: "";
+					position: relative;
+					display: inline-block;
+				}
+			}
+
+			&--true{
+				&:after{
+					content: "✓";
+					color: var(--checkmarkGreen);
+				}
+			}
+			&--false{
+				&:after{
+					content: "✗";
+					color: var(--checkmarkRed);
+				}
+			}
+
+			&:first-child{
+				display: table-cell;
+			}
+		}
+
+		&:nth-child(odd){
+			background: var(--tableBackgroundOdd);
+		}
+	}
+}
+
 @media (--mobileLandscape) {
-	.table{
+	table.table{
 		&__row{
 			&__td{
 				min-width: 250px;
@@ -105,7 +199,7 @@
 	}
 }
 @media (--tabletPortrait) {
-	.table{
+	table.table{
 		&__row{
 			&__td{
 				min-width: 250px;
@@ -114,7 +208,7 @@
 	}
 }
 @media (--tabletLandscape) {
-	.table{
+	table.table{
 		&__row{
 			&__td{
 				min-width: 230px;
@@ -132,7 +226,7 @@
 	}
 }
 @media (--desktopLarge) {
-	.table{
+	table.table{
 		&__row{
 			&__td{
 				display: table-cell;

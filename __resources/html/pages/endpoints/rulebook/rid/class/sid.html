@@ -1,5 +1,91 @@
 <section class="main__article__section section">
-	<div class="section__intro">
-		<h2>Class</h2>
+	<div class="-js-template -js-template--#MENUTYPE#-breadcrumb" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#" data-output="1"></div>
+	<div class="-js-template -js-template--#MENUTYPE# section__intro" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#"></div>
+	<div class="section__main">
+		<h4>Requires:</h4>
+		<div>
+		</div>
 	</div>
+	<div class="-js-template -js-template--#MENUTYPE#-info" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#"></div>
 </section>
+
+
+<script id="template--#MENUTYPE#" type="x-template">
+	<h2>¤NAME¤</h2>
+	<a class="section__intro__book section__intro__url" href="¤BOOKURL¤">¤BOOK¤<i>(¤BOOKPAGE¤)</i></a>
+	<p>¤SHORTDESCRIPTIONHTML¤<p>
+</script>
+<script id="template--#MENUTYPE#-info" type="x-template">
+	<div class="section__main section__main--html">
+		<h3>Advancement</h3>
+		<div><div>¤ADVANCEMENTHTML¤</div></div>
+	</div>
+	<div class="section__main section__main--html">
+		<h3>Features</h3>
+		¤CLASSFEATURESHTML¤
+	</div>
+	<div class="section__main">
+		<h3>Class skills</h3>
+		<ul class="list-content">
+			<li class="list-content__item"><a class="list-content__item__link" href="/skill/#class=¤ALIAS¤&filter=no">Level 0</a></li>
+			<li class="list-content__item"><a class="list-content__item__link" href="/skill/#class=¤ALIAS¤&filter=no">Level 1</a></li>
+			<li class="list-content__item"><a class="list-content__item__link" href="/skill/#class=¤ALIAS¤&filter=no">Level 2</a></li>
+			<li class="list-content__item"><a class="list-content__item__link" href="/skill/#class=¤ALIAS¤&filter=no">Level 3</a></li>
+			<li class="list-content__item"><a class="list-content__item__link" href="/skill/#class=¤ALIAS¤&filter=no">Level 4</a></li>
+			<li class="list-content__item"><a class="list-content__item__link" href="/skill/#class=¤ALIAS¤&filter=no">Level 5</a></li>
+			<li class="list-content__item"><a class="list-content__item__link" href="/skill/#class=¤ALIAS¤&filter=no">Level 6</a></li>
+			<li class="list-content__item"><a class="list-content__item__link" href="/skill/#class=¤ALIAS¤&filter=no">Level 7</a></li>
+			<li class="list-content__item"><a class="list-content__item__link" href="/skill/#class=¤ALIAS¤&filter=no">Level 8</a></li>
+			<li class="list-content__item"><a class="list-content__item__link" href="/skill/#class=¤ALIAS¤&filter=no">Level 9</a></li>
+		</ul>
+	</div>
+	<div class="section__main">
+		<h3>SPELLS</h3>
+		<ul class="list-content">
+			<li class="list-content__item"><a class="list-content__item__link" href="/spell/#class=¤ALIAS¤&level=0&filter=no">Level 0</a></li>
+			<li class="list-content__item"><a class="list-content__item__link" href="/spell/#class=¤ALIAS¤&level=1&filter=no">Level 1</a></li>
+			<li class="list-content__item"><a class="list-content__item__link" href="/spell/#class=¤ALIAS¤&level=2&filter=no">Level 2</a></li>
+			<li class="list-content__item"><a class="list-content__item__link" href="/spell/#class=¤ALIAS¤&level=3&filter=no">Level 3</a></li>
+			<li class="list-content__item"><a class="list-content__item__link" href="/spell/#class=¤ALIAS¤&level=4&filter=no">Level 4</a></li>
+			<li class="list-content__item"><a class="list-content__item__link" href="/spell/#class=¤ALIAS¤&level=5&filter=no">Level 5</a></li>
+			<li class="list-content__item"><a class="list-content__item__link" href="/spell/#class=¤ALIAS¤&level=6&filter=no">Level 6</a></li>
+			<li class="list-content__item"><a class="list-content__item__link" href="/spell/#class=¤ALIAS¤&level=7&filter=no">Level 7</a></li>
+			<li class="list-content__item"><a class="list-content__item__link" href="/spell/#class=¤ALIAS¤&level=8&filter=no">Level 8</a></li>
+			<li class="list-content__item"><a class="list-content__item__link" href="/spell/#class=¤ALIAS¤&level=9&filter=no">Level 9</a></li>
+		</ul>
+	</div>
+</script>
+<script id="template--#MENUTYPE#-breadcrumb" type="x-template">
+	<ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li class="breadcrumb__listitem" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a class="breadcrumb__listitem__item" itemprop="item" href="/">
+				<span class="breadcrumb__listitem__item__link" itemprop="name">Home</span>
+			</a>
+			<meta property="position" content="1">
+		</li>
+		<li class="breadcrumb__listitem" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a class="breadcrumb__listitem__item" itemprop="item" href="/rulebook">
+				<span class="breadcrumb__listitem__item__link" itemprop="name">Rulebooks</span>
+			</a>
+			<meta property="position" content="2">
+		</li>
+		<li class="breadcrumb__listitem" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a class="breadcrumb__listitem__item" itemprop="item" href="/rulebook/¤BOOKALIAS¤">
+				<span class="breadcrumb__listitem__item__link" itemprop="name">¤BOOK¤</span>
+			</a>
+			<meta property="position" content="3">
+		</li>
+		<li class="breadcrumb__listitem" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a class="breadcrumb__listitem__item" itemprop="item" href="/feat#rulebook=¤BOOKALIAS¤">
+				<span class="breadcrumb__listitem__item__link" itemprop="name">Feats</span>
+			</a>
+			<meta property="position" content="4">
+		</li>
+		<li class="breadcrumb__listitem" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<span class="breadcrumb__listitem__item" itemprop="item">
+				<span class="breadcrumb__listitem__item__text" itemprop="name">¤NAME¤</span>
+			</span>
+			<meta property="position" content="5">
+		</li>
+	</ol>
+</script>

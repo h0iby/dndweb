@@ -1,19 +1,48 @@
-.table-amount{
-	display: block;
-	position: relative;
-	top: 20px;
-	float: right;
-	vertical-align: top;
-	font-size: 1.8rem;
-	line-height: 1.8rem;
+.main{
+	& .table-amount{
+		display: block;
+		position: relative;
+		top: 20px;
+		float: right;
+		vertical-align: top;
+		font-size: 1.8rem;
+		line-height: 1.8rem;
 
-	&__text{
-		vertical-align: top;
-		@apply --LanguageFontCommon;
+		&__text{
+			vertical-align: top;
+			@apply --LanguageFontCommon;
+		}
+		&__select{
+			width: 55px;
+			height: 1.8rem;
+			vertical-align: top;
+
+		}
+		&--hidden{
+			display: none;
+		}
 	}
-	&__select{
-		width: 55px;
-		height: 1.8rem;
-		vertical-align: top;
+
+	& .table-pager{
+		display: block;
+		position: relative;
+		text-align: center;
+		padding: 20px 0;
+
+		&__load{
+			display: inline-block;
+			background: var(--loadMoreBackgroundColor);
+			color: var(--loadMoreFontColor);
+			text-decoration: none;
+			padding: 5px 20px;
+			font-size: 1.75rem;
+			line-height: 2.5rem;
+			border-radius: 5px;
+		}
+
+		&--hidden{
+			visibility: hidden;
+			opacity: 0;
+		}
 	}
 }

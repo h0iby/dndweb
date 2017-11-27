@@ -103,4 +103,19 @@ var dnd = dnd || {};
 			}
 		}
 	}
+	dnd.getHash = function(item){
+		if(window.location.hash && item != null){
+			var itemValue = "";
+			var hashItems = window.location.hash.substring(1).split("&");
+			for(var i = 0; i < hashItems.length; i++){
+				var hashes = hashItems[i].split("=");
+				if(hashes[0] == item){
+					itemValue = hashes[1];
+				}
+			}
+			return itemValue;
+		} else {
+			return window.location.hash;
+		}
+	}
 })();

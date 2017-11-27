@@ -29,10 +29,8 @@ html, body {
 	/*word-break: break-all;*/
 
 	&__article{
-		&__data{
-			max-width: 1200px;
-			margin: 0 auto;
-		}
+		max-width: 1600px;
+		margin: 0 auto;
 	}
 }
 
@@ -87,19 +85,28 @@ html, body {
 		& h4{
 			margin: 30px 0 5px;
 		}
-	}
-	&__intro{
-		margin: 15px 0 0;
-	}
-	&__main{
-		& p{
-			margin: 30px 0 0;
-		}
+
 		& table{
 			width: 100%;
 
 			& th, & td {
 				text-align: left;
+			}
+		}
+	}
+	&__intro{
+		margin: 15px 0 0;
+	}
+	&__main{
+		&--html{
+			& p{
+				margin: 30px 0 0;
+			}
+			& h3 + p {
+				margin: 0;
+			}
+			& p + table {
+				margin: 30px 0 0;
 			}
 		}
 	}

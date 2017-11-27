@@ -25,7 +25,7 @@ var dnd = dnd || {};
 	var setHash = function(item, value){
 		dnd.setHash(item, dnd.replaceAll(value, " ", "-"));
 	}
-	var getHash = function(){
+	var getHash = function(item){
 		if(window.location.hash){
 			var hashItems = window.location.hash.substring(1).split("&");
 			for(var i = 0; i < hashItems.length; i++){
@@ -152,7 +152,7 @@ var dnd = dnd || {};
 			getHash();
 		}
 	}
-	var filterPageAmount = function(){
+	var filterPageAmount = function(amount){
 		dnd.filters.amount = 25;
 		if(dnd.vars.modern){
 			if(localStorage.getItem("filterAmount") == null){
@@ -162,10 +162,11 @@ var dnd = dnd || {};
 			}
 		}
 
-		var selects = dnd.selector(".-js-sorting-amount");
+		var selects = dnd.selector(".-js-amount-sorting");
 		for(var i = 0; i < selects.length; i++){
 			var select = selects[i];
 			var options = select.options;
+			var containers = dnd.selector(".-js-amount-page");
 			for(var o = 0; o < options.length; o++) {
 				var option = options[o];
 				if(option.value == dnd.filters.amount.toString()) {
@@ -173,20 +174,103 @@ var dnd = dnd || {};
 				}
 			}
 
-			select.addEventListener('change',function(){
-				var selectValue = this.options[this.selectedIndex].value;
-				dnd.filters.amount = parseInt(selectValue);
-
-				if(dnd.vars.localstorage){
-					localStorage.setItem("filterAmount", dnd.filters.amount);
+			for(var o = 0; o < containers.length; o++){
+				var container = containers[o]
+				if(amount <= Math.floor(options[0].value)){
+					container.classList.add('table-amount--hidden');
 				}
+			}
 
-				dnd.templates();
-			});
+			if(!select.hasAttribute("data-load")){
+				select.setAttribute("data-load", amount);
+				select.addEventListener('change',function(){
+					var selectValue = this.options[this.selectedIndex].value;
+					dnd.filters.amount = parseInt(selectValue);
+
+					if(dnd.vars.localstorage){
+						localStorage.setItem("filterAmount", dnd.filters.amount);
+					}
+
+					dnd.templates();
+				});
+			}
 		}
 	}
-	dnd.filters = function(){
-		filterPageAmount();
+	var filterPageLoad = function(amount){
+		if(amount < dnd.filters.amount){
+			var containers = dnd.selector(".-js-amount-pager");
+			for(var i = 0; i < containers.length; i++){
+				var container = containers[i];
+				container.classList.add("table-pager--hidden");
+			}
+		} else {
+			var loaders = dnd.selector(".-js-amount-load");
+			for(var i = 0; i < loaders.length; i++){
+				var loader = loaders[i];
+
+				if(dnd.getHash("page") != ""){
+					var containers = dnd.selector(".-js-amount-pager");
+					for(var i = 0; i < containers.length; i++){
+						var container = containers[i];
+						container.classList.add("table-pager--hidden");
+					}
+				}
+
+				if(!loader.hasAttribute("data-load")){
+					loader.setAttribute("data-load", amount);
+					loader.addEventListener('click',function(event){
+						event.preventDefault();
+						var currentPage = Math.floor(dnd.getHash("page"));
+						if(dnd.getHash("page") != ""){
+							currentPage++;
+						} else {
+							currentPage = 2;
+						}
+						setHash("page", currentPage.toString());
+						dnd.templates();
+					});
+				}
+			}
+		}
+	}
+	var filterWindowScroll = function(amount){
+		var scrollPos = 0,
+			timeout = 250,
+        	timer;
+
+        window.onscroll = function() {
+			var body = document.body,
+    			html = document.documentElement,
+				offSet = 500;
+
+			var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+			var currentHeight = height - window.outerHeight - offSet;
+			var currentPos = window.pageYOffset;
+			var listItems = dnd.selector(".-js-list")[0].getElementsByClassName("table__row");
+
+            if(currentPos > currentHeight){
+				if(timer) {
+					window.clearTimeout(timer);
+				}
+
+				timer = window.setTimeout(function() {
+					if(dnd.getHash("page") != ""){
+						if(listItems.length >= Math.floor(dnd.getHash("page")) * dnd.filters.amount){
+							var currentPage = Math.floor(dnd.getHash("page"));
+							currentPage++;
+							setHash("page", currentPage.toString());
+							dnd.templates();
+						}
+					}
+				}, timeout);
+            }
+            scrollPos = window.pageYOffset;
+        };
+	}
+	dnd.filters = function(amount){
+		filterPageAmount(amount);
+		filterPageLoad(amount);
+		filterWindowScroll(amount);
 		setTimeout(function(){
 			var selectors = dnd.selector(".filter__list__item__container__select");
 			for(var i = 0; i < selectors.length; i++){

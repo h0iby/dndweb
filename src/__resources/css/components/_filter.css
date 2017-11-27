@@ -7,14 +7,16 @@
 	&__title{
 		position: relative;
 		display: inline-block;
-		padding: 7px 35px 6px 7px;
+		padding: 10px 45px 10px 20px;
 		background: var(--filterBackground);
+		border-radius: 7px;
+		transition: border-radius 0.35s;
 
 		&::after, &::before{
 			position: absolute;
 			content: "";
 			display: block;
-			right: 12px;
+			right: 20px;
 			top: 50%;
 			margin: -1 0 0 0;
 			width: 12px;
@@ -36,8 +38,9 @@
 			display: block;
 			float: left;
 			width: 100%;
-			background: var(--filterBackgroundEven);
-            height: 51px;
+			background: var(--filterBackground);
+            height: var(--filterLineHeight);
+			transition: border-radius 0.35s;
 
 			&__text{
 				display: block;
@@ -49,8 +52,8 @@
 				word-break: normal;
 				line-height: 2.2rem;
 				box-sizing: border-box;
-				padding: 0 10px;
-                line-height: 51px;
+				padding: 0 20px;
+                line-height: var(--filterLineHeight);
 			}
 			&__container{
 				position: relative;
@@ -59,8 +62,8 @@
 				width: 60%;
 				line-height: 2.2rem;
 				box-sizing: border-box;
-				padding: 0 10px;
-                line-height: 51px;
+				padding: 0 20px;
+                line-height: var(--filterLineHeight);
 
 				&__input{
 					box-sizing: border-box;
@@ -202,8 +205,15 @@
 				}
 			}
 
-			&:nth-child(odd){
-				background: var(--filterBackgroundOdd);
+			&:first-child:last-child{
+				border-radius: 7px;
+
+			}
+			&:first-child{
+				border-radius: 7px 7px 0 0;
+			}
+			&:last-child{
+				border-radius: 0 0 7px 7px;
 			}
 		}
 	}
@@ -222,6 +232,8 @@
 
 		&:checked ~ {
 			& .filter__title{
+				border-radius: 7px 7px 0 0;
+
 				&::after{
 					transition: transform .5s;
 					transform: rotate(-180deg) scale(.5);
@@ -249,12 +261,23 @@
                 &[data-filters="17"]{ max-height: calc(var(--filterLineHeight) * 17); }
                 &[data-filters="18"]{ max-height: calc(var(--filterLineHeight) * 18); }
                 &[data-filters="19"]{ max-height: calc(var(--filterLineHeight) * 19); }
+
+				& .filter__list{
+					&__item{
+						&:first-child{
+							border-radius: 0 7px 0 0;
+						}
+						&:last-child{
+							border-radius: 0 0 7px 7px;
+						}
+						&:first-child:last-child{
+							border-radius: 0 7px 7px 7px;
+						}
+					}
+				}
 			}
 		}
 	}
-
-
-
 }
 
 @media (--tabletLandscape) {

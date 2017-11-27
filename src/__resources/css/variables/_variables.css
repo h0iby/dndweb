@@ -91,10 +91,8 @@
 
 
 	/* filter */
-    --filterLineHeight: 51px;
-	--filterBackground: rgba(var(--whiteRGB),0.5);
-	--filterBackgroundEven: rgba(var(--whiteRGB),0.3);
-	--filterBackgroundOdd: rgba(var(--grayDarkRGB),0.08);
+    --filterLineHeight: 60px;
+	--filterBackground: rgba(var(--beigeRGB),1);
 	--filterPlusColor: rgba(var(--redDarkRGB),1);
 	--filterInputBorderColor: rgba(var(--grayDarkRGB),1);
 	--filterInputBackground: rgba(var(--whiteRGB),1);
@@ -109,9 +107,13 @@
 
 	/* paging */
 	--pagingFontColor: rgba(var(--redDarkRGB),1);
+	--loadMoreFontColor: rgba(var(--whiteRGB),1);
+	--loadMoreBackgroundColor: rgba(var(--grayDarkRGB),1);
 
 
 	/* breadcrumb */
 	--breadcrumbFontColor: rgba(var(--grayBlackRGB),1);
 	--breadcrumbFontLinkColor: rgba(var(--redDarkRGB),1);
+
+	--footerColor: rgba(var(--whiteRGB),1);
 }

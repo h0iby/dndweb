@@ -1,5 +1,53 @@
 <section class="main__article__section section">
-	<div class="section__intro">
-		<h2>Skill</h2>
-	</div>
+	<div class="-js-template -js-template--#MENUTYPE#-breadcrumb" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#" data-output="1"></div>
+	<div class="-js-template -js-template--#MENUTYPE# section__intro" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#" data-output="1"></div>
+	<div class="-js-template -js-template--#MENUTYPE#-info" data-type="#MENUTYPE#" data-item="#MENUITEM#" data-endpoint="#DATAENDPOINT#" data-output="1"></div>
 </section>
+
+<script id="template--#MENUTYPE#" type="x-template">
+	<h2>¤NAME¤</h2>
+	<a class="section__intro__book section__intro__url" href="¤BOOKURL¤">¤BOOK¤<i>(¤BOOKPAGE¤)</i></a>
+	<p>¤DESCRIPTION¤<p>
+</script>
+<script id="template--#MENUTYPE#-info" type="x-template">
+	<div class="section__main section__main--html">
+		¤CHECKHTML¤
+	</div>
+	<div class="section__main section__main--html">
+		¤SYNERGYHTML¤
+	</div>
+	<div class="section__main section__main--html">
+		¤ACTIONHTML¤
+	</div>
+	<div class="section__main section__main--html">
+		¤TRYAGAINHTML¤
+	</div>
+	<div class="section__main section__main--html">
+		¤UNTRAINEDHTML¤
+	</div>
+	<div class="section__main section__main--html">
+		¤SPECIALHTML¤
+	</div>
+</script>
+<script id="template--#MENUTYPE#-breadcrumb" type="x-template">
+	<ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+		<li class="breadcrumb__listitem" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a class="breadcrumb__listitem__item" itemprop="item" href="/">
+				<span class="breadcrumb__listitem__item__link" itemprop="name">Home</span>
+			</a>
+			<meta property="position" content="1">
+		</li>
+		<li class="breadcrumb__listitem" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<a class="breadcrumb__listitem__item" itemprop="item" href="/skill">
+				<span class="breadcrumb__listitem__item__link" itemprop="name">Skills</span>
+			</a>
+			<meta property="position" content="2">
+		</li>
+		<li class="breadcrumb__listitem" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+			<span class="breadcrumb__listitem__item" itemprop="item">
+				<span class="breadcrumb__listitem__item__text" itemprop="name">¤NAME¤</span>
+			</span>
+			<meta property="position" content="3">
+		</li>
+	</ol>
+</script>

@@ -103,6 +103,21 @@ var dnd = dnd || {};
 			}
 		}
 	}
+	dnd.getHash = function(item){
+		if(window.location.hash && item != null){
+			var itemValue = "";
+			var hashItems = window.location.hash.substring(1).split("&");
+			for(var i = 0; i < hashItems.length; i++){
+				var hashes = hashItems[i].split("=");
+				if(hashes[0] == item){
+					itemValue = hashes[1];
+				}
+			}
+			return itemValue;
+		} else {
+			return window.location.hash;
+		}
+	}
 })();
 var dnd = dnd || {};
 (function() {
@@ -270,13 +285,17 @@ var dnd = dnd || {};
 		if(item.getAttribute("data-reset") == "true"){
 			templateClear(item);
 		}
+		var isList = document.getElementsByClassName("-js-amount-sorting").length > 0,
+			isRestricted = item.getAttribute("data-output") != null,
+			hasPaging = dnd.getHash("page") != "";
+
 		var templateHtml = template.innerHTML,
 			counter = 0,
             itemHtml = "",
 			filters = dnd.filters.amount != null ? dnd.filters.amount : 25,
-			dataOutput = item.getAttribute("data-output") != null ? Math.floor(item.getAttribute("data-output")) : filters,
-			running = document.getElementsByClassName("-js-sorting-amount").length > 0 ? dataOutput : 999999,
-			count = running;
+			lists = isList ? filters : 999999,
+			dataOutput = isRestricted ? Math.floor(item.getAttribute("data-output")) : lists,
+			count = isList && !isRestricted && hasPaging ? Math.floor(dataOutput) * Math.floor(dnd.getHash("page")) : Math.floor(dataOutput);
 
 		data.forEach(function(obj, i){
 			if(counter < count){
@@ -302,9 +321,9 @@ var dnd = dnd || {};
 				html = dnd.replaceAll(html, '¤SHORTDESCRIPTIONHTML¤', obj.short_description_html);
 
 				html = dnd.replaceAll(html, '¤CLASSFEATURES¤', obj.class_features);
-				html = dnd.replaceAll(html, '¤CLASSFEATURESHTML¤', obj.class_features_html);
+				html = dnd.replaceAll(html, '¤CLASSFEATURESHTML¤', obj.class_features_html != "" && obj.class_features_html != null ? '<h3>Features</h3>' + obj.class_features_html : "");
 				html = dnd.replaceAll(html, '¤ADVANCEMENT¤', obj.advancement);
-				html = dnd.replaceAll(html, '¤ADVANCEMENTHTML¤', obj.advancement_html);
+				html = dnd.replaceAll(html, '¤ADVANCEMENTHTML¤', obj.advancement_html != "" && obj.advancement_html != null ? '<h3>Advancement</h3>' + obj.advancement_html : "");
 				html = dnd.replaceAll(html, '¤PRESTIGE¤', isPrestige);
 
 				html = dnd.replaceAll(html, '¤BENEFIT¤', obj.benefit);
@@ -312,6 +331,12 @@ var dnd = dnd || {};
 				html = dnd.replaceAll(html, '¤NORMAL¤', obj.normal != "" && obj.normal != null ? "<h4>Normal</h4><p>" + obj.normal + "</p>" : "");
 
 				html = dnd.replaceAll(html, '¤ABILITY¤', obj.base_skill != "" && obj.base_skill != null ? obj.base_skill.toLowerCase() : "");
+				html = dnd.replaceAll(html, '¤CHECKHTML¤', obj.check_html != "" && obj.check_html != null ? '<h3>Check</h3>' + obj.check_html : "");
+				html = dnd.replaceAll(html, '¤SYNERGYHTML¤', obj.synergy_html != "" && obj.synergy_html != null ? '<h3>Synergy</h3>' + obj.synergy_html : "");
+				html = dnd.replaceAll(html, '¤ACTIONHTML¤', obj.action_html != "" && obj.action_html != null ? '<h3>Action</h3>' + obj.action_html : "");
+				html = dnd.replaceAll(html, '¤TRYAGAINHTML¤', obj.try_again_html != "" && obj.try_again_html != null ? '<h3>Try again</h3>' + obj.try_again_html : "");
+				html = dnd.replaceAll(html, '¤SPECIALHTML¤', obj.special_html != "" && obj.special_html != null ? '<h3>Special</h3>' + obj.special_html : "");
+				html = dnd.replaceAll(html, '¤UNTRAINEDHTML¤', obj.untrained_html != "" && obj.untrained_html != null ? '<h3>Untrained</h3>' + obj.untrained_html : "");
 
 				html = dnd.replaceAll(html, '¤SPELLSCHOOL¤', obj.spellschool_name);
 				html = dnd.replaceAll(html, '¤COMPONENTVERBAL¤', isComponentVerbal);
@@ -343,7 +368,7 @@ var dnd = dnd || {};
 	var templateInit = function(item, data){
 		var template = document.getElementById(item.classList[1].replace("-js-",""));
 		if(item && data && template){
-			dnd.filters();
+			dnd.filters(data.length);
 			templateLoad(item, data, template);
 			item.setAttribute("data-loaded", "true");
 		}
@@ -413,7 +438,7 @@ var dnd = dnd || {};
 	var setHash = function(item, value){
 		dnd.setHash(item, dnd.replaceAll(value, " ", "-"));
 	}
-	var getHash = function(){
+	var getHash = function(item){
 		if(window.location.hash){
 			var hashItems = window.location.hash.substring(1).split("&");
 			for(var i = 0; i < hashItems.length; i++){
@@ -540,7 +565,7 @@ var dnd = dnd || {};
 			getHash();
 		}
 	}
-	var filterPageAmount = function(){
+	var filterPageAmount = function(amount){
 		dnd.filters.amount = 25;
 		if(dnd.vars.modern){
 			if(localStorage.getItem("filterAmount") == null){
@@ -550,10 +575,11 @@ var dnd = dnd || {};
 			}
 		}
 
-		var selects = dnd.selector(".-js-sorting-amount");
+		var selects = dnd.selector(".-js-amount-sorting");
 		for(var i = 0; i < selects.length; i++){
 			var select = selects[i];
 			var options = select.options;
+			var containers = dnd.selector(".-js-amount-page");
 			for(var o = 0; o < options.length; o++) {
 				var option = options[o];
 				if(option.value == dnd.filters.amount.toString()) {
@@ -561,20 +587,103 @@ var dnd = dnd || {};
 				}
 			}
 
-			select.addEventListener('change',function(){
-				var selectValue = this.options[this.selectedIndex].value;
-				dnd.filters.amount = parseInt(selectValue);
-
-				if(dnd.vars.localstorage){
-					localStorage.setItem("filterAmount", dnd.filters.amount);
+			for(var o = 0; o < containers.length; o++){
+				var container = containers[o]
+				if(amount <= Math.floor(options[0].value)){
+					container.classList.add('table-amount--hidden');
 				}
+			}
 
-				dnd.templates();
-			});
+			if(!select.hasAttribute("data-load")){
+				select.setAttribute("data-load", amount);
+				select.addEventListener('change',function(){
+					var selectValue = this.options[this.selectedIndex].value;
+					dnd.filters.amount = parseInt(selectValue);
+
+					if(dnd.vars.localstorage){
+						localStorage.setItem("filterAmount", dnd.filters.amount);
+					}
+
+					dnd.templates();
+				});
+			}
 		}
 	}
-	dnd.filters = function(){
-		filterPageAmount();
+	var filterPageLoad = function(amount){
+		if(amount < dnd.filters.amount){
+			var containers = dnd.selector(".-js-amount-pager");
+			for(var i = 0; i < containers.length; i++){
+				var container = containers[i];
+				container.classList.add("table-pager--hidden");
+			}
+		} else {
+			var loaders = dnd.selector(".-js-amount-load");
+			for(var i = 0; i < loaders.length; i++){
+				var loader = loaders[i];
+
+				if(dnd.getHash("page") != ""){
+					var containers = dnd.selector(".-js-amount-pager");
+					for(var i = 0; i < containers.length; i++){
+						var container = containers[i];
+						container.classList.add("table-pager--hidden");
+					}
+				}
+
+				if(!loader.hasAttribute("data-load")){
+					loader.setAttribute("data-load", amount);
+					loader.addEventListener('click',function(event){
+						event.preventDefault();
+						var currentPage = Math.floor(dnd.getHash("page"));
+						if(dnd.getHash("page") != ""){
+							currentPage++;
+						} else {
+							currentPage = 2;
+						}
+						setHash("page", currentPage.toString());
+						dnd.templates();
+					});
+				}
+			}
+		}
+	}
+	var filterWindowScroll = function(amount){
+		var scrollPos = 0,
+			timeout = 250,
+        	timer;
+
+        window.onscroll = function() {
+			var body = document.body,
+    			html = document.documentElement,
+				offSet = 500;
+
+			var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+			var currentHeight = height - window.outerHeight - offSet;
+			var currentPos = window.pageYOffset;
+			var listItems = dnd.selector(".-js-list")[0].getElementsByClassName("table__row");
+
+            if(currentPos > currentHeight){
+				if(timer) {
+					window.clearTimeout(timer);
+				}
+
+				timer = window.setTimeout(function() {
+					if(dnd.getHash("page") != ""){
+						if(listItems.length >= Math.floor(dnd.getHash("page")) * dnd.filters.amount){
+							var currentPage = Math.floor(dnd.getHash("page"));
+							currentPage++;
+							setHash("page", currentPage.toString());
+							dnd.templates();
+						}
+					}
+				}, timeout);
+            }
+            scrollPos = window.pageYOffset;
+        };
+	}
+	dnd.filters = function(amount){
+		filterPageAmount(amount);
+		filterPageLoad(amount);
+		filterWindowScroll(amount);
 		setTimeout(function(){
 			var selectors = dnd.selector(".filter__list__item__container__select");
 			for(var i = 0; i < selectors.length; i++){

@@ -186,7 +186,7 @@
 }
 
 @media (--mobileLandscape) {
-	table.table{
+	.table{
 		&__row{
 			&__td{
 				min-width: 250px;
@@ -199,7 +199,7 @@
 	}
 }
 @media (--tabletPortrait) {
-	table.table{
+	.table{
 		&__row{
 			&__td{
 				min-width: 250px;
@@ -208,7 +208,7 @@
 	}
 }
 @media (--tabletLandscape) {
-	table.table{
+	.table{
 		&__row{
 			&__td{
 				min-width: 230px;
@@ -226,7 +226,7 @@
 	}
 }
 @media (--desktopLarge) {
-	table.table{
+	.table{
 		&__row{
 			&__td{
 				display: table-cell;

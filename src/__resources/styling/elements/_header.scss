@@ -1,4 +1,4 @@
-.header{
+.header {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -7,15 +7,15 @@
 	order: 1;
 	z-index: 3;
 	flex-shrink: 0;
-	background: var(--backgroundHeader) 50% 0 repeat-x;
-	box-shadow: -5px -15px 25px 15px var(--shadow);
-    transition: transform 0.35s;
+	background: $backgroundHeader 50% 0 repeat-x;
+	box-shadow: -5px -15px 25px 15px $shadow;
+	transition: transform 0.35s;
 
-    &.is-hidden{
+	&.is-hidden {
 		transform: translate(0, -75px);
-    }
+	}
 
-	&__logo{
+	&__logo {
 		position: absolute;
 		top: 5px;
 		left: 50%;
@@ -24,7 +24,7 @@
 		margin: 0 0 0 -25px;
 		text-decoration: none;
 		z-index: 1;
-		color: var(--logoColor);
+		color: $logoColor;
 		opacity: 0;
 		transition: transform 0.5s;
 		transition-delay: 0.1s;
@@ -33,37 +33,42 @@
 		animation-delay: .10s;
 		animation-fill-mode: forwards;
 
-        & .stroke1 { animation: animateLogo .7s 1; }
+		& .stroke1 {
+			animation: animateLogo .7s 1;
+		}
 
-		&::before, &::after{
+		&::before, &::after {
 			position: absolute;
 			top: 0;
 			content: "D";
-			color: var(--logoTextColor);
+			color: $logoTextColor;
 			font-size: 4rem;
 			line-height: 55px;
 			font-weight: normal;
 			padding: 4px 10px 0;
 			z-index: -1;
-			transform:scale(1.6,1);
-			@apply --LanguageFontCommon;
+			transform: scale(1.6,1);
+			@include LanguageFontCommon();
 		}
-		&::before{
+
+		&::before {
 			right: 68%;
 		}
-		&::after{
+
+		&::after {
 			left: 56%;
 		}
 
-		&:hover{
+		&:hover {
 			& .stroke1 {
 				fill: url(#Gradient);
 				clip-path: inset(0 0 0 0);
+				animation: animateLogo .7s 1;
 			}
 		}
 	}
 
-	&__search{
+	&__search {
 		position: absolute;
 		top: 100%;
 		z-index: 2;
@@ -72,15 +77,15 @@
 		font-smoothing: antialiased;
 		transform-origin: 0% 0%;
 		transform: translate(110%, 0);
-		background: var(--backgroundHeader) 50% 0 repeat-x;
-		box-shadow: 0px 2px 8px 0px var(--shadow);
+		background: $backgroundHeader 50% 0 repeat-x;
+		box-shadow: 0px 2px 8px 0px $shadow;
 		margin: 1px 0 0;
 		opacity: 0;
 		padding: 0 0 0 20px;
 		display: block;
 		transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
 
-		&__input{
+		&__input {
 			margin: 0;
 			padding: 0;
 			border: none;
@@ -99,15 +104,15 @@
 				transform: translate(0, 0);
 				opacity: 1;
 
-				&__icon{
-					& .header__search__icon__line{
-						&--num1{
+				&__icon {
+					& .header__search__icon__line {
+						&--num1 {
 							animation-name: searchIconLineLengthen;
 							animation-duration: 0.5s;
 							animation-fill-mode: forwards;
 						}
 
-						&--num2{
+						&--num2 {
 							animation-name: searchIconCircleCollapse;
 							animation-duration: 0.5s;
 							animation-fill-mode: forwards;
@@ -117,7 +122,7 @@
 			}
 		}
 
-		&__icon{
+		&__icon {
 			position: absolute;
 			display: block;
 			width: 33px;
@@ -134,17 +139,17 @@
 			animation-delay: .40s;
 			animation-fill-mode: forwards;
 
-			&__line{
+			&__line {
 				display: block;
 				width: 10px;
 				height: 0px;
 				border-radius: 3px;
 				z-index: 1;
 				opacity: 1;
-				border: solid 2px var(--searchFieldIcon);
+				border: solid 2px $searchFieldIcon;
 				transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0), background 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.55s ease;
 
-				&--num1{
+				&--num1 {
 					height: 0px;
 					border-width: 2px 0;
 					transform-origin: 19px 9px;
@@ -155,7 +160,7 @@
 					animation-fill-mode: forwards;
 				}
 
-				&--num2{
+				&--num2 {
 					animation-name: searchIconCircleBloat;
 					animation-duration: 0.2s;
 					animation-delay: 0s;
@@ -163,13 +168,13 @@
 				}
 			}
 
-			&--submit{
+			&--submit {
 				margin: -17px 0 0 0;
 				right: 8px;
 			}
 		}
 
-		&__searchfield, &__submit{
+		&__searchfield, &__submit {
 			position: relative;
 			display: block;
 			top: 16px;
@@ -182,16 +187,16 @@
 			z-index: 3;
 		}
 
-		&__searchfield{
-			background: var(--searchField);
+		&__searchfield {
+			background: $searchField;
 			border-radius: 7px;
 			width: 200px;
 			padding: 0 10px;
-			border: solid 1px var(--searchFieldBorder);
-			color: var(--searchFieldText);
+			border: solid 1px $searchFieldBorder;
+			color: $searchFieldText;
 		}
 
-		&__submit{
+		&__submit {
 			position: relative;
 			width: 48px;
 			height: 38px;
@@ -202,7 +207,7 @@
 	}
 }
 
-@media (--mobileLandscape) {
+@media #{$mobileLandscape} {
 	.header{
 		&__search{
 			&__searchfield{
@@ -211,7 +216,7 @@
 		}
 	}
 }
-@media (--tabletLandscape) {
+@media #{$tabletLandscape} {
 	.header{
 		&__search{
 			box-shadow: none;
@@ -227,19 +232,19 @@
 		}
 	}
 }
-@media (--desktop) {
-	.header{
-		&__search{
-			&__searchfield{
+@media #{$desktop} {
+	.header {
+		&__search {
+			&__searchfield {
 				width: 300px;
 			}
 		}
 	}
 }
-@media (--desktopLarge) {
-	.header{
-		&__search{
-			&__searchfield{
+@media #{$desktopLarge} {
+	.header {
+		&__search {
+			&__searchfield {
 				width: 400px;
 			}
 		}

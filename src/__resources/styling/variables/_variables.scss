@@ -1,0 +1,123 @@
+/* basic */
+$transparent: rgba(0,0,0,0);
+$whiteRGB: rgb(255,255,255);
+$blackRGB: rgb(0,0,0);
+$beigeRGB: rgb(250,243,232);
+$grayBlackRGB: rgb(21,21,21);
+$grayDarkRGB: rgb(51,51,51);
+$grayLightRGB: rgb(97,96,92);
+$redDarkRGB: rgb(157,10,14);
+$redRGB: rgb(255,0,0);
+$greenDarkRGB: rgb(27,157,9);
+$pathLogo: url('/_assets/images/logo.png');
+
+
+
+/* breakpoints */
+$mobilePortrait: "(min-width : 25em)";/* (480px) */
+$mobileLandscape: "(min-width : 37.5em)";/* (600px) */
+$tabletPortrait: "(min-width : 48em)";/* (768px) */
+$tabletLandscape: "(min-width : 56.25em)";/* (900px) */
+$desktop: "(min-width : 68.75em)";/* (1100px) */
+$desktopLarge: "(min-width : 81.25em)";/* (1300px) */
+
+
+
+/* layout */
+$selectionBackground: rgba($redRGB,1);
+$selectionFontColor: rgba($grayBlackRGB,1);
+$shadow: rgba($blackRGB,1);
+$backgroundLogo: $pathLogo;
+$backgroundSite: rgba($beigeRGB,1);
+$backgroundPage: rgba($beigeRGB,1);
+$backgroundHeader: rgba($beigeRGB,1);
+$backgroundFooter: rgba($grayBlackRGB,1);
+$fontSize: 16px;
+$fontColor: rgba($grayBlackRGB,1);
+$fontColorLink: rgba($redDarkRGB,1);
+$checkmarkTransparent: rgba($greenDarkRGB,0);
+$checkmarkGreen: rgba($greenDarkRGB,1);
+$checkmarkRed: rgba($redDarkRGB,1);
+
+
+
+/* logo */
+$logoColor: rgba($redRGB,1);
+$logoTextColor: rgba($grayDarkRGB,1);
+
+
+
+/* loader */
+$loaderOverlay: rgba($beigeRGB,1);
+$loaderColor: rgba($grayBlackRGB,1);
+
+
+
+/* search */
+$searchField: rgba($whiteRGB,1);
+$searchFieldIcon: rgba($grayBlackRGB,1);
+$searchFieldBorder: rgba($grayBlackRGB,1);
+$searchFieldText: rgba($grayBlackRGB,1);
+
+
+
+/* nav */
+$navCloseBackground: rgba($blackRGB,1);
+$navBurgerColor: rgba($grayBlackRGB,1);
+$navBackgroundHeader: rgba($beigeRGB,1);
+$navFontColor: rgba($grayDarkRGB,1);
+$navAccordionHeight: 60px;
+$navAccordionSubHeight: 50px;
+$navAccordion0FontColor: rgba($grayDarkRGB,1);
+$navAccordion0Background: $transparent;
+$navAccordion0SpacerTransparent: $transparent;
+$navAccordion0SpacerColor: rgba($grayBlackRGB,1);
+$navAccordion0IconColor: rgba($redDarkRGB,1);
+//$navAccordion0IconBackground: $pathBackground;
+$navAccordion1FontColor: rgba($whiteRGB,1);
+$navAccordion1Background: rgba($redDarkRGB,1);
+$navAccordion1SpacerTransparent: $transparent;
+$navAccordion1SpacerColor: rgba($whiteRGB,1);
+$navAccordion1IconColor: rgba($whiteRGB,1);
+$navAccordion1IconBackground: rgba($redDarkRGB,1);
+$navAccordion2FontColor: rgba($whiteRGB,1);
+$navAccordion2Background: rgba($grayDarkRGB,1);
+$navMainBackground: rgba($redDarkRGB,1);
+$navMainFontColor: rgba($whiteRGB,1);
+
+
+
+/* filter */
+$filterLineHeight: 60px;
+$filterBackground: rgba($beigeRGB,1);
+$filterPlusColor: rgba($redDarkRGB,1);
+$filterInputBorderColor: rgba($grayDarkRGB,1);
+$filterInputBackground: rgba($whiteRGB,1);
+
+
+
+/* table */
+$tableBackgroundEven: rgba($whiteRGB,0.3);
+$tableBackgroundOdd: rgba($grayDarkRGB,0.08);
+$tableHeaderBackground: rgba($grayDarkRGB,1);
+$tableHeaderFontColor: rgba($whiteRGB,1);
+$tableStrongBorderColor: rgba($whiteRGB,1);
+$tableLinkColor: rgba($redDarkRGB,1);
+
+
+
+/* paging */
+$pagingFontColor: rgba($redDarkRGB,1);
+$loadMoreFontColor: rgba($whiteRGB,1);
+$loadMoreBackgroundColor: rgba($grayDarkRGB,1);
+
+
+
+/* breadcrumb */
+$breadcrumbFontColor: rgba($grayBlackRGB,1);
+$breadcrumbFontLinkColor: rgba($redDarkRGB,1);
+$footerColor: rgba($whiteRGB,1);
+
+
+
+/**/

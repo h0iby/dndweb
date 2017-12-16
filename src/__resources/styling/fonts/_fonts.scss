@@ -1,0 +1,182 @@
+/* Alphabets */
+@font-face {
+  font-family: 'Celestial';
+  src:
+    url('/_assets/fonts/Celestial.woff2') format('woff2'),
+    url('/_assets/fonts/Celestial.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Common';
+  src:
+    url('/_assets/fonts/Common.woff2') format('woff2'),
+    url('/_assets/fonts/Common.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Draconic';
+  src:
+    url('/_assets/fonts/Draconic.woff2') format('woff2'),
+    url('/_assets/fonts/Draconic.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Druidic';
+  src:
+    url('/_assets/fonts/Druidic.woff2') format('woff2'),
+    url('/_assets/fonts/Druidic.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Dwarven';
+  src:
+    url('/_assets/fonts/Dwarven.woff2') format('woff2'),
+    url('/_assets/fonts/Dwarven.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Elven';
+  src:
+    url('/_assets/fonts/Elven.woff2') format('woff2'),
+    url('/_assets/fonts/Elven.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Infernal';
+  src:
+    url('/_assets/fonts/Infernal.woff2') format('woff2'),
+    url('/_assets/fonts/Infernal.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+/* Languages */
+/* Default */
+@mixin LanguageFontDefault() {
+	font-family: 'Georgia', 'serif';
+	font-weight: normal;
+	font-style: normal;
+}
+/* Celestial Alphabet */
+@mixin LanguageFontCelestial() {
+	font-family: 'Celestial', 'Times New Roman', 'serif';
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 1.1px;
+}
+/* Common Alphabet */
+@mixin LanguageFontCommon() {
+	font-family: 'Common', 'Times New Roman', 'serif';
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 1.1px;
+}
+@mixin LanguageFontGnoll() {
+	font-family: 'Common', 'Times New Roman', 'serif';
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 1.1px;
+}
+@mixin LanguageFontHalfling() {
+	font-family: 'Common', 'Times New Roman', 'serif';
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 1.1px;
+}
+/* Draconic Alphabet */
+@mixin LanguageFontAuran() {
+	font-family: 'Draconic', 'Times New Roman', 'serif';
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 1.1px;
+}
+@mixin LanguageFontDraconic() {
+	font-family: 'Draconic', 'Times New Roman', 'serif';
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 1.1px;
+}
+@mixin LanguageFontIgnan() {
+	font-family: 'Draconic', 'Times New Roman', 'serif';
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 1.1px;
+}
+/* Druidic Alphabet */
+@mixin LanguageFontDruid() {
+	font-family: 'Druidic', 'Times New Roman', 'serif';
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 1.1px;
+}
+/* Dwarven Alphabet */
+@mixin LanguageFontDwarven() {
+	font-family: 'Dwarven', 'Times New Roman', 'serif';
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 1.1px;
+}
+@mixin LanguageFontGiant() {
+	font-family: 'Dwarven', 'Times New Roman', 'serif';
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 1.1px;
+}
+@mixin LanguageFontGnome() {
+	font-family: 'Dwarven', 'Times New Roman', 'serif';
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 1.1px;
+}
+@mixin LanguageFontGoblin() {
+	font-family: 'Dwarven', 'Times New Roman', 'serif';
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 1.1px;
+}
+@mixin LanguageFontOrc() {
+	font-family: 'Dwarven', 'Times New Roman', 'serif';
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 1.1px;
+}
+/* Elven Alphabet */
+@mixin LanguageFontAquan() {
+	font-family: 'Elven', 'Times New Roman', 'serif';
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 1.1px;
+}
+@mixin LanguageFontElven() {
+	font-family: 'Elven', 'Times New Roman', 'serif';
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 1.1px;
+}
+@mixin LanguageFontUndercommon() {
+	font-family: 'Elven', 'Times New Roman', 'serif';
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 1.1px;
+}
+/* Infernal Alphabet */
+@mixin LanguageFontAbyssal() {
+	font-family: 'Infernal', 'Times New Roman', 'serif';
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 1.1px;
+}
+@mixin LanguageFontInfernal() {
+	font-family: 'Infernal', 'Times New Roman', 'serif';
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 1.1px;
+}

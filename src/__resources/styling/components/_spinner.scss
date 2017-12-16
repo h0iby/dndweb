@@ -6,7 +6,7 @@
 	margin: -40px 0 0 -25px;
 
 	&__line {
-		background-color: var(--loaderColor);
+		background-color: $loaderColor;
 		height: 100%;
 		width: 6px;
 		display: inline-block;

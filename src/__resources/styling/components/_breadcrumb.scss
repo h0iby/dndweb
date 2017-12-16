@@ -1,27 +1,27 @@
-.breadcrumb{
+.breadcrumb {
 	display: none;
 	margin: 0;
 	padding: 15px 2.5% 10px;
 
-	&__listitem{
+	&__listitem {
 		display: inline-block;
 		margin: 0;
 		padding: 0;
 
-		&__item{
+		&__item {
 			text-decoration: none;
 
-			&__link, &__text{
+			&__link, &__text {
 				display: block;
 				padding: 6px 6px 6px 0;
 				text-decoration: none;
-				color: var(--breadcrumbFontColor);
+				color: $breadcrumbFontColor;
 			}
 
-			&__link{
-				color: var(--breadcrumbFontLinkColor);
+			&__link {
+				color: $breadcrumbFontLinkColor;
 
-				&::after{
+				&::after {
 					content: "→";
 					display: inline-block;
 					padding: 0;
@@ -31,22 +31,22 @@
 				}
 			}
 
-			&:hover{
-				& .breadcrumb__listitem__item{
-					&__link{
-						&::after{
+			&:hover {
+				& .breadcrumb__listitem__item {
+					&__link {
+						&::after {
 							transform: rotate(180deg) translate(0px, -2px);
 						}
 					}
 				}
 			}
 		}
-
 	}
 }
 
-@media (--tabletLandscape) {
-	.breadcrumb{
+
+@media #{$tabletLandscape} {
+	.breadcrumb {
 		display: block;
 	}
 }

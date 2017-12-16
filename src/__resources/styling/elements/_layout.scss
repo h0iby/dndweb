@@ -1,11 +1,11 @@
 html, body {
 	display: flex;
-	@apply --LanguageFontDefault;
-	font-size: var(--fontSize);
-	color: var(--fontColor);
+	@include LanguageFontDefault();
+	font-size: $fontSize;
+	color: $fontColor;
 	min-height: 100%;
 	width: 100%;
-	background: var(--backgroundPage) 0 0 repeat;
+	background: $backgroundPage 0 0 repeat;
 }
 
 .page {
@@ -26,7 +26,6 @@ html, body {
 	flex-grow: 1;
 	z-index: 1;
 	overflow: auto;
-	/*word-break: break-all;*/
 
 	&__article{
 		max-width: 1600px;
@@ -34,9 +33,9 @@ html, body {
 	}
 }
 
-.section{
-	&__intro{
-		&__book{
+.section {
+	&__intro {
+		&__book {
 			font-size: 1.4rem;
 			line-height: 2rem;
 			margin: 0 0 10px;
@@ -45,14 +44,14 @@ html, body {
 		}
 	}
 
-	&__breadcrumb, &__intro, &__filter, &__header, &__main, &__footer{
+	&__breadcrumb, &__intro, &__filter, &__header, &__main, &__footer {
 		position: relative;
 		padding: 0 2.5%;
 		float: left;
 		width: 95%;
 		vertical-align: top;
 
-		&__subtitle{
+		&__subtitle {
 			display: inline-block;
 			margin: 0 0 10px;
 			padding: 5px 0;
@@ -60,57 +59,58 @@ html, body {
 			text-decoration: none;
 		}
 
-		& p, & a{
+		& p, & a {
 			word-break: normal;
 			font-size: 1.1rem;
-    		line-height: 1.6rem;
+			line-height: 1.6rem;
 		}
 
-		& p{
-			color: var(--fontColor);
+		& p {
+			color: $fontColor;
 		}
 
-		& a{
-			color: var(--fontColorLink);
+		& a {
+			color: $fontColorLink;
 		}
 
-		& h2{
+		& h2 {
 			margin: 10px 0 5px;
 		}
 
-		& h3{
+		& h3 {
 			margin: 15px 0 10px;
 		}
 
-		& h4{
+		& h4 {
 			margin: 30px 0 5px;
 		}
 
-		& table{
+		& table {
 			width: 100%;
-
-			& th, & td {
-				text-align: left;
-			}
 		}
 	}
-	&__intro{
+
+	&__intro {
 		margin: 15px 0 0;
 	}
-	&__main{
-		&--html{
-			& p{
+
+	&__main {
+		&--html {
+			& p {
 				margin: 30px 0 0;
 			}
+
 			& h3 + p {
 				margin: 0;
 			}
+
 			& p + table {
 				margin: 30px 0 0;
 			}
 		}
 	}
-	&__breadcrumb, &__filter, &__header, &__main{
+
+	&__breadcrumb, &__filter, &__header, &__main {
 		margin: 35px 0 0;
 	}
 }

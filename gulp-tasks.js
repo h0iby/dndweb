@@ -1,17 +1,16 @@
 console.time("Require");
 
 var gulp = require("gulp")
-	,debug = require('gulp-debug')
-	,del = require('del')
-	,postcss = require('gulp-postcss')
-	,postcssimport = require("postcss-import")
-	,postcssurl = require("postcss-url")
-	,postcsscssnext = require("postcss-cssnext")
-	,postcssbrowserreporter = require("postcss-browser-reporter")
-	,cssnano = require("cssnano")
-	,plugins = require("gulp-load-plugins")({ camelize: true })
-	,browserSync = require("browser-sync")
-	,reload = browserSync.reload
+	, debug = require('gulp-debug')
+	, del = require('del')
+	, sass = require('gulp-sass')
+	, sourcemaps = require('gulp-sourcemaps')
+	, cssnano = require("gulp-cssnano")
+	, autoprefixer = require('gulp-autoprefixer')
+	, concat = require('gulp-concat')
+	, plugins = require("gulp-load-plugins")({ camelize: true })
+	, browserSync = require("browser-sync")
+	, reload = browserSync.reload
 	;
 
 console.timeEnd("Require");
@@ -19,35 +18,45 @@ console.timeEnd("Require");
 
 // uglify
 var uglifyOptions =
-{
-	mangle: false,
-	compress:
 	{
-		global_defs:
+		mangle: false,
+		compress:
 		{
-			DEBUG: false
+			global_defs:
+			{
+				DEBUG: false
+			}
 		}
-	}
-};
+	};
 // /////////////////////////////////////////
 
+
+// browser support
+var supported = [
+	'last 2 versions',
+	'safari >= 9',
+	'ie >= 11',
+	'ff >= 50',
+	'ios 9',
+];
+// /////////////////////////////////////////
 
 
 // folders
 var Folders =
-{
-	root: "src",
-	source: {
-		main: "src/__resources",
-		styles: "src/__resources/css",
-		scripts: "src/__resources/scripts"
-	},
-	target: {
-		main: "src/_assets",
-		styles: "src/_assets/css",
-		scripts: "src/_assets/scripts"
-	}
-};
+	{
+		root: "src",
+		source: {
+			main: "src/__resources",
+			styles: "src/__resources/styling",
+			scripts: "src/__resources/scripts"
+		},
+		target: {
+			main: "src/_assets",
+			styles: "src/_assets/css",
+			scripts: "src/_assets/scripts"
+		}
+	};
 // /////////////////////////////////////////
 
 
@@ -65,8 +74,7 @@ gulp.task("build", ["styles", "scripts", "watch-build"]);
 
 
 // watch task - sync
-gulp.task("watch-sync", function()
-{
+gulp.task("watch-sync", function () {
 	gulp.watch(Folders.target.styles + "/*.css", browserSync.reload);
 	gulp.watch(Folders.target.scripts + "/*.js", browserSync.reload);
 	gulp.watch(Folders.root + "/*.html", browserSync.reload);
@@ -74,8 +82,7 @@ gulp.task("watch-sync", function()
 });
 // /////////////////////////////////////////
 // watch task - build
-gulp.task("watch-build", function()
-{
+gulp.task("watch-build", function () {
 	gulp.watch(Folders.source.styles + "/**/*.*", ["styles"]);
 	gulp.watch(Folders.source.scripts + "/**/*.*", ["scripts"]);
 });
@@ -84,11 +91,29 @@ gulp.task("watch-build", function()
 
 
 // css
-gulp.task("styles", ["css", "css-print"]);
+gulp.task("styles", ["css"]);//, "css-print"
 // /////////////////////////////////////////
 
 // css general
 gulp.task("css", function () {
+	return (
+		gulp.src(Folders.source.styles + "/main.scss")
+			.pipe(sass())
+			.pipe(cssnano({
+				autoprefixer: { browsers: supported, add: true }
+			}))
+			.pipe(gulp.dest(Folders.target.styles))
+	)
+	/*
+	return (
+		gulp.src(gulp.srcFolders.source.styles + "/main.scss")
+			.pipe(sass([
+				cssnano()
+			]))
+			.pipe(gulp.dest(Folders.target.styles))
+	)
+	*/
+	/*
 	return (
 	gulp.src(Folders.source.styles + "/main.css")
 		.pipe(postcss([
@@ -99,18 +124,11 @@ gulp.task("css", function () {
 		]))
 		.pipe(gulp.dest(Folders.target.styles))
 	)
+	*/
 });
 // css print
 gulp.task("css-print", function () {
-	return (
-	gulp.src(Folders.source.styles + "/print.css")
-		.pipe(postcss([
-			postcssimport(),
-			postcssurl(),
-			postcsscssnext()
-		]))
-		.pipe(gulp.dest(Folders.target.styles))
-	)
+	
 });
 // /////////////////////////////////////////
 
@@ -140,19 +158,18 @@ gulp.task("js", function () {
 
 
 // live sync and reload
-gulp.task("browser-sync", function()
-{
+gulp.task("browser-sync", function () {
 	browserSync(
-	{
-		notify: false,
-		ghostMode: false,
-		snippetOptions:
 		{
-			blacklist: [ "/map/**" ]
-		},
-		server:
-		{
-			baseDir: Folders.root
-		}
-	});
+			notify: false,
+			ghostMode: false,
+			snippetOptions:
+			{
+				blacklist: ["/map/**"]
+			},
+			server:
+			{
+				baseDir: Folders.root
+			}
+		});
 });

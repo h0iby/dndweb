@@ -1,191 +1,193 @@
-.table{
+.table {
 	display: table;
 	width: 100%;
 	margin: 10px 0 0;
 
-	&__headline{
+	&__headline {
 		display: inline-block;
 	}
 
-	&__row{
+	&__row {
 		display: table-row;
-		background: var(--tableBackgroundEven);
+		background: $tableBackgroundEven;
 
-		&__td{
+		&__td {
 			display: none;
 			vertical-align: top;
 			padding: 2px 0;
 			word-break: normal;
 			width: auto;
+			text-align: left;
 
-			&__bold{
+			&__bold {
 				display: block;
 				font-weight: normal;
-				border-bottom: solid 1px var(--tableStrongBorderColor);
+				border-bottom: solid 1px $tableStrongBorderColor;
 			}
 
-			&__text{
+			&__text {
 				display: block;
 				padding: 8px 10px 6px;
 				text-decoration: none;
 			}
 
-			&__link{
+			&__link {
 				display: block;
 				padding: 8px 10px 6px;
 				text-decoration: none;
-				color: var(--tableLinkColor);
+				color: $tableLinkColor;
 			}
 
-			&--center{
+			&--center {
 				text-align: center;
 			}
 
-			&--header{
-				background: var(--tableHeaderBackground);
-				color: var(--tableHeaderFontColor);
+			&--header {
+				background: $tableHeaderBackground;
+				color: $tableHeaderFontColor;
 				text-overflow: ellipsis;
 				white-space: nowrap;
 				overflow: hidden;
 				padding: 8px 10px 6px;
-
 			}
 
-			&--component, &--prestige{
+			&--component, &--prestige {
 				width: 50px;
 				text-align: center;
 			}
 
-			&--true, &--false{
+			&--true, &--false {
 				text-align: center;
 				vertical-align: middle;
 
-				&:after{
+				&:after {
 					content: "";
 					position: relative;
 					display: inline-block;
 				}
 			}
 
-			&--true{
-				&:after{
+			&--true {
+				&:after {
 					content: "✓";
-					color: var(--checkmarkGreen);
-				}
-			}
-			&--false{
-				&:after{
-					content: "✗";
-					color: var(--checkmarkRed);
+					color: $checkmarkGreen;
 				}
 			}
 
-			&:first-child{
+			&--false {
+				&:after {
+					content: "✗";
+					color: $checkmarkRed;
+				}
+			}
+
+			&:first-child {
 				display: table-cell;
 			}
 		}
 
-		&:nth-child(odd){
-			background: var(--tableBackgroundOdd);
+		&:nth-child(odd) {
+			background: $tableBackgroundOdd;
 		}
 	}
 }
 
-.table-advancement{
+.table-advancement {
 	display: block;
 	width: 100%;
 	margin: 10px 0 0;
 
-	&__headline{
+	&__headline {
 		display: inline-block;
 	}
 
-	&__row{
+	&__row {
 		display: grid;
 		grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
-		background: var(--tableBackgroundEven);
+		background: $tableBackgroundEven;
 
-		&__td{
+		&__td {
 			display: block;
 			vertical-align: top;
 			padding: 2px 0;
 			word-break: normal;
 			width: auto;
 
-			&__bold{
+			&__bold {
 				display: block;
 				font-weight: normal;
-				border-bottom: solid 1px var(--tableStrongBorderColor);
+				border-bottom: solid 1px $tableStrongBorderColor;
 			}
 
-			&__text{
+			&__text {
 				display: block;
 				padding: 8px 10px 6px;
 				text-decoration: none;
 			}
 
-			&__link{
+			&__link {
 				display: block;
 				padding: 8px 10px 6px;
 				text-decoration: none;
-				color: var(--tableLinkColor);
+				color: $tableLinkColor;
 			}
 
-			&--center{
+			&--center {
 				text-align: center;
 			}
 
-			&--header{
-				background: var(--tableHeaderBackground);
-				color: var(--tableHeaderFontColor);
+			&--header {
+				background: $tableHeaderBackground;
+				color: $tableHeaderFontColor;
 				text-overflow: ellipsis;
 				white-space: nowrap;
 				overflow: hidden;
 				padding: 8px 10px 6px;
-
 			}
 
-			&--component, &--prestige{
+			&--component, &--prestige {
 				width: 50px;
 				text-align: center;
 			}
 
-			&--true, &--false{
+			&--true, &--false {
 				text-align: center;
 				vertical-align: middle;
 
-				&:after{
+				&:after {
 					content: "";
 					position: relative;
 					display: inline-block;
 				}
 			}
 
-			&--true{
-				&:after{
+			&--true {
+				&:after {
 					content: "✓";
-					color: var(--checkmarkGreen);
-				}
-			}
-			&--false{
-				&:after{
-					content: "✗";
-					color: var(--checkmarkRed);
+					color: $checkmarkGreen;
 				}
 			}
 
-			&:first-child{
+			&--false {
+				&:after {
+					content: "✗";
+					color: $checkmarkRed;
+				}
+			}
+
+			&:first-child {
 				display: table-cell;
 			}
 		}
 
-		&:nth-child(odd){
-			background: var(--tableBackgroundOdd);
+		&:nth-child(odd) {
+			background: $tableBackgroundOdd;
 		}
 	}
 }
 
-@media (--mobileLandscape) {
+
+@media #{$mobileLandscape} {
 	.table{
 		&__row{
 			&__td{
@@ -198,7 +200,8 @@
 		}
 	}
 }
-@media (--tabletPortrait) {
+
+@media #{$tabletPortrait} {
 	.table{
 		&__row{
 			&__td{
@@ -207,7 +210,8 @@
 		}
 	}
 }
-@media (--tabletLandscape) {
+
+@media #{$tabletLandscape} {
 	.table{
 		&__row{
 			&__td{
@@ -225,7 +229,8 @@
 		}
 	}
 }
-@media (--desktopLarge) {
+
+@media #{$desktopLarge} {
 	.table{
 		&__row{
 			&__td{

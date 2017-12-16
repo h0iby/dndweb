@@ -1,19 +1,19 @@
-.header{
-	&__nav{
+.header {
+	&__nav {
 		position: fixed;
 		top: 0;
 		left: 0;
 		height: 100%;
 		width: 90%;
 		max-width: 400px;
-		background: var(--navBackgroundHeader) 0 0 repeat;
-		box-shadow: 0 0 25px 0px var(--shadow);
+		background: $navBackgroundHeader 0 0 repeat;
+		box-shadow: 0 0 25px 0px $shadow;
 		font-smoothing: antialiased;
 		transform-origin: 0% 0%;
 		transform: translate(-150%, 0);
 		transition: transform 0.35s cubic-bezier(0.77,0.2,0.05,1.0);
 		z-index: 89;
-		@apply --LanguageFontCommon;
+		@include LanguageFontCommon();
 
 		&__close {
 			position: fixed;
@@ -23,13 +23,13 @@
 			height: 100%;
 			z-index: 5;
 			opacity: .65;
-			background: var(--navCloseBackground);
+			background: $navCloseBackground;
 			transition: transform 0.35s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.35s cubic-bezier(0.77,0.2,0.05,1.0);
 			transform: translate(-100%,0%);
 			animation: hideClose 0.35s cubic-bezier(0.77,0.2,0.05,1.0) forwards;
 		}
 
-		&__icon{
+		&__icon {
 			position: absolute;
 			top: 35px;
 			left: 26px;
@@ -42,9 +42,9 @@
 			animation-duration: 0.35s;
 			animation-delay: .40s;
 			animation-fill-mode: forwards;
-            transform: translate(0, 0px);
+			transform: translate(0, 0px);
 
-			&__line{
+			&__line {
 				transition: transform 0.5s;
 				display: block;
 				left: 0;
@@ -52,24 +52,24 @@
 				height: 4px;
 				margin-bottom: 5px;
 				position: relative;
-				background: var(--navBurgerColor);
+				background: $navBurgerColor;
 				border-radius: 3px;
 				z-index: 1;
 				transform-origin: 4px 0px;
 
-				&--num1{
+				&--num1 {
 					transform: rotate(0deg) translate(0px, 0px);
 					animation-name: burgerMenuTopToVertical;
 					animation-duration: 0.35s;
 					animation-fill-mode: forwards;
 				}
 
-				&--num2{
+				&--num2 {
 					opacity: 1;
 					transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0), background 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.55s ease;
 				}
 
-				&--num3{
+				&--num3 {
 					transform: rotate(0deg) translate(0px, 0px);
 					animation-name: burgerMenuBottomToVertical;
 					animation-duration: 0.35s;
@@ -78,7 +78,7 @@
 			}
 		}
 
-		&__label{
+		&__label {
 			display: block;
 			font-size: 1.8rem;
 			line-height: 64px;
@@ -88,7 +88,7 @@
 			text-transform: uppercase;
 		}
 
-		&__list{
+		&__list {
 			position: absolute;
 			top: 70px;
 			left: 0;
@@ -98,19 +98,19 @@
 			display: block;
 			transition: transform 0.35s;
 
-			&__item{
+			&__item {
 				position: relative;
 				transition: transform 0.35s cubic-bezier(0.77,0.2,0.05,1.0);
 				transform: translate(-100%, 0);
-				line-height: var(--navAccordionHeight);
-				min-height: var(--navAccordionHeight);
+				line-height: $navAccordionHeight;
+				min-height: $navAccordionHeight;
 
-				&__input{
+				&__input {
 					position: absolute;
 					top: 0;
 					right: 0;
 					width: 70px;
-					height: var(--navAccordionHeight);
+					height: $navAccordionHeight;
 					z-index: 2;
 					opacity: 0;
 					cursor: pointer;
@@ -119,48 +119,94 @@
 					border: none;
 					background: transparent;
 
-					&:checked ~ .header__nav__list__item{
-						&__bullet{
-							& .header__nav__list__item__bullet__icon{
-								&::before{
+					&:checked ~ .header__nav__list__item {
+						&__bullet {
+							& .header__nav__list__item__bullet__icon {
+								&::before {
 									transform: rotateY(180deg);
 								}
 							}
 						}
-						&__list{
+
+						&__list {
 							max-height: 10000px;
-							&[data-children='0']{ max-height: 0px; }
-							&[data-children='1']{ max-height: 50px; }
-							&[data-children='2']{ max-height: 100px; }
-							&[data-children='3']{ max-height: 150px; }
-							&[data-children='4']{ max-height: 200px; }
-							&[data-children='5']{ max-height: 250px; }
-							&[data-children='6']{ max-height: 300px; }
-							&[data-children='7']{ max-height: 350px; }
-							&[data-children='8']{ max-height: 400px; }
-							&[data-children='9']{ max-height: 450px; }
-							&[data-children='10']{ max-height: 500px; }
-							&[data-children='11']{ max-height: 550px; }
-							&[data-children='12']{ max-height: 600px; }
-							&[data-children='13']{ max-height: 650px; }
-							&[data-children='14']{ max-height: 700px; }
+
+							&[data-children='0'] {
+								max-height: 0px;
+							}
+
+							&[data-children='1'] {
+								max-height: 50px;
+							}
+
+							&[data-children='2'] {
+								max-height: 100px;
+							}
+
+							&[data-children='3'] {
+								max-height: 150px;
+							}
+
+							&[data-children='4'] {
+								max-height: 200px;
+							}
+
+							&[data-children='5'] {
+								max-height: 250px;
+							}
+
+							&[data-children='6'] {
+								max-height: 300px;
+							}
+
+							&[data-children='7'] {
+								max-height: 350px;
+							}
+
+							&[data-children='8'] {
+								max-height: 400px;
+							}
+
+							&[data-children='9'] {
+								max-height: 450px;
+							}
+
+							&[data-children='10'] {
+								max-height: 500px;
+							}
+
+							&[data-children='11'] {
+								max-height: 550px;
+							}
+
+							&[data-children='12'] {
+								max-height: 600px;
+							}
+
+							&[data-children='13'] {
+								max-height: 650px;
+							}
+
+							&[data-children='14'] {
+								max-height: 700px;
+							}
 						}
 					}
 				}
 
-				&__bullet{
+				&__bullet {
 					position: absolute;
 					display: block;
 					right: 10px;
 					top: 0;
 					width: 60px;
-					height: var(--navAccordionHeight);
+					height: $navAccordionHeight;
 					cursor: pointer;
 					opacity: 0;
 					transition: transform 0.35s, opacity 0.35s;
 					transform: translate(-20px,0);
 
-					&__icon{
+					&__icon {
 						position: absolute;
 						display: block;
 						top: 50%;
@@ -170,7 +216,7 @@
 						margin: -18px 0 0 -18px;
 						cursor: pointer;
 						border-radius: 50%;
-						background: var(--navAccordion0IconColor);
+						background: $navAccordion0IconColor;
 						transform: rotate(90deg);
 
 						&::before {
@@ -188,20 +234,20 @@
 					}
 				}
 
-				&__link{
+				&__link {
 					position: relative;
-					color: var(--navAccordion0FontColor);
+					color: $navAccordion0FontColor;
 					display: block;
 					font-size: 1.7rem;
 					font-weight: normal;
-					line-height: calc(var(--navAccordionHeight) - 6);
+					line-height: calc(#{$navAccordionHeight} - 6);
 					text-decoration: none;
 					text-transform: uppercase;
 					padding: 6px 0 0;
 					margin: 0 0 0 70px;
 				}
 
-				&__line{
+				&__line {
 					position: absolute;
 					display: block;
 					top: 100%;
@@ -214,7 +260,7 @@
 					border: none;
 					transition: transform 0.35s;
 
-					&::before, &::after{
+					&::before, &::after {
 						content: "";
 						position: absolute;
 						display: block;
@@ -222,36 +268,36 @@
 						height: 100%;
 					}
 
-					&::before{
+					&::before {
 						left: 15%;
 						right: auto;
-						background: linear-gradient(to right, var(--navAccordion0SpacerTransparent), var(--navAccordion0SpacerColor));
+						background: linear-gradient(to right, $navAccordion0SpacerTransparent, $navAccordion0SpacerColor);
 					}
 
-					&::after{
+					&::after {
 						left: auto;
 						right: 15%;
-						background: linear-gradient(to right, var(--navAccordion0SpacerColor), var(--navAccordion0SpacerTransparent));
+						background: linear-gradient(to right, $navAccordion0SpacerColor, $navAccordion0SpacerTransparent);
 					}
 				}
 
-				&__list{
+				&__list {
 					display: block;
 					transition: transform 0.35s, max-height 0.35s;
 					margin: 0;
 					overflow: hidden;
 					max-height: 0px;
 
-					&__item{
+					&__item {
 						position: relative;
-						line-height: var(--navAccordionSubHeight);
-						background: var(--navAccordion1Background);
+						line-height: $navAccordionSubHeight;
+						background: $navAccordion1Background;
 
-						&__input{
+						&__input {
 							position: absolute;
 							top: 0;
 							right: 0;
-							height: var(--navAccordionSubHeight);
+							height: $navAccordionSubHeight;
 							width: 90px;
 							z-index: 2;
 							opacity: 0;
@@ -261,28 +307,29 @@
 							border: none;
 							background: transparent;
 
-							&:checked ~ .header__nav__list__item__list__item{
-								&__bullet{
-									& .header__nav__list__item__list__item__bullet__icon{
+							&:checked ~ .header__nav__list__item__list__item {
+								&__bullet {
+									& .header__nav__list__item__list__item__bullet__icon {
 										transform: rotate(-180deg);
 									}
 								}
-								&__list{
+
+								&__list {
 									max-height: 500px;
 								}
 							}
 						}
 
-						&__bullet{
+						&__bullet {
 							right: 45px;
 							width: 50px;
-							height: var(--navAccordionSubHeight);
+							height: $navAccordionSubHeight;
 							position: absolute;
 							display: block;
 							top: 0;
 							cursor: pointer;
 
-							&__icon{
+							&__icon {
 								position: absolute;
 								display: block;
 								left: 50%;
@@ -290,12 +337,12 @@
 								width: 24px;
 								height: 24px;
 								margin: -12px 0 0 -12px;
-								background: var(--navAccordion1IconColor);
+								background: $navAccordion1IconColor;
 								cursor: pointer;
 								border-radius: 50%;
 								transition: transform 0.35s;
 
-								&::before, &::after{
+								&::before, &::after {
 									content: "⥂";
 									position: absolute;
 									display: block;
@@ -304,33 +351,33 @@
 									width: 12px;
 									height: 4px;
 									margin: 0 0 0 -6px;
-									background: var(--navAccordion1IconBackground);
+									background: $navAccordion1IconBackground;
 								}
 
-								&::before{
+								&::before {
 									transform: rotate(45deg) translate(4px, 8px);
 								}
 
-								&::after{
+								&::after {
 									transform: rotate(-45deg) translate(-4px, 8px);
 								}
 							}
 						}
 
-						&__link{
+						&__link {
 							position: relative;
 							display: block;
 							margin: 0 0 0 95px;
 							padding: 4px 0 0;
 							font-size: 1rem;
-							line-height: calc(var(--navAccordionSubHeight) - 4);
+							line-height: calc(#{$navAccordionSubHeight} - 4);
 							font-weight: normal;
 							text-decoration: none;
 							text-transform: uppercase;
-							color: var(--navAccordion1FontColor);
+							color: $navAccordion1FontColor;
 						}
 
-						&__line{
+						&__line {
 							position: absolute;
 							display: block;
 							top: 0;
@@ -343,7 +390,7 @@
 							border: none;
 							transition: transform 0.35s;
 
-							&::before, &::after{
+							&::before, &::after {
 								content: "";
 								position: absolute;
 								display: block;
@@ -351,49 +398,49 @@
 								height: 100%;
 							}
 
-							&::before{
+							&::before {
 								left: 15%;
 								right: auto;
-								background: linear-gradient(to right, var(--navAccordion1SpacerTransparent), var(--navAccordion1SpacerColor));
+								background: linear-gradient(to right, $navAccordion1SpacerTransparent, $navAccordion1SpacerColor);
 							}
 
-							&::after{
+							&::after {
 								left: auto;
 								right: 15%;
-								background: linear-gradient(to right, var(--navAccordion1SpacerColor), var(--navAccordion1SpacerTransparent));
+								background: linear-gradient(to right, $navAccordion1SpacerColor, $navAccordion1SpacerTransparent);
 							}
 						}
 
-						&__list{
+						&__list {
 							display: block;
 							transition: transform 0.35s;
 							margin: 0;
 							overflow: hidden;
 							max-height: 0px;
 
-							&__item{
+							&__item {
 								position: relative;
-								line-height: var(--navAccordionSubHeight);
-								background: var(--navAccordion2Background);
+								line-height: $navAccordionSubHeight;
+								background: $navAccordion2Background;
 
-								&__input, &__bullet{
+								&__input, &__bullet {
 									display: none;
 								}
 
-								&__link{
+								&__link {
 									position: relative;
 									display: block;
 									margin: 0 0 0 95px;
 									padding: 4px 0 0;
 									font-size: 1rem;
-									line-height: calc(var(--navAccordionSubHeight) - 4);
+									line-height: calc(#{$navAccordionSubHeight} - 4);
 									font-weight: normal;
 									text-decoration: none;
 									text-transform: uppercase;
-									color: var(--navAccordion2FontColor);
+									color: $navAccordion2FontColor;
 								}
 
-								&__line{
+								&__line {
 									position: absolute;
 									display: block;
 									top: 0;
@@ -406,7 +453,7 @@
 									border: none;
 									transition: transform 0.35s;
 
-									&::before, &::after{
+									&::before, &::after {
 										content: "";
 										position: absolute;
 										display: block;
@@ -414,24 +461,24 @@
 										height: 100%;
 									}
 
-									&::before{
+									&::before {
 										left: 15%;
 										right: auto;
-										background: linear-gradient(to right, var(--navAccordion1SpacerTransparent), var(--navAccordion1SpacerColor));
+										background: linear-gradient(to right, $navAccordion1SpacerTransparent, $navAccordion1SpacerColor);
 									}
 
-									&::after{
+									&::after {
 										left: auto;
 										right: 15%;
-										background: linear-gradient(to right, var(--navAccordion1SpacerColor), var(--navAccordion1SpacerTransparent));
+										background: linear-gradient(to right, $navAccordion1SpacerColor, $navAccordion1SpacerTransparent);
 									}
 								}
 							}
 						}
 
-						&:first-child{
-							& .header__nav__list__item__list__item{
-								&__line{
+						&:first-child {
+							& .header__nav__list__item__list__item {
+								&__line {
 									display: none;
 								}
 							}
@@ -439,16 +486,16 @@
 					}
 				}
 
-				&:last-child{
-					& .header__nav__list__item__line{
+				&:last-child {
+					& .header__nav__list__item__line {
 						display: none;
 					}
 				}
 			}
 		}
 
-		&__input{
-			&--on, &--off{
+		&__input {
+			&--on, &--off {
 				margin: 0;
 				padding: 0;
 				border: none;
@@ -462,50 +509,50 @@
 				opacity: 0;
 				z-index: 98;
 				display: none;
-                transition: transform 0.35s;
-                transform: translate(0, 0px);
+				transition: transform 0.35s;
+				transform: translate(0, 0px);
 			}
 
-			&--on{
+			&--on {
 				display: block;
 
-				&:checked ~ .header__nav{
+				&:checked ~ .header__nav {
 					transform: scale(1.0, 1.0);
 					opacity: 1;
 
-					&__input{
+					&__input {
 						display: none;
 
-						&--off{
+						&--off {
 							display: block;
 							z-index: 99;
 						}
 					}
 
-					&__close{
+					&__close {
 						animation: showClose 0.35s cubic-bezier(0.77,0.2,0.05,1.0) forwards;
 					}
 
-					&__icon{
+					&__icon {
 						transition: transform 0.5s;
 
-						& .header__nav__icon__line{
+						& .header__nav__icon__line {
 							opacity: 1;
 
-							&--num1{
+							&--num1 {
 								animation-name: burgerMenuTopToRotated;
 								animation-duration: 0.35s;
 								animation-fill-mode: forwards;
 							}
 
-							&--num2{
+							&--num2 {
 								opacity: 0;
 								left: 50%;
 								width: 0%;
 								position: relative;
 							}
 
-							&--num3{
+							&--num3 {
 								animation-name: burgerMenuBottomToRotated;
 								animation-duration: 0.35s;
 								animation-fill-mode: forwards;
@@ -513,35 +560,178 @@
 						}
 					}
 
-					& .header__nav__list{
-						&__item{
+					& .header__nav__list {
+						&__item {
 							transition-delay: 0.15s;
 							transform: translate(0%, 0);
 
-							.header__nav__list__item__bullet{
+							.header__nav__list__item__bullet {
 								transform: translate(0,0);
 							}
 
-							&:nth-child(1){ transition-delay: 0.15s; & .header__nav__list__item__bullet{ transition-delay: .55s; transform: translate(0,0); } }
-							&:nth-child(2){ transition-delay: 0.20s; & .header__nav__list__item__bullet{ transition-delay: .60s; transform: translate(0,0); } }
-							&:nth-child(3){ transition-delay: 0.25s; & .header__nav__list__item__bullet{ transition-delay: .65s; transform: translate(0,0); } }
-							&:nth-child(4){ transition-delay: 0.30s; & .header__nav__list__item__bullet{ transition-delay: .70s; transform: translate(0,0); } }
-							&:nth-child(5){ transition-delay: 0.35s; & .header__nav__list__item__bullet{ transition-delay: .75s; transform: translate(0,0); } }
-							&:nth-child(6){ transition-delay: 0.40s; & .header__nav__list__item__bullet{ transition-delay: .80s; transform: translate(0,0); } }
-							&:nth-child(7){ transition-delay: 0.45s; & .header__nav__list__item__bullet{ transition-delay: .85s; transform: translate(0,0); } }
-							&:nth-child(8){ transition-delay: 0.50s; & .header__nav__list__item__bullet{ transition-delay: .90s; transform: translate(0,0); } }
-							&:nth-child(9){ transition-delay: 0.55s; & .header__nav__list__item__bullet{ transition-delay: .95s; transform: translate(0,0); } }
-							&:nth-child(10){ transition-delay: 0.60s; & .header__nav__list__item__bullet{ transition-delay: 1.00s; transform: translate(0,0); } }
-							&:nth-child(11){ transition-delay: 0.65s; & .header__nav__list__item__bullet{ transition-delay: 1.05s; transform: translate(0,0); } }
-							&:nth-child(12){ transition-delay: 0.70s; & .header__nav__list__item__bullet{ transition-delay: 1.10s; transform: translate(0,0); } }
-							&:nth-child(13){ transition-delay: 0.75s; & .header__nav__list__item__bullet{ transition-delay: 1.15s; transform: translate(0,0); } }
-							&:nth-child(14){ transition-delay: 0.80s; & .header__nav__list__item__bullet{ transition-delay: 1.20s; transform: translate(0,0); } }
-							&:nth-child(15){ transition-delay: 0.85s; & .header__nav__list__item__bullet{ transition-delay: 1.25s; transform: translate(0,0); } }
-							&:nth-child(16){ transition-delay: 0.90s; & .header__nav__list__item__bullet{ transition-delay: 1.30s; transform: translate(0,0); } }
-							&:nth-child(17){ transition-delay: 0.95s; & .header__nav__list__item__bullet{ transition-delay: 1.35s; transform: translate(0,0); } }
-							&:nth-child(18){ transition-delay: 1s; & .header__nav__list__item__bullet{ transition-delay: 1.40s; transform: translate(0,0); } }
+							&:nth-child(1) {
+								transition-delay: 0.15s;
 
-							&__bullet{
+								& .header__nav__list__item__bullet {
+									transition-delay: .55s;
+									transform: translate(0,0);
+								}
+							}
+
+							&:nth-child(2) {
+								transition-delay: 0.20s;
+
+								& .header__nav__list__item__bullet {
+									transition-delay: .60s;
+									transform: translate(0,0);
+								}
+							}
+
+							&:nth-child(3) {
+								transition-delay: 0.25s;
+
+								& .header__nav__list__item__bullet {
+									transition-delay: .65s;
+									transform: translate(0,0);
+								}
+							}
+
+							&:nth-child(4) {
+								transition-delay: 0.30s;
+
+								& .header__nav__list__item__bullet {
+									transition-delay: .70s;
+									transform: translate(0,0);
+								}
+							}
+
+							&:nth-child(5) {
+								transition-delay: 0.35s;
+
+								& .header__nav__list__item__bullet {
+									transition-delay: .75s;
+									transform: translate(0,0);
+								}
+							}
+
+							&:nth-child(6) {
+								transition-delay: 0.40s;
+
+								& .header__nav__list__item__bullet {
+									transition-delay: .80s;
+									transform: translate(0,0);
+								}
+							}
+
+							&:nth-child(7) {
+								transition-delay: 0.45s;
+
+								& .header__nav__list__item__bullet {
+									transition-delay: .85s;
+									transform: translate(0,0);
+								}
+							}
+
+							&:nth-child(8) {
+								transition-delay: 0.50s;
+
+								& .header__nav__list__item__bullet {
+									transition-delay: .90s;
+									transform: translate(0,0);
+								}
+							}
+
+							&:nth-child(9) {
+								transition-delay: 0.55s;
+
+								& .header__nav__list__item__bullet {
+									transition-delay: .95s;
+									transform: translate(0,0);
+								}
+							}
+
+							&:nth-child(10) {
+								transition-delay: 0.60s;
+
+								& .header__nav__list__item__bullet {
+									transition-delay: 1.00s;
+									transform: translate(0,0);
+								}
+							}
+
+							&:nth-child(11) {
+								transition-delay: 0.65s;
+
+								& .header__nav__list__item__bullet {
+									transition-delay: 1.05s;
+									transform: translate(0,0);
+								}
+							}
+
+							&:nth-child(12) {
+								transition-delay: 0.70s;
+
+								& .header__nav__list__item__bullet {
+									transition-delay: 1.10s;
+									transform: translate(0,0);
+								}
+							}
+
+							&:nth-child(13) {
+								transition-delay: 0.75s;
+
+								& .header__nav__list__item__bullet {
+									transition-delay: 1.15s;
+									transform: translate(0,0);
+								}
+							}
+
+							&:nth-child(14) {
+								transition-delay: 0.80s;
+
+								& .header__nav__list__item__bullet {
+									transition-delay: 1.20s;
+									transform: translate(0,0);
+								}
+							}
+
+							&:nth-child(15) {
+								transition-delay: 0.85s;
+
+								& .header__nav__list__item__bullet {
+									transition-delay: 1.25s;
+									transform: translate(0,0);
+								}
+							}
+
+							&:nth-child(16) {
+								transition-delay: 0.90s;
+
+								& .header__nav__list__item__bullet {
+									transition-delay: 1.30s;
+									transform: translate(0,0);
+								}
+							}
+
+							&:nth-child(17) {
+								transition-delay: 0.95s;
+
+								& .header__nav__list__item__bullet {
+									transition-delay: 1.35s;
+									transform: translate(0,0);
+								}
+							}
+
+							&:nth-child(18) {
+								transition-delay: 1s;
+
+								& .header__nav__list__item__bullet {
+									transition-delay: 1.40s;
+									transform: translate(0,0);
+								}
+							}
+
+							&__bullet {
 								opacity: 1;
 							}
 						}
@@ -551,42 +741,42 @@
 		}
 	}
 
-    &.is-hidden{
-        & .header__nav{
-            &__input--on:checked{
-                & ~ .header__nav__input--off, & ~ .header__nav__icon {
-                    transform: translate(0, 75px);
-                }
-            }
-        }
-    }
+	&.is-hidden {
+		& .header__nav {
+			&__input--on:checked {
+				& ~ .header__nav__input--off, & ~ .header__nav__icon {
+					transform: translate(0, 75px);
+				}
+			}
+		}
+	}
 }
 
-.main{
-	&__article{
-		&__nav{
+.main {
+	&__article {
+		&__nav {
 			position: relative;
 			display: block;
 			padding: 10px;
 
-			&__link{
+			&__link {
 				position: relative;
 				display: block;
 				float: left;
 				width: 98%;
 				height: 150px;
-				background: var(--navMainBackground);
-				color: var(--navMainFontColor);
+				background: $navMainBackground;
+				color: $navMainFontColor;
 				margin: 0 1% 10px;
 				text-decoration: none;
 
-				&:active, &:visited{
-					background: var(--navMainBackground);
-					color: var(--navMainFontColor);
+				&:active, &:visited {
+					background: $navMainBackground;
+					color: $navMainFontColor;
 				}
 			}
 
-			&__title{
+			&__title {
 				display: block;
 				padding: 14px 7px 8px 20px;
 				font-weight: bold;
@@ -594,7 +784,7 @@
 				font-weight: normal;
 			}
 
-			&__text{
+			&__text {
 				display: block;
 				padding: 0 7px 0 30px;
 				font-size: 0.9rem;
@@ -602,7 +792,7 @@
 				font-weight: normal;
 			}
 
-			&__note{
+			&__note {
 				position: absolute;
 				bottom: 4px;
 				right: 9px;
@@ -614,7 +804,7 @@
 	}
 }
 
-@media (--mobilePortrait) {
+@media #{$mobilePortrait} {
 	.main{
 		&__article{
 			&__nav{
@@ -625,7 +815,7 @@
 		}
 	}
 }
-@media (--tabletPortrait) {
+@media #{$tabletPortrait} {
 	.main{
 		&__article{
 			&__nav{
@@ -636,7 +826,7 @@
 		}
 	}
 }
-@media (--desktop) {
+@media #{$desktop} {
 	.main{
 		&__article{
 			&__nav{
@@ -647,7 +837,7 @@
 		}
 	}
 }
-@media (--desktopLarge) {
+@media #{$desktopLarge} {
 	.main{
 		&__article{
 			&__nav{

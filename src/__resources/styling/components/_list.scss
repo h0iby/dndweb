@@ -15,7 +15,7 @@
 			&__info{
 				display: block;
 				margin: 0 0 3px;
-				color: var(--fontColor);
+				color: $fontColor;
 				font-size: 0.9rem;
 				line-height: 1.1rem;
 			}
@@ -39,30 +39,30 @@
 	}
 }
 
-@media (--tabletLandscape) {
-	.list{
+@media #{$tabletLandscape} {
+	.list {
 		padding: 0 0 0 4px;
 
-		&__item{
+		&__item {
 			display: inline-block;
 			margin: 0 0 0 -4px;
 
-			&__link{
+			&__link {
 				display: inline-block;
 
-				&__info{
+				&__info {
 					display: inline-block;
 					margin: 0 0 0 2px;
 				}
 
-				&::after{
+				&::after {
 					content: ",";
 					display: inline-block;
 					padding: 0;
 					margin: 0 10px 0 0;
 					transform: none;
 					transition: none;
-					color: var(--fontColor);
+					color: $fontColor;
 				}
 			}
 		}

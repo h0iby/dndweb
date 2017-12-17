@@ -19,11 +19,6 @@
 /**/
 
 /* components */
-@import 'components/_buttons';
-@import 'components/_dropdowns';
-@import 'components/_inputs';
-/**/
-
 @import 'components/_loader';
 @import 'components/_spinner';
 @import 'components/_breadcrumb';
@@ -38,5 +33,9 @@
 @import 'elements/_header';
 @import 'elements/_footer';
 @import 'elements/_navigation';
+/**/
+@import 'elements/_buttons';
+@import 'elements/_dropdowns';
+@import 'elements/_inputs';
 /**/
 

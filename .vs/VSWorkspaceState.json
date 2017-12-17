@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\_assets",
+    "\\src\\_assets\\css",
+    "\\src\\__resources",
+    "\\src\\__resources\\styling",
+    "\\src\\__resources\\styling\\components",
+    "\\src\\__resources\\styling\\elements",
+    "\\src\\__resources\\styling\\fonts",
+    "\\src\\__resources\\styling\\mixins"
+  ],
+  "SelectedNode": "\\src\\__resources\\styling\\main.scss",
+  "PreviewInSolutionExplorer": false
+}

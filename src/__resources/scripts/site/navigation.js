@@ -25,20 +25,25 @@ var dnd = dnd || {};
 	}
 	var topNav = function(){
 		var scrollPos = 0;
-        var timeout;
+        var resizeTimer;
         var header = document.getElementById("Header");
         var headerHeight = header.offsetHeight + 5;
 
-        window.onscroll = function() {
-            if(window.pageYOffset < scrollPos){
-                header.classList.remove("is-hidden");
-            } else {
-				if(!document.getElementById("navigationOn").checked){
-                	header.classList.add("is-hidden");
+		window.addEventListener('scroll', function(){
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(function () {
+				if(window.pageYOffset < scrollPos){
+					header.classList.remove("is-hidden");
+				} else {
+					if(!document.getElementById("navigationOn").checked){
+						header.classList.add("is-hidden");
+					}
 				}
-            }
-            scrollPos = window.pageYOffset;
-        };
+				scrollPos = window.pageYOffset;
+				dnd.vars.scollPos = Math.floor(scrollPos);
+				localStorage.setItem("scrollPos", Math.floor(scrollPos));
+			}, 100);
+		});
 	}
 	dnd.loader = function(mode){
 		var loader = dnd.selector("#Loader");

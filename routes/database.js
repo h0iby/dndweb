@@ -7,7 +7,6 @@ var path = require('path')
 
 module.exports = {
     setup: (app, item, html) => {
-		console.log("Registering endpoint: " + item.path);
 		app.get(item.path, (req, res) => {
 			var current = html;
 
@@ -77,7 +76,6 @@ module.exports = {
 			}
 
 			var serviceRequest = function(){
-                console.log(serverPath);
 				var xhr = new XMLHttpRequest();
 				xhr.onreadystatechange = function(err) {
 					if (this.readyState === 4) { serviceCallback(this.responseText); }

@@ -6,7 +6,8 @@
 	width: 100%;
 	order: 1;
 	z-index: 3;
-	flex-shrink: 0;
+	//grid-area: header;
+	flex: 0 0 70px;
 	background: $backgroundHeader 50% 0 repeat-x;
 	box-shadow: -5px -15px 25px 15px $shadow;
 	transition: transform 0.35s;

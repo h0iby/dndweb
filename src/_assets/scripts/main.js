@@ -146,20 +146,25 @@ var dnd = dnd || {};
 	}
 	var topNav = function(){
 		var scrollPos = 0;
-        var timeout;
+        var resizeTimer;
         var header = document.getElementById("Header");
         var headerHeight = header.offsetHeight + 5;
 
-        window.onscroll = function() {
-            if(window.pageYOffset < scrollPos){
-                header.classList.remove("is-hidden");
-            } else {
-				if(!document.getElementById("navigationOn").checked){
-                	header.classList.add("is-hidden");
+		window.addEventListener('scroll', function(){
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(function () {
+				if(window.pageYOffset < scrollPos){
+					header.classList.remove("is-hidden");
+				} else {
+					if(!document.getElementById("navigationOn").checked){
+						header.classList.add("is-hidden");
+					}
 				}
-            }
-            scrollPos = window.pageYOffset;
-        };
+				scrollPos = window.pageYOffset;
+				dnd.vars.scollPos = Math.floor(scrollPos);
+				localStorage.setItem("scrollPos", Math.floor(scrollPos));
+			}, 100);
+		});
 	}
 	dnd.loader = function(mode){
 		var loader = dnd.selector("#Loader");
@@ -278,6 +283,11 @@ var dnd = dnd || {};
 	"use strict";
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
+
+	var templateScroll = function(){
+		window.scroll(0,dnd.vars.scollPos);
+	}
+
 	var templateClear = function(item){
 		item.innerHTML = "";
 	}
@@ -364,6 +374,10 @@ var dnd = dnd || {};
 			}
 		});
 		item.innerHTML = itemHtml;
+
+		if(isList && item.classList.contains("-js-list")){
+			templateScroll();
+		}
 	}
 	var templateInit = function(item, data){
 		var template = document.getElementById(item.classList[1].replace("-js-",""));
@@ -651,7 +665,7 @@ var dnd = dnd || {};
 			timeout = 250,
         	timer;
 
-        window.onscroll = function() {
+		window.addEventListener('scroll', function(){
 			var body = document.body,
     			html = document.documentElement,
 				offSet = 500;
@@ -678,7 +692,7 @@ var dnd = dnd || {};
 				}, timeout);
             }
             scrollPos = window.pageYOffset;
-        };
+        });
 	}
 	dnd.filters = function(amount){
 		filterPageAmount(amount);
@@ -846,6 +860,8 @@ var dnd = dnd || {};
     dnd.vars.localstorage = false;
     dnd.vars.indexeddb = false;
 	dnd.vars.modern = false;
+	dnd.vars.listrun = false;
+	dnd.vars.scollPos = localStorage.getItem("scrollPos");
 	window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 	window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
 	window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange

@@ -31,6 +31,7 @@ var serviceCallback = function(data){
 		templateLogo = path.join(__dirname+''+htmlTemplatesPath+'/logo.html'),
 		templateSearch = path.join(__dirname+''+htmlTemplatesPath+'/search.html'),
 		templateOverlay = path.join(__dirname+''+htmlTemplatesPath+'/overlay.html'),
+		templateScripts = path.join(__dirname+''+htmlTemplatesPath+'/scripts.html'),
 		templatePaging = path.join(__dirname+''+htmlTemplatesPath+'/paging.html'),
 		templatePager = path.join(__dirname+''+htmlTemplatesPath+'/pager.html'),
 		templatePage = path.join(__dirname+''+htmlTemplatesPath+'/index.html');
@@ -44,6 +45,7 @@ var serviceCallback = function(data){
 		fileLogo = fs.readFileSync(templateLogo).toString(),
 		fileSearch = fs.readFileSync(templateSearch).toString(),
 		fileOverlay = fs.readFileSync(templateOverlay).toString(),
+		fileScripts = fs.readFileSync(templateScripts).toString(),
 		filePaging = fs.readFileSync(templatePaging).toString(),
 		filePager = fs.readFileSync(templatePager).toString(),
 		filePage = fs.readFileSync(templatePage).toString();
@@ -115,6 +117,7 @@ var serviceCallback = function(data){
 	html = html.replace("#SEARCH#", fileSearch);
 	html = html.replace("#FOOTER#", fileFooter);
 	html = html.replace("#OVERLAY#", fileOverlay);
+	html = html.replace("#SCRIPTS#", fileScripts);
 
 
 
@@ -125,7 +128,6 @@ var serviceCallback = function(data){
 	// create endpoints for data
 	jsonData.forEach(function(item, i){
 		if(item.render){
-			console.log("item", item);
 			var current = html,
 				pathMain = '' + item.path.replace(':rid', 'rid').replace(':sid', 'sid') + '.html',
 				templateMain = path.join(__dirname+''+htmlPagesPath+'/endpoints' + pathMain + ''),
@@ -143,8 +145,30 @@ var serviceCallback = function(data){
 	});
 
 	// create endpoint for character
-	console.log("Registering endpoint: /character");
 	app.get('/character', (req, res) => {
+		var current = html,
+			templateMain = path.join(__dirname+''+htmlPagesPath+'/characters.html'),
+			fileMain = fs.readFileSync(templateMain).toString();
+
+		var repData = true,
+			repAlias = null,
+			repPath = null,
+			repRobots = "noindex follow",
+			repTitle = "D&amp;D: Search",
+			repDescription = "Search for D&amp;D feats, classes, spells and more here.",
+			repKeywords = "D&amp;D, DnD, dndtools, feats, spells, classes",
+			repUrl = "/search",
+			repType = "search";
+
+		fileMain = fileMain.replace("#PAGING#", filePaging).replace("#PAGING#", filePaging);
+		fileMain = fileMain.replace("#PAGER#", filePager).replace("#LOADMORE#", filePager);
+		current = current.replace("#HEAD#", fileHead);
+		current = htmlReplacements(current, fileMain, repAlias, repPath, repData, repRobots, repTitle, repDescription, repKeywords, repUrl, repType);
+		res.send(current);
+	});
+
+	// create endpoint for specific character
+	app.get('/character/*', (req, res) => {
 		var current = html,
 			templateMain = path.join(__dirname+''+htmlPagesPath+'/character.html'),
 			fileMain = fs.readFileSync(templateMain).toString();
@@ -167,7 +191,6 @@ var serviceCallback = function(data){
 	});
 
 	// create endpoint for search
-	console.log("Registering endpoint: /search");
 	app.get('/search', (req, res) => {
 		var current = html,
 			templateMain = path.join(__dirname+''+htmlPagesPath+'/default.html'),
@@ -191,7 +214,6 @@ var serviceCallback = function(data){
 	});
 
 	// create endpoint for home
-	console.log("Registering endpoint: /");
 	app.get('/', (req, res) => {
 		var current = html,
 			templateMain = path.join(__dirname+''+htmlPagesPath+'/default.html'),
@@ -288,7 +310,6 @@ var serviceCallback = function(data){
 
 // service request - with callback when done.
 var serviceRequest = function(){
-    console.log(serverPath + "/endpoints");
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 		if (this.readyState === 4) { serviceCallback(this.responseText); }

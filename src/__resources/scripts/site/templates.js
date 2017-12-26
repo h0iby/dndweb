@@ -3,6 +3,11 @@ var dnd = dnd || {};
 	"use strict";
 	dnd.vars = dnd.vars || {};
 	dnd.service = dnd.service || {};
+
+	var templateScroll = function(){
+		window.scroll(0,dnd.vars.scollPos);
+	}
+
 	var templateClear = function(item){
 		item.innerHTML = "";
 	}
@@ -89,6 +94,10 @@ var dnd = dnd || {};
 			}
 		});
 		item.innerHTML = itemHtml;
+
+		if(isList && item.classList.contains("-js-list")){
+			templateScroll();
+		}
 	}
 	var templateInit = function(item, data){
 		var template = document.getElementById(item.classList[1].replace("-js-",""));

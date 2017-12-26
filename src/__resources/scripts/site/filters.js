@@ -238,7 +238,7 @@ var dnd = dnd || {};
 			timeout = 250,
         	timer;
 
-        window.onscroll = function() {
+		window.addEventListener('scroll', function(){
 			var body = document.body,
     			html = document.documentElement,
 				offSet = 500;
@@ -265,7 +265,7 @@ var dnd = dnd || {};
 				}, timeout);
             }
             scrollPos = window.pageYOffset;
-        };
+        });
 	}
 	dnd.filters = function(amount){
 		filterPageAmount(amount);

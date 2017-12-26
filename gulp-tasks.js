@@ -91,7 +91,7 @@ gulp.task("watch-build", function () {
 
 
 // css
-gulp.task("styles", ["css"]);//, "css-print"
+gulp.task("styles", ["css", "css-print"]);//, 
 // /////////////////////////////////////////
 
 // css general
@@ -104,31 +104,17 @@ gulp.task("css", function () {
 			}))
 			.pipe(gulp.dest(Folders.target.styles))
 	)
-	/*
-	return (
-		gulp.src(gulp.srcFolders.source.styles + "/main.scss")
-			.pipe(sass([
-				cssnano()
-			]))
-			.pipe(gulp.dest(Folders.target.styles))
-	)
-	*/
-	/*
-	return (
-	gulp.src(Folders.source.styles + "/main.css")
-		.pipe(postcss([
-			postcssimport(),
-			postcssurl(),
-			postcsscssnext(),
-			cssnano()
-		]))
-		.pipe(gulp.dest(Folders.target.styles))
-	)
-	*/
 });
 // css print
 gulp.task("css-print", function () {
-	
+	return (
+		gulp.src(Folders.source.styles + "/print.scss")
+			.pipe(sass())
+			.pipe(cssnano({
+				autoprefixer: { browsers: supported, add: true }
+			}))
+			.pipe(gulp.dest(Folders.target.styles))
+	)
 });
 // /////////////////////////////////////////
 

@@ -2,20 +2,22 @@
     &__item{
         margin: 5px 0;
         position: relative;
+        box-sizing: border-box;
 
         &__text{
             position: relative;
             display: block;
+            box-sizing: border-box;
             font-size: 1.3rem;
             line-height: 2rem;
             overflow: hidden;
             margin: -2px 0 0;
+            padding: 0 8px;
 
             em{
                 font-size: 1rem;
                 letter-spacing: 1px;
             }
-
             &::before, &::after{
                 content: "";
                 position: absolute;
@@ -33,15 +35,25 @@
                 transform: translate(100%, 0);
             }
         }
+        &__input, &__select, &__output, &__output span, &__output em {
+            font-size: 0.9rem;
+            line-height: 1.4rem;
+            @include LanguageFontDefault();
+            color: $characterFontColor;
+        }
         &__input, &__select, &__output{
             position: relative;
             display: block;
             border: none;
+            box-sizing: border-box;
+            height: auto;
             width: 100%;
             border-bottom: solid 2px $characterBorderColor;
             background: transparent;
             outline: none;
             appearance: none;
+            margin: 0;
+            padding: 0 8px;
         }
         &__input, &__select{
             &:focus{
@@ -60,38 +72,94 @@
                 appearance: none;
             }
         }
-        &__input, &__select, &__output, &__output span, &__output {
-            font-size: 0.9rem;
-            line-height: 2rem;
-            margin: 0;
-            padding: 0;
-            @include LanguageFontDefault();
-            color: $characterFontColor;
-        }
         &__output{
             span{
                 em{
                     font-size: 0.8rem;
-                    line-height: 2rem;
                 }
             }
         }
     }
 }
 
-@media #{$tabletPortrait} {
+@media #{$mobileLandscape} {
     .character{
         display: flex;
         flex-flow: row wrap;
+        align-items: flex-end;
         /*
         display: grid;
         grid-template-columns: [one] 10% [two] 10% [three] 10% [four] 10% [five] 10% [six] 10% [seven] 10% [eight] 10% [nine] 10% [ten];
         grid-template-rows: auto;
         */
-
         &__item{
-            flex: 1 1 48%;
+            flex: 1 1 33%;
             padding: 0 1%;
+        }
+    }
+}
+
+
+@media #{$tabletPortrait} {
+    .character{
+        &__item{
+            flex: 1 1 25%;
+            padding: 0 1%;
+
+            &--character-name{
+                flex: 0 0 25%;
+            }
+            &--character-alias{
+                flex: 0 0 25%;
+            }
+            &--character-campaign{
+                flex: 0 0 25%;
+            }
+            &--player-name{
+                flex: 0 0 25%;
+            }
+            &--character-alignment{
+                flex: 0 0 25%;
+            }
+            &--character-race{
+                flex: 0 0 25%;
+            }
+            &--character-size{
+                flex: 0 0 20%;
+            }
+            &--character-gender{
+                flex: 0 0 20%;
+            }
+            &--character-age{
+                flex: 0 0 10%;
+            }
+            &--character-xp{
+                flex: 0 0 15%;
+            }
+            &--character-class{
+                flex: 0 0 65%;
+            }
+            &--character-deity{
+                flex: 0 0 20%;
+            }
+            &--character-skin{
+                flex: 0 0 20%;
+            }
+            &--character-hair{
+                flex: 0 0 20%;
+            }
+            &--character-height{
+                flex: 0 0 20%;
+            }
+            &--character-weight{
+                flex: 0 0 20%;
+            }
+            &--character-eyes{
+                flex: 0 0 20%;
+            }
+            &--character-description{
+                flex: 0 0 100%;
+            }
         }
     }
 }
@@ -107,18 +175,8 @@
         */
 
         &__item{
-            flex: 1 1 auto;
-            padding: 0 1%;
-
-            &--character-name, &--character-campaign, &--player-name{
-                flex: 0 0 31%;
-            }
-            &--character-class{
-                flex: 0 0 31%;
-            }
-            &--character-description{
-                flex: 0 0 98%;
-            }
+            //flex: 1 1 31%;
+            //padding: 0 1%;
         }
     }
 }

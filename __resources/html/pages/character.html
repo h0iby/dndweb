@@ -21,107 +21,108 @@
 			</li>
 		</ol>
 	</div>
-	<div class="section__grid character">
-		<div class="character__item character__item--character-name">
-			<input class="character__item__input -js-character-name" disabled="disabled" type="text" value="Svend Shadowface" />
-			<h3 class="character__item__text">Character Name</h3>
-		</div>
-		<div class="character__item character__item--character-player">
-			<input class="character__item__input -js-character-player" disabled="disabled" type="text" value="Jonas Høiby" />
-			<h3 class="character__item__text">Player Name</h3>
-		</div>
-		<div class="character__item character__item--character-campaign">
-			<input class="character__item__input -js-character-campaign" disabled="disabled" type="text" value="Røde's goodgame" />
-			<h3 class="character__item__text">Campaign</h3>
-		</div>
-
-
-
-
-
-		<div class="character__item character__item--character-class">
-			<p class="character__item__output">
-				<span>Dragon Shaman <em>(3)</em></span>
-				<span>Dragonfire Adept <em>(10)</em></span>
-			</p>
-			<h3 class="character__item__text">Class <em>(Level)</em></h3>
-		</div>
-		<div class="character__item character__item--character-size">
-			<select class="character__item__select -js-character-size" disabled="disabled">
-				<option value="medium" selected="selected">Medium</option>
-			</select>
-			<h3 class="character__item__text">Size</h3>
-		</div>
-		<div class="character__item character__item--character-race">
-			<select class="character__item__select -js-character-race" disabled="disabled">
-				<option value="human" selected="selected">Human</option>
-			</select>
-			<h3 class="character__item__text">Race</h3>
-		</div>
-		<div class="character__item character__item--character-alignment">
-			<select class="character__item__select -js-character-alignment" disabled="disabled">
-				<option value="lg">Lawful Good</option>
-				<option value="ng">Neutral Good</option>
-				<option value="cg">Chaotic Good</option>
-				<option value="ln">Lawful Neutral</option>
-				<option value="tn">True Neutral</option>
-				<option value="cn" selected="selected">Chaotic Neutral</option>
-				<option value="le">Lawful Evil</option>
-				<option value="ne">Neutral Evil</option>
-				<option value="ce">Chaotic Evil</option>
-			</select>
-			<h3 class="character__item__text">Alignment</h3>
-		</div>
-		<div class="character__item character__item--character-deity">
-			<input class="character__item__input -js-character-deity" disabled="disabled" type="text" value="Tamara" />
-			<h3 class="character__item__text">Deity</h3>
-		</div>
-
-
-
-
-
-		<div class="character__item character__item--character-age">
-			<input class="character__item__input -js-character-age" disabled="disabled" type="number" min="1" value="16" />
-			<h3 class="character__item__text">Age</h3>
-		</div>
-		<div class="character__item character__item--character-gender">
-			<select class="character__item__select -js-character-gender" disabled="disabled">
-				<option value="female">Female</option>
-				<option value="male" selected="selected">Male</option>
-			</select>
-			<h3 class="character__item__text">Gender</h3>
-		</div>
-		<div class="character__item character__item--character-hair">
-			<input class="character__item__input -js-character-hair" disabled="disabled" type="text" value="Brown" />
-			<h3 class="character__item__text">Hair</h3>
-		</div>
-		<div class="character__item character__item--character-eyes">
-			<input class="character__item__input -js-character-eyes" disabled="disabled" type="text" value="Green" />
-			<h3 class="character__item__text">Eyes</h3>
-		</div>
-		<div class="character__item character__item--character-height">
-			<input class="character__item__input -js-character-height" disabled="disabled" type="number" min="1" value="16" />
-			<h3 class="character__item__text">Height</h3>
-		</div>
-		<div class="character__item character__item--character-weight">
-			<input class="character__item__input -js-character-weight" disabled="disabled" type="number" min="1" value="16" />
-			<h3 class="character__item__text">Weight</h3>
-		</div>
-		<div class="character__item character__item--character-skin">
-			<input class="character__item__input -js-character-skin" disabled="disabled" type="text" value="Pink" />
-			<h3 class="character__item__text">Skin</h3>
-		</div>
-		<div class="character__item character__item--character-description">
-			<input class="character__item__input -js-character-description" disabled="disabled" type="text" value="Half the body is covered in snakelike scales" />
-			<h3 class="character__item__text">Description</h3>
-		</div>
+	<div class="section__slider slider-container -js-slider">
 		
+		<div class="slider" data-stop-end="true">
+			<div class="slider__item character" data-name="Character">
+				<div class="character__item character__item--character-name">
+					<input class="character__item__input -js-character-name" disabled="disabled" type="text" title="" value="Svend Shadowface" />
+					<h3 class="character__item__text">Character Name</h3>
+				</div>
+				<div class="character__item character__item--character-alias">
+						<input class="character__item__input -js-character-alias" disabled="disabled" type="text" title="" value="Lord Shadowface" />
+						<h3 class="character__item__text">Character Alias</h3>
+					</div>
+				<div class="character__item character__item--player-name">
+					<input class="character__item__input -js-player-name" disabled="disabled" type="text" title="" value="Jonas Høiby" />
+					<h3 class="character__item__text">Player Name</h3>
+				</div>
+				<div class="character__item character__item--character-campaign">
+					<input class="character__item__input -js-character-campaign" disabled="disabled" type="text" title="" value="Røde's goodgame" />
+					<h3 class="character__item__text">Campaign</h3>
+				</div>
 
-		
+				<div class="character__item character__item--character-alignment">
+					<select class="character__item__select -js-character-alignment" disabled="disabled" title="">
+						<option value="lg">Lawful Good</option>
+						<option value="ng">Neutral Good</option>
+						<option value="cg">Chaotic Good</option>
+						<option value="ln">Lawful Neutral</option>
+						<option value="tn">True Neutral</option>
+						<option value="cn" selected="selected">Chaotic Neutral</option>
+						<option value="le">Lawful Evil</option>
+						<option value="ne">Neutral Evil</option>
+						<option value="ce">Chaotic Evil</option>
+					</select><h3 class="character__item__text">Alignment</h3>
+				</div>
+				<div class="character__item character__item--character-race">
+					<select class="character__item__select -js-character-race" disabled="disabled" title="">
+						<option value="human" selected="selected">Human</option>
+					</select><h3 class="character__item__text">Race</h3>
+				</div>
+				<div class="character__item character__item--character-size">
+					<select class="character__item__select -js-character-size" disabled="disabled" title="">
+						<option value="medium" selected="selected">Medium</option>
+					</select>
+					<h3 class="character__item__text">Size</h3>
+				</div>
+				<div class="character__item character__item--character-gender">
+					<select class="character__item__select -js-character-gender" disabled="disabled" title="">
+						<option value="female">Female</option>
+						<option value="male" selected="selected">Male</option>
+					</select>
+					<h3 class="character__item__text">Gender</h3>
+				</div>
+				<div class="character__item character__item--character-age">
+					<input class="character__item__input -js-character-age" disabled="disabled" title="" type="number" min="1" value="16" />
+					<h3 class="character__item__text">Age</h3>
+				</div>
 
+				<div class="character__item character__item--character-xp">
+					<input class="character__item__input -js-character-xp" disabled="disabled" title=""type="number" min="0" value="16000" />
+					<h3 class="character__item__text">XP <em class="-js-character-levelup"></em></h3>
+				</div>
+				<div class="character__item character__item--character-class">
+					<p class="character__item__output" title="Dragon Shaman (3), Dragonfire Adept (10)">
+						<span>Dragon Shaman <em>(3)</em></span>
+						<span>Dragonfire Adept <em>(10)</em></span>
+					</p>
+					<h3 class="character__item__text">Class <em>(Level)</em></h3>
+				</div>
+				<div class="character__item character__item--character-deity">
+					<input class="character__item__input -js-character-deity" disabled="disabled" title="" type="text" value="Tamara" />
+					<h3 class="character__item__text">Deity</h3>
+				</div>
 
-		
+				<div class="character__item character__item--character-skin">
+					<input class="character__item__input -js-character-skin" disabled="disabled" title="" type="text" value="Pink" />
+					<h3 class="character__item__text">Skin</h3>
+				</div>
+				<div class="character__item character__item--character-hair">
+					<input class="character__item__input -js-character-hair" disabled="disabled" title="" type="text" value="Brown" />
+					<h3 class="character__item__text">Hair</h3>
+				</div>
+				<div class="character__item character__item--character-height">
+					<input class="character__item__input -js-character-height" disabled="disabled" title="" type="number" min="1" value="16" />
+					<h3 class="character__item__text">Height</h3>
+				</div>
+				<div class="character__item character__item--character-weight">
+					<input class="character__item__input -js-character-weight" disabled="disabled" title="" type="number" min="1" value="16" />
+					<h3 class="character__item__text">Weight</h3>
+				</div>
+				<div class="character__item character__item--character-eyes">
+					<input class="character__item__input -js-character-eyes" disabled="disabled" title="" type="text" value="Green" />
+					<h3 class="character__item__text">Eyes</h3>
+				</div>
 
+				<div class="character__item character__item--character-description">
+					<input class="character__item__input -js-character-description" disabled="disabled" title="" type="text" value="Half the body is covered in snakelike scales" />
+					<h3 class="character__item__text">Description</h3>
+				</div>
+			</div>
+			<div class="slider__item combat" data-name="Combat">combat</div>
+			<div class="slider__item skills" data-name="Skills">skills</div>
+			<div class="slider__item feats" data-name="Feats">feats</div>
+		</div>
 	</div>
 </section>

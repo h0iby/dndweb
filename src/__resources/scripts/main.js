@@ -4,6 +4,7 @@
 // = include /site/templates.js
 // = include /site/filters.js
 // = include /site/filter.js
+// = include /site/slider.js
 
 var dnd = dnd || {};
 (function() {
@@ -30,6 +31,7 @@ var dnd = dnd || {};
 			item.setAttribute("style", "background-image: url('" + item.getAttribute("data-slow") + "');");
 		}
 	}
-    dnd.navigation();
+	dnd.navigation();
+	dnd.sliders();
 	dnd.data(dataIsLoaded, null);
 })();

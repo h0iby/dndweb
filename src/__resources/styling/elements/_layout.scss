@@ -53,9 +53,9 @@ html, body {
 }
 
 .section {
-	&__breadcrumb, &__intro, &__filter, &__header, &__main, &__grid, &__footer {
+	&__breadcrumb, &__intro, &__filter, &__header, &__main, &__slider, &__footer {
 		position: relative;
-		padding: 0 3.5%;
+		padding: 0 auto;
 		float: none;
 		width: 93%;
 		vertical-align: top;
@@ -101,12 +101,12 @@ html, body {
 		}
 	}
 
-	&__breadcrumb, &__filter, &__header, &__main, &__grid {
-		margin: 35px 0 0;
+	&__breadcrumb, &__filter, &__header, &__main, &__slider {
+		margin: 35px auto 0;
 	}
 
 	&__intro {
-		margin: 15px 0 0;
+		margin: 15px auto 0;
 		
 		&__book {
 			font-size: 1.4rem;
@@ -132,11 +132,15 @@ html, body {
 			}
 		}
 	}
+
+	&__slider{
+		overflow: hidden;
+	}
 }
 @media #{$tabletPortrait} {
 	.section{
-		&__breadcrumb, &__intro, &__filter, &__header, &__main, &__grid, &__footer{
-			padding: 0 2.5%;
+		&__breadcrumb, &__intro, &__filter, &__header, &__main, &__slider, &__footer{
+			padding: 0 auto;
 			width: 95%;
 		}
 	}

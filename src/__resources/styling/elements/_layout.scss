@@ -44,6 +44,8 @@ html, body {
 	&__section{
 		max-width: 1600px;
 		margin: 0 auto;
+		//display: flex;
+		//height: 100%;
 	}
 }
 @supports (display: grid) {
@@ -55,7 +57,8 @@ html, body {
 .section {
 	&__breadcrumb, &__intro, &__filter, &__header, &__main, &__slider, &__footer {
 		position: relative;
-		padding: 0 auto;
+		padding: 0;
+		margin: 0 auto;
 		float: none;
 		width: 93%;
 		vertical-align: top;
